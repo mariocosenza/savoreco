@@ -1,0 +1,20 @@
+button {
+    background: aquamarine;
+    border-radius: 12px;
+    padding: 5px;
+}
+
+div.centerButton {
+    text-align: center;
+}
+
+.center {
+    margin: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: black;
+        color: white;
+    }
+}
