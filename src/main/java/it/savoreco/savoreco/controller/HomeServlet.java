@@ -21,14 +21,13 @@ import java.io.IOException;
 public class HomeServlet extends HttpServlet {
     Logger logger = LoggerFactory.getLogger(HomeServlet.class);
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/index.jsp");
         try {
             requestDispatcher.forward(request, response);
-        } catch (ServletException e) {
+        } catch (IOException | ServletException e) {
             logger.warn("Cannot forward to index.jsp", e);
         }
-
     }
 
 }
