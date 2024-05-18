@@ -19,8 +19,9 @@ import java.io.IOException;
         value = "/home"
 )
 public class HomeServlet extends HttpServlet {
-    Logger logger = LoggerFactory.getLogger(HomeServlet.class);
+    private static final Logger logger = LoggerFactory.getLogger(HomeServlet.class);
 
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/index.jsp");
         try {
