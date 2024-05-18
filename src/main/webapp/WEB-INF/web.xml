@@ -8,6 +8,6 @@
         <location>/view/error/error-page.html</location>
     </error-page>
     <welcome-file-list>
-        <welcome-file>/index.jsp</welcome-file>
+        <welcome-file>home</welcome-file>
     </welcome-file-list>
 </web-app>
