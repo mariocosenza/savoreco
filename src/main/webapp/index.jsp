@@ -1,13 +1,24 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-    <title>JSP - Hello World</title>
+    <link href="assets/styles/global.css" rel="stylesheet">
+    <%@include file="WEB-INF/components/header.jsp" %>
+    <title>Savoreco</title>
 </head>
 <body>
-<h1><%= "Hello World!" %>
+    <jsp:include page="WEB-INF/components/navbar.jsp"></jsp:include>
+<h1>
+    Hello World
 </h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+    <div class="cardCentral">
+        <search>
+            <form role="search" action="" method="post">
+                <label>
+                    <input id="searchBarHome" class="centralSearch" type="search" placeholder="Inserisci la via del ristorante">
+                </label>
+            </form>
+        </search>
+    </div>
 </body>
 </html>
