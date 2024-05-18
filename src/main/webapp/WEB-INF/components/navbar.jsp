@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="it">
 <nav id="topNavBar">
         <a href="../../home">
             <img src="../../assets/images/savoreco-logo.webp" alt="Logo Savoreco" class="logoImage">
