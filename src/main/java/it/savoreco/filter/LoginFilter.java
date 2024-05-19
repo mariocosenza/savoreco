@@ -1,4 +1,4 @@
-package it.savoreco.savoreco.filter;
+package it.savoreco.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
