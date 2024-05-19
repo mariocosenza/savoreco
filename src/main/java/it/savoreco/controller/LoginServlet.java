@@ -1,4 +1,4 @@
-package it.savoreco.savoreco.controller;
+package it.savoreco.controller;
 
 import jakarta.servlet.annotation.HttpConstraint;
 import jakarta.servlet.annotation.ServletSecurity;

@@ -1,4 +1,4 @@
-package it.savoreco.savoreco.controller;
+package it.savoreco.controller;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
