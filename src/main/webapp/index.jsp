@@ -7,7 +7,7 @@
     <title>Savoreco</title>
 </head>
 <body>
-    <jsp:include page="WEB-INF/components/navbar.jsp"></jsp:include>
+    <jsp:include page="WEB-INF/components/navbar.jsp"/>
 <h1>
     Hello World
 </h1>
