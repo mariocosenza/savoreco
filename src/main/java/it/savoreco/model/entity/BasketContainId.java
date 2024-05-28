@@ -5,10 +5,12 @@ import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.Hibernate;
 
+import java.io.Serial;
 import java.util.Objects;
 
 @Embeddable
 public class BasketContainId implements java.io.Serializable {
+    @Serial
     private static final long serialVersionUID = -8764401838796867261L;
     @NotNull
     @Column(name = "basket_id", nullable = false)
