@@ -10,4 +10,6 @@
     <welcome-file-list>
         <welcome-file>home</welcome-file>
     </welcome-file-list>
+
+    <!-- TODO filer -->
 </web-app>
