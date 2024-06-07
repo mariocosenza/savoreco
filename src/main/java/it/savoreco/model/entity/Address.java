@@ -5,6 +5,8 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
+import org.locationtech.jts.geom.Point;
+
 
 @Entity
 @Table(name = "address")
@@ -19,6 +21,10 @@ public class Address {
     @Size(max = 2)
     @Column(name = "country_code", length = 2)
     private String countryCode;
+
+
+    @Column(name = "gps_point")
+    private Point gpsPoint;
 
     public AddressId getId() {
         return id;
@@ -44,10 +50,12 @@ public class Address {
         this.countryCode = countryCode;
     }
 
-/*
- TODO [Reverse Engineering] create field to map the 'gps_point' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
-    @Column(name = "gps_point", columnDefinition = "geometry")
-    private Object gpsPoint;
-*/
+    public Point getGpsPoint() {
+        return gpsPoint;
+    }
+
+    public void setGpsPoint(Point gpsPoint) {
+        this.gpsPoint = gpsPoint;
+    }
+
 }
