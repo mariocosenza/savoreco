@@ -3,8 +3,10 @@ package it.savoreco.model.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -41,6 +43,18 @@ public class Purchase {
     @ColumnDefault("0")
     @Column(name = "total_cost", nullable = false, precision = 16, scale = 8)
     private BigDecimal totalCost;
+
+    @Enumerated
+    @ColumnDefault("pending")
+    @JdbcType(PostgreSQLEnumJdbcType.class)
+    @Column(name = "status", columnDefinition = "order_status not null")
+    private Statuses status;
+
+    @Enumerated
+    @ColumnDefault("google")
+    @JdbcType(PostgreSQLEnumJdbcType.class)
+    @Column(name = "payment_method", columnDefinition = "payment_type not null")
+    private PaymentMethods paymentMethod;
 
     public Long getId() {
         return id;
@@ -90,18 +104,28 @@ public class Purchase {
         this.totalCost = totalCost;
     }
 
-/*
- TODO [Reverse Engineering] create field to map the 'status' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
-    @ColumnDefault("pending")
-    @Column(name = "status", columnDefinition = "order_status not null")
-    private Object status;
-*/
-/*
- TODO [Reverse Engineering] create field to map the 'payment_method' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
-    @ColumnDefault("google")
-    @Column(name = "payment_method", columnDefinition = "payment_type not null")
-    private Object paymentMethod;
-*/
+    public Statuses getStatus() {
+        return status;
+    }
+
+    public void setStatus(Statuses status) {
+        this.status = status;
+    }
+
+    public PaymentMethods getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethods paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public enum Statuses {
+
+    }
+
+    public enum PaymentMethods {
+
+    }
+
 }
