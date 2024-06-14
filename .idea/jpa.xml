@@ -2,7 +2,7 @@
 <project version="4">
   <component name="JpaBuddyIdeaProjectConfig">
     <option name="reLastEntityCreationPackage" value="src/main/java/it/savoreco/model/entity" />
-    <option name="reverseEngineeringLastDbConnectionId" value="dc9d202a-c73e-4b42-8521-92803c919a77__savorecodb_savoreco" />
+    <option name="reverseEngineeringLastDbConnectionId" value="dc9d202a-c73e-4b42-8521-92803c919a77" />
   </component>
   <component name="JpaPluginProjectSettings" reExcludeTablePrefixes="" reExcludeColumnPrefixes="" reExcludeTableSuffixes="" reExcludeColumnSuffixes="" />
 </project>
