@@ -15,6 +15,11 @@ public class UserAccount {
     @Column(name = "user_id", nullable = false)
     private Long id;
 
+    @Size(max = 128)
+    @NotNull
+    @Column(name = "email", nullable = false, length = 128)
+    private String email;
+
     @Size(max = 48)
     @NotNull
     @Column(name = "name", nullable = false, length = 48)
@@ -44,6 +49,10 @@ public class UserAccount {
     private Instant expires;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+            @JoinColumn(name = "street", referencedColumnName = "street"),
+            @JoinColumn(name = "zipcode", referencedColumnName = "zipcode")
+    })
     private Address address;
 
     @Size(max = 2)
@@ -62,6 +71,14 @@ public class UserAccount {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
