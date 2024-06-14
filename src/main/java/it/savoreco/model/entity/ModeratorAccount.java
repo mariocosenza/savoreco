@@ -12,6 +12,11 @@ public class ModeratorAccount {
     @Column(name = "moderator_id", nullable = false)
     private Integer id;
 
+    @Size(max = 128)
+    @NotNull
+    @Column(name = "email", nullable = false, length = 128)
+    private String email;
+
     @Size(max = 48)
     @NotNull
     @Column(name = "name", nullable = false, length = 48)
@@ -33,6 +38,14 @@ public class ModeratorAccount {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
