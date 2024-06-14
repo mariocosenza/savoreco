@@ -114,34 +114,77 @@ html {
 body {
     background: var(--md-sys-color-background);
     color: var(--md-sys-color-on-surface);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
 }
 
 nav {
-    width: 100%;
+    width: 100vw;
     list-style-type: none;
     box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.24);
-    max-height: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    max-height: 5rem;
     height: 3rem;
-    display: inline;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
 }
 
-span.siteLink {
+nav a.siteLink {
+    color: var(--md-sys-color-on-surface, black);
+    text-decoration: none;
+    justify-content: center;
+}
+
+span.siteLinkRight {
+    margin-left: auto;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 700;
+    overflow: hidden;
     float: right;
     margin-right: 10vw;
 }
-
-span.siteLink ul li{
+span.siteLinkRight a {
+    margin-left: 1vw;
     display: inline-block;
-    margin-right: 1vw;
+}
+
+#ecoLogoText {
+    color: var(--md-sys-color-primary, #2F6A43);
+}
+
+#bigTextLogo {
+    color: var(--md-sys-color-on-background, black);
+}
+
+#ecoLogoText, #bigTextLogo{
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+}
+
+span.siteLinkRight a:hover {
+    color: var(--md-sys-color-secondary-fixed-dim);
 }
 
 img.logoImage {
+    float: left;
     max-height: 100%;
     height: 4em;
     width: 15vw;
     margin-top: 0.2em;
     margin-bottom: 0.2em;
-    margin-left: 10vw;
+    margin-left: 5vw;
     object-fit: scale-down;
 }
 
@@ -162,6 +205,7 @@ button {
     border-radius: calc(100px + 1.5625vw);
     background-color: var(--md-sys-color-primary);
     color: var(--md-sys-color-on-primary);
+
 }
 
 button.big {
@@ -182,6 +226,69 @@ div.cardCentral {
     justify-content: center;
 }
 
+search input {
+    padding: 0.2em 0.8em;
+    line-height: 1.5em;
+    color: var(--md-sys-color-on-background);
+    vertical-align: middle;
+    background-color: var(--md-sys-color-on-primary);
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    border: 1px solid var(--md-sys-color-primary);
+    border-radius: 0.4em;
+    outline: none;
+    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 0 inset;
+    :focus{
+        border-color: var(--md-sys-color-secondary-fixed-dim);;
+        outline: none;
+        box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
+    }
+    width: 75%;
+    min-width: 50%;
+    max-width: 100%;
+    margin-bottom: 1em;
+}
+
+search button {
+    align-items: center;
+    text-align: center;
+    font-size: 1.4em;
+    width: 3em;
+    max-width: 3em;
+    color: var(--md-sys-color-on-primary);
+}
 
 
+
+form {
+    padding: 0;
+    background: none;
+}
+
+
+footer {
+    background:  var(--md-sys-color-secondary-container);
+    display: flex;
+    min-height: 50px;
+    bottom: 0;
+    width: 100vw;
+    height: 2.5rem;
+    margin-top: 2rem;
+}
+
+p.footer {
+    background:  var(--md-sys-color-secondary-container);
+    min-width: 33vw;
+}
+
+@media screen and (max-width: 500px) {
+    footer {
+        display: block;
+    }
+
+    p.footer {
+        margin: 0;
+        min-width: 95vw;
+    }
+}
 
