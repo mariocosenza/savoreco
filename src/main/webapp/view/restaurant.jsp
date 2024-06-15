@@ -1,10 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-    <title>Title</title>
+    <title>Ristorante</title>
 </head>
 <body>
 
+
+<%@ include file="../components/footer.jsp"%>
 </body>
 </html>
