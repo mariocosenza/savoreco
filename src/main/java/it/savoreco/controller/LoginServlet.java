@@ -21,14 +21,9 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
-@WebInitParam(
-        name = "usernamePattern",
-        value = ""
-)
+
 @WebServlet(
         name = "loginPage",
         value = "/login"
@@ -53,8 +48,6 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
-        Pattern pattern = Pattern.compile(getServletContext().getInitParameter("usernamePattern"));
-        Matcher matcher = pattern.matcher(request.getParameter("username"));
         String logged = null;
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
