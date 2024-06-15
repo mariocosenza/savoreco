@@ -11,5 +11,22 @@
         <welcome-file>home</welcome-file>
     </welcome-file-list>
 
-    <!-- TODO filer -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>JSP Files</web-resource-name>
+            <description>No direct access to JSP files</description>
+            <url-pattern>/view/*</url-pattern>
+            <http-method>POST</http-method>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>No direct browser access to JSP files</description>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <session-config>
+        <session-timeout>1440</session-timeout>
+    </session-config>
+
 </web-app>

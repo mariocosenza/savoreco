@@ -3,20 +3,24 @@ package it.savoreco.controller;
 import it.savoreco.model.entity.ModeratorAccount;
 import it.savoreco.model.entity.SellerAccount;
 import it.savoreco.model.entity.UserAccount;
-import it.savoreco.service.CookieFactory;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.HttpConstraint;
 import jakarta.servlet.annotation.ServletSecurity;
 import jakarta.servlet.annotation.WebInitParam;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,86 +29,73 @@ import java.util.regex.Pattern;
         name = "usernamePattern",
         value = ""
 )
-
 @WebServlet(
         name = "loginPage",
         value = "/login"
 )
+/*
 @ServletSecurity(
         @HttpConstraint(transportGuarantee = ServletSecurity.TransportGuarantee.CONFIDENTIAL)
-)
+)*/
 public class LoginServlet extends HttpServlet {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginServlet.class);
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        doPost(request, response);
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/login.jsp");
+        try {
+            requestDispatcher.forward(request, response);
+        } catch (IOException | ServletException e) {
+            logger.warn("Cannot forward to login.jsp", e);
+        }
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
         Pattern pattern = Pattern.compile(getServletContext().getInitParameter("usernamePattern"));
         Matcher matcher = pattern.matcher(request.getParameter("username"));
-        Cookie[] cookies = request.getCookies();
-        boolean logged = false;
+        String logged = null;
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(false);
 
-        if (session == null) {
+        if (session == null || session.getAttribute("logged") == null) {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             SessionFactory sessionFactory = (SessionFactory) request.getServletContext().getAttribute("SessionFactory");
+
             if (request.getParameter("radioType").equals("user")) {
                 if (attemptLogin(UserAccount.class, email, password, sessionFactory)) {
-                    response.addCookie(CookieFactory.newUserCookie(request.getSession()));
-                    logged = true;
+                    logged = "user";
                 }
             } else if (request.getParameter("radioType").equals("seller")) {
                 if (attemptLogin(SellerAccount.class, email, password, sessionFactory)) {
-                    response.addCookie(CookieFactory.newSellerCookie(request.getSession()));
-                    logged = true;
+                    logged = "seller";
                 }
             } else if (request.getParameter("radioType").equals("moderator")) {
                 if (attemptLogin(ModeratorAccount.class, email, password, sessionFactory)) {
-                    response.addCookie(CookieFactory.newModeratorCookie(request.getSession()));
-                    logged = true;
+                    logged = "moderator";
                 }
             }
-        } else {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("user")) {
-                    if (cookie.getValue().equals(session.getId())) {
-                        logged = true;
-                    }
-                    break;
-                } else if (cookie.getName().equals("seller")) {
-                    if (cookie.getValue().equals(session.getId())) {
-                        logged = true;
-                    }
-                    break;
-                } else if (cookie.getName().equals("moderator")) {
-                    if (cookie.getValue().equals(session.getId())) {
-                        logged = true;
-                    }
-                    break;
-                }
-
-            }
-
+        } else if (session.getAttribute("logged") != null) {
+            logged = session.getAttribute("logged").toString();
         }
 
-        if (logged) {
-            response.setStatus(200);
-            response.setContentType("text/html");
-            try {
-                var writer = response.getWriter();
-                Objects.requireNonNull(writer).append("this is 200");
-            } catch (IOException e) {
-                logger.warn("Cannot use Writer");
-            }
+        if (logged == null) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         } else {
-            response.setStatus(404);
+            request.getSession().setAttribute("logged", logged);
         }
+
+
+        try (PrintWriter out = response.getWriter()) {
+            out.println("{\"loginStatus\" : {\"login \": " + logged + "}}");
+        } catch (IOException e) {
+            logger.warn("Error writing response", e);
+        }
+
+
     }
 
     private boolean attemptLogin(Class<?> classe, String email, String password, SessionFactory sessionFactory) {

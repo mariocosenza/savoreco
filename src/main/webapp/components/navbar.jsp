@@ -10,7 +10,7 @@
         <em id="bigTextLogo">SAVOR</em><em id="ecoLogoText">ECO</em>
     </a>
     <span class="siteLinkRight">
-            <a href="../view/login.jsp" class="siteLink">
+            <a href="login" class="siteLink">
                 <c:catch var="catchException">
                     <c:if test="${account.name != null}" var="test" scope="page">
                         <c:out value="${account.name}"/>

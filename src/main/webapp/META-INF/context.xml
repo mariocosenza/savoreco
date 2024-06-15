@@ -4,4 +4,7 @@
                   global="jdbc/MyLocalDB"
                   auth="Container"
                   type="javax.sql.DataSource" />
+
+
+    <CookieProcessor sameSiteCookies="strict" />
 </Context>
