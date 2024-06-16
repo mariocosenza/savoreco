@@ -2,5 +2,6 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <comment>R2 Bucket Apit</comment>
-    <entry key="r2Key">putkey.here</entry>
+    <entry key="accessKey">putkey.here</entry>
+    <entry key="secretKey">putkey.here</entry>
 </properties>

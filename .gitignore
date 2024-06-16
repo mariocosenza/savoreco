@@ -39,4 +39,6 @@ bin/
 .vscode/
 
 ### Mac OS ###
-.DS_Store
+.DS_Storebucket.cfg.xml
+bucket.cfg.xml
+
