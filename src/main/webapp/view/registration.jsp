@@ -3,12 +3,14 @@
 <html>
 <head>
     <title>Registrazione</title>
-    <link href="../assets/styles/registration.css" rel="stylesheet">
+    <link href="../assets/styles/access.css" rel="stylesheet">
     <jsp:include page="../components/header.jsp"/>
     <script src="../scripts/registration.js"></script>
 </head>
 <body>
-<img src="../assets/images/savoreco-logo.webp" alt="page logo" class="registrationLogo">
+<a href="home">
+    <img src="../assets/images/savoreco-logo.webp" alt="page logo" class="accessLogo">
+</a>
 <main>
     <div class="center">
         <form method="post" id="form" onsubmit="submitRegistration(); return false" onchange="validate()">
@@ -36,6 +38,9 @@
             <button disabled>
                 Crea account
             </button>
+            <p>
+                Sei gia iscritto? <a href="login">Accedi</a>
+            </p>
             <p>
                 Condizioni
             </p>

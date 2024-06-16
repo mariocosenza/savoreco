@@ -23,12 +23,12 @@ input[type="text"], input[type="password"], input[type="email"], input[type="dat
     margin-bottom: 1em;
 }
 
-div.center {
+div.center, div.centerLogin {
     border-radius: 1.1rem;
     border: 0.1rem solid var(--md-sys-color-secondary);
     padding: 1vw;
     box-shadow: 0 0.2em 4em 0.4em rgba(0, 0, 0, 0.25);
-    margin-top: 15vh;
+    margin-top: 10vh;
     width: 38vw;
     min-width: 38vw;
     margin-left: 29vw;
@@ -37,6 +37,10 @@ div.center {
     justify-content: center;
     margin-right: 29vw;
     background-color: var(--md-sys-color-surface);
+}
+
+div.centerLogin {
+    margin-top: 25vh;
 }
 
 label,input{
@@ -85,7 +89,7 @@ button:disabled {
     cursor: not-allowed;
 }
 
-img.registrationLogo {
+img.accessLogo {
     position: absolute;
     left: 2em;
     width: 10em;
@@ -94,16 +98,25 @@ img.registrationLogo {
 }
 
 h1 {
+    font-size: 1.4rem;
     text-align: center;
     color: var(--md-sys-color-primary);
 }
 
-#name_label {
-    margin-top: 0.5em;
+#seller {
+    margin-bottom: 0.8em;
+}
+
+a {
+    color: var(--md-sys-color-on-primary-fixed-variant);
+}
+
+a:hover {
+    color: var(--md-sys-color-secondary-fixed-dim);
 }
 
 @media screen and (max-width: 600px){
-    div.center {
+    div.center, div.centerLogin {
         min-width: 74vw;
         margin-left: 12vw;
         margin-right: 12vw;
@@ -117,7 +130,7 @@ h1 {
         height: 1.8em;
     }
 
-    img.registrationLogo {
+    img.accessLogo {
         width: 5em;
     }
 }
