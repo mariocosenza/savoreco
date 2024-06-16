@@ -13,21 +13,22 @@ import java.io.IOException;
 
 
 @WebServlet(
-        name = "homeServlet",
-        displayName = "Savoreco - Home",
-        description = "Savoreco home page",
-        value = "/home"
+        name = "searchServlet",
+        displayName = "Risultati Ricerca",
+        description = "Savoreco search page",
+        value = "/search"
 )
-public class HomeServlet extends HttpServlet {
-    private static final Logger logger = LoggerFactory.getLogger(HomeServlet.class);
+public class SearchServlet extends HttpServlet {
+
+    private static final Logger logger = LoggerFactory.getLogger(SearchServlet.class);
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/search.jsp");
         try {
-            requestDispatcher.forward(request, response);
+            requestDispatcher.forward(req, resp);
         } catch (IOException | ServletException e) {
-            logger.warn("Cannot forward to index.jsp", e);
+            logger.warn("Cannot forward to search.jsp", e);
         }
     }
 
