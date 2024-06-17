@@ -1,0 +1,21 @@
+@import "global.css";
+
+.result {
+
+}
+
+aside {
+    display: block;
+    float: left;
+    min-width: 20vw;
+    max-width: 20vw;
+}
+
+label {
+    text-align: center;
+    min-width: 20vw;
+    font-size: 1.1em;
+    background-color: var(--md-sys-color-primary-container);
+    border-radius: 0.4em;
+    margin-bottom: 1em;
+}

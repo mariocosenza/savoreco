@@ -282,6 +282,10 @@ p.footer {
     min-width: 33vw;
 }
 
+div.dropdown {
+
+}
+
 @media screen and (max-width: 500px) {
     footer {
         display: block;

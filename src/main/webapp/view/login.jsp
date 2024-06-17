@@ -6,7 +6,7 @@
     <link href="../assets/styles/access.css" rel="stylesheet">
     <script src="../scripts/login.js"></script>
     <script src="../scripts/tooltip.js"></script>
-    <jsp:include page="../components/header.jsp"/>
+    <%@ include file="/components/header.jsp"%>
 </head>
 <body>
 <a href="home">

@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registrazione</title>
+    <title>Registrazione - Savoreco</title>
     <link href="../assets/styles/access.css" rel="stylesheet">
-    <jsp:include page="../components/header.jsp"/>
+    <%@ include file="/components/header.jsp"%>
     <script src="../scripts/registration.js"></script>
     <script src="../scripts/tooltip.js"></script>
 </head>

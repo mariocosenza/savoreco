@@ -18,7 +18,7 @@
                 SAPORE
             </h1>
             <search>
-                <form role="search" action="" method="post">
+                <form role="search" action="search" method="get">
                     <label>
                         <input id="searchBarHome" class="centralSearch" type="search" placeholder="Inserisci la via del ristorante">
                         <button id="submitSearch">
