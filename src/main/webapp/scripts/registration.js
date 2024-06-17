@@ -96,7 +96,7 @@ function validateUser() {
         }
 
     if (!error) {
-        document.querySelector("button").disabled = false
+        document.querySelector("button").disabled = true
     }
 
     return !error

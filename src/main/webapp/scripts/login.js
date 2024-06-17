@@ -9,8 +9,8 @@ async function submitLogin(){
 
 function validate() {
     document.querySelectorAll("label").forEach(e => e.style.color = "var(--md-sys-color-on-background)")
-    let error = false
 
+    let error = false
         for (const arg of document.querySelectorAll("label")) {
             const element = document.getElementById(arg.htmlFor)
             if (element.type !== "radio" && element.value !== "") {
@@ -37,7 +37,7 @@ function validate() {
         }
 
     if (!error) {
-        document.querySelector("button").disabled = false
+        document.querySelector("button").disabled = true
     }
 
     return !error
