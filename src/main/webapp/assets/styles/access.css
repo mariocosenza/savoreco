@@ -1,14 +1,14 @@
 @import "global.css";
 
 input[type="text"], input[type="password"], input[type="email"], input[type="date"] {
-    padding: 0.2em 0.8em;
-    line-height: 1.5em;
+    padding: 2%;
+    line-height: 1.8em;
     color: var(--md-sys-color-on-background);
     vertical-align: middle;
     background-color: var(--md-sys-color-on-primary);
     background-repeat: no-repeat;
     background-position: right 8px center;
-    border: 1px solid var(--md-sys-color-primary);
+    border: 1% solid var(--md-sys-color-primary);
     border-radius: 0.4em;
     outline: none;
     box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 0 inset;
@@ -17,8 +17,8 @@ input[type="text"], input[type="password"], input[type="email"], input[type="dat
         outline: none;
         box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
     }
-    width: 50%;
-    min-width: 50%;
+    width: 65%;
+    min-width: 65%;
     max-width: 75%;
     margin-bottom: 1em;
 }
@@ -28,7 +28,7 @@ div.center, div.centerLogin {
     border: 0.1rem solid var(--md-sys-color-secondary);
     padding: 1vw;
     box-shadow: 0 0.2em 4em 0.4em rgba(0, 0, 0, 0.25);
-    margin-top: 10vh;
+    margin-top: 5vh;
     width: 38vw;
     min-width: 38vw;
     margin-left: 29vw;
@@ -40,17 +40,40 @@ div.center, div.centerLogin {
 }
 
 div.centerLogin {
-    margin-top: 25vh;
+    margin-top: 15vh;
 }
 
-label,input{
+label,input, span.form{
     color: var(--md-sys-color-on-background);
-    display:flex;
+    display: flex;
     flex-direction: column;
     margin: auto auto 0.2em;
     align-items: center;
     justify-content: center;
 }
+
+label {
+    font-size: 1.1em;
+}
+
+
+/* Tooltip text */
+.tooltiptext {
+    display: none;
+    font-size: 0.8em;
+    text-align: center;
+    margin-left: 16%;
+    margin-right: 16%;
+    margin-bottom: 1em;
+    width: 64%;
+    min-width: 64%;
+    opacity: 0.8;
+    background-color: var(--md-sys-color-secondary-fixed-dim);
+    color: var(--md-sys-color-on-surface);
+    padding: 2%;
+    border-radius: 1.1em;
+}
+
 
 input {
     margin-bottom: 1em;
@@ -91,7 +114,7 @@ button:disabled {
 
 img.accessLogo {
     position: absolute;
-    left: 2em;
+    left: 2vw;
     width: 10em;
     height: auto;
     top: 2em;
@@ -115,7 +138,39 @@ a:hover {
     color: var(--md-sys-color-secondary-fixed-dim);
 }
 
+.alert {
+    z-index: 1;
+    top: 2em;
+    position: absolute;
+    visibility: hidden;
+    right: 5vw;
+    margin-left: 70vw;
+    min-width: 25vw;
+    margin-top: 1vh;
+    margin-right: 5vw;
+    padding: 20px;
+    background-color: var(--md-sys-color-error-container);
+    color: var(--md-sys-color-on-error-container);
+}
+
+.closebtn {
+    margin-left: 5%;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
+
 @media screen and (max-width: 600px){
+
     div.center, div.centerLogin {
         min-width: 74vw;
         margin-left: 12vw;
@@ -131,6 +186,6 @@ a:hover {
     }
 
     img.accessLogo {
-        width: 5em;
+        width: 2em;
     }
 }

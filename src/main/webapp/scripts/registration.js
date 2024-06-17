@@ -37,7 +37,7 @@ function validate() {
 }
 
 function validateUser() {
-    document.querySelector("label").style.color = "var(--md-sys-color-on-background)"
+    document.querySelectorAll("label").forEach(e => e.style.color = "var(--md-sys-color-on-background)")
     let error = false
 
     if (document.forms["form"]["user"].checked) {

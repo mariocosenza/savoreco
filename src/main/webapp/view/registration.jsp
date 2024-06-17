@@ -6,11 +6,16 @@
     <link href="../assets/styles/access.css" rel="stylesheet">
     <jsp:include page="../components/header.jsp"/>
     <script src="../scripts/registration.js"></script>
+    <script src="../scripts/tooltip.js"></script>
 </head>
 <body>
 <a href="home">
     <img src="../assets/images/savoreco-logo.webp" alt="page logo" class="accessLogo">
 </a>
+<div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Errore!</strong> Email o password errati
+</div>
 <main>
     <div class="center">
         <form method="post" id="form" onsubmit="submitRegistration(); return false" onchange="validate()">
@@ -30,7 +35,8 @@
             <label for="email">Email</label>
             <input type="email" id="email" name="username" placeholder="Inserisci la tua email" required>
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required>
+            <span class="tooltiptext">La password deve avere 8 caratteri almeno un numero e un carattere speciale</span>
+            <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required onfocusin="showTooltip()" onfocusout="hideTooltip()">
             <label id="check_label" for="check_password">Conferma password</label>
             <input type="password" id="check_password" name="check_password" placeholder="Conferma la tua password" required>
             <label for="age" id="age_label">Età</label>

@@ -119,6 +119,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 main {
@@ -271,7 +272,7 @@ footer {
     display: flex;
     min-height: 50px;
     bottom: 0;
-    width: 100vw;
+    min-width: 100vw;
     height: 2.5rem;
     margin-top: 2rem;
 }
