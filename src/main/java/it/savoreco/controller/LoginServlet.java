@@ -46,6 +46,10 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
+    /**
+     * TODO add account bing with hibernate
+     */
+
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
         String logged = null;

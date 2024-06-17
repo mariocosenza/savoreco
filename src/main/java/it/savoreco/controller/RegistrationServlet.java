@@ -44,6 +44,9 @@ public class RegistrationServlet extends HttpServlet {
 
     }
 
+    /**
+     * TODO add account bing with hibernate
+     */
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)  {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/registration.jsp");
