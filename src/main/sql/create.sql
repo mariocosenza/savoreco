@@ -7,7 +7,7 @@ CREATE TABLE address
 (
     street       varchar(256),
     city         varchar(512),
-    country_code char(2),
+    country_code char(2) default 'IT' not null,
     zipcode      varchar(16),
     gps_point    geometry(point, '4326'),
 
@@ -27,12 +27,12 @@ CREATE TABLE user_account
     name         varchar(48)            not null,
     surname      varchar(48)            not null,
     password     varchar(512)           not null,
-    age          smallint default 0     not null,
+    age          date                   not null,
     deleted      boolean  default false not null,
     expires      timestamp,
     street       text,
     zipcode      varchar(16),
-    country_code char(2)                not null,
+    country_code char(2)                default 'IT' not null,
     avatar_image varchar(1024)          not null, --default do be added
 
     CONSTRAINT pk_user_account PRIMARY KEY (user_id),
