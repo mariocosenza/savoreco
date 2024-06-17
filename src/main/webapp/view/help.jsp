@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <%@ include file="/components/header.jsp"%>
+    <%@ include file="/components/header.jsp" %>
     <title>Help Page</title>
     <link href="../assets/styles/help.css" rel="stylesheet"/>
 </head>
@@ -10,6 +10,6 @@
 <main>
 
 </main>
-<%@ include file="/components/footer.jsp"%>
+<%@ include file="/components/footer.jsp" %>
 </body>
 </html>
