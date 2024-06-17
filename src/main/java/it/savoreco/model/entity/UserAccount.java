@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "user_account")
@@ -36,9 +37,8 @@ public class UserAccount {
     private String password;
 
     @NotNull
-    @ColumnDefault("0")
     @Column(name = "age", nullable = false)
-    private Short age;
+    private LocalDate age;
 
     @NotNull
     @ColumnDefault("false")
@@ -57,6 +57,7 @@ public class UserAccount {
 
     @Size(max = 2)
     @NotNull
+    @ColumnDefault("IT")
     @Column(name = "country_code", nullable = false, length = 2)
     private String countryCode;
 
@@ -105,11 +106,11 @@ public class UserAccount {
         this.password = password;
     }
 
-    public Short getAge() {
+    public LocalDate getAge() {
         return age;
     }
 
-    public void setAge(Short age) {
+    public void setAge(LocalDate age) {
         this.age = age;
     }
 

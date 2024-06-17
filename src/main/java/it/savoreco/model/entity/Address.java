@@ -5,6 +5,7 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.ColumnDefault;
 import org.locationtech.jts.geom.Point;
 
 
@@ -20,6 +21,7 @@ public class Address {
 
     @Size(max = 2)
     @Column(name = "country_code", length = 2)
+    @ColumnDefault("IT")
     private String countryCode;
 
 
