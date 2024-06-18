@@ -1,11 +1,11 @@
 SET SCHEMA 'savoreco';
 
 INSERT INTO address (street, city, country_code, zipcode, gps_point)
-VALUES ('Viale del Besento', 'Potenza', 'IT', '85100', ST_GeomFromText('POINT(40.627233, 15.799091)', 4326)),
-       ('Via Nicola Sant angelo', 'Potenza', 'IT', '85100', ST_GeomFromText('POINT(40.911374, 14.748329)', 4326)),
-       ('Viale Italia', 'Potenza', 'IT', '85100', ST_GeomFromText('POINT(40.911988, 14.774473)', 4326)),
-       ('Via del Mulino', 'Potenza', 'IT', '85100', ST_GeomFromText('POINT(40.261313, 16.254209)', 4326)),
-       ('Viale guglielmo', 'Potenza', 'IT', '85100', ST_GeomFromText('POINT(40.630571, 15.805132)', 4326));
+VALUES ('Viale del Besento', 'Potenza', 'IT', '85100', ST_GeomFromText('POINT(40.627233 15.799091)', 4326)),
+       ('Via Nicola Sant angelo', 'Potenza', 'IT', '85100', ST_GeomFromText('POINT(40.911374 14.748329)', 4326)),
+       ('Viale Italia', 'Potenza', 'IT', '85100', ST_GeomFromText('POINT(40.911988 14.774473)', 4326)),
+       ('Via del Mulino', 'Potenza', 'IT', '85100', ST_GeomFromText('POINT(40.261313 16.254209)', 4326)),
+       ('Viale guglielmo', 'Potenza', 'IT', '85100', ST_GeomFromText('POINT(40.630571 15.805132)', 4326));
 
 INSERT INTO user_account (email, name, surname, password, age, street, zipcode, country_code, avatar_image)
 VALUES ('GiovanniBianchi@gmail.com', 'Giovanni', 'Bianchi', encode(sha512('Giovanni123*'::bytea), 'hex'), '1985-08-15', 'Via del Mulino',
