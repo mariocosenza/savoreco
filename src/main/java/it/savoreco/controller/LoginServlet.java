@@ -1,27 +1,25 @@
 package it.savoreco.controller;
 
-import it.savoreco.model.entity.ModeratorAccount;
+
 import it.savoreco.model.entity.SellerAccount;
 import it.savoreco.model.entity.UserAccount;
+import it.savoreco.service.PasswordSHA512;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.HttpConstraint;
-import jakarta.servlet.annotation.ServletSecurity;
-import jakarta.servlet.annotation.WebInitParam;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-
+import java.util.Objects;
 
 
 @WebServlet(
@@ -38,87 +36,76 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/login.jsp");
         try {
-            requestDispatcher.forward(request, response);
+            if((Objects.nonNull(request.getSession(false)) && Objects.nonNull(request.getSession(false).getAttribute("logged")))) {
+                RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+                requestDispatcher.forward(request, response);
+            } else {
+                RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/login.jsp");
+                requestDispatcher.forward(request, response);
+            }
+
         } catch (IOException | ServletException e) {
-            logger.warn("Cannot forward to login.jsp", e);
+            logger.warn("Cannot forward", e);
         }
     }
-
-    /**
-     * TODO add account bing with hibernate
-     */
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) {
-        String logged = null;
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        HttpSession session = request.getSession(false);
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        UserAccount account = null;
+        SellerAccount sellerAccount = null;
 
-        if (session == null || session.getAttribute("logged") == null) {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            SessionFactory sessionFactory = (SessionFactory) request.getServletContext().getAttribute("SessionFactory");
 
-            if (request.getParameter("radioType").equals("user")) {
-                if (attemptLogin(UserAccount.class, email, password, sessionFactory)) {
-                    logged = "user";
-                }
-            } else if (request.getParameter("radioType").equals("seller")) {
-                if (attemptLogin(SellerAccount.class, email, password, sessionFactory)) {
-                    logged = "seller";
-                }
-            } else if (request.getParameter("radioType").equals("moderator")) {
-                if (attemptLogin(ModeratorAccount.class, email, password, sessionFactory)) {
-                    logged = "moderator";
-                }
+        var password = req.getParameter("password");
+        var email = req.getParameter("email");
+
+
+        if (Objects.nonNull(req.getParameter("profile_type"))
+                && (req.getParameter("profile_type").equals("user") || req.getParameter("profile_type").equals("seller"))
+                &&  Objects.nonNull(email) && Objects.nonNull(password)
+                &&  (Objects.isNull(req.getSession(false)) || Objects.isNull(req.getSession().getAttribute("logged")))) {
+            SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
+            Session session = sessionFactory.getCurrentSession();
+            Transaction transaction = session.beginTransaction();
+            if(req.getParameter("profile_type").equals("user")) {
+                Query<UserAccount> query = session.createQuery("FROM UserAccount u WHERE u.email= :email AND u.password= :password" , UserAccount.class);
+                query.setParameter("email", email.trim());
+                query.setParameter("password", PasswordSHA512.SHA512Hash(password));
+                account = query.list().getFirst();
+            } else {
+                Query<SellerAccount> query = session.createQuery("FROM SellerAccount u WHERE u.email= :email AND u.password= :password", SellerAccount.class);
+                query.setParameter("email", email.trim());
+                query.setParameter("password", PasswordSHA512.SHA512Hash(password));
+                sellerAccount = query.list().getFirst();
             }
-        } else if (session.getAttribute("logged") != null) {
-            logged = session.getAttribute("logged").toString();
+            transaction.commit();
         }
 
-        if (logged == null) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        } else {
-            request.getSession().setAttribute("logged", logged);
+        if(Objects.nonNull(account)) {
+            var session = req.getSession();
+            session.setAttribute("user", account);
+            session.setAttribute("logged", "user");
+        } else if(Objects.nonNull(sellerAccount)) {
+            var session = req.getSession();
+            session.setAttribute("seller", sellerAccount);
+            session.setAttribute("logged", "seller");
+        }  else {
+            try {
+                RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/login.jsp");
+                req.setAttribute("error", true);
+                requestDispatcher.forward(req, resp);
+                return;
+            } catch (IOException | ServletException e) {
+                logger.warn("Error sending include", e);
+            }
         }
 
-
-        try (PrintWriter out = response.getWriter()) {
-            out.println("{\"loginStatus\" : {\"login \": " + logged + "}}");
-        } catch (IOException e) {
-            logger.warn("Error writing response", e);
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+        try {
+            requestDispatcher.forward(req, resp);
+        } catch (IOException | ServletException e) {
+            logger.warn("Cannot forward to index.jsp", e);
         }
-
-
-    }
-
-    private boolean attemptLogin(Class<?> classe, String email, String password, SessionFactory sessionFactory) {
-        String hql = null;
-        List<?> list = null;
-        if (classe == UserAccount.class) {
-            hql = "FROM UserAccount u WHERE u.email= :email AND u.password= :password";
-            Query<UserAccount> query = sessionFactory.getCurrentSession().createQuery(hql, UserAccount.class);
-            query.setParameter("email", email);
-            query.setParameter("password", password);
-            list = query.list();
-        } else if (classe == SellerAccount.class) {
-            hql = "FROM SellerAccount u WHERE u.email= :email AND u.password= :password";
-            Query<SellerAccount> query = sessionFactory.getCurrentSession().createQuery(hql, SellerAccount.class);
-            query.setParameter("email", email);
-            query.setParameter("password", password);
-            list = query.list();
-        } else if (classe == ModeratorAccount.class) {
-            hql = "FROM ModeratorAccount u WHERE u.email= :email AND u.password= :password";
-            Query<ModeratorAccount> query = sessionFactory.getCurrentSession().createQuery(hql, ModeratorAccount.class);
-            query.setParameter("email", email);
-            query.setParameter("password", password);
-            list = query.list();
-        }
-
-        return list != null && !list.isEmpty();
 
     }
 
