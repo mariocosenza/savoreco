@@ -62,8 +62,7 @@ public class UserAccount {
     private String countryCode;
 
     @Size(max = 1024)
-    @NotNull
-    @Column(name = "avatar_image", nullable = false, length = 1024)
+    @Column(name = "avatar_image", length = 1024)
     private String avatarImage;
 
     public Long getId() {
