@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,9 +17,14 @@
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
     <strong>Errore!</strong> Email o password errati
 </div>
+<c:if test="${error}">
+    <script>
+        document.querySelector(".alert").style.visibility = "visible"
+    </script>
+</c:if>
 <main>
     <div class="centerLogin">
-        <form method="post" id="form" onsubmit="submitLogin(); return false" onchange="validate()">
+        <form method="post" id="form" action="login" onchange="validate()">
             <h1>
                 Accedi a Savoreco
             </h1>
@@ -31,7 +37,7 @@
             </div>
 
                 <label for="email">Email</label>
-                <input type="email" id="email" name="username" placeholder="Inserisci la tua email" required>
+                <input type="email" id="email" name="email" placeholder="Inserisci la tua email" required>
                 <label for="password">Password</label>
                 <span class="tooltiptext">La password deve avere 8 caratteri almeno un numero e un carattere speciale</span>
                 <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required onfocusin="showTooltip()" onfocusout="hideTooltip()">

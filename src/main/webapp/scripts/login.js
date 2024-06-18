@@ -2,10 +2,6 @@
 const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-async function submitLogin(){
-
-
-}
 
 function validate() {
     document.querySelectorAll("label").forEach(e => e.style.color = "var(--md-sys-color-on-background)")
@@ -37,7 +33,7 @@ function validate() {
         }
 
     if (!error) {
-        document.querySelector("button").disabled = true
+        document.querySelector("button").disabled = false
     }
 
     return !error
