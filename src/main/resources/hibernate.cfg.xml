@@ -4,25 +4,11 @@
         "https://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
+        <!-- Proprietà di connessione al database -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.datasource">java:comp/env/jdbc/MyLocalDB</property>
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.default_schema">savoreco</property>
-
-
-        <!-- Mapping with model class containing annotations -->
-        <mapping class="it.savoreco.model.entity.Address"/>
-        <mapping class="it.savoreco.model.entity.AddressId"/>
-        <mapping class="it.savoreco.model.entity.Basket"/>
-        <mapping class="it.savoreco.model.entity.BasketContainId"/>
-        <mapping class="it.savoreco.model.entity.BoughtFood"/>
-        <mapping class="it.savoreco.model.entity.BoughtFoodId"/>
-        <mapping class="it.savoreco.model.entity.BoughtFood"/>
-        <mapping class="it.savoreco.model.entity.Food"/>
-        <mapping class="it.savoreco.model.entity.ModeratorAccount"/>
-        <mapping class="it.savoreco.model.entity.Purchase"/>
-        <mapping class="it.savoreco.model.entity.SellerAccount"/>
-        <mapping class="it.savoreco.model.entity.UserAccount"/>
 
     </session-factory>
 </hibernate-configuration>
