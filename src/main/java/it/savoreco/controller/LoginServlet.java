@@ -81,6 +81,7 @@ public class LoginServlet extends HttpServlet {
             transaction.commit();
         }
 
+
         if(Objects.nonNull(account)) {
             var session = req.getSession();
             session.setAttribute("user", account);
@@ -93,7 +94,7 @@ public class LoginServlet extends HttpServlet {
             try {
                 RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/login.jsp");
                 req.setAttribute("error", true);
-                requestDispatcher.forward(req, resp);
+                requestDispatcher.include(req, resp);
                 return;
             } catch (IOException | ServletException e) {
                 logger.warn("Error sending include", e);
@@ -102,7 +103,7 @@ public class LoginServlet extends HttpServlet {
 
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/index.jsp");
         try {
-            requestDispatcher.forward(req, resp);
+            requestDispatcher.include(req, resp);
         } catch (IOException | ServletException e) {
             logger.warn("Cannot forward to index.jsp", e);
         }
