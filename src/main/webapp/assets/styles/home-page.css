@@ -17,7 +17,7 @@ div.overlay {
 div.center {
     overflow: visible;
     border-radius: 2rem;
-    border: 1px solid var(--md-sys-color-secondary, #B2F1C0);
+    border: 0.2em solid var(--md-sys-color-secondary, #B2F1C0);
     background: var(--md-sys-color-on-primary, #FFFFFF);
     margin-top: 25vh;
     min-width: 50vw;
