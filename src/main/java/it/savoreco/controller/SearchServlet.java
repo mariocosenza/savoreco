@@ -39,7 +39,7 @@ public class SearchServlet extends HttpServlet {
 
             Query<Integer> query = session.createNativeQuery("SELECT restaurant_id FROM savoreco.restaurant r " +
                     "INNER JOIN savoreco.address b " +
-                    "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distance(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000", Integer.class);
+                    "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distance(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 3000", Integer.class);
 
             query.setParameter("longitude", Double.parseDouble(req.getParameter("lon")), Double.class);
             query.setParameter("latitude", Double.parseDouble(req.getParameter("lat")), Double.class);
