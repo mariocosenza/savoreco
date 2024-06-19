@@ -8,7 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "basket_contains")
 public class BasketContain {
     @EmbeddedId
-    private BasketContainId id;
+    private BasketContainId id = new BasketContainId();
 
     @MapsId("basketId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
