@@ -16,6 +16,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <jsp:include page="../components/header.jsp"/>
     <title>Ristorante</title>
     <link rel="stylesheet" type="text/css" href="../assets/styles/restaurant.css">
 </head>
