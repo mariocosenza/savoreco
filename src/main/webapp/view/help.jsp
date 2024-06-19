@@ -76,7 +76,7 @@
 
     <article>
         <h3>Progetto Open Source</h3>
-        <p>Questo sito è parte di un progetto per tecnologie software per il web realizzato da Mario Cosenza, Giuseppe Cavallaro e Mario Fasolino. Il progetto è open source sotto la licenza AGPL-3.0. Il codice sorgente è disponibile su GitHub al seguente indirizzo: <a href="https://github.com/mariocosenza/savoreco" target="_blank"><strong>https://github.com/mariocosenza/savoreco</strong></a>.</p>
+        <p>Questo sito è parte di un progetto per tecnologie software per il web realizzato da Mario Cosenza, Giuseppe Cavallaro e Mario Fasolino. Il progetto è open source sotto la licenza AGPL-3.0. Il codice sorgente è disponibile su GitHub al seguente indirizzo: <a href="https://github.com/mariocosenza/savoreco" rel="noopener" target="_blank"><strong>https://github.com/mariocosenza/savoreco</strong></a>.</p>
     </article>
 
 
