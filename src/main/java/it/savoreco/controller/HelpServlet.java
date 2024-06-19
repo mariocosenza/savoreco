@@ -18,10 +18,10 @@ import java.io.IOException;
         value = "/help"
 )
 public class HelpServlet extends HttpServlet {
-    private static final Logger logger = LoggerFactory.getLogger(HomeServlet.class);
+    private static final Logger logger = LoggerFactory.getLogger(HelpServlet.class);
 
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/help.jsp");
         try {
             requestDispatcher.forward(req, resp);
