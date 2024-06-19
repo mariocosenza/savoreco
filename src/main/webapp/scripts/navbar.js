@@ -1,21 +1,7 @@
-function toggleMenu(user) {
-    if(user) {
-        document.querySelector("#userDropDown").style.display = "block";
-    } else {
-        document.querySelector("#sellerDropDown").style.display = "block";
-    }
-
+function openNav() {
+    document.getElementById("sidenav").style.minWidth = "clamp(250px, 25vw, 600px";
 }
 
-
-window.onclick = function(event) {
-    if (!event.target.matches(".dropbtn")) {
-        const dropdowns = document.getElementsByClassName("dropdown-content");
-        for (let i = 0; i < dropdowns.length; i++) {
-            const openDropdown = dropdowns[i];
-            if (openDropdown.style.display === "block") {
-                openDropdown.style.display = "none";
-            }
-        }
-    }
+function closeNav() {
+    document.getElementById("sidenav").style.minWidth = "0";
 }

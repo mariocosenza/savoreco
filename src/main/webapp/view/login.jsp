@@ -6,7 +6,6 @@
     <title>Accedi - Savoreco</title>
     <link href="../assets/styles/access.css" rel="stylesheet">
     <script src="../scripts/login.js"></script>
-    <script src="../scripts/tooltip.js"></script>
     <%@ include file="/components/header.jsp"%>
 </head>
 <body>
@@ -39,7 +38,6 @@
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Inserisci la tua email" required>
                 <label for="password">Password</label>
-                <span class="tooltiptext">La password deve avere 8 caratteri almeno un numero e un carattere speciale</span>
                 <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required onfocusin="showTooltip()" onfocusout="hideTooltip()">
 
             <button disabled>

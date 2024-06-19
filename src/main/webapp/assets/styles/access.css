@@ -57,22 +57,6 @@ label {
 }
 
 
-/* Tooltip text */
-.tooltiptext {
-    display: none;
-    font-size: 0.8em;
-    text-align: center;
-    margin-left: 16%;
-    margin-right: 16%;
-    margin-bottom: 1em;
-    width: 64%;
-    min-width: 64%;
-    opacity: 0.8;
-    background-color: var(--md-sys-color-secondary-fixed-dim);
-    color: var(--md-sys-color-on-surface);
-    padding: 2%;
-    border-radius: 1.1em;
-}
 
 
 input {
