@@ -9,12 +9,12 @@ CREATE TABLE address
     city         varchar(512),
     country_code char(2) default 'IT' not null,
     zipcode      varchar(16),
-    gps_point    geometry(point, '4326'),
+    lat           double precision default 0 not null,
+    lon           double precision default 0 not null,
 
     CONSTRAINT pk_address PRIMARY KEY (street, zipcode)
 );
 
-CREATE INDEX idx_address_geom_x ON address USING GIST (gps_point);
 -- CREATE INDEX ind_address_country ON address (street collate "it_IT") where country_code = 'IT';
 
 CREATE TYPE order_status AS ENUM ('delivered', 'pending', 'payed', 'confirmed', 'delivering', 'canceled');
@@ -32,7 +32,7 @@ CREATE TABLE user_account
     expires      timestamp,
     street       text,
     zipcode      varchar(16),
-    country_code char(2)                default 'IT' not null,
+    country_code varchar(2)             default 'IT',
     avatar_image varchar(1024)          not null, --default do be added
 
     CONSTRAINT pk_user_account PRIMARY KEY (user_id),
@@ -99,6 +99,7 @@ CREATE TABLE food
     green_point   int                   default 0 not null,
     category      varchar(128) not null default 'other',
     allergens     text,
+    price         double precision default 10 not null,
     quantity      smallint     not null default 1 check (quantity >= 0),
 
     CONSTRAINT pk_food PRIMARY KEY (food_id),
