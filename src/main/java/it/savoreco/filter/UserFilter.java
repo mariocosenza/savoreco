@@ -20,8 +20,7 @@ public class UserFilter implements Filter {
                 if (session != null) {
                     if (session.getAttribute("logged") != null && session.getAttribute("logged").equals("user")) {
                         chain.doFilter(request, response);
-                    }
-                    else {
+                    } else {
                         httpResponse.sendRedirect("/home");
                     }
                 } else {

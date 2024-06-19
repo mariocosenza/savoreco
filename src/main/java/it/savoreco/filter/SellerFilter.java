@@ -11,7 +11,7 @@ import java.io.IOException;
 @WebFilter(value = "/seller/*")
 public class SellerFilter implements Filter {
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)  {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) {
         if (servletRequest instanceof HttpServletRequest httpRequest && servletResponse instanceof HttpServletResponse httpResponse) {
             var session = httpRequest.getSession(false);
             try {
