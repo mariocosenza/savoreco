@@ -3,7 +3,6 @@ package it.savoreco.service;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 
-import java.io.File;
 import java.io.InputStream;
 
 public class FileUpload {

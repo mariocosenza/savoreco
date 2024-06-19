@@ -20,12 +20,13 @@ import java.util.Base64;
 )
 public class FileServlet extends HomeServlet {
     private static final Logger logger = LoggerFactory.getLogger(HomeServlet.class);
+
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) {
         FileUpload fileUpload = new FileUpload();
         try {
             var filePart = req.getPart("file");
-            if(req.getSession(false) != null && req.getSession().getAttribute("seller") instanceof SellerAccount seller) {
+            if (req.getSession(false) != null && req.getSession().getAttribute("seller") instanceof SellerAccount seller) {
                 SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
                 System.out.println(Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes()));
                 fileUpload.saveImage(Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes()), filePart.getInputStream());

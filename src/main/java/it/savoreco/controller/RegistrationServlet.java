@@ -51,13 +51,15 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        Type mapType = new TypeToken<Map<String, String>>(){}.getType();
+        Type mapType = new TypeToken<Map<String, String>>() {
+        }.getType();
         Map<String, String> map = null;
         try {
             Gson gson = new Gson();
             map = gson.fromJson(req.getReader(), mapType);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.error("Error parsing JSON", e);
+            return;
         }
 
         if (Objects.isNull(map.get("profile_type"))
@@ -78,7 +80,6 @@ public class RegistrationServlet extends HttpServlet {
 
         var formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         formatter = formatter.withLocale(Locale.ITALY);
-
 
 
         if (Objects.nonNull(name) && Objects.nonNull(surname)
@@ -114,8 +115,7 @@ public class RegistrationServlet extends HttpServlet {
                     resp.setStatus(HttpServletResponse.SC_ACCEPTED);
                 }
             }
-        }
-        else {
+        } else {
             try {
                 resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             } catch (IOException e) {

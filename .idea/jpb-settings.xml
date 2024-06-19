@@ -5,6 +5,9 @@
       <database-info dbms-id="postgres">
         <mapping-types>
           <mapping-type sql-type="boolean" java-class="boolean" />
+          <mapping-type sql-type="geometry" java-class="Geometry" />
+          <mapping-type sql-type="geometry" java-class="org.locationtech.jts.geom.Geometry" />
+          <mapping-type sql-type="geometry" java-class="org.locationtech.jts.geom.Point" />
         </mapping-types>
       </database-info>
     </database-infos>

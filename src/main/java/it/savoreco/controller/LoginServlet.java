@@ -10,7 +10,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -37,9 +36,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
         try {
-            if((Objects.nonNull(request.getSession(false)) && Objects.nonNull(request.getSession(false).getAttribute("logged")))) {
-                RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-                requestDispatcher.forward(request, response);
+            if ((Objects.nonNull(request.getSession(false)) && Objects.nonNull(request.getSession(false).getAttribute("logged")))) {
+                response.sendRedirect("/home");
             } else {
                 RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/login.jsp");
                 requestDispatcher.forward(request, response);
@@ -62,13 +60,13 @@ public class LoginServlet extends HttpServlet {
 
         if (Objects.nonNull(req.getParameter("profile_type"))
                 && (req.getParameter("profile_type").equals("user") || req.getParameter("profile_type").equals("seller"))
-                &&  Objects.nonNull(email) && Objects.nonNull(password)
-                &&  (Objects.isNull(req.getSession(false)) || Objects.isNull(req.getSession().getAttribute("logged")))) {
+                && Objects.nonNull(email) && Objects.nonNull(password)
+                && (Objects.isNull(req.getSession(false)) || Objects.isNull(req.getSession().getAttribute("logged")))) {
             SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
             Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
-            if(req.getParameter("profile_type").equals("user")) {
-                Query<UserAccount> query = session.createQuery("FROM UserAccount u WHERE u.email= :email AND u.password= :password" , UserAccount.class);
+            if (req.getParameter("profile_type").equals("user")) {
+                Query<UserAccount> query = session.createQuery("FROM UserAccount u WHERE u.email= :email AND u.password= :password", UserAccount.class);
                 query.setParameter("email", email.trim());
                 query.setParameter("password", PasswordSHA512.SHA512Hash(password));
                 account = query.list().getFirst();
@@ -82,15 +80,15 @@ public class LoginServlet extends HttpServlet {
         }
 
 
-        if(Objects.nonNull(account)) {
+        if (Objects.nonNull(account)) {
             var session = req.getSession();
             session.setAttribute("user", account);
             session.setAttribute("logged", "user");
-        } else if(Objects.nonNull(sellerAccount)) {
+        } else if (Objects.nonNull(sellerAccount)) {
             var session = req.getSession();
             session.setAttribute("seller", sellerAccount);
             session.setAttribute("logged", "seller");
-        }  else {
+        } else {
             try {
                 RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/login.jsp");
                 req.setAttribute("error", true);
@@ -101,10 +99,9 @@ public class LoginServlet extends HttpServlet {
             }
         }
 
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/index.jsp");
         try {
-            requestDispatcher.include(req, resp);
-        } catch (IOException | ServletException e) {
+            resp.sendRedirect("/home");
+        } catch (IOException e) {
             logger.warn("Cannot forward to index.jsp", e);
         }
 

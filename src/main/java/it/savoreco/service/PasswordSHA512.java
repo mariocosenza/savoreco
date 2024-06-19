@@ -24,7 +24,7 @@ public class PasswordSHA512 {
             sha = MessageDigest.getInstance("SHA-512");
             hash = sha.digest(password.getBytes(StandardCharsets.UTF_8));
         } catch (NoSuchAlgorithmException e) {
-           logger.error("Hash Algorithm Not Supported", e);
+            logger.error("Hash Algorithm Not Supported", e);
         }
         return convertToHex(Objects.requireNonNull(hash));
     }
