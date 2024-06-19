@@ -22,10 +22,11 @@
                                   <a href="cart">Carrello</a>
                                   <a href="user/purchase">Ordini</a>
                                   <a href="user/preference">Preferenze</a>
+                                  <a href="exit">Esci</a>
                              </div>
                   </c:if>
                   <c:if test="${sessionScope.seller != null}">
-                          <a onclick="toggleMenu(false)" class="siteLink">
+                          <a onclick="openNav(false)" class="siteLink">
                               <c:out value="Ciao"/>
                               <c:out value="${sessionScope.seller.name}"/>
                           </a>
@@ -33,6 +34,7 @@
                                   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                                   <a href="seller/">Crea Ristorante</a>
                                   <a href="seller/seller">Visualizza Ordini</a>
+                                  <a href="exit">Esci</a>
                           </div>
                   </c:if>
               </c:if>

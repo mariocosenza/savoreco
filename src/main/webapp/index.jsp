@@ -24,13 +24,11 @@
             </h1>
             <span class="tooltiptext" style="display: none">Indirizzo non trovato riprova</span>
             <search>
-                <form role="search" action="search" method="get">
                     <div id="autocomplete">
                     </div>
                     <script>
                        autocomplete()
                     </script>
-                </form>
             </search>
         </div>
     </div>
