@@ -56,9 +56,8 @@ public class UserAccount {
     private Address address;
 
     @Size(max = 2)
-    @NotNull
     @ColumnDefault("IT")
-    @Column(name = "country_code", nullable = false, length = 2)
+    @Column(name = "country_code", length = 2)
     private String countryCode;
 
     @Size(max = 1024)
@@ -153,4 +152,20 @@ public class UserAccount {
         this.avatarImage = avatarImage;
     }
 
+    @Override
+    public String toString() {
+        return "UserAccount{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", password='" + password + '\'' +
+                ", age=" + age +
+                ", deleted=" + deleted +
+                ", expires=" + expires +
+                ", address=" + address +
+                ", countryCode='" + countryCode + '\'' +
+                ", avatarImage='" + avatarImage + '\'' +
+                '}';
+    }
 }
