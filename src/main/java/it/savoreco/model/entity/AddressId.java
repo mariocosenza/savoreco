@@ -6,12 +6,10 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.Hibernate;
 
-import java.io.Serial;
 import java.util.Objects;
 
 @Embeddable
 public class AddressId implements java.io.Serializable {
-    @Serial
     private static final long serialVersionUID = 946913276673592358L;
     @Size(max = 256)
     @NotNull
