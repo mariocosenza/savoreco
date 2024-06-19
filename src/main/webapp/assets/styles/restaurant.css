@@ -1,0 +1,82 @@
+@import "global.css";
+
+.foodImage {
+    max-height: 100%;
+    height: 6em;
+    width: 6em;
+    margin-right: 1em;
+    object-fit: cover;
+}
+
+.restaurantImage {
+    max-height: 100%;
+    height: 4em;
+    width: 4em;
+    margin-right: 1em;
+    object-fit: cover;
+}
+
+.restaurantBox {
+    border-radius: 1.1rem;
+    border: 0.1rem solid var(--md-sys-color-secondary);
+    padding: 2vw;
+    box-shadow: 0 0.2em 4em 0.4em rgba(0, 0, 0, 0.25);
+    margin-top: 5vh;
+    width: 60vw;
+    min-width: 38vw;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--md-sys-color-on-primary);
+}
+
+.restaurantInfo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.foodBox {
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    width: calc(100% - 2rem);
+    background-color: var(--md-sys-color-primary-container);
+}
+
+.foodInfo {
+    margin-left: 1em;
+}
+
+.categoryBox {
+    margin-top: 2em;
+}
+
+.categoryContent {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 900px) {
+    .restaurantBox {
+        width: 90vw;
+    }
+
+    .foodBox {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .foodImage {
+        width: 100%;
+        height: auto;
+        margin-bottom: 1em;
+    }
+
+    .restaurantImage {
+        width: 3em;
+        height: 3em;
+    }
+}
