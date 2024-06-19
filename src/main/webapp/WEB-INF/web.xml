@@ -18,10 +18,12 @@
             <url-pattern>/view/*</url-pattern>
             <http-method>POST</http-method>
             <http-method>GET</http-method>
+            <http-method>PUT</http-method>
+            <http-method>HEAD</http-method>
         </web-resource-collection>
         <auth-constraint>
             <description>No direct browser access to JSP files</description>
-            <role-name>admin</role-name>
+            <role-name>manager-gui</role-name>
         </auth-constraint>
     </security-constraint>
 
