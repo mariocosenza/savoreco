@@ -2,6 +2,7 @@ package it.savoreco.service;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
@@ -18,7 +19,7 @@ public class CloudFlareR2Config {
         return Optional.ofNullable((AmazonS3Client) AmazonS3ClientBuilder
                 .standard()
                 .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                .withRegion("")
+                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(configurationProvider.getProperties("url") ,""))
                 .build());
 
     }

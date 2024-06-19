@@ -4,6 +4,7 @@ import it.savoreco.model.entity.SellerAccount;
 import it.savoreco.service.FileUpload;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.hibernate.SessionFactory;
@@ -18,6 +19,12 @@ import java.util.Base64;
         maxFileSize = 1024 * 1024 * 10,      // 10 MB
         maxRequestSize = 1024 * 1024 * 100   // 100 MB
 )
+@WebServlet(
+        name = "fileServlet",
+        displayName = "Upload",
+        description = "Upload",
+        value = "/seller/fileUpload"
+)
 public class FileServlet extends HomeServlet {
     private static final Logger logger = LoggerFactory.getLogger(HomeServlet.class);
 
@@ -26,11 +33,10 @@ public class FileServlet extends HomeServlet {
         FileUpload fileUpload = new FileUpload();
         try {
             var filePart = req.getPart("file");
-            if (req.getSession(false) != null && req.getSession().getAttribute("seller") instanceof SellerAccount seller) {
-                SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
-                System.out.println(Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes()));
-                fileUpload.saveImage(Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes()), filePart.getInputStream());
-                sessionFactory.getCurrentSession().merge(seller);
+            if (req.getSession(false) != null && req.getSession().getAttribute("seller") instanceof SellerAccount) {
+               Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes());
+               fileUpload.saveImage(Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes()), filePart.getInputStream());
+
             }
 
         } catch (IOException | ServletException e) {
