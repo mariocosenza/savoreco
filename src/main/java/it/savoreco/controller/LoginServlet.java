@@ -25,10 +25,6 @@ import java.util.Objects;
         name = "loginPage",
         value = "/login"
 )
-/*
-@ServletSecurity(
-        @HttpConstraint(transportGuarantee = ServletSecurity.TransportGuarantee.CONFIDENTIAL)
-)*/
 public class LoginServlet extends HttpServlet {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginServlet.class);
