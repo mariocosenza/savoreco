@@ -11,28 +11,22 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-
 @WebServlet(
-        name = "homeServlet",
-        displayName = "Savoreco - Home",
-        description = "Savoreco home page",
-        value = "/home"
+        name = "sellerServlet",
+        displayName = "Seller - Home",
+        description = "Seller management page",
+        value = "/seller/seller"
 )
-public class HomeServlet extends HttpServlet {
-    private static final Logger logger = LoggerFactory.getLogger(HomeServlet.class);
+public class SellerServlet extends HttpServlet {
+    private static final Logger logger = LoggerFactory.getLogger(SellerServlet.class);
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/seller/seller.jsp");
         try {
             requestDispatcher.forward(request, response);
         } catch (IOException | ServletException e) {
             logger.warn("Cannot forward to index.jsp", e);
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        resp.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
     }
 }

@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "user_account")
@@ -36,9 +37,8 @@ public class UserAccount {
     private String password;
 
     @NotNull
-    @ColumnDefault("0")
     @Column(name = "age", nullable = false)
-    private Short age;
+    private LocalDate age;
 
     @NotNull
     @ColumnDefault("false")
@@ -56,13 +56,12 @@ public class UserAccount {
     private Address address;
 
     @Size(max = 2)
-    @NotNull
-    @Column(name = "country_code", nullable = false, length = 2)
+    @ColumnDefault("IT")
+    @Column(name = "country_code", length = 2)
     private String countryCode;
 
     @Size(max = 1024)
-    @NotNull
-    @Column(name = "avatar_image", nullable = false, length = 1024)
+    @Column(name = "avatar_image", length = 1024)
     private String avatarImage;
 
     public Long getId() {
@@ -105,11 +104,11 @@ public class UserAccount {
         this.password = password;
     }
 
-    public Short getAge() {
+    public LocalDate getAge() {
         return age;
     }
 
-    public void setAge(Short age) {
+    public void setAge(LocalDate age) {
         this.age = age;
     }
 
@@ -153,4 +152,20 @@ public class UserAccount {
         this.avatarImage = avatarImage;
     }
 
+    @Override
+    public String toString() {
+        return "UserAccount{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", password='" + password + '\'' +
+                ", age=" + age +
+                ", deleted=" + deleted +
+                ", expires=" + expires +
+                ", address=" + address +
+                ", countryCode='" + countryCode + '\'' +
+                ", avatarImage='" + avatarImage + '\'' +
+                '}';
+    }
 }

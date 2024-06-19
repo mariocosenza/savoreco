@@ -58,6 +58,19 @@ public class Food {
     @Column(name = "quantity", nullable = false)
     private Short quantity;
 
+    @NotNull
+    @ColumnDefault("10")
+    @Column(name = "price", nullable = false)
+    private Double price;
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     public Integer getId() {
         return id;
     }

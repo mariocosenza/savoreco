@@ -1,0 +1,35 @@
+@import "global.css";
+
+main {
+    margin: 5vw;
+}
+
+header, article, div {
+    border: 0.2em solid var(--md-sys-color-secondary, #B2F1C0);
+}
+
+header, article {
+    box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
+}
+
+header, article, div {
+    margin-bottom: 20px;
+    padding: 5vw;
+    border: 1px solid var(--md-sys-color-on-background);
+    border-radius: 0.4em;
+    background-color: var(--md-sys-color-background);
+}
+header {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+}
+h1, h2, h3 {
+    color: var(--md-sys-color-on-background);
+}
+a {
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}

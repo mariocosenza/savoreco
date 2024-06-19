@@ -14,7 +14,7 @@ import java.time.Instant;
 @Table(name = "bought_food")
 public class BoughtFood {
     @EmbeddedId
-    private BoughtFoodId id;
+    private BoughtFoodId id = new BoughtFoodId();
 
     @MapsId("purchaseId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

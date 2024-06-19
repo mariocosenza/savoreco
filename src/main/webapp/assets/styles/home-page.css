@@ -15,12 +15,12 @@ div.overlay {
 }
 
 div.center {
+    overflow: visible;
     border-radius: 2rem;
-    border: 1px solid var(--md-sys-color-primary-container, #B2F1C0);
+    border: 0.2em solid var(--md-sys-color-secondary, #B2F1C0);
     background: var(--md-sys-color-on-primary, #FFFFFF);
     margin-top: 25vh;
     min-width: 50vw;
-    overflow: hidden;
 }
 
 h1.search {
@@ -45,6 +45,7 @@ div.info {
     margin-left: 25vw;
     display: flex;
     margin-right: 25vw;
+    box-shadow: 0 0.1em 2em 0.2em rgba(0, 0, 0, 0.25);
 }
 
 div.info img.center {
@@ -72,12 +73,13 @@ div.left, div.right{
     height: 25rem;
     max-height: 30rem;
     border-radius: 2rem;
-    border: 1px solid var(--md-sys-color-primary-container, #B2F1C0);
+    border: 1px solid var(--md-sys-color-secondary, #B2F1C0);
     background: var(--md-sys-color-on-primary, #FFFFFF);
     margin-top: 5vh;
     min-width: 25vw;
     width: 25vw;
     overflow: hidden;
+    box-shadow: 0 0.1em 2em 0.2em rgba(0, 0, 0, 0.25);
 }
 
 div.left {
@@ -109,6 +111,15 @@ div.left p, div.right p {
     margin-right: 5%;
 }
 
+#autocomplete {
+    overflow: visible;
+    z-index: 1;
+    text-align: center;
+    min-width: 76%;
+    margin-left: 12%;
+    margin-right: 12%;
+    margin-bottom: 0.6em;
+}
 
 
 @media screen and (max-width: 900px) {
