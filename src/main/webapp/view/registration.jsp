@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +32,7 @@
             <input type="text" id="name" name="name" placeholder="Inserisci il tuo nome" required>
             <label for="surname" id="surname_label">Cognome</label>
             <input type="text" id="surname" name="surname" placeholder="Inserisci il tuo cognome" required>
-            <label for="email">Email</label>
+            <label for="email" id="email_label">Email</label>
             <input type="email" id="email" name="email" placeholder="Inserisci la tua email" required>
             <label for="password">Password</label>
             <span class="tooltiptext">La password deve avere 8 caratteri almeno un numero e un carattere speciale</span>
