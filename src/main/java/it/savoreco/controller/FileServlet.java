@@ -35,7 +35,7 @@ public class FileServlet extends HomeServlet {
             var filePart = req.getPart("file");
             if (req.getSession(false) != null && req.getSession().getAttribute("seller") instanceof SellerAccount) {
                Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes());
-               fileUpload.saveImage(Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes()), filePart.getInputStream());
+               fileUpload.saveImage(Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes()) + ".png", filePart.getInputStream());
 
             }
 
