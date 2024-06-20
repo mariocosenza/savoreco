@@ -1,5 +1,6 @@
 package it.savoreco.controller;
 
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,7 +27,7 @@ public class HelpServlet extends HttpServlet {
         try {
             requestDispatcher.forward(req, resp);
         } catch (IOException | ServletException e) {
-            logger.warn("Cannot forward to index.jsp", e);
+            logger.warn("Cannot forward to help.jsp", e);
         }
     }
 
