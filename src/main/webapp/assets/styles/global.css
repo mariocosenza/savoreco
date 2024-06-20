@@ -325,6 +325,14 @@ p.footer {
         display: block;
     }
 
+    #bigTextLogo {
+        margin-left: 2vw;
+    }
+
+    img.logoImage {
+        display: none;
+    }
+
     p.footer {
         margin: 0;
         min-width: 95vw;
