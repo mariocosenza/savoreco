@@ -48,7 +48,7 @@ public class UserAccount {
     @Column(name = "expires")
     private Instant expires;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumns({
             @JoinColumn(name = "street", referencedColumnName = "street"),
             @JoinColumn(name = "zipcode", referencedColumnName = "zipcode")
@@ -63,6 +63,11 @@ public class UserAccount {
     @Size(max = 1024)
     @Column(name = "avatar_image", length = 1024)
     private String avatarImage;
+
+    @NotNull
+    @ColumnDefault("0")
+    @Column(name = "eco_point", nullable = false)
+    private Integer ecoPoint;
 
     public Long getId() {
         return id;
@@ -152,6 +157,14 @@ public class UserAccount {
         this.avatarImage = avatarImage;
     }
 
+    public Integer getEcoPoint() {
+        return ecoPoint;
+    }
+
+    public void setEcoPoint(Integer ecoPoint) {
+        this.ecoPoint = ecoPoint;
+    }
+
     @Override
     public String toString() {
         return "UserAccount{" +
@@ -166,6 +179,7 @@ public class UserAccount {
                 ", address=" + address +
                 ", countryCode='" + countryCode + '\'' +
                 ", avatarImage='" + avatarImage + '\'' +
+                ", ecoPoint=" + ecoPoint +
                 '}';
     }
 }
