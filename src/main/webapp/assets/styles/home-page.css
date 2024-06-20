@@ -111,15 +111,6 @@ div.left p, div.right p {
     margin-right: 5%;
 }
 
-#autocomplete {
-    overflow: visible;
-    z-index: 1;
-    text-align: center;
-    min-width: 76%;
-    margin-left: 12%;
-    margin-right: 12%;
-    margin-bottom: 0.6em;
-}
 
 
 @media screen and (max-width: 900px) {

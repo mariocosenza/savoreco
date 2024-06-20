@@ -4,15 +4,15 @@ main {
     margin: 5vw;
 }
 
-header, article, div {
+main header, article, main div {
     border: 0.2em solid var(--md-sys-color-secondary, #B2F1C0);
 }
 
-header, article {
+main header, article {
     box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
 }
 
-header, article, div {
+header, article, main div {
     margin-bottom: 20px;
     padding: 5vw;
     border: 1px solid var(--md-sys-color-on-background);
@@ -23,13 +23,13 @@ header {
     background-color: var(--md-sys-color-primary-container);
     color: var(--md-sys-color-on-primary-container);
 }
-h1, h2, h3 {
+main h1, main h2, main h3 {
     color: var(--md-sys-color-on-background);
 }
-a {
+main a {
     color: var(--md-sys-color-primary);
     text-decoration: none;
 }
-a:hover {
+main a:hover {
     text-decoration: underline;
 }
