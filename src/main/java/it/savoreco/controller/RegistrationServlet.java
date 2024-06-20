@@ -100,6 +100,7 @@ public class RegistrationServlet extends HttpServlet {
                     user.setAge(LocalDate.parse(Objects.requireNonNullElse(map.get("age"), "1900-01-01"), formatter));
                     user.setPassword(PasswordSHA512.SHA512Hash(password));
                     user.setCountryCode("IT");
+                    user.setEcoPoint(0);
                     session.persist(user);
                     transaction.commit();
                     resp.setStatus(HttpServletResponse.SC_ACCEPTED);
