@@ -17,11 +17,11 @@ public class InvalidateServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp)  {
         if(req.getSession(false) != null) {
             req.getSession().invalidate();
-            try {
-                resp.sendRedirect("/home");
-            } catch (IOException e) {
-                logger.warn("Error sending redirect to invalidate session", e);
-            }
+        }
+        try {
+            resp.sendRedirect("/home");
+        } catch (IOException e) {
+            logger.warn("Error sending redirect to invalidate session", e);
         }
     }
 }
