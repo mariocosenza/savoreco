@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
         var password = req.getParameter("password");
         var email = req.getParameter("email");
 
-
+        try {
         if (Objects.nonNull(req.getParameter("profile_type"))
                 && (req.getParameter("profile_type").equals("user") || req.getParameter("profile_type").equals("seller"))
                 && Objects.nonNull(email) && Objects.nonNull(password)
@@ -65,12 +65,12 @@ public class LoginServlet extends HttpServlet {
                 Query<UserAccount> query = session.createQuery("FROM UserAccount u WHERE u.email= :email AND u.password= :password", UserAccount.class);
                 query.setParameter("email", email.trim());
                 query.setParameter("password", PasswordSHA512.SHA512Hash(password));
-                account = query.list().getFirst();
+                account = query.stream().findAny().orElse(null);
             } else {
                 Query<SellerAccount> query = session.createQuery("FROM SellerAccount u WHERE u.email= :email AND u.password= :password", SellerAccount.class);
                 query.setParameter("email", email.trim());
                 query.setParameter("password", PasswordSHA512.SHA512Hash(password));
-                sellerAccount = query.list().getFirst();
+                sellerAccount = query.stream().findAny().orElse(null);
             }
             transaction.commit();
         }
@@ -95,10 +95,10 @@ public class LoginServlet extends HttpServlet {
             }
         }
 
-        try {
+
             resp.sendRedirect("/home");
-        } catch (IOException e) {
-            logger.warn("Cannot forward to index.jsp", e);
+        } catch (Exception e) {
+            logger.info("Login error", e);
         }
 
     }
