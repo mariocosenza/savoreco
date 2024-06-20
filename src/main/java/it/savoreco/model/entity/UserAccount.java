@@ -53,7 +53,7 @@ public class UserAccount {
             @JoinColumn(name = "street", referencedColumnName = "street"),
             @JoinColumn(name = "zipcode", referencedColumnName = "zipcode")
     })
-    private Address address;
+    private Address address = new Address();
 
     @Size(max = 2)
     @ColumnDefault("IT")

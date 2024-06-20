@@ -14,10 +14,10 @@ public class Basket {
     private Long id;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
-    private UserAccount user;
+    private UserAccount user = new UserAccount();
 
     public Long getId() {
         return id;

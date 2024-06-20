@@ -13,16 +13,16 @@ public class BasketContain {
     private BasketContainId id;
 
     @MapsId("basketId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "basket_id", nullable = false)
-    private Basket basket;
+    private Basket basket = new Basket();
 
     @MapsId("foodId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "food_id", nullable = false)
-    private Food food;
+    private Food food = new Food();
 
     @NotNull
     @ColumnDefault("1")

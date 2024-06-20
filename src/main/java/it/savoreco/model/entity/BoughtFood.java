@@ -17,16 +17,16 @@ public class BoughtFood {
     private BoughtFoodId id = new BoughtFoodId();
 
     @MapsId("purchaseId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "purchase_id", nullable = false)
-    private Purchase purchase;
+    private Purchase purchase = new Purchase();
 
     @MapsId("foodId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "food_id", nullable = false)
-    private Food food;
+    private Food food = new Food();
 
     @Size(max = 128)
     @NotNull
