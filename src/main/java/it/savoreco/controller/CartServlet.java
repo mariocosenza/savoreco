@@ -36,15 +36,22 @@ public class CartServlet extends HttpServlet {
         if (Objects.isNull(req.getParameter("add"))) {
             RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/cart.jsp");
             try {
-                if(Objects.isNull(req.getSession(false)) || Objects.isNull(req.getSession(false).getAttribute("cart"))) {
-                    req.setAttribute("noItem", true);
-                } else {
+                if(Objects.isNull(req.getSession(false)) || (Objects.nonNull(req.getSession(false)) && Objects.nonNull(req.getSession(false).getAttribute("cart")))) {
+                    req.setAttribute("noItem", 1);
+                }  else {
+                    Transaction transaction = session.beginTransaction();
                     if(Objects.nonNull(req.getSession(false).getAttribute("user"))) {
                         var user = (UserAccount) req.getSession().getAttribute("user");
                         Query<BasketContain> basketContainQuery = session.createQuery("from BasketContain b where b.basket.user = :user", BasketContain.class);
                         basketContainQuery.setParameter("user", user);
                         List<BasketContain> basketContains = basketContainQuery.list();
-                        req.setAttribute("basketList", basketContains);
+                        transaction.commit();
+                        if(basketContains.isEmpty()) {
+                            req.setAttribute("noItem", 1);
+                        } else {
+                            req.setAttribute("basketList", basketContains);
+                            req.setAttribute("tot", basketContains.stream().mapToDouble(b -> b.getFood().getPrice()).sum());
+                        }
                     }
                 }
                 requestDispatcher.forward(req, resp);

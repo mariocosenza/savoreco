@@ -16,10 +16,10 @@ public class Food {
     private Integer id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "restaurant_id", nullable = false)
-    private Restaurant restaurant;
+    private Restaurant restaurant = new Restaurant();
 
     @Size(max = 1024)
     @Column(name = "image_object", length = 1024)

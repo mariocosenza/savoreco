@@ -20,10 +20,10 @@ public class Purchase {
     private Long id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
-    private UserAccount user;
+    private UserAccount user = new UserAccount();
 
     @NotNull
     @ColumnDefault("0")
