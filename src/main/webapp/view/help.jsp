@@ -1,5 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<html>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html lang="it">
 <head>
     <%@ include file="/components/header.jsp" %>
     <title>Help Page</title>
