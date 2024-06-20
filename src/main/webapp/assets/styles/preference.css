@@ -1,0 +1,93 @@
+@import "global.css";
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 75vw;
+    margin: 5vh auto auto;
+    background-color: var(--md-sys-color-background);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.formPreference label, .formPreference input{
+    color: var(--md-sys-color-background);
+    display: flex;
+    flex-direction: column;
+    margin: auto auto 0.2em;
+    align-items: center;
+    justify-content: center;
+}
+
+label {
+    font-size: 1.1em;
+    margin-top: 0.5em;
+}
+
+.formPreference {
+    width: 100%;
+}
+
+form {
+    background-color: var(--md-sys-color-background);
+}
+
+.formPreference input {
+    line-height: 2em;
+    color: var(--md-sys-color-on-background);
+    vertical-align: middle;
+    background-color: var(--md-sys-color-on-primary);
+    border: 1% solid var(--md-sys-color-primary);
+    border-radius: 0.4em;
+    outline: none;
+    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 0 inset;
+    :focus{
+        border-color: var(--md-sys-color-secondary-fixed-dim);;
+        outline: none;
+        box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
+    }
+    width: 75%;
+    min-width: 75%;
+    max-width: 75%;
+    max-height: 10em;
+    margin-bottom: 1.1em;
+}
+
+button {
+    font-size: 1.5em;
+}
+
+.alert {
+    z-index: 1;
+    top: 2em;
+    position: absolute;
+    visibility: hidden;
+    right: 5vw;
+    margin-left: 70vw;
+    min-width: 15vw;
+    margin-top: 15vh;
+    margin-right: 5vw;
+    padding: 20px;
+    background-color: var(--md-sys-color-error-container);
+    color: var(--md-sys-color-on-error-container);
+}
+
+.closebtn {
+    margin-left: 5%;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
+button {
+    margin-top: 1em;
+}
