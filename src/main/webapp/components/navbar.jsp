@@ -10,6 +10,7 @@
         <em id="bigTextLogo">SAVOR</em><em id="ecoLogoText">ECO</em>
     </a>
     <span class="siteLinkRight">
+         <c:set var="serverPath" value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}"/>
               <c:if test="${sessionScope.logged != null}" >
                   <c:if test="${sessionScope.user != null}">
                       <div class="dropdown">
@@ -19,10 +20,10 @@
                           </a>
                               <div id="sidenav" class="sidenav">
                                   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                                  <a href="cart">Carrello</a>
-                                  <a href="user/purchase">Ordini</a>
-                                  <a href="user/preference">Preferenze</a>
-                                  <a href="exit">Esci</a>
+                                  <a href="${serverPath}/cart">Carrello</a>
+                                  <a href="${serverPath}/user/purchase">Ordini</a>
+                                  <a href="${serverPath}/user/preference">Preferenze</a>
+                                  <a href="${serverPath}/exit">Esci</a>
                              </div>
                   </c:if>
                   <c:if test="${sessionScope.seller != null}">
@@ -32,9 +33,9 @@
                           </a>
                           <div id="sidenav" class="sidenav">
                                   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                                  <a href="seller/">Crea Ristorante</a>
-                                  <a href="seller/seller">Visualizza Ordini</a>
-                                  <a href="exit">Esci</a>
+                                  <a href="${serverPath}/seller/">Crea Ristorante</a>
+                                  <a href="${serverPath}/seller/seller">Visualizza Ordini</a>
+                                  <a href="${serverPath}/exit">Esci</a>
                           </div>
                   </c:if>
               </c:if>
