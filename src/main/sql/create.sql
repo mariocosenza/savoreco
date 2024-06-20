@@ -29,6 +29,7 @@ CREATE TABLE user_account
     password     varchar(512)           not null,
     age          date                   not null,
     deleted      boolean  default false not null,
+    eco_point     int      default 0     not null,
     expires      timestamp,
     street       text,
     zipcode      varchar(16),
@@ -150,6 +151,7 @@ CREATE TABLE basket_contains
 (
     basket_id bigint,
     food_id   int,
+    quantity  int check (quantity >= 1),
 
     CONSTRAINT pk_basket_contains PRIMARY KEY (basket_id, food_id),
     CONSTRAINT fk_basket_contains_food FOREIGN KEY (food_id) REFERENCES food (food_id) on update cascade on delete cascade,
