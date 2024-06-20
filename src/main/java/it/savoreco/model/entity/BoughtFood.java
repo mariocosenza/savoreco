@@ -117,4 +117,17 @@ public class BoughtFood {
         this.quantity = quantity;
     }
 
+    @Override
+    public String toString() {
+        return "BoughtFood{" +
+                "id=" + id +
+                ", purchase=" + purchase +
+                ", food=" + food +
+                ", name='" + name + '\'' +
+                ", greenPoint=" + greenPoint +
+                ", price=" + price +
+                ", time=" + time +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

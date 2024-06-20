@@ -128,4 +128,17 @@ public class Purchase {
 
     }
 
+    @Override
+    public String toString() {
+        return "Purchase{" +
+                "id=" + id +
+                ", user=" + user +
+                ", deliveryCost=" + deliveryCost +
+                ", time=" + time +
+                ", iva=" + iva +
+                ", totalCost=" + totalCost +
+                ", status=" + status +
+                ", paymentMethod=" + paymentMethod +
+                '}';
+    }
 }
