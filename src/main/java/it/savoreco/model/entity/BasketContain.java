@@ -1,6 +1,8 @@
 package it.savoreco.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -8,7 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "basket_contains")
 public class BasketContain {
     @EmbeddedId
-    private BasketContainId id = new BasketContainId();
+    private BasketContainId id;
 
     @MapsId("basketId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -21,6 +23,11 @@ public class BasketContain {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "food_id", nullable = false)
     private Food food;
+
+    @NotNull
+    @ColumnDefault("1")
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity;
 
     public BasketContainId getId() {
         return id;
@@ -46,4 +53,21 @@ public class BasketContain {
         this.food = food;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "BasketContain{" +
+                "id=" + id +
+                ", basket=" + basket +
+                ", food=" + food +
+                ", quantity=" + quantity +
+                '}';
+    }
 }
