@@ -84,4 +84,15 @@ public class SellerAccount {
         this.restaurant = restaurant;
     }
 
+    @Override
+    public String toString() {
+        return "SellerAccount{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", password='" + password + '\'' +
+                ", restaurant=" + restaurant +
+                '}';
+    }
 }

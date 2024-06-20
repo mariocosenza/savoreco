@@ -31,4 +31,8 @@ public class HomeServlet extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        resp.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
+    }
 }

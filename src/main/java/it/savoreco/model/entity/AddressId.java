@@ -53,4 +53,11 @@ public class AddressId implements java.io.Serializable {
         return Objects.hash(zipcode, street);
     }
 
+    @Override
+    public String toString() {
+        return "AddressId{" +
+                "street='" + street + '\'' +
+                ", zipcode='" + zipcode + '\'' +
+                '}';
+    }
 }

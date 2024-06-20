@@ -16,10 +16,10 @@ public class Food {
     private Integer id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "restaurant_id", nullable = false)
-    private Restaurant restaurant;
+    private Restaurant restaurant = new Restaurant();
 
     @Size(max = 1024)
     @Column(name = "image_object", length = 1024)
@@ -57,6 +57,19 @@ public class Food {
     @ColumnDefault("1")
     @Column(name = "quantity", nullable = false)
     private Short quantity;
+
+    @NotNull
+    @ColumnDefault("10")
+    @Column(name = "price", nullable = false)
+    private Double price;
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 
     public Integer getId() {
         return id;
@@ -138,4 +151,20 @@ public class Food {
         this.quantity = quantity;
     }
 
+    @Override
+    public String toString() {
+        return "Food{" +
+                "id=" + id +
+                ", restaurant=" + restaurant +
+                ", imageObject='" + imageObject + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", available=" + available +
+                ", greenPoint=" + greenPoint +
+                ", category='" + category + '\'' +
+                ", allergens='" + allergens + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                '}';
+    }
 }

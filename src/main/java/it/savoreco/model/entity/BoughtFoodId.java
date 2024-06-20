@@ -50,4 +50,11 @@ public class BoughtFoodId implements java.io.Serializable {
         return Objects.hash(purchaseId, foodId);
     }
 
+    @Override
+    public String toString() {
+        return "BoughtFoodId{" +
+                "purchaseId=" + purchaseId +
+                ", foodId=" + foodId +
+                '}';
+    }
 }

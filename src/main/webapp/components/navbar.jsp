@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
-<!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="it">
 <nav id="topNavBar">
+    <script src="../scripts/navbar.js"></script>
     <a href="../../home">
         <img src="../assets/images/savoreco-logo.webp" alt="Logo Savoreco" class="logoImage">
     </a>
@@ -10,20 +10,41 @@
         <em id="bigTextLogo">SAVOR</em><em id="ecoLogoText">ECO</em>
     </a>
     <span class="siteLinkRight">
-            <a href="../view/login.jsp" class="siteLink">
-                <c:catch var="catchException">
-                    <c:if test="${account.name != null}" var="test" scope="page">
-                        <c:out value="${account.name}"/>
-                    </c:if>
-                    <c:if test="${!test}">
+         <c:set var="serverPath" value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}"/>
+              <c:if test="${sessionScope.logged != null}" >
+                  <c:if test="${sessionScope.user != null}">
+                      <div class="dropdown">
+                          <a onclick="openNav(true)" class="siteLink">
+                              <c:out value="Ciao"/>
+                              <c:out value="${sessionScope.user.name}"/>
+                          </a>
+                              <div id="sidenav" class="sidenav">
+                                  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                                  <a href="${serverPath}/cart">Carrello</a>
+                                  <a href="${serverPath}/user/purchase">Ordini</a>
+                                  <a href="${serverPath}/user/preference">Preferenze</a>
+                                  <a href="${serverPath}/exit">Esci</a>
+                             </div>
+                  </c:if>
+                  <c:if test="${sessionScope.seller != null}">
+                          <a onclick="openNav(false)" class="siteLink">
+                              <c:out value="Ciao"/>
+                              <c:out value="${sessionScope.seller.name}"/>
+                          </a>
+                          <div id="sidenav" class="sidenav">
+                                  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                                  <a href="${serverPath}/seller/">Crea Ristorante</a>
+                                  <a href="${serverPath}/seller/seller">Visualizza Ordini</a>
+                                  <a href="${serverPath}/exit">Esci</a>
+                          </div>
+                  </c:if>
+              </c:if>
+                <c:if test="${sessionScope.logged == null}">
+                    <a href="login" class="siteLink">
                         <c:out value="Accedi"/>
-                    </c:if>
-                </c:catch>
-                <c:if test="${catchException}">
-                    Accedi
-                </c:if>
-            </a>
-            <a href="Accedi" class="siteLink">
+                    </a>
+            </c:if>
+            <a href="help" class="siteLink">
                 Aiuto
             </a>
 

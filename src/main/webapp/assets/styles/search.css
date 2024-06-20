@@ -1,0 +1,76 @@
+@import "global.css";
+
+.result {
+
+}
+
+aside {
+    display: block;
+    float: left;
+    min-width: 20vw;
+    max-width: 20vw;
+}
+
+label {
+    text-align: center;
+    min-width: 20vw;
+    font-size: 1.1em;
+    background-color: var(--md-sys-color-primary-container);
+    border-radius: 0.4em;
+    margin-bottom: 1em;
+}
+
+.allResult {
+    margin-right: 5vw;
+    min-width: 75vw;
+    float: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: var(--md-sys-color-on-background);
+    font-size: 1.4em;
+}
+
+h2 {
+    color: var(--md-sys-color-on-background);
+    font-size: 1.1em;
+}
+
+.result {
+    display: flex;
+    flex-direction: row;
+    margin: 2vw;
+    padding-left: 2vw;
+    min-width: 72vw;
+    min-height: 25vh;
+    max-height: 50vh;
+    border-radius: 0.4em;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.result img {
+    margin-top: 5%;
+    min-width: 25%;
+    max-width: 25%;
+    margin-bottom: 5%;
+    margin-right: 5%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 0.4em;
+}
+
+.restaurantInfo {
+    display: flex;
+    flex-direction: row;
+}
+
+.allResult button {
+    font-size: 1.5em;
+    margin-bottom: 0.2em;
+}

@@ -19,14 +19,19 @@ public class Restaurant {
     private Integer id;
 
     @Size(max = 128)
+
     @NotNull
     @Column(name = "name", nullable = false, length = 128)
     private String name;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumns({
+            @JoinColumn(name = "street", referencedColumnName = "street", nullable = false),
+            @JoinColumn(name = "zipcode", referencedColumnName = "zipcode", nullable = false)
+    })
     @OnDelete(action = OnDeleteAction.RESTRICT)
-    private Address address;
+    private Address address = new Address();
 
     @ColumnDefault("")
     @Column(name = "description", length = Integer.MAX_VALUE)
@@ -127,4 +132,18 @@ public class Restaurant {
         this.creationTime = creationTime;
     }
 
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address=" + address +
+                ", description='" + description + '\'' +
+                ", imageObject='" + imageObject + '\'' +
+                ", deliveryCost=" + deliveryCost +
+                ", category='" + category + '\'' +
+                ", deleted=" + deleted +
+                ", creationTime=" + creationTime +
+                '}';
+    }
 }

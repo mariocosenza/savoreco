@@ -20,10 +20,10 @@ public class Purchase {
     private Long id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
-    private UserAccount user;
+    private UserAccount user = new UserAccount();
 
     @NotNull
     @ColumnDefault("0")
@@ -128,4 +128,17 @@ public class Purchase {
 
     }
 
+    @Override
+    public String toString() {
+        return "Purchase{" +
+                "id=" + id +
+                ", user=" + user +
+                ", deliveryCost=" + deliveryCost +
+                ", time=" + time +
+                ", iva=" + iva +
+                ", totalCost=" + totalCost +
+                ", status=" + status +
+                ", paymentMethod=" + paymentMethod +
+                '}';
+    }
 }

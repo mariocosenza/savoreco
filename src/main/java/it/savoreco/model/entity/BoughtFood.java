@@ -14,19 +14,19 @@ import java.time.Instant;
 @Table(name = "bought_food")
 public class BoughtFood {
     @EmbeddedId
-    private BoughtFoodId id;
+    private BoughtFoodId id = new BoughtFoodId();
 
     @MapsId("purchaseId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "purchase_id", nullable = false)
-    private Purchase purchase;
+    private Purchase purchase = new Purchase();
 
     @MapsId("foodId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "food_id", nullable = false)
-    private Food food;
+    private Food food = new Food();
 
     @Size(max = 128)
     @NotNull
@@ -117,4 +117,17 @@ public class BoughtFood {
         this.quantity = quantity;
     }
 
+    @Override
+    public String toString() {
+        return "BoughtFood{" +
+                "id=" + id +
+                ", purchase=" + purchase +
+                ", food=" + food +
+                ", name='" + name + '\'' +
+                ", greenPoint=" + greenPoint +
+                ", price=" + price +
+                ", time=" + time +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

@@ -1,13 +1,16 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <link href="assets/styles/home-page.css" rel="stylesheet">
     <%@include file="/components/header.jsp" %>
+    <link href="assets/styles/home-page.css" rel="stylesheet">
+    <script src="scripts/tooltip.js"></script>
+    <script src="scripts/home.js"></script>
     <title>Savoreco</title>
 </head>
 <body>
     <jsp:include page="/components/navbar.jsp"/>
+
 <main>
     <div class="overlay">
         <div class="center">
@@ -17,15 +20,13 @@
             <h1 id="searchBoxRight" class="search">
                 SAPORE
             </h1>
+            <span class="tooltiptext" style="display: none">Indirizzo non trovato riprova</span>
             <search>
-                <form role="search" action="" method="post">
-                    <label>
-                        <input id="searchBarHome" class="centralSearch" type="search" placeholder="Inserisci la via del ristorante">
-                        <button id="submitSearch">
-                            VAI
-                        </button>
-                    </label>
-                </form>
+                    <div id="autocomplete">
+                    </div>
+                    <script>
+                       autocomplete()
+                    </script>
             </search>
         </div>
     </div>
