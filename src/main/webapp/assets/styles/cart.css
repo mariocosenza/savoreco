@@ -2,15 +2,20 @@
 
 
 div.empty {
-    margin-top: 10vh;
+    margin-top: 2%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--md-sys-color-background);
     color: var(--md-sys-color-on-background);
     text-align: center;
+    max-height: 50vh;
     max-width: 100vw;
+}
+
+main div {
+    width: 100%;
+    margin: 0;
 }
 
 main img {
@@ -19,13 +24,102 @@ main img {
     height: auto;
 }
 
-div.empty h1 {
-    font-size: 2em;
+main {
+    width: 80%;
+    margin: 5vh auto auto;
+    border-radius: 1em;
+    background-color: var(--md-sys-color-surface-variant);
+    padding: 6%;
+    box-shadow: 0 0 2em rgba(0, 0, 0, 0.1);
+}
+
+form {
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    text-align: right;
 }
 
 button {
-    font-size: 1.5em;
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-background);
+    padding: 0.8em;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 2em;
+    margin-left: 50%;
 }
+
+
+h1.orderTitle {
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+
+button:hover {
+    background-color: var(--md-sys-color-tertiary);
+}
+
+
+li {
+    list-style-type: none;
+    min-width: 100%;
+    padding: 0;
+}
+
+div h1 {
+    width: 100%;
+    display: inline;
+}
+
+
+div.empty h1 {
+    font-size: 2em;
+    display: inline;
+}
+
+svg {
+   float: right;
+    width: 1em;
+    height: 1em;
+}
+
+svg.addIcon {
+    clear: both;
+    float: none;
+    min-width: 1.2em;
+    min-height: 2em;
+    margin-left: 2%;
+}
+
+h2 {
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    font-size: 1.2em;
+}
+
+ol {
+    color: var(--md-sys-color-on-background);
+    display: flex;
+    justify-content: left;
+    border-bottom: 0.1em solid #ddd;
+    padding: 1vw 0;
+}
+
+h2, h1  {
+    color: var(--md-sys-color-on-background);
+}
+
+button.empty {
+    text-align: center;
+    margin: auto;
+}
+
 
 @media  screen and (max-width: 600px) {
     main img {
