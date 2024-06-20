@@ -1,0 +1,34 @@
+@import "global.css";
+
+
+div.empty {
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--md-sys-color-background);
+    color: var(--md-sys-color-on-background);
+    text-align: center;
+    max-width: 100vw;
+}
+
+main img {
+    min-width: 15vw;
+    max-width: 20vw;
+    height: auto;
+}
+
+div.empty h1 {
+    font-size: 2em;
+}
+
+button {
+    font-size: 1.5em;
+}
+
+@media  screen and (max-width: 600px) {
+    main img {
+        max-width: 45vw;
+    }
+}
