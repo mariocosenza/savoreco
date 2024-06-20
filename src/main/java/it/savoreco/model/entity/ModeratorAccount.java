@@ -72,4 +72,14 @@ public class ModeratorAccount {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "ModeratorAccount{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

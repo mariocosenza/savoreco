@@ -151,4 +151,20 @@ public class Food {
         this.quantity = quantity;
     }
 
+    @Override
+    public String toString() {
+        return "Food{" +
+                "id=" + id +
+                ", restaurant=" + restaurant +
+                ", imageObject='" + imageObject + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", available=" + available +
+                ", greenPoint=" + greenPoint +
+                ", category='" + category + '\'' +
+                ", allergens='" + allergens + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                '}';
+    }
 }

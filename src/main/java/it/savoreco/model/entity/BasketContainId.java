@@ -50,4 +50,11 @@ public class BasketContainId implements java.io.Serializable {
         return Objects.hash(basketId, foodId);
     }
 
+    @Override
+    public String toString() {
+        return "BasketContainId{" +
+                "basketId=" + basketId +
+                ", foodId=" + foodId +
+                '}';
+    }
 }

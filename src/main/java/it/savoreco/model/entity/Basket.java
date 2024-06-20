@@ -35,4 +35,11 @@ public class Basket {
         this.user = user;
     }
 
+    @Override
+    public String toString() {
+        return "Basket{" +
+                "id=" + id +
+                ", user=" + user +
+                '}';
+    }
 }
