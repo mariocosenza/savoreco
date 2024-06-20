@@ -1,0 +1,84 @@
+@import "global.css";
+
+table {
+    width: 90%;
+    max-width: 80em;
+    border-collapse: collapse;
+    margin: 2em auto;
+    white-space: nowrap;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+td, th {
+    padding: 0.75em;
+    border: 1px solid;
+    text-align: left;
+    border-color: inherit;
+}
+
+@media screen and (max-width: 600px) {
+    table {
+        width: 100%;
+        margin: 1em 0;
+        white-space: normal;
+        border: 1px solid;
+    }
+
+    .fields {
+        display: none;
+    }
+
+    tbody tr {
+        display: block;
+        width: 100%;
+        margin-bottom: 1em;
+        border: 1px solid;
+        border-color: inherit;
+    }
+
+    td {
+        display: flex;
+        align-items: baseline;
+        padding: 0.5em;
+        border: none;
+        width: 100%;
+        white-space: normal;
+    }
+
+    td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        width: 30%;
+        text-align: right;
+        margin-right: 1em;
+    }
+
+    td button {
+        width: auto;
+        margin: 0;
+    }
+}
+
+
+table.active-users {
+    border: 2px solid var(--md-sys-color-primary);
+}
+
+table.active-users th {
+    background-color: var(--md-sys-color-primary);
+    color: white;
+}
+
+table.deleted-users {
+    border: 2px solid var(--md-sys-color-on-tertiary-container);
+}
+
+table.deleted-users th {
+    background-color: var(--md-sys-color-on-tertiary-container);
+    color: white;
+}
+
+
