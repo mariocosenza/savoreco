@@ -8,26 +8,48 @@ table {
     white-space: nowrap;
 }
 
-tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
 td, th {
     padding: 0.75em;
     border: 1px solid;
     text-align: left;
     border-color: inherit;
+
 }
+
+h1 {
+    margin-left: 1em;
+}
+
+th {
+    color: white;
+    background-color: var(--md-sys-color-on-primary-fixed-variant);
+}
+
+button.active-users {
+    background-color: var(--md-sys-color-on-primary-fixed-variant);
+}
+
+button.deleted-users {
+    background-color: var(--md-sys-color-on-tertiary-fixed-variant);
+}
+
+.active-users {
+    background-color: var(--md-sys-color-primary-fixed);
+}
+
+.deleted-users {
+    background-color: var(--md-sys-color-tertiary-fixed-dim);
+}
+
+
 
 @media screen and (max-width: 600px) {
     table {
-        width: 100%;
-        margin: 1em 0;
+        margin: 1em auto;
         white-space: normal;
-        border: 1px solid;
     }
 
-    .fields {
+    .disappearSmall {
         display: none;
     }
 
@@ -36,7 +58,6 @@ td, th {
         width: 100%;
         margin-bottom: 1em;
         border: 1px solid;
-        border-color: inherit;
     }
 
     td {
@@ -61,24 +82,4 @@ td, th {
         margin: 0;
     }
 }
-
-
-table.active-users {
-    border: 2px solid var(--md-sys-color-primary);
-}
-
-table.active-users th {
-    background-color: var(--md-sys-color-primary);
-    color: white;
-}
-
-table.deleted-users {
-    border: 2px solid var(--md-sys-color-on-tertiary-container);
-}
-
-table.deleted-users th {
-    background-color: var(--md-sys-color-on-tertiary-container);
-    color: white;
-}
-
 
