@@ -35,12 +35,11 @@ public class RestaurantServlet extends HttpServlet {
             Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
 
-            int aid = Integer.parseInt(request.getParameter("id"));
-            System.out.println(aid);
+            int id = Integer.parseInt(request.getParameter("id"));
 
             Query<Restaurant> restaurantQuery = session.createQuery("FROM Restaurant r "
                     +"WHERE r.id = :id", Restaurant.class);
-            restaurantQuery.setParameter("id", aid);
+            restaurantQuery.setParameter("id", id);
             Restaurant restaurant = restaurantQuery.getSingleResult();
 
             Query<Food> foodQuery = session.createQuery("FROM Food f "
