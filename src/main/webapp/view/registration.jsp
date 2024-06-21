@@ -47,8 +47,9 @@
             <p>
                 Sei gia iscritto? <a href="login">Accedi</a>
             </p>
-            <p>
-                Condizioni
+            <p class="policy">
+                Creando un account, accetti i nostri Termini di Servizio e confermi di aver letto la nostra Privacy Policy.
+                La tua privacy è garantita e i dati saranno trattati nel rispetto delle normative vigenti.
             </p>
         </form>
     </div>
