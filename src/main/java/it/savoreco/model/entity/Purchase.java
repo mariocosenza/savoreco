@@ -44,17 +44,17 @@ public class Purchase {
     @Column(name = "total_cost", nullable = false, precision = 16, scale = 8)
     private BigDecimal totalCost;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @ColumnDefault("pending")
     @JdbcType(PostgreSQLEnumJdbcType.class)
     @Column(name = "status", columnDefinition = "order_status not null")
-    private Statuses status;
+    private Statuses status = Statuses.pending;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @ColumnDefault("google")
     @JdbcType(PostgreSQLEnumJdbcType.class)
     @Column(name = "payment_method", columnDefinition = "payment_type not null")
-    private PaymentMethods paymentMethod;
+    private PaymentMethods paymentMethod = PaymentMethods.google;
 
     public Long getId() {
         return id;
@@ -120,14 +120,6 @@ public class Purchase {
         this.paymentMethod = paymentMethod;
     }
 
-    public enum Statuses {
-
-    }
-
-    public enum PaymentMethods {
-
-    }
-
     @Override
     public String toString() {
         return "Purchase{" +
@@ -140,5 +132,13 @@ public class Purchase {
                 ", status=" + status +
                 ", paymentMethod=" + paymentMethod +
                 '}';
+    }
+
+    public enum Statuses {
+        delivered, pending, payed, confirmed, delivering, canceled
+    }
+
+    public enum PaymentMethods {
+        google, paypal, visa, mastercard
     }
 }
