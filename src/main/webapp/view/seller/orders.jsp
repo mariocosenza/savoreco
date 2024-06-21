@@ -7,6 +7,9 @@
 <%@ page import="it.savoreco.model.entity.BoughtFood" %>
 <%@ page import="it.savoreco.model.entity.Purchase" %>
 <%@ page import="it.savoreco.model.entity.UserAccount" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.time.ZoneId" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%
     List<BoughtFood> orders = (List<BoughtFood>) request.getAttribute("orders");
@@ -38,7 +41,7 @@
                     , <%= restaurant.getAddress().getId().getZipcode() %></p>
                 <p><strong>Categoria:</strong> <%= restaurant.getCategory() %></p>
                 <p><strong>Descrizione:</strong> <%= restaurant.getDescription() %></p>
-                <p><strong>Costo di Consegna:</strong> <%= restaurant.getDeliveryCost() %> euro</p>
+                <p><strong>Costo di Consegna:</strong> <%= String.format("%.2f", restaurant.getDeliveryCost()) %>€</p>
             </div>
         </div>
     </div>
@@ -57,20 +60,21 @@
 
 
         <div class="purchaseBox">
-            <h3>Acquisto del <%= purchase.getTime() %>:</h3>
+            <h3>Acquisto del  <%= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+                    .format(purchase.getTime().atZone(ZoneId.systemDefault()))%>:</h3>
             <div class="info">
                 <p><strong>Metodo di pagamento:</strong> <%= purchase.getPaymentMethod() %></p>
-                <p><strong>Costo consegna:</strong> <%= purchase.getDeliveryCost() %> euro</p>
+                <p><strong>Costo consegna:</strong> <%= String.format("%.2f", purchase.getDeliveryCost()) %>€</p>
                 <p><strong>IVA:</strong> <%= purchase.getIva() %>%</p>
                 <p><strong>Stato:</strong> <%= purchase.getStatus() %></p>
-                <p><strong>Costo totale:</strong> <%= purchase.getTotalCost() %> euro</p>
+                <p><strong>Costo totale:</strong> <%= String.format("%.2f", purchase.getTotalCost()) %>€</p>
             </div>
 
-            <h3>Dettagli utente</h3>
+            <h3>Dettagli utente:</h3>
             <div class="info">
                 <p><strong>Email:</strong> <%= user.getEmail() %></p>
                 <p><strong>Nome:</strong> <%= user.getName() %> <%= user.getSurname() %></p>
-                <p><strong>Et&#224:</strong> <%= user.getAge() %></p>
+                <p><strong>Età:</strong> <%= user.getAge() %></p>
                 <p><strong>Indirizzo:</strong> <%= user.getAddress().getId().getStreet() %>, <%= user.getAddress().getId().getZipcode() %>, <%= user.getCountryCode() %></p>
                 <p><strong>Eliminato:</strong> <%= user.getDeleted() %></p>
             </div>
@@ -81,12 +85,12 @@
                     <img src="<%= food.getImageObject() %>" alt="<%= food.getName() %>" class="foodImage">
                     <div>
                         <h2><%= food.getName() %></h2>
-                        <p><strong>Descrizione:</strong> <%= food.getDescription() %></p>
+                        <p>Descrizione: <%= food.getDescription() %></p>
                         <p><strong>Categoria:</strong> <%= food.getCategory() %></p>
-                        <p><strong>Allergeni:</strong> <%= food.getAllergens() %></p>
-                        <p><strong>Quantit&#224:</strong> <%= boughtFood.getQuantity() %></p>
+                        <p><strong>Prezzo:</strong> <%= String.format("%.2f", boughtFood.getPrice()) %>€</p>
                         <p><strong>Green Points:</strong> <%= boughtFood.getGreenPoint() %></p>
-                        <p><strong>Prezzo:</strong> <%= boughtFood.getPrice() %> euro</p>
+                        <p><strong>Allergeni:</strong> <%= food.getAllergens() %></p>
+                        <p><strong>Quantità:</strong> <%= boughtFood.getQuantity() %></p>
                     </div>
                 </div>
                 <% } %>

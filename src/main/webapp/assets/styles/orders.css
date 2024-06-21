@@ -1,36 +1,32 @@
 @import "global.css";
 
-/* Stili di base */
 .purchaseBox, .restaurantBox, .foodBox, .orderBox {
     border-radius: 1.1rem;
     border: 0.1rem solid var(--md-sys-color-secondary);
     padding: 2vw;
     box-shadow: 0 0.2em 4em 0.4em rgba(0, 0, 0, 0.25);
     background-color: var(--md-sys-color-on-primary);
-    width: calc(100% - 4rem); /* Riduce lo spazio ai lati per migliorare il centramento */
-    max-width: 100%; /* Assicura che non superino la larghezza del contenitore genitore */
+    width: calc(100% - 4rem);
+    max-width: 100%;
     box-sizing: border-box;
 }
 
-/* Stile specifico per l'ordine */
 .orderBox {
     width: 85vw;
     min-width: 38vw;
     overflow: hidden;
     position: relative;
     display: flex;
-    flex-direction: column; /* Permette ai figli di disporsi verticalmente */
-    align-items: center; /* Centra i figli orizzontalmente */
+    flex-direction: column;
+    align-items: center;
     margin: auto;
     padding: 2vw;
 }
 
-/* Stile per la centratura verticale */
 .purchaseBox, .restaurantBox {
     margin: 1vh auto 4vh auto;
 }
 
-/* Stili generali */
 p {
     padding-right: 1em;
 }
@@ -69,7 +65,6 @@ p {
     background-color: var(--md-sys-color-primary-container);
 }
 
-/* Media Queries per la progettazione responsiva */
 @media (max-width: 768px) {
     .purchaseBox, .restaurantBox, .foodBox, .orderBox {
         padding: 4vw;

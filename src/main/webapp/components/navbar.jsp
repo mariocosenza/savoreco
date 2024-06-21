@@ -34,7 +34,7 @@
                           <div id="sidenav" class="sidenav">
                                   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                                   <a href="${serverPath}/seller/">Crea Ristorante</a>
-                                  <a href="${serverPath}/seller/seller">Visualizza Ordini</a>
+                                  <a href="orders?id=${sessionScope.seller.restaurant.id}">Visualizza Ordini</a>
                                   <a href="${serverPath}/exit">Esci</a>
                           </div>
                   </c:if>
