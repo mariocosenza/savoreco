@@ -10,8 +10,8 @@
 
 .restaurantImage {
     max-height: 100%;
-    height: 4em;
-    width: 4em;
+    height: 6em;
+    width: 6em;
     margin-right: 1em;
     object-fit: cover;
 }
@@ -71,12 +71,19 @@
 
     .foodImage {
         width: 100%;
+        max-width: 6em;
         height: auto;
         margin-bottom: 1em;
     }
 
     .restaurantImage {
-        width: 3em;
-        height: 3em;
+        width: 100%;
+        max-width: 6em;
+        height: auto;
+    }
+
+    button {
+        height: 2.5em;
+        padding: 0.5em;
     }
 }

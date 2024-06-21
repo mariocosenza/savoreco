@@ -4,6 +4,7 @@
 <%@ page import="it.savoreco.model.entity.Restaurant" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%
     List<Food> foodList = (List<Food>) request.getAttribute("foodList");
@@ -16,6 +17,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <%@ include file="/components/header.jsp"%>
     <title>Ristorante</title>
     <link rel="stylesheet" type="text/css" href="../assets/styles/restaurant.css">
 </head>
@@ -28,11 +30,11 @@
             <img src="<%= restaurant.getImageObject()%>" alt="logo" class="restaurantImage">
             <div>
                 <h1><%= restaurant.getName() %></h1>
-                <p><strong>Indirizzo:</strong> <%= restaurant.getAddress().getId().getStreet() %>
+                <p><strong>Indirizzo: </strong> <%= restaurant.getAddress().getId().getStreet() %>
                     , <%= restaurant.getAddress().getId().getZipcode() %></p>
-                <p><strong>Categoria:</strong> <%= restaurant.getCategory() %></p>
-                <p><strong>Descrizione:</strong> <%= restaurant.getDescription() %></p>
-                <p><strong>Costo di Consegna:</strong> <%= restaurant.getDeliveryCost() %> euro</p>
+                <p><strong>Categoria: </strong> <%= restaurant.getCategory() %></p>
+                <p><strong>Descrizione: </strong> <%= restaurant.getDescription() %></p>
+                <p><strong>Costo di Consegna: </strong> <%= String.format("%.2f", restaurant.getDeliveryCost())%>€</p>
             </div>
         </div>
 
@@ -56,10 +58,12 @@
                     <div class="foodInfo">
                         <h3><%= food.getName() %></h3>
                         <p><%= food.getDescription() %></p>
-                        <p><strong>Green Points:</strong> <%= food.getGreenPoint() %></p>
-                        <p><strong>Allergeni:</strong> <%= food.getAllergens() %></p>
-                        <p><strong>Quantit&#224:</strong> <%= food.getQuantity() %></p>
+                        <p><strong>Prezzo: </strong><%= String.format("%.2f", food.getPrice()) %>€</p>
+                        <p><strong>Green Points: </strong> <%= food.getGreenPoint() %></p>
+                        <p><strong>Allergeni: </strong> <%= food.getAllergens() %></p>
+                        <p><strong>Quantità: </strong> <%= food.getQuantity() %></p>
                     </div>
+                    <button>Aggiungi al carrello</button>
                 </div>
                 <% } %>
             </div>
@@ -72,3 +76,4 @@
 <%@ include file="../components/footer.jsp" %>
 </body>
 </html>
+
