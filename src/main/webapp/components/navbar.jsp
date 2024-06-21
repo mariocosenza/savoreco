@@ -38,6 +38,17 @@
                                   <a href="${serverPath}/exit">Esci</a>
                           </div>
                   </c:if>
+                  <c:if test="${sessionScope.moderator != null}">
+                           <a onclick="openNav(false)" class="siteLink">
+                              <c:out value="Ciao"/>
+                              <c:out value="${sessionScope.moderator.name}"/>
+                          </a>
+                          <div id="sidenav" class="sidenav">
+                                  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                                  <a href="${serverPath}/moderator/moderatorPage">Pannello Moderatore</a>
+                                  <a href="${serverPath}/exit">Esci</a>
+                          </div>
+                 </c:if>
               </c:if>
                 <c:if test="${sessionScope.logged == null}">
                     <a href="login" class="siteLink">
