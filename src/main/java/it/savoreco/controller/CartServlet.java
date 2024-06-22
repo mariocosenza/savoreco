@@ -15,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,13 +32,14 @@ public class CartServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
         Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
         if (Objects.isNull(req.getParameter("add"))) {
             RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/cart.jsp");
             try {
                 if(Objects.isNull(req.getSession(false)) || (Objects.nonNull(req.getSession(false)) && Objects.nonNull(req.getSession(false).getAttribute("cart")))) {
                     req.setAttribute("noItem", 1);
                 }  else {
-                    Transaction transaction = session.beginTransaction();
+
                     if(Objects.nonNull(req.getSession(false).getAttribute("user"))) {
                         var user = (UserAccount) req.getSession().getAttribute("user");
                         Query<BasketContain> basketContainQuery = session.createQuery("from BasketContain b where b.basket.user = :user", BasketContain.class);
@@ -47,8 +47,10 @@ public class CartServlet extends HttpServlet {
                         List<BasketContain> basketContains = basketContainQuery.list();
                         transaction.commit();
                         if(basketContains.isEmpty()) {
+                            System.out.println("test");
                             req.setAttribute("noItem", 1);
                         } else {
+                            req.setAttribute("noItem", 2);
                             req.setAttribute("basketList", basketContains);
                             req.setAttribute("tot", basketContains.stream().mapToDouble(b -> b.getFood().getPrice()).sum());
                         }
@@ -56,9 +58,10 @@ public class CartServlet extends HttpServlet {
                 }
                 requestDispatcher.forward(req, resp);
             } catch (IOException | ServletException e) {
+                transaction.commit();
                 logger.warn("Cannot forward to cart.jsp", e);
             }
-        } else if (Objects.isNull(req.getSession(false)) || Objects.isNull(req.getSession(false).getAttribute("logged"))) {
+        } /* else if (Objects.isNull(req.getSession(false)) || Objects.isNull(req.getSession(false).getAttribute("logged"))) {
             var httpSession = req.getSession();
             if (Objects.isNull(httpSession.getAttribute("cart"))) {
                 var cartMap = new HashMap<Integer, Integer>();
@@ -102,6 +105,6 @@ public class CartServlet extends HttpServlet {
             } catch (Exception e) {
                 logger.warn("Cannot persist cart.", e);
             }
-        }
+        }*/
     }
 }
