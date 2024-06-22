@@ -1,0 +1,24 @@
+@import "access.css";
+
+input[type="number"] {
+    padding: 2%;
+    line-height: 1.8em;
+    color: var(--md-sys-color-on-background);
+    vertical-align: middle;
+    background-color: var(--md-sys-color-on-primary);
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    border: 1% solid var(--md-sys-color-primary);
+    border-radius: 0.4em;
+    outline: none;
+    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 0 inset;
+    :focus{
+        border-color: var(--md-sys-color-secondary-fixed-dim);;
+        outline: none;
+        box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
+    }
+    width: 65%;
+    min-width: 65%;
+    max-width: 75%;
+    margin-bottom: 1em;
+}

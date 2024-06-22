@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <html lang="it">
 <nav id="topNavBar">
     <script src="../scripts/navbar.js"></script>
@@ -33,7 +33,9 @@
                           </a>
                           <div id="sidenav" class="sidenav">
                                   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                                  <a href="${serverPath}/seller/">Crea Ristorante</a>
+                              <c:if test="${sessionScope.seller.restaurant == null}">
+                                  <a href="${serverPath}/addRestaurant">Crea Ristorante</a>
+                              </c:if>
                                   <a href="orders?id=${sessionScope.seller.restaurant.id}">Visualizza Ordini</a>
                                   <a href="${serverPath}/exit">Esci</a>
                           </div>
