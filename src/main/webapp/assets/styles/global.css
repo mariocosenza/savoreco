@@ -329,7 +329,7 @@ span.copyright {
 
 p.footer {
     all: revert;
-    background:  var(--md-sys-color-secondary-container);
+    background-color:  var(--md-sys-color-secondary-container);
     min-width: 31.33vw;
     margin-left: 1vw;
     margin-right: 1vw;
@@ -342,6 +342,7 @@ p.footer {
 footer a {
     all: revert;
     text-decoration: none;
+    color: var(--md-sys-color-on-secondary-container, black);
 }
 
 footer a:hover {
