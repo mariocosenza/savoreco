@@ -6,7 +6,7 @@
     <%@include file="../../components/header.jsp"%>
     <title>Savoreco Preferenze</title>
     <script src="../../scripts/coordinate.js"></script>
-    <link rel="stylesheet" href="../../assets/styles/preference.css">
+    <link rel="stylesheet" href="../../assets/styles/preferenceStatus.css">
     <script src="../../scripts/userPreference.js"></script>
 </head>
 <body>
