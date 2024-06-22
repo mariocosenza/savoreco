@@ -31,7 +31,6 @@ public class HibernateSessionFactoryListener implements ServletContextListener {
         configuration.configure("hibernate.cfg.xml");
         configuration.addAnnotatedClass(SellerAccount.class);
         configuration.addAnnotatedClass(Basket.class);
-        configuration.addAnnotatedClass(BoughtFoodId.class);
         configuration.addAnnotatedClass(BasketContain.class);
         configuration.addAnnotatedClass(BasketContainId.class);
         configuration.addAnnotatedClass(Food.class);
