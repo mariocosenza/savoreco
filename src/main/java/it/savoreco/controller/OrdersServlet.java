@@ -66,7 +66,7 @@ public class OrdersServlet extends HttpServlet {
 
 
         BoughtFood boughtFood = new BoughtFood();
-        boughtFood.setFood(food);
+       // boughtFood.setFood(food);
         boughtFood.setPurchase(purchase);
         boughtFood.setName(food.getName());
         boughtFood.setQuantity((short) 1);
@@ -86,7 +86,7 @@ public class OrdersServlet extends HttpServlet {
 
 
         BoughtFood boughtFood_2 = new BoughtFood();
-        boughtFood_2.setFood(food_2);
+      //  boughtFood_2.setFood(food_2);
         boughtFood_2.setPurchase(purchase);
         boughtFood_2.setName(food_2.getName());
         boughtFood_2.setQuantity((short) 1);
@@ -135,7 +135,7 @@ public class OrdersServlet extends HttpServlet {
 
 
         BoughtFood boughtFood2 = new BoughtFood();
-        boughtFood2.setFood(food2);
+        //boughtFood2.setFood(food2);
         boughtFood2.setPurchase(purchase2);
         boughtFood2.setName(food2.getName());
         boughtFood2.setQuantity((short) 1);
@@ -156,7 +156,7 @@ public class OrdersServlet extends HttpServlet {
 
 
         BoughtFood boughtFood2_2 = new BoughtFood();
-        boughtFood2_2.setFood(food2_2);
+       // boughtFood2_2.setFood(food2_2);
         boughtFood2_2.setPurchase(purchase2);
         boughtFood2_2.setName(food2_2.getName());
         boughtFood2_2.setQuantity((short) 1);
