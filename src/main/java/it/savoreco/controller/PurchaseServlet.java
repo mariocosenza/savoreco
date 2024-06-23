@@ -89,11 +89,15 @@ public class PurchaseServlet extends HttpServlet {
                 SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
                 Session session = sessionFactory.getCurrentSession();
                 Transaction transaction = session.beginTransaction();
+                var user = (UserAccount) req.getSession().getAttribute("user");
                 var purchase = new Purchase();
                 purchase.setIva(IVA);
-                purchase.setUser((UserAccount) httpSession.getAttribute("user"));
+                purchase.setUser(user);
                 purchase.setTime(Instant.now());
                 purchase.setPickUp(Boolean.parseBoolean(req.getParameter("pick_up")));
+                if(!Boolean.parseBoolean(req.getParameter("pick_up"))) {
+                    purchase.setAddress(user.getAddress());
+                }
                 purchase.setStatus(Purchase.Statuses.pending);
                 purchase.setPaymentMethod(Purchase.PaymentMethods.google);
                 purchase.setTotalCost(BigDecimal.valueOf(((List<Food>) httpSession.getAttribute("readyBoughtFood")).stream().mapToDouble(Food::getPrice).sum()));
@@ -107,7 +111,6 @@ public class PurchaseServlet extends HttpServlet {
                         boughtFood.setPurchase(purchase);
                         boughtFood.setName(food.getName());
                         boughtFood.setGreenPoint(food.getGreenPoint());
-                        boughtFood.setTime(Instant.now());
                         boughtFood.setQuantity((short) 1);
                         boughtFood.setPrice(BigDecimal.valueOf(food.getPrice()));
                         boughtFoodList.add(boughtFood);
@@ -117,6 +120,7 @@ public class PurchaseServlet extends HttpServlet {
                         soldFood.setQuantity((short) (soldFood.getQuantity() + 1));
                         soldFood.setGreenPoint(soldFood.getGreenPoint() + food.getGreenPoint());
                     }
+                    user.setEcoPoint(user.getEcoPoint() + food.getGreenPoint());
                 }
 
                 purchase.setStatus(Purchase.Statuses.payed);

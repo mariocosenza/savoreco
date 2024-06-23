@@ -97,7 +97,7 @@ public class RegistrationServlet extends HttpServlet {
                     user.setName(name.trim());
                     user.setSurname(surname.trim());
                     user.setEmail(email.trim());
-                    user.setAge(LocalDate.parse(Objects.requireNonNullElse(map.get("age"), "1900-01-01"), formatter));
+                    user.setBirthdate(LocalDate.parse(Objects.requireNonNullElse(map.get("age"), "1900-01-01"), formatter));
                     user.setPassword(PasswordSHA512.SHA512Hash(password));
                     user.setCountryCode("IT");
                     user.setEcoPoint(0);

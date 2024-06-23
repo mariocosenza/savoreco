@@ -27,7 +27,7 @@ main div {
 }
 
 #container {
-    margin-left: 65%; !important;
+    margin-left: 60%; !important;
     max-width:  25%; !important;
     max-height: 25%; !important;
 }
@@ -167,11 +167,39 @@ div.summaryPayment h2 {
     text-align: right;
 }
 
+
+.delivery {
+    min-width: 100%;
+    display: inline-block;
+    text-align: right;
+    justify-content: right;
+}
+
+.delivery label {
+    margin-top: 0.5em;
+}
+
+.delivery input[type="radio"] {
+    accent-color: var(--md-sys-color-tertiary);
+    margin-top: 0.8em;
+}
+
+.delivery h2 {
+    display: block;
+    font-size: 0.9em;
+    text-align: right;
+}
+
 @media  screen and (max-width: 600px) {
     main img {
         max-width: 45vw;
     }
 
+    .delivery h2 {
+        line-height: 1.5;
+        text-align: center;
+        font-size: 0.7em;
+    }
     #container {
         margin-left: 30%;
     }

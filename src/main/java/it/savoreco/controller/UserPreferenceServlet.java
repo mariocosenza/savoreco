@@ -1,5 +1,6 @@
 package it.savoreco.controller;
 
+import com.google.common.html.HtmlEscapers;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import it.savoreco.model.entity.Address;
@@ -13,7 +14,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -75,21 +75,25 @@ public class UserPreferenceServlet extends HttpServlet {
             if (emailMatcher.matcher(map.get("email")).matches() && passwordMatcher.matcher(map.get("password")).matches()) {
                 userAccount.setEmail(map.get("email"));
                 userAccount.setPassword(PasswordSHA512.SHA512Hash(map.get("password")));
+            }
                 var address = new Address();
                 address.setCountryCode("IT");
                 address.setLat(Double.valueOf(map.get("lat")));
                 address.setLon(Double.valueOf(map.get("lon")));
                 var id = new AddressId();
-                id.setStreet(map.get("address"));
-                id.setZipcode(map.get("postal"));
-                address.setCity(map.get("city"));
+                id.setStreet(HtmlEscapers.htmlEscaper().escape(map.get("address")));
+                id.setZipcode(HtmlEscapers.htmlEscaper().escape(map.get("postal")));
+                address.setCity(HtmlEscapers.htmlEscaper().escape(map.get("city")));
                 address.setId(id);
-                session.persist(address);
+                if(session.get(Address.class, id) == null) {
+                    session.persist(address);
+                }
                 userAccount.setAddress(address);
                 session.merge(userAccount);
                 transaction.commit();
-            }
-        } catch (HibernateException e) {
+                resp.setStatus(HttpServletResponse.SC_OK);
+        } catch (Exception e) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             logger.warn("Cannot get UserAccount", e);
         }
     }
