@@ -95,6 +95,9 @@ public class PurchaseServlet extends HttpServlet {
                 purchase.setUser(user);
                 purchase.setTime(Instant.now());
                 purchase.setPickUp(Boolean.parseBoolean(req.getParameter("pick_up")));
+                if(!Boolean.parseBoolean(req.getParameter("pick_up"))) {
+                    purchase.setAddress(user.getAddress());
+                }
                 purchase.setStatus(Purchase.Statuses.pending);
                 purchase.setPaymentMethod(Purchase.PaymentMethods.google);
                 purchase.setTotalCost(BigDecimal.valueOf(((List<Food>) httpSession.getAttribute("readyBoughtFood")).stream().mapToDouble(Food::getPrice).sum()));
