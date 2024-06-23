@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="it.savoreco.model.entity.UserAccount" %>
 
+
 <%
     List<UserAccount> usersList = (List<UserAccount>) request.getAttribute("usersList");
     if (usersList == null) {
@@ -22,9 +23,9 @@
     <h1>Dettagli Utenti</h1>
     <table>
         <tr class="disappearSmall">
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Age</th>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Età</th>
             <th>Green Points</th>
             <th>Expires</th>
             <th></th>
@@ -32,9 +33,9 @@
 
         <% for (UserAccount user : usersList) {%>
         <tr class=<%= (user.getDeleted()) ? "deleted-users" : "active-users" %> >
-            <td data-label="Name:"><%= user.getName() %></td>
-            <td data-label="Surname:"><%= user.getSurname() %></td>
-            <td data-label="Age:"><%= user.getAge() %></td>
+            <td data-label="Nome:"><%= user.getName() %></td>
+            <td data-label="Cognome:"><%= user.getSurname() %></td>
+            <td data-label="Età:"><%= user.getAge() %></td>
             <td data-label="Green Points:"><%= user.getEcoPoint() %></td>
             <% if(user.getDeleted()){ %>
             <td data-label="Expires:"><%= user.getExpires() %></td>

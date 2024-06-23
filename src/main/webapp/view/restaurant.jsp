@@ -4,7 +4,7 @@
 <%@ page import="it.savoreco.model.entity.Restaurant" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%
     List<Food> foodList = (List<Food>) request.getAttribute("foodList");

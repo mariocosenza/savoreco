@@ -43,18 +43,10 @@ public class Purchase {
     @ColumnDefault("0")
     @Column(name = "total_cost", nullable = false, precision = 16, scale = 8)
     private BigDecimal totalCost;
-
-    @Enumerated(EnumType.STRING)
-    @ColumnDefault("pending")
-    @JdbcType(PostgreSQLEnumJdbcType.class)
-    @Column(name = "status", columnDefinition = "order_status not null")
-    private Statuses status = Statuses.pending;
-
-    @Enumerated(EnumType.STRING)
-    @ColumnDefault("google")
-    @JdbcType(PostgreSQLEnumJdbcType.class)
-    @Column(name = "payment_method", columnDefinition = "payment_type not null")
-    private PaymentMethods paymentMethod = PaymentMethods.google;
+    @NotNull
+    @ColumnDefault("false")
+    @Column(name = "pick_up", nullable = false)
+    private boolean pickUp;
 
     public Long getId() {
         return id;
@@ -104,6 +96,30 @@ public class Purchase {
         this.totalCost = totalCost;
     }
 
+    public boolean getPickUp() {
+        return pickUp;
+    }
+
+    public void setPickUp(boolean pickUp) {
+        this.pickUp = pickUp;
+    }
+
+    @Enumerated
+    @ColumnDefault("pending")
+    @JdbcType(PostgreSQLEnumJdbcType.class)
+    @Column(name = "status", columnDefinition = "order_status not null")
+    private Statuses status;
+
+    @Enumerated
+    @ColumnDefault("google")
+    @JdbcType(PostgreSQLEnumJdbcType.class)
+    @Column(name = "payment_method", columnDefinition = "payment_type not null")
+    private PaymentMethods paymentMethod;
+
+    public boolean isPickUp() {
+        return pickUp;
+    }
+
     public Statuses getStatus() {
         return status;
     }
@@ -120,25 +136,35 @@ public class Purchase {
         this.paymentMethod = paymentMethod;
     }
 
+    public enum Statuses {
+        delivered,
+        pending,
+        payed,
+        confirmed,
+        delivering,
+        canceled
+    }
+
+    public enum PaymentMethods {
+        google,
+        paypal,
+        visa,
+        mastercard
+    }
+
     @Override
     public String toString() {
         return "Purchase{" +
                 "id=" + id +
                 ", user=" + user +
+                ", status=" + status +
+                ", paymentMethod=" + paymentMethod +
                 ", deliveryCost=" + deliveryCost +
                 ", time=" + time +
                 ", iva=" + iva +
                 ", totalCost=" + totalCost +
-                ", status=" + status +
-                ", paymentMethod=" + paymentMethod +
+                ", pickUp=" + pickUp +
                 '}';
     }
 
-    public enum Statuses {
-        delivered, pending, payed, confirmed, delivering, canceled
-    }
-
-    public enum PaymentMethods {
-        google, paypal, visa, mastercard
-    }
 }
