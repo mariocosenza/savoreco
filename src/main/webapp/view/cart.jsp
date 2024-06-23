@@ -25,9 +25,9 @@
         </c:when>
         <c:otherwise>
             <h1 class="orderTitle">Il tuo ordine</h1>
-            <li>
+            <ol>
             <c:forEach items="${requestScope.basketList}" var="item">
-                <ol>
+                <li>
                     <div>
                         <div>
                             <h1>
@@ -60,9 +60,9 @@
                     </div>
 
                     </div>
-                </ol>
+                </li>
             </c:forEach>
-            </li>
+            </ol>
             <h1>Totale costo senza tasse <fmt:formatNumber value="${requestScope.tot}" pattern="#.##"/>€ </h1>
             <c:choose>
                 <c:when test="${sessionScope.logged == null  || sessionScope.user == null}">

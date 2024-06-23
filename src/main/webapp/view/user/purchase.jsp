@@ -16,9 +16,9 @@
         let cost = ${requestScope.deliveryCost + requestScope.tot};
     </script>
             <h1 class="orderTitle">Riepilogo</h1>
-            <li>
+            <ol>
                 <c:forEach items="${requestScope.basketList}" var="item">
-                    <ol>
+                    <li>
                         <div class="summaryPayment">
                                 <h1>
                                     <c:out value="${item.food.name}"/>
@@ -36,9 +36,9 @@
                                     </c:choose>
                                 </h2>
                         </div>
-                    </ol>
+                    </li>
                 </c:forEach>
-            </li>
+            </ol>
             <div class="rightCost">
             <h1>Costo spedizione: <fmt:formatNumber value="${requestScope.deliveryCost}" pattern="#.##"/>€ </h1><br>
             <h1>Totale costo: <fmt:formatNumber value="${requestScope.tot}" pattern="#.##"/>€</h1>
