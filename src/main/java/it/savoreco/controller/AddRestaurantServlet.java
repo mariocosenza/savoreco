@@ -33,10 +33,6 @@ public class AddRestaurantServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(AddRestaurantServlet.class);
 
     private Pattern nameMatcher;
-    private Pattern streetMatcher;
-    private Pattern zipcodeMatcher;
-    private Pattern cityMatcher;
-    private Pattern countryCodeMatcher;
     private Pattern descriptionMatcher;
     private Pattern deliveryCostMatcher;
     private Pattern categoryMatcher;
@@ -45,10 +41,6 @@ public class AddRestaurantServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         nameMatcher = Pattern.compile("^[a-zA-Z][a-zA-Z0-9-_\\s]{2,15}$");
-        streetMatcher = Pattern.compile("^[a-zA-Z0-9\\s,.-]{2,100}$");
-        zipcodeMatcher = Pattern.compile("^\\d{5}$");
-        cityMatcher = Pattern.compile("^[a-zA-Z\\s]{2,50}$");
-        countryCodeMatcher = Pattern.compile("^[A-Z\\s]{2}$");
         descriptionMatcher = Pattern.compile("^.{2,255}$");
         deliveryCostMatcher = Pattern.compile("^\\d+(\\.\\d{1,2})?$");
         categoryMatcher = Pattern.compile("^[a-zA-Z\\s]{2,50}$");
@@ -69,10 +61,11 @@ public class AddRestaurantServlet extends HttpServlet {
         }
 
         var name = map.get("name");
-        var street = map.get("street");
-        var zipcode = map.get("zipcode");
+        var street = map.get("address");
+        var zipcode = map.get("postal");
         var city = map.get("city");
-        var countryCode = map.get("countryCode");
+        var lat = map.get("lat");
+        var lon = map.get("lon");
         var description = map.get("description");
         var deliveryCost = map.get("deliveryCost");
         var category = map.get("category");
@@ -88,14 +81,9 @@ public class AddRestaurantServlet extends HttpServlet {
         }
 
         if (nameMatcher.matcher(name).matches()
-                && streetMatcher.matcher(street).matches()
-                && zipcodeMatcher.matcher(zipcode).matches()
-                && cityMatcher.matcher(city).matches()
-                && countryCodeMatcher.matcher(countryCode).matches()
                 && descriptionMatcher.matcher(description).matches()
                 && deliveryCostMatcher.matcher(deliveryCost).matches()
                 && categoryMatcher.matcher(category).matches()) {
-
 
             SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
             Session session = sessionFactory.getCurrentSession();
@@ -109,9 +97,9 @@ public class AddRestaurantServlet extends HttpServlet {
                 var address = new Address();
                 address.setId(addressId);
                 address.setCity(HtmlEscapers.htmlEscaper().escape(city));
-                address.setCountryCode(HtmlEscapers.htmlEscaper().escape(countryCode.trim()));
-                address.setLon(1.0);
-                address.setLat(1.0);
+                address.setCountryCode("IT");
+                address.setLat(Double.valueOf(lat));
+                address.setLon(Double.valueOf(lon));
 
                 var restaurant = new Restaurant();
                 restaurant.setName(HtmlEscapers.htmlEscaper().escape(name));

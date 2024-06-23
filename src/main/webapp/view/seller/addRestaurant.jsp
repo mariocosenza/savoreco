@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registrazione - Savoreco</title>
+    <title>Registrazione Ristorante</title>
     <link href="../../assets/styles/addRestaurant.css" rel="stylesheet">
     <%@ include file="/components/header.jsp"%>
     <script src="../../scripts/addRestaurant.js"></script>
-    <script src="../../scripts/tooltip.js"></script>
+    <script src="../../scripts/coordinate.js"></script>
 </head>
 <body>
 <a href="home">
@@ -26,26 +26,29 @@
             <label for="name" id="name_label">Nome</label>
             <input type="text" id="name" name="name" placeholder="Inserisci il tuo nome" required>
 
-            <label for="street" id="street_label">Street</label>
-            <input type="text" id="street" name="street" placeholder="Inserisci il tuo street" required>
+            <label for="autocomplete">Indirizzo</label>
+            <search>
+                <div id="autocomplete">
+                </div>
+                <script>
+                    autocomplete()
+                </script>
+            </search>
+            <input name="lat" id="lat" type="text" style="display: none" hidden="hidden">
+            <input name="lon" id="lon" type="text" style="display: none" hidden="hidden">
+            <input name="postal" id="postal" type="text" style="display: none" hidden="hidden">
+            <input name="address" id="address" type="text" style="display: none" hidden="hidden">
+            <input name="city" id="city" type="text" style="display: none" hidden="hidden">
 
-            <label for="zipcode" id="zipcode_label">Zipcode</label>
-            <input type="text" id="zipcode" name="zipcode" placeholder="Inserisci il tuo zipcode" required>
 
-            <label for="city" id="city_label">City</label>
-            <input type="text" id="city" name="city" placeholder="Inserisci il tuo city" required>
+            <label for="description" id="description_label">Descrizione</label>
+            <input type="text" id="description" name="description" placeholder="Inserisci la descrizione" required>
 
-            <label for="countryCode" id="countryCode_label">CountryCode</label>
-            <input type="text" id="countryCode" name="countryCode" placeholder="Inserisci il tuo countryCode" required>
+            <label for="deliveryCost" id="deliveryCost_label">Costo di Consegna</label>
+            <input type="text" id="deliveryCost" name="deliveryCost" placeholder="Inserisci il costo di consegna" required>
 
-            <label for="description" id="description_label">Description</label>
-            <input type="text" id="description" name="description" placeholder="Inserisci il tuo description" required>
-
-            <label for="deliveryCost" id="deliveryCost_label">DeliveryCost</label>
-            <input type="text" id="deliveryCost" name="deliveryCost" placeholder="Inserisci il tuo deliveryCost" required>
-
-            <label for="category" id="category_label">Category</label>
-            <input type="text" id="category" name="category" placeholder="Inserisci il tuo category" required>
+            <label for="category" id="category_label">Categoria</label>
+            <input type="text" id="category" name="category" placeholder="Inserisci la categoria" required>
 
             <button disabled>
                 Crea ristorante
