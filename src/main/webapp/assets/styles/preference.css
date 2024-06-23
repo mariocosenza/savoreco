@@ -12,7 +12,7 @@
 }
 
 .formPreference label, .formPreference input{
-    color: var(--md-sys-color-background);
+    color: var(--md-sys-color-on-background);
     display: flex;
     flex-direction: column;
     margin: auto auto 0.2em;
@@ -90,4 +90,33 @@ button {
 
 button {
     margin-top: 1em;
+}
+
+.point {
+    text-align: left;
+    background-color: var(--md-sys-color-tertiary-container);
+    min-width: 15vw;
+    border-radius: 1vw;
+    margin-right: 83vw;
+    color: var(--md-sys-color-on-tertiary-container);
+    padding: 0.8em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.point h1 {
+    color: var(--md-sys-color-on-tertiary-container);
+    text-align: left;
+    font-size: 1.5em;
+}
+
+h2 {
+    color: var(--md-sys-color-on-primary-container);
+    font-size: 0.9em;
+}
+
+@media screen and (max-width: 600px) {
+    .point {
+        min-width: 98%;
+        padding: 2%;
+    }
 }

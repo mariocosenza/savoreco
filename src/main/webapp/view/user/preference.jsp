@@ -1,3 +1,5 @@
+<%@ page import="it.savoreco.service.PointLevel" %>
+<%@ page import="it.savoreco.model.entity.UserAccount" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
@@ -17,20 +19,26 @@
 </div>
 <main>
     <div class="form-container">
+        <div class="point">
+            <h1>I tuoi punti ECO: ${sessionScope.user.ecoPoint}</h1>
+            <h1>Il tuo livello è <%=PointLevel.calcolaLivello(((UserAccount) session.getAttribute("user")).getEcoPoint())%></h1>
+        </div>
+        <h3>Aggiorna le informazioni del tuo account</h3>
         <form id="form" action="user/preference" method="post" onsubmit="submitRegistration(); return false" onchange="validate()">
             <div class="formPreference">
-                <label for="email" id="email_label">Email:</label>
-                <input type="email"  value="${sessionScope.user.email}" id="email" name="email" required>
+                <label for="email" id="email_label">Email: ${sessionScope.user.email}</label>
+                <input type="email"  value="" id="email" name="email">
 
                 <label id="password_label" for="password">Nuova Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password"  value="" id="password" name="password">
 
                 <label id="check_label" for="check_password">Conferma Password:</label>
-                <input type="password" id="check_password" name="confirm-password" required>
+                <input type="password" value="" id="check_password" name="confirm-password">
             </div>
+            <h2>Puoi modificare anche solo il tuo indirizzo</h2>
             <c:if test="${sessionScope.user.address.city != null}">
                 <label for="autocomplete">
-                    <c:out value="Il tuo indirizzo ${sessionScope.user.address.id.street} ${sessionScope.user.address.city}"/>
+                    <c:out value="Il tuo indirizzo ${sessionScope.user.address.id.street}, ${sessionScope.user.address.city}"/>
                 </label>
             </c:if>
                 <search>

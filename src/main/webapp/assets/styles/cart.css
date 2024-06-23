@@ -18,6 +18,31 @@ main div {
     margin: 0;
 }
 
+
+.rightCost h1 {
+    margin: auto auto 1.5em;
+}
+.rightCost h2 {
+    font-size: 1.0em;
+}
+
+#container {
+    margin-left: 60%; !important;
+    max-width:  25%; !important;
+    max-height: 25%; !important;
+}
+
+
+.rightCost {
+    float: right;
+    margin-left: auto;
+    min-width: auto;
+}
+
+.rightCost h2 {
+    margin: auto;
+}
+
 main img {
     min-width: 15vw;
     max-width: 20vw;
@@ -120,9 +145,69 @@ button.empty {
     margin: auto;
 }
 
+div.summaryPayment {
+    display: block;
+}
+
+div.summaryPayment h1 {
+    display: block;
+    float: left;
+    min-width: 50%;
+    width: auto;
+    margin: auto auto 0.6rem;
+}
+
+div.summaryPayment h2 {
+    display: inline-block;
+    float: right;
+    margin: auto auto 0.6rem;
+    width: auto;
+    font-size: 1em;
+    min-width: 50%;
+    text-align: right;
+}
+
+
+.delivery {
+    min-width: 100%;
+    display: inline-block;
+    text-align: right;
+    justify-content: right;
+}
+
+.delivery label {
+    margin-top: 0.5em;
+}
+
+.delivery input[type="radio"] {
+    accent-color: var(--md-sys-color-tertiary);
+    margin-top: 0.8em;
+}
+
+.delivery h2 {
+    display: block;
+    font-size: 0.9em;
+    text-align: right;
+}
 
 @media  screen and (max-width: 600px) {
     main img {
         max-width: 45vw;
+    }
+
+    .delivery h2 {
+        line-height: 1.5;
+        text-align: center;
+        font-size: 0.7em;
+    }
+    #container {
+        margin-left: 30%;
+    }
+}
+
+@media  screen and (max-width: 400px) {
+
+    #container {
+        margin-left: 20%;
     }
 }

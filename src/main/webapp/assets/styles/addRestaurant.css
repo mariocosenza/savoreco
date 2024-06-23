@@ -1,0 +1,10 @@
+@import "access.css";
+
+input.radar-autocomplete-input {
+    width: 100%;
+    margin: auto;
+}
+
+#autocomplete {
+    padding-bottom: 0;
+}

@@ -15,7 +15,7 @@
     </header>
 
     <article>
-        <h2>Domande Frequenti (FAQ)</h2>
+        <h2 id="question">Domande Frequenti (FAQ)</h2>
         <div>
             <h3>Come posso cancellare il mio ordine?</h3>
             <p>Se desideri cancellare il tuo ordine, puoi farlo entro prima dalla conferma dell'ordine. Vai alla <strong>sezione Ordini</strong> e seleziona l'ordine che desideri modificare.</p>
@@ -34,7 +34,7 @@
         </div>
         <div>
             <h3>Come posso lasciare un feedback sul mio ordine?</h3>
-            <p>Apprezziamo il tuo feedback! Dopo la consegna del tuo ordine, riceverai un'email con un link per lasciare una recensione sul nostro servizio e sui piatti ordinati.</p>
+            <p>Apprezziamo il tuo feedback! Invia il tuo feedback <a href="mailto:feedback@savoreco.it"><strong>feedback@savoreco.it</strong></a></p>
         </div>
         <div>
             <h3>Qual è la vostra politica di sostenibilità?</h3>

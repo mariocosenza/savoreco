@@ -10,7 +10,7 @@ async function submitRegistration() {
         document.querySelector("#lat").value = address.latitude
         document.querySelector("#lon").value = address.longitude
         document.querySelector("#postal").value = address.postalCode
-        document.querySelector("#address").value = address.street
+        document.querySelector("#address").value = address.street + ` ${address.number}`
         document.querySelector("#city").value = address.city
         const formData = new FormData(document.querySelector("#form"))
         try { const response = await fetch("/user/preference", {
@@ -54,35 +54,43 @@ function formOk() {
 function validate() {
     document.querySelectorAll("label").forEach(e => e.style.color = "var(--md-sys-color-on-background)")
     let error = false
+    let count = 0;
     for (const arg of document.querySelectorAll("label")) {
         const element = document.getElementById(arg.htmlFor)
         if (element.id === "email") {
-            if (regexEmail.test(element.value)) {
+            if(element.value === "") {
+                count++
+            } else if (regexEmail.test(element.value)) {
                 arg.style.color = "var(--md-sys-color-primary)"
             } else {
                 arg.style.color = "var(--md-sys-color-error)"
                 error = true
             }
         } else if (element.id === "password") {
-            if (regexPassword.test(element.value)) {
+            if(element.value === "") {
+                count++
+            } else if (regexPassword.test(element.value)) {
                 arg.style.color = "var(--md-sys-color-primary)"
             } else {
                 arg.style.color = "var(--md-sys-color-error)"
                 error = true
             }
             if(element.value === document.querySelector("#check_password").value) {
-                document.querySelector("#check_label").style.color = "var(--md-sys-color-primary)"
+                if(element.value === "") {
+                    count++
+                } else {
+                    document.querySelector("#check_label").style.color = "var(--md-sys-color-primary)"
+                }
             } else if(document.querySelector("#check_password").value !== "") {
                 arg.style.color = "var(--md-sys-color-error)"
                 document.querySelector("#check_label").style.color = "var(--md-sys-color-error)"
                 error = true
             }
         }
-        else if(element.value === "") {
-            error = true
-        }
     }
 
+    if(count === 3)
+        error = false
 
     if (!error) {
         document.querySelector("button").disabled = false

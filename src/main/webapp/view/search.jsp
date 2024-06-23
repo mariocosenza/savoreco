@@ -36,7 +36,7 @@
                         <h1><c:out value="${resto.name}"/></h1>
                         <h2>Costo consegna <fmt:formatNumber value="${resto.deliveryCost}" pattern="#.#"/>€</h2>
                         <h2><c:out value="${resto.category}"/></h2>
-                        <a href="restaurant">
+                        <a href="restaurant?id=${resto.id}">
                             <button>
                                 Visualizza
                             </button>

@@ -25,9 +25,9 @@
         </c:when>
         <c:otherwise>
             <h1 class="orderTitle">Il tuo ordine</h1>
-            <li>
+            <ol>
             <c:forEach items="${requestScope.basketList}" var="item">
-                <ol>
+                <li>
                     <div>
                         <div>
                             <h1>
@@ -60,30 +60,31 @@
                     </div>
 
                     </div>
-                </ol>
+                </li>
             </c:forEach>
-            </li>
+            </ol>
             <h1>Totale costo senza tasse <fmt:formatNumber value="${requestScope.tot}" pattern="#.##"/>€ </h1>
-            <form action="user/payment" method="get">
-                <div>
-                    <c:choose>
-                        <c:when test="${sessionScope.logged == null  || sessionScope.user == null}">
+            <c:choose>
+                <c:when test="${sessionScope.logged == null  || sessionScope.user == null}">
+                    <form action="login" method="get">
+                         <div>
                             <button>
                                 Accedi e acquista
                             </button>
-                        </c:when>
+                         </div>
+                </c:when>
                         <c:otherwise>
+                        <form action="user/purchase" method="get">
+                            <div>
                             <button>
                                 Procedi al checkout
                             </button>
+                            </div>
                         </c:otherwise>
-                    </c:choose>
-                </div>
+            </c:choose>
             </form>
         </c:otherwise>
     </c:choose>
-
-
 </main>
 <%@include file="../components/footer.jsp"%>
 </body>

@@ -13,20 +13,15 @@ import java.time.Instant;
 @Entity
 @Table(name = "bought_food")
 public class BoughtFood {
-    @EmbeddedId
-    private BoughtFoodId id = new BoughtFoodId();
+    @Id
+    @Column(name = "purchase_id", nullable = false)
+    private Long id;
 
-    @MapsId("purchaseId")
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @MapsId
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "purchase_id", nullable = false)
     private Purchase purchase = new Purchase();
-
-    @MapsId("foodId")
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "food_id", nullable = false)
-    private Food food = new Food();
 
     @Size(max = 128)
     @NotNull
@@ -44,20 +39,21 @@ public class BoughtFood {
     private BigDecimal price;
 
     @NotNull
-    @ColumnDefault("now()")
-    @Column(name = "\"time\"", nullable = false)
-    private Instant time;
-
-    @NotNull
     @ColumnDefault("1")
     @Column(name = "quantity", nullable = false)
     private Short quantity;
 
-    public BoughtFoodId getId() {
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ColumnDefault("1")
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    private Restaurant restaurant = new Restaurant();
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(BoughtFoodId id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -67,14 +63,6 @@ public class BoughtFood {
 
     public void setPurchase(Purchase purchase) {
         this.purchase = purchase;
-    }
-
-    public Food getFood() {
-        return food;
-    }
-
-    public void setFood(Food food) {
-        this.food = food;
     }
 
     public String getName() {
@@ -101,13 +89,6 @@ public class BoughtFood {
         this.price = price;
     }
 
-    public Instant getTime() {
-        return time;
-    }
-
-    public void setTime(Instant time) {
-        this.time = time;
-    }
 
     public Short getQuantity() {
         return quantity;
@@ -117,17 +98,25 @@ public class BoughtFood {
         this.quantity = quantity;
     }
 
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+
     @Override
     public String toString() {
         return "BoughtFood{" +
                 "id=" + id +
                 ", purchase=" + purchase +
-                ", food=" + food +
                 ", name='" + name + '\'' +
                 ", greenPoint=" + greenPoint +
                 ", price=" + price +
-                ", time=" + time +
                 ", quantity=" + quantity +
+                ", restaurant=" + restaurant +
                 '}';
     }
 }

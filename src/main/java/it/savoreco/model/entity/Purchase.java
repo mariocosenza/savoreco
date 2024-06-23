@@ -43,18 +43,17 @@ public class Purchase {
     @ColumnDefault("0")
     @Column(name = "total_cost", nullable = false, precision = 16, scale = 8)
     private BigDecimal totalCost;
+    @NotNull
+    @ColumnDefault("false")
+    @Column(name = "pick_up", nullable = false)
+    private boolean pickUp;
 
-    @Enumerated
-    @ColumnDefault("pending")
-    @JdbcType(PostgreSQLEnumJdbcType.class)
-    @Column(name = "status", columnDefinition = "order_status not null")
-    private Statuses status;
-
-    @Enumerated
-    @ColumnDefault("google")
-    @JdbcType(PostgreSQLEnumJdbcType.class)
-    @Column(name = "payment_method", columnDefinition = "payment_type not null")
-    private PaymentMethods paymentMethod;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumns({
+            @JoinColumn(name = "street", referencedColumnName = "street"),
+            @JoinColumn(name = "zipcode", referencedColumnName = "zipcode")
+    })
+    private Address address;
 
     public Long getId() {
         return id;
@@ -104,6 +103,38 @@ public class Purchase {
         this.totalCost = totalCost;
     }
 
+    public boolean getPickUp() {
+        return pickUp;
+    }
+
+    public void setPickUp(boolean pickUp) {
+        this.pickUp = pickUp;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    @Enumerated
+    @ColumnDefault("pending")
+    @JdbcType(PostgreSQLEnumJdbcType.class)
+    @Column(name = "status", columnDefinition = "order_status not null")
+    private Statuses status;
+
+    @Enumerated
+    @ColumnDefault("google")
+    @JdbcType(PostgreSQLEnumJdbcType.class)
+    @Column(name = "payment_method", columnDefinition = "payment_type not null")
+    private PaymentMethods paymentMethod;
+
+    public boolean isPickUp() {
+        return pickUp;
+    }
+
     public Statuses getStatus() {
         return status;
     }
@@ -121,24 +152,18 @@ public class Purchase {
     }
 
     public enum Statuses {
-
+        delivered,
+        pending,
+        payed,
+        confirmed,
+        delivering,
+        canceled
     }
 
     public enum PaymentMethods {
-
-    }
-
-    @Override
-    public String toString() {
-        return "Purchase{" +
-                "id=" + id +
-                ", user=" + user +
-                ", deliveryCost=" + deliveryCost +
-                ", time=" + time +
-                ", iva=" + iva +
-                ", totalCost=" + totalCost +
-                ", status=" + status +
-                ", paymentMethod=" + paymentMethod +
-                '}';
+        google,
+        paypal,
+        visa,
+        mastercard
     }
 }

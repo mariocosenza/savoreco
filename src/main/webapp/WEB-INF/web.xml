@@ -11,19 +11,19 @@
         <welcome-file>home</welcome-file>
     </welcome-file-list>
 
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>JSP Files</web-resource-name>
             <description>No direct access to JSP files</description>
             <url-pattern>/view/*</url-pattern>
-            <http-method>POST</http-method>
-            <http-method>GET</http-method>
-            <http-method>PUT</http-method>
-            <http-method>HEAD</http-method>
+            <deny-uncovered-http-methods>true</deny-uncovered-http-methods>
         </web-resource-collection>
         <auth-constraint>
             <description>No direct browser access to JSP files</description>
-            <role-name>manager-gui</role-name>
+            <role-name>admin</role-name>
         </auth-constraint>
     </security-constraint>
 

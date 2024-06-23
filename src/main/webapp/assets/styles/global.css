@@ -120,6 +120,9 @@ body {
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizelegibility;
+    -moz-font-smoothing: antialiased;
 }
 
 main {
@@ -293,9 +296,12 @@ div.cardCentral {
     margin-left: 12%;
     margin-right: 12%;
     margin-bottom: 0.6em;
+    padding-bottom: 1em;
 }
 
-
+img.footerLogo {
+    max-width: max(15%, 50px);
+}
 
 form {
     padding: 0;
@@ -304,20 +310,51 @@ form {
 
 
 footer {
+    all: revert;
     background:  var(--md-sys-color-secondary-container);
     display: flex;
     min-height: 50px;
     bottom: 0;
     min-width: 100vw;
-    height: 2.5rem;
-    margin-top: 2rem;
+    height: auto;
+    margin-top: 10rem;
+}
+
+span.copyright {
+    all: revert;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--md-sys-color-on-secondary-container, black);
 }
 
 p.footer {
-    background:  var(--md-sys-color-secondary-container);
-    min-width: 33vw;
+    all: revert;
+    background-color:  var(--md-sys-color-secondary-container);
+    min-width: 31.33vw;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    color: var(--md-sys-color-on-secondary-container, black);
+    font-size: 1rem;
+    line-height: 1.5;
+    display: block;
 }
 
+footer a {
+    all: revert;
+    text-decoration: none;
+    color: var(--md-sys-color-on-secondary-container, black);
+}
+
+footer a:hover {
+    color: var(--md-sys-color-tertiary-fixed-dim);
+}
+
+span.footerTitle {
+    all: revert;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
 
 
 @media screen and (max-width: 500px) {
@@ -326,7 +363,7 @@ p.footer {
     }
 
     #bigTextLogo {
-        margin-left: 2vw;
+        margin-left: 4vw;
     }
 
     img.logoImage {
@@ -334,8 +371,8 @@ p.footer {
     }
 
     p.footer {
-        margin: 0;
         min-width: 95vw;
+        margin: 1em 0 0 5vw;
     }
 }
 

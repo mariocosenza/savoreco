@@ -15,8 +15,6 @@ CREATE TABLE address
     CONSTRAINT pk_address PRIMARY KEY (street, zipcode)
 );
 
--- CREATE INDEX ind_address_country ON address (street collate "it_IT") where country_code = 'IT';
-
 CREATE TYPE order_status AS ENUM ('delivered', 'pending', 'payed', 'confirmed', 'delivering', 'canceled');
 CREATE TYPE payment_type AS ENUM ('google', 'paypal', 'visa', 'mastercard');
 
@@ -27,7 +25,7 @@ CREATE TABLE user_account
     name         varchar(48)            not null,
     surname      varchar(48)            not null,
     password     varchar(512)           not null,
-    age          date                   not null,
+    birthdate    date                   not null,
     deleted      boolean  default false not null,
     eco_point     int      default 0     not null,
     expires      timestamp,
@@ -117,6 +115,8 @@ CREATE TABLE purchase
     status         order_status   default 'pending' not null,
     total_cost     decimal(16, 8) default 0         not null,
     payment_method payment_type                     not null default 'google',
+    pick_up        boolean                          not null default false,
+
 
     CONSTRAINT fk_purchase_user_account FOREIGN KEY (user_id) REFERENCES user_account (user_id) on update restrict on delete cascade,
     CONSTRAINT pk_purchase PRIMARY KEY (purchase_id)
@@ -135,15 +135,13 @@ CREATE TABLE basket
 CREATE TABLE bought_food
 (
     purchase_id bigint,
-    food_id     int,
     name        varchar(128)                 not null,
     green_point int            default 0     not null,
     price       decimal(16, 8) default 0     not null,
-    time        timestamp      default now() not null,
     quantity    smallint                     not null default 1 check (quantity >= 1),
+    restaurant_id  integer                   not null default 1,
 
-    CONSTRAINT pk_bought_food PRIMARY KEY (purchase_id, food_id),
-    CONSTRAINT fk_bought_food_food FOREIGN KEY (food_id) REFERENCES food (food_id) on update restrict on delete restrict,
+    CONSTRAINT pk_bought_food PRIMARY KEY (purchase_id),
     CONSTRAINT fk_bought_food_purchase FOREIGN KEY (purchase_id) REFERENCES purchase (purchase_id) on update cascade on delete cascade
 );
 
