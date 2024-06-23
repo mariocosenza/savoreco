@@ -21,7 +21,7 @@
                               <div id="sidenav" class="sidenav">
                                   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                                   <a href="${serverPath}/cart">Carrello</a>
-                                  <a href="${serverPath}/user/order">Ordini</a>
+                                  <a href="${serverPath}/userOrders">Ordini</a>
                                   <a href="${serverPath}/user/preference">Preferenze</a>
                                   <a href="${serverPath}/exit">Esci</a>
                              </div>
@@ -38,7 +38,7 @@
                                       <a href="${serverPath}/addRestaurant">Crea Ristorante</a>
                                   </c:when>
                                   <c:otherwise>
-                                      <a href="${serverPath}/orders">Visualizza Ordini</a>
+                                      <a href="${serverPath}/restaurantOrders">Visualizza Ordini</a>
                                   </c:otherwise>
                               </c:choose>
                               <a href="${serverPath}/exit">Esci</a>

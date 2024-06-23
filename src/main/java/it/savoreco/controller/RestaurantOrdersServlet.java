@@ -17,17 +17,17 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(
-        name = "ordersServlet",
-        displayName = "Orders - Home",
-        description = "Orders page",
-        value = "/orders"
+        name = "restaurantOrdersServlet",
+        displayName = "RestaurantOrders - Home",
+        description = "RestaurantOrders page",
+        value = "/restaurantOrders"
 )
-public class OrdersServlet extends HttpServlet {
-    private static final Logger logger = LoggerFactory.getLogger(OrdersServlet.class);
+public class RestaurantOrdersServlet extends HttpServlet {
+    private static final Logger logger = LoggerFactory.getLogger(RestaurantOrdersServlet.class);
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/seller/orders.jsp");
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/seller/restaurantOrders.jsp");
 
         SellerAccount seller = (SellerAccount) request.getSession().getAttribute("seller");
         if ((seller == null)||(seller.getRestaurant() == null)) {
@@ -45,20 +45,25 @@ public class OrdersServlet extends HttpServlet {
             Transaction transaction = session.beginTransaction();
 
             Restaurant restaurant = seller.getRestaurant();
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
             Query<BoughtFood> bFoodQuery = session.createQuery("FROM BoughtFood bf " +
                     "WHERE bf.restaurant = :restaurant", BoughtFood.class);
             bFoodQuery.setParameter("restaurant", restaurant);
             List<BoughtFood> orders = bFoodQuery.list();
 
+            System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+
             transaction.commit();
+
+            System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
 
             request.setAttribute("orders", orders);
             request.setAttribute("restaurant", restaurant);
 
             requestDispatcher.forward(request, response);
         } catch (IOException | ServletException e) {
-            logger.warn("Cannot forward to orders.jsp", e);
+            logger.warn("Cannot forward to restaurantOrders.jsp", e);
         }
     }
 }
