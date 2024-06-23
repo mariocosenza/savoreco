@@ -39,11 +39,6 @@ public class BoughtFood {
     private BigDecimal price;
 
     @NotNull
-    @ColumnDefault("now()")
-    @Column(name = "\"time\"", nullable = false)
-    private Instant time;
-
-    @NotNull
     @ColumnDefault("1")
     @Column(name = "quantity", nullable = false)
     private Short quantity;
@@ -94,13 +89,6 @@ public class BoughtFood {
         this.price = price;
     }
 
-    public Instant getTime() {
-        return time;
-    }
-
-    public void setTime(Instant time) {
-        this.time = time;
-    }
 
     public Short getQuantity() {
         return quantity;
@@ -127,7 +115,6 @@ public class BoughtFood {
                 ", name='" + name + '\'' +
                 ", greenPoint=" + greenPoint +
                 ", price=" + price +
-                ", time=" + time +
                 ", quantity=" + quantity +
                 ", restaurant=" + restaurant +
                 '}';

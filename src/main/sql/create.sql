@@ -25,7 +25,7 @@ CREATE TABLE user_account
     name         varchar(48)            not null,
     surname      varchar(48)            not null,
     password     varchar(512)           not null,
-    age          date                   not null,
+    birthdate    date                   not null,
     deleted      boolean  default false not null,
     eco_point     int      default 0     not null,
     expires      timestamp,
@@ -138,7 +138,6 @@ CREATE TABLE bought_food
     name        varchar(128)                 not null,
     green_point int            default 0     not null,
     price       decimal(16, 8) default 0     not null,
-    time        timestamp      default now() not null,
     quantity    smallint                     not null default 1 check (quantity >= 1),
     restaurant_id  integer                   not null default 1,
 

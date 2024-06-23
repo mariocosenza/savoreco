@@ -37,8 +37,8 @@ public class UserAccount {
     private String password;
 
     @NotNull
-    @Column(name = "age", nullable = false)
-    private LocalDate age;
+    @Column(name = "birthdate", nullable = false)
+    private LocalDate birthdate;
 
     @NotNull
     @ColumnDefault("false")
@@ -109,12 +109,12 @@ public class UserAccount {
         this.password = password;
     }
 
-    public LocalDate getAge() {
-        return age;
+    public LocalDate getBirthdate() {
+        return birthdate;
     }
 
-    public void setAge(LocalDate age) {
-        this.age = age;
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
     }
 
     public boolean getDeleted() {
@@ -173,7 +173,7 @@ public class UserAccount {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", password='" + password + '\'' +
-                ", age=" + age +
+                ", birthdate=" + birthdate +
                 ", deleted=" + deleted +
                 ", expires=" + expires +
                 ", address=" + address +
