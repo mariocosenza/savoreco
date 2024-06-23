@@ -1,4 +1,3 @@
-<%@ page import="it.savoreco.model.entity.Food" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="it.savoreco.model.entity.Restaurant" %>
@@ -62,7 +61,7 @@
             <div class="info">
                 <p><strong>Email:</strong> <%= user.getEmail() %></p>
                 <p><strong>Nome:</strong> <%= user.getName() %> <%= user.getSurname() %></p>
-                <p><strong>Età:</strong> <%= user.getAge() %></p>
+                <p><strong>Data di Nascita:</strong> <%= user.getBirthdate() %></p>
                 <p><strong>Indirizzo:</strong> <%= user.getAddress().getId().getStreet() %>, <%= user.getAddress().getId().getZipcode() %>, <%= user.getCountryCode() %></p>
                 <p><strong>Eco Points:</strong> <%= user.getEcoPoint() %></p>
                 <% if(user.getDeleted()){%>
@@ -77,8 +76,6 @@
                         <h2><%= boughtFood.getName() %></h2>
                         <p><strong>Quantità:</strong> <%= boughtFood.getQuantity() %></p>
                         <p><strong>Prezzo:</strong> <%= String.format("%.2f", boughtFood.getPrice()) %>€</p>
-                        <p><strong>Data e Ora:</strong> <%= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
-                                .format(boughtFood.getTime().atZone(ZoneId.systemDefault()))%>:</p>
                         <p><strong>Green Points:</strong> <%= boughtFood.getGreenPoint() %></p>
                     </div>
                 </div>

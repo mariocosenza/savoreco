@@ -52,7 +52,8 @@
             <h2><%= category %>
             </h2>
             <div class="categoryContent">
-                <% for (Food food : foods) { %>
+                <% for (Food food : foods) {
+                    if(food.getAvailable()){%>
                 <div class="foodBox">
                     <img class="foodImage" src="<%= food.getImageObject() %>" alt="<%= food.getName() %>">
                     <div class="foodInfo">
@@ -65,7 +66,8 @@
                     </div>
                     <button>Aggiungi al carrello</button>
                 </div>
-                <% } %>
+                <% }
+                }%>
             </div>
         </div>
         <%

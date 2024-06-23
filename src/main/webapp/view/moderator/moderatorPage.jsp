@@ -35,7 +35,7 @@
         <tr class=<%= (user.getDeleted()) ? "deleted-users" : "active-users" %> >
             <td data-label="Nome:"><%= user.getName() %></td>
             <td data-label="Cognome:"><%= user.getSurname() %></td>
-            <td data-label="Età:"><%= user.getAge() %></td>
+            <td data-label="Data di nascita:"><%= user.getBirthdate() %></td>
             <td data-label="Green Points:"><%= user.getEcoPoint() %></td>
             <% if(user.getDeleted()){ %>
             <td data-label="Expires:"><%= user.getExpires() %></td>
