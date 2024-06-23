@@ -21,7 +21,7 @@
                               <div id="sidenav" class="sidenav">
                                   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                                   <a href="${serverPath}/cart">Carrello</a>
-                                  <a href="${serverPath}/user/purchase">Ordini</a>
+                                  <a href="${serverPath}/user/order">Ordini</a>
                                   <a href="${serverPath}/user/preference">Preferenze</a>
                                   <a href="${serverPath}/exit">Esci</a>
                              </div>
