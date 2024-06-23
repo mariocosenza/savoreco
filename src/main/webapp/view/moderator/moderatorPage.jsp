@@ -1,11 +1,10 @@
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
 <%@ page import="it.savoreco.model.entity.UserAccount" %>
+
 
 <%
     List<UserAccount> usersList = (List<UserAccount>) request.getAttribute("usersList");
-    Map<UserAccount, Integer> greenPointMap = (Map<UserAccount, Integer>) request.getAttribute("greenPointMap");
-    if ((usersList == null) || (greenPointMap == null)) {
+    if (usersList == null) {
         response.sendRedirect("./home.jsp");
         return;
     }%>
@@ -21,52 +20,32 @@
 <%@ include file="../../components/navbar.jsp" %>
 <main>
 
-    <h1>Dettagli Utenti attivi</h1>
-    <table class="active-users">
-        <tr class="fields">
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Age</th>
+    <h1>Dettagli Utenti</h1>
+    <table>
+        <tr class="disappearSmall">
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Età</th>
             <th>Green Points</th>
+            <th>Expires</th>
             <th></th>
         </tr>
 
-        <% for (UserAccount user : usersList) {
-            if (!user.getDeleted()) {%>
-        <tr>
-            <td data-label="Name"><%= user.getName() %></td>
-            <td data-label="Surname"><%= user.getSurname() %></td>
-            <td data-label="Age"><%= user.getBirthdate() %></td>
-            <td data-label="Green Points"><%= greenPointMap.get(user) %></td>
-            <td data-label=""><button>elimina</button></td>
+        <% for (UserAccount user : usersList) {%>
+        <tr class=<%= (user.getDeleted()) ? "deleted-users" : "active-users" %> >
+            <td data-label="Nome:"><%= user.getName() %></td>
+            <td data-label="Cognome:"><%= user.getSurname() %></td>
+            <td data-label="Data di nascita:"><%= user.getBirthdate() %></td>
+            <td data-label="Green Points:"><%= user.getEcoPoint() %></td>
+            <% if(user.getDeleted()){ %>
+            <td data-label="Expires:"><%= user.getExpires() %></td>
+            <td data-label=""><button class="deleted-users">Ripristina</button></td>
+            <% } else {%>
+            <td class="disappearSmall">/</td>
+            <td data-label=""><button class="active-users">Elimina</button></td>
+            <% } %>
         </tr>
     <%
-            }
-        }
-    %>
-    </table>
-
-    <h1>Dettagli Utenti eliminati</h1>
-    <table class="deleted-users">
-        <tr class="fields">
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Age</th>
-            <th>Green Points</th>
-            <th>Expires</th>
-        </tr>
-
-        <% for (UserAccount user : usersList) {
-            if (user.getDeleted()) {%>
-        <tr>
-            <td data-label="Name"><%= user.getName() %></td>
-            <td data-label="Surname"><%= user.getSurname() %></td>
-            <td data-label="Age"><%= user.getBirthdate() %></td>
-            <td data-label="Green Points"><%= greenPointMap.get(user) %></td>
-            <td data-label="Expires"><%= user.getExpires() %></td>
-        </tr>
-    <%
-            }
         }
     %>
     </table>

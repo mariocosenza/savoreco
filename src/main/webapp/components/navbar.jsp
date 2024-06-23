@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="it">
 <c:set var="serverPath" value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}"/>
 <nav id="topNavBar">
@@ -33,9 +33,15 @@
                           </a>
                           <div id="sidenav" class="sidenav">
                                   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                                  <a href="${serverPath}/seller/">Crea Ristorante</a>
-                                  <a href="${serverPath}/seller/seller">Visualizza Ordini</a>
-                                  <a href="${serverPath}/exit">Esci</a>
+                              <c:choose>
+                                  <c:when test="${sessionScope.seller.restaurant == null}">
+                                      <a href="${serverPath}/addRestaurant">Crea Ristorante</a>
+                                  </c:when>
+                                  <c:otherwise>
+                                      <a href="${serverPath}/orders">Visualizza Ordini</a>
+                                  </c:otherwise>
+                              </c:choose>
+                              <a href="${serverPath}/exit">Esci</a>
                           </div>
                   </c:if>
                   <c:if test="${sessionScope.moderator != null}">
