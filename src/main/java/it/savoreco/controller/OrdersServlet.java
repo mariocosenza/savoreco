@@ -29,20 +29,25 @@ public class OrdersServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/seller/orders.jsp");
 
+        SellerAccount seller = (SellerAccount) request.getSession().getAttribute("seller");
+        if ((seller == null)||(seller.getRestaurant() == null)) {
+            try {
+                response.sendError(HttpServletResponse.SC_FORBIDDEN);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return;
+        }
+
         try {
             SessionFactory sessionFactory = (SessionFactory) request.getServletContext().getAttribute("SessionFactory");
             Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
 
-            int id = Integer.parseInt(request.getParameter("id"));
+            Restaurant restaurant = seller.getRestaurant();
 
-            Query<Restaurant> restaurantQuery = session.createQuery("FROM Restaurant r "
-                    +"WHERE r.id = :id", Restaurant.class);
-            restaurantQuery.setParameter("id", id);
-            Restaurant restaurant = restaurantQuery.getSingleResult();
-
-            Query<BoughtFood> bFoodQuery = session.createQuery("SELECT bf FROM BoughtFood bf " +
-                    "WHERE bf.food.restaurant = :restaurant", BoughtFood.class);
+            Query<BoughtFood> bFoodQuery = session.createQuery("FROM BoughtFood bf " +
+                    "WHERE bf.restaurant = :restaurant", BoughtFood.class);
             bFoodQuery.setParameter("restaurant", restaurant);
             List<BoughtFood> orders = bFoodQuery.list();
 
