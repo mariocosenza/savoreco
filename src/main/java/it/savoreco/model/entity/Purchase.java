@@ -48,6 +48,13 @@ public class Purchase {
     @Column(name = "pick_up", nullable = false)
     private boolean pickUp;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumns({
+            @JoinColumn(name = "street", referencedColumnName = "street"),
+            @JoinColumn(name = "zipcode", referencedColumnName = "zipcode")
+    })
+    private Address address;
+
     public Long getId() {
         return id;
     }
@@ -104,6 +111,14 @@ public class Purchase {
         this.pickUp = pickUp;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Enumerated
     @ColumnDefault("pending")
     @JdbcType(PostgreSQLEnumJdbcType.class)
@@ -151,20 +166,4 @@ public class Purchase {
         visa,
         mastercard
     }
-
-    @Override
-    public String toString() {
-        return "Purchase{" +
-                "id=" + id +
-                ", user=" + user +
-                ", status=" + status +
-                ", paymentMethod=" + paymentMethod +
-                ", deliveryCost=" + deliveryCost +
-                ", time=" + time +
-                ", iva=" + iva +
-                ", totalCost=" + totalCost +
-                ", pickUp=" + pickUp +
-                '}';
-    }
-
 }
