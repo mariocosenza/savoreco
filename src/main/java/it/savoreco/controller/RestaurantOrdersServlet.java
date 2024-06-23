@@ -30,7 +30,7 @@ public class RestaurantOrdersServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/seller/restaurantOrders.jsp");
 
         SellerAccount seller = (SellerAccount) request.getSession().getAttribute("seller");
-        if ((seller == null)||(seller.getRestaurant() == null)) {
+        if ((seller == null) || (seller.getRestaurant() == null)) {
             try {
                 response.sendError(HttpServletResponse.SC_FORBIDDEN);
             } catch (IOException e) {
@@ -45,18 +45,13 @@ public class RestaurantOrdersServlet extends HttpServlet {
             Transaction transaction = session.beginTransaction();
 
             Restaurant restaurant = seller.getRestaurant();
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
             Query<BoughtFood> bFoodQuery = session.createQuery("FROM BoughtFood bf " +
                     "WHERE bf.restaurant = :restaurant", BoughtFood.class);
             bFoodQuery.setParameter("restaurant", restaurant);
             List<BoughtFood> orders = bFoodQuery.list();
 
-            System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-
             transaction.commit();
-
-            System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
 
             request.setAttribute("orders", orders);
             request.setAttribute("restaurant", restaurant);
