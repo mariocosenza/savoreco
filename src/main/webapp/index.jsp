@@ -32,7 +32,7 @@
     </div>
 
     <div class="center info">
-        <img src="assets/images/center-info.webp" class="center">
+        <img src="assets/images/center-info.webp" class="center" alt="Info center">
         <p>
             Savoreco è una piattaforma di food delivery che promuove la sostenibilità ambientale, <br>
             incentivando scelte green con un sistema di punteggio e sconti basati sulle ordinazioni. <br>
@@ -41,7 +41,7 @@
     </div>
     <div class="bottomInfo">
         <div class="left">
-            <img src="assets/images/left-info.webp" class="left">
+            <img src="assets/images/left-info.webp" class="left" alt="Info left">
             <p>
                 Potrai aggiungere prodotti al carrello, gestire le informazioni di consegna e completare l'ordine facilmente.
                 Effettua scelte sostenibili per ottenere sconti, sottoscrivi un abbonamento per consegne gratuite e monitora il tuo ordine in tempo reale.
@@ -49,7 +49,7 @@
             </p>
         </div>
         <div class="right">
-            <img src="assets/images/right-info.webp" class="right">
+            <img src="assets/images/right-info.webp" class="right" alt="Info right">
             <p>
                 I venditori possono registrare un nuovo ristorante, aggiungere e categorizzare il menù, specificare tag,
                 definire i prezzi, personalizzare la pagina del ristorante, aggiungere una descrizione,

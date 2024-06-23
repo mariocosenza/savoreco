@@ -127,9 +127,14 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/registration.jsp");
+
         try {
-            requestDispatcher.forward(req, resp);
+            if(Objects.isNull(req.getSession(false)) || Objects.isNull(req.getSession(false).getAttribute("logged"))) {
+                RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/registration.jsp");
+                requestDispatcher.forward(req, resp);
+            } else {
+                resp.sendRedirect("/home");
+            }
         } catch (IOException | ServletException e) {
             logger.warn("Cannot forward to registration.jsp", e);
         }
