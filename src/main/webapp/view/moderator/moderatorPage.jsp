@@ -36,7 +36,7 @@
         <tr>
             <td data-label="Name"><%= user.getName() %></td>
             <td data-label="Surname"><%= user.getSurname() %></td>
-            <td data-label="Age"><%= user.getAge() %></td>
+            <td data-label="Age"><%= user.getBirthdate() %></td>
             <td data-label="Green Points"><%= greenPointMap.get(user) %></td>
             <td data-label=""><button>elimina</button></td>
         </tr>
@@ -61,7 +61,7 @@
         <tr>
             <td data-label="Name"><%= user.getName() %></td>
             <td data-label="Surname"><%= user.getSurname() %></td>
-            <td data-label="Age"><%= user.getAge() %></td>
+            <td data-label="Age"><%= user.getBirthdate() %></td>
             <td data-label="Green Points"><%= greenPointMap.get(user) %></td>
             <td data-label="Expires"><%= user.getExpires() %></td>
         </tr>
