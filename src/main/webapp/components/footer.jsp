@@ -41,7 +41,7 @@
         </a>
     </p>
     <p class="footer">
-        <span class="footerTitle">Apprezziamo la tua opinione</span> <br>
+        <span class="footerTitle">Teniamo alla tua privacy</span> <br>
         <a href="help">Informativa privacy</a><br>
         <a href="https://github.com/mariocosenza/savoreco?tab=readme-ov-file#authors" target="_blank" rel="noopener">Il nostro team</a><br><br>
         <span class="copyright">© 2024 Savoreco</span><br>
