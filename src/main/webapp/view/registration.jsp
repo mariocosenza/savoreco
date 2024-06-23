@@ -39,8 +39,8 @@
             <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required onfocusin="showTooltip()" onfocusout="hideTooltip()">
             <label id="check_label" for="check_password">Conferma password</label>
             <input type="password" id="check_password" name="check_password" placeholder="Conferma la tua password" required>
-            <label for="age" id="age_label">Età</label>
-            <input type="date" id="age" name="age" min="1900-01-01">
+            <label for="birthdate" id="age_label">Età</label>
+            <input type="date" id="birthdate" name="birthdate" min="1900-01-01">
             <button disabled>
                 Crea account
             </button>
