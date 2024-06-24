@@ -11,6 +11,19 @@
 </head>
 <body>
     <jsp:include page="../components/navbar.jsp"/>
+    <search>
+        <form action="search" method="get">
+            <input inputmode="search" autocomplete="off" placeholder="Inserisci nome del ristorante" name="byName" type="search"
+            <c:if test="${param.byName != null}">
+                   value="${param.byName}"
+            </c:if>>
+            <button class="searchLogo">
+                <img src="../assets/icons/search-svgrepo-com.svg" alt="searchLogo">
+            </button>
+            <input style="display: none" name="lat" value="${param.lat}">
+            <input style="display: none" name="lon" value="${param.lon}">
+        </form>
+    </search>
     <div class="mobileSelector">
         <label>
             Scegli categoria ristorante <!--Per motivi di sicurezza non usare id di elementi html-->
@@ -36,19 +49,24 @@
                     Ordina risultati
                 </label>
                         <select name="sort" class="classic">
-                            <option disabled selected value> -- Seleziona un opzione -- </option>
-                            <option  value="distance">
-                                Rage di 30km
+                            <option <c:if test="${param.sort == 'distance' or param.sort == null}">
+                                selected
+                            </c:if> value="distance">
+                                Rage di 30 km
                             </option>
-                            <option  value="name">
-                                Nome
+                            <option <c:if test="${param.sort == 'name'}">
+                                selected
+                            </c:if> value="name">
+                                A => Z
                             </option>
-                            <option  value="deliveryPrice">
+                            <option <c:if test="${param.sort == 'deliveryPrice'}">
+                                selected
+                            </c:if> value="deliveryPrice">
                                 Costo consegna
                             </option>
                         </select>
-                    <input style="display: none" name="lat" value="${requestScope.lat}">
-                    <input style="display: none" name="lon" value="${requestScope.lon}">
+                    <input style="display: none" name="lat" value="${param.lat}">
+                    <input style="display: none" name="lon" value="${param.lon}">
                 </form>
         </aside>
         <div class="allResult">
@@ -74,8 +92,8 @@
             <button name="maxResult" class="showMoreButton" value="${requestScope.maxResult}">
                 Mostra di più
             </button>
-            <input style="display: none" name="lat" value="${requestScope.lat}">
-            <input style="display: none" name="lon" value="${requestScope.lon}">
+            <input style="display: none" name="lat" value="${param.lat}">
+            <input style="display: none" name="lon" value="${param.lon}">
         </form>
     </c:if>
 <%@ include file="/components/footer.jsp"%>
