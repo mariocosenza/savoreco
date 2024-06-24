@@ -30,16 +30,26 @@ public class SearchServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
+
+        if(Objects.isNull(req.getParameter("lat")) || Objects.isNull(req.getParameter("lon"))) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/search.jsp");
-        req.setAttribute("lat", req.getParameter("lat"));
-        req.setAttribute("lon", req.getParameter("lon"));
         try {
             SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
             Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
 
             Query<Integer> query;
-            if(Objects.isNull(req.getParameter("sort")) || req.getParameter("sort").equals("distance")) {
+            if(Objects.nonNull(req.getParameter("byName")) && !req.getParameter("byName").isEmpty()) {
+                query =  session.createNativeQuery("SELECT restaurant_id FROM savoreco.restaurant r " +
+                        "INNER JOIN savoreco.address b " +
+                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000 and savoreco.similarity(r.name, :name) > 0.3 LIMIT :maxResult", Integer.class);
+                query.setParameter("name", req.getParameter("byName"));
+            }
+            else if(Objects.isNull(req.getParameter("sort")) || req.getParameter("sort").equals("distance")) {
                 query =  session.createNativeQuery("SELECT restaurant_id FROM savoreco.restaurant r " +
                         "INNER JOIN savoreco.address b " +
                         "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000 LIMIT :maxResult", Integer.class);
