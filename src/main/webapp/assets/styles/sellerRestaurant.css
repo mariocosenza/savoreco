@@ -1,0 +1,674 @@
+.ristorante-seller {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.ristorante-seller .div-2 {
+  background-color: #ffffff;
+  height: 1321px;
+  overflow-x: hidden;
+  position: relative;
+  width: 1920px;
+}
+
+.ristorante-seller .logo {
+  height: 96px;
+  left: 41px;
+  object-fit: cover;
+  position: absolute;
+  top: 1px;
+  width: 75px;
+}
+
+.ristorante-seller .line {
+  height: 4px;
+  left: 0;
+  position: absolute;
+  top: 106px;
+  width: 1920px;
+}
+
+.ristorante-seller .container-2 {
+  align-items: center;
+  background-color: var(--m-3syslightprimary);
+  border-radius: 100px;
+  display: inline-flex;
+  gap: 10px;
+  justify-content: center;
+  left: 1816px;
+  overflow: hidden;
+  position: absolute;
+  top: 29px;
+}
+
+.ristorante-seller .punto-wrapper {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 10px;
+  justify-content: center;
+  padding: 8px;
+  position: relative;
+}
+
+.ristorante-seller .punto {
+  height: 24px;
+  object-fit: cover;
+  position: relative;
+  width: 24px;
+}
+
+.ristorante-seller .p {
+  color: #000000;
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  height: 69px;
+  left: 765px;
+  letter-spacing: -0.12px;
+  line-height: normal;
+  position: absolute;
+  top: 188px;
+  width: 391px;
+}
+
+.ristorante-seller .elenco-prodotti {
+  background-color: var(--material-theme-schemes-on-primary);
+  border: 0.8px solid;
+  border-color: var(--material-theme-schemes-primary-container);
+  border-radius: 27.92px;
+  box-shadow: 0px 3.19px 39.88px #00000040;
+  height: 909px;
+  left: 64px;
+  position: absolute;
+  top: 349px;
+  width: 1062px;
+}
+
+.ristorante-seller .text-wrapper-2 {
+  color: #000000;
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 20px;
+  font-weight: 700;
+  height: 69px;
+  left: 394px;
+  letter-spacing: -0.1px;
+  line-height: normal;
+  position: absolute;
+  top: 6px;
+  width: 273px;
+}
+
+.ristorante-seller .frame {
+  height: 46px;
+  left: 201px;
+  position: absolute;
+  top: 360px;
+  width: 193px;
+}
+
+.ristorante-seller .overlap {
+  border-radius: 3.32px 3.32px 0px 0px;
+  height: 46px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 193px;
+}
+
+.ristorante-seller .indirizzo {
+  border: 0.83px solid !important;
+  border-radius: 3.32px !important;
+  flex: unset !important;
+  flex-grow: unset !important;
+  gap: 8.31px !important;
+  height: 46.52px !important;
+  margin-bottom: -0.52px !important;
+}
+
+.ristorante-seller .text-field-instance {
+  border-radius: 3.32px 3.32px 0px 0px !important;
+  padding: 3.32px 0px 3.32px 13.29px !important;
+}
+
+.ristorante-seller .design-component-instance-node {
+  height: 39.87px !important;
+  padding: 3.32px 0px !important;
+}
+
+.ristorante-seller .indirizzo-2 {
+  color: #999d99 !important;
+  font-family: "Roboto-Regular", Helvetica !important;
+  font-size: 10px !important;
+  font-style: unset !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.42px !important;
+  line-height: 19.9px !important;
+  margin-top: -0.83px !important;
+}
+
+.ristorante-seller .indirizzo-3 {
+  left: -3px !important;
+  padding: 0px 3.32px !important;
+  top: -10px !important;
+}
+
+.ristorante-seller .indirizzo-4 {
+  font-family: "Roboto-Regular", Helvetica !important;
+  font-size: 10px !important;
+  font-style: unset !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.33px !important;
+  line-height: 13.3px !important;
+  margin-top: -0.83px !important;
+}
+
+.ristorante-seller .write-icon {
+  height: 19px !important;
+  left: 166px !important;
+  position: absolute !important;
+  top: 12px !important;
+  width: 21px !important;
+}
+
+.ristorante-seller .img {
+  height: 46px;
+  left: 163px;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+.ristorante-seller .frame-nome {
+  height: 46px;
+  left: 0;
+  position: absolute;
+  top: -64px;
+  width: 193px;
+}
+
+.ristorante-seller .text-wrapper-3 {
+  color: #000000;
+  font-family: "League Spartan-Medium", Helvetica;
+  font-size: 22.7px;
+  font-weight: 500;
+  left: -48px;
+  letter-spacing: -0.11px;
+  line-height: 26.7px;
+  position: absolute;
+  text-align: center;
+  top: 10px;
+  white-space: nowrap;
+  width: 37px;
+}
+
+.ristorante-seller .rimuovi-button {
+  height: 24px;
+  left: -85px;
+  position: absolute;
+  top: 11px;
+  width: 24px;
+}
+
+.ristorante-seller .overlap-group {
+  height: 26px;
+  left: -1px;
+  position: relative;
+  top: -1px;
+  width: 26px;
+}
+
+.ristorante-seller .group {
+  height: 11px;
+  left: 8px;
+  position: absolute;
+  top: 8px;
+  width: 10px;
+}
+
+.ristorante-seller .vector-wrapper {
+  background-image: url(./vector.png);
+  background-size: 100% 100%;
+  height: 12px;
+  left: -1px;
+  position: relative;
+  top: -1px;
+  width: 12px;
+}
+
+.ristorante-seller .vector {
+  height: 12px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 12px;
+}
+
+.ristorante-seller .vector-2 {
+  height: 26px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 26px;
+}
+
+.ristorante-seller .prezzo {
+  height: 46px;
+  left: 231px;
+  position: absolute;
+  top: -64px;
+  width: 122px;
+}
+
+.ristorante-seller .overlap-2 {
+  border-radius: 3.32px 3.32px 0px 0px;
+  height: 46px;
+  position: relative;
+}
+
+.ristorante-seller .indirizzo-5 {
+  border-radius: 3.32px 3.32px 0px 0px !important;
+  height: 46px !important;
+  left: 0 !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 122px !important;
+}
+
+.ristorante-seller .write-icon-instance {
+  height: 19px !important;
+  left: 96px !important;
+  position: absolute !important;
+  top: 12px !important;
+  width: 21px !important;
+}
+
+.ristorante-seller .line-2 {
+  height: 46px;
+  left: 92px;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+.ristorante-seller .allergeni {
+  height: 46px;
+  left: 231px;
+  position: absolute;
+  top: 0;
+  width: 183px;
+}
+
+.ristorante-seller .indirizzo-6 {
+  border-radius: 3.32px 3.32px 0px 0px !important;
+  height: 46px !important;
+  left: 0 !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 183px !important;
+}
+
+.ristorante-seller .icon-instance-node {
+  height: 19px !important;
+  left: 153px !important;
+  position: absolute !important;
+  top: 12px !important;
+  width: 21px !important;
+}
+
+.ristorante-seller .line-3 {
+  height: 46px;
+  left: 148px;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+.ristorante-seller .green-point {
+  height: 46px;
+  left: 391px;
+  position: absolute;
+  top: -65px;
+  width: 122px;
+}
+
+.ristorante-seller .frame-2 {
+  height: 46px;
+  left: 201px;
+  position: absolute;
+  top: 187px;
+  width: 193px;
+}
+
+.ristorante-seller .img-wrapper {
+  background-image: url(./vector-3.png);
+  background-size: 100% 100%;
+  height: 12px;
+  left: -1px;
+  position: relative;
+  top: -1px;
+  width: 12px;
+}
+
+.ristorante-seller .check-out-instance {
+  background-color: #2f6a43 !important;
+  border-radius: 113.89px !important;
+  gap: 11.39px !important;
+  left: 418px !important;
+  padding: 9.11px 13.67px !important;
+  position: absolute !important;
+  top: 470px !important;
+  width: 225px !important;
+}
+
+.ristorante-seller .check-out-2 {
+  color: #ffffff !important;
+  font-family: "League Spartan-Medium", Helvetica !important;
+  font-size: 19.4px !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.1px !important;
+  line-height: 22.8px !important;
+  margin-top: -1.14px !important;
+}
+
+.ristorante-seller .recapiti-guadagni {
+  background-color: var(--material-theme-schemes-on-primary);
+  border: 0.8px solid;
+  border-color: var(--material-theme-schemes-primary-container);
+  border-radius: 27.92px;
+  box-shadow: 0px 3.19px 39.88px #00000040;
+  height: 909px;
+  left: 1312px;
+  position: absolute;
+  top: 349px;
+  width: 504px;
+}
+
+.ristorante-seller .text-wrapper-4 {
+  color: #000000;
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 20px;
+  font-weight: 700;
+  height: 69px;
+  left: 100px;
+  letter-spacing: -0.1px;
+  line-height: normal;
+  position: absolute;
+  top: 655px;
+  width: 304px;
+}
+
+.ristorante-seller .text-wrapper-5 {
+  color: #000000;
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 20px;
+  font-weight: 700;
+  height: 69px;
+  left: 124px;
+  letter-spacing: -0.1px;
+  line-height: normal;
+  position: absolute;
+  top: 312px;
+  width: 255px;
+}
+
+.ristorante-seller .recapiti {
+  height: 67px;
+  left: 111px;
+  position: absolute;
+  top: 434px;
+  width: 281px;
+}
+
+.ristorante-seller .overlap-group-2 {
+  border-radius: 4.84px 4.84px 0px 0px;
+  height: 67px;
+  position: relative;
+}
+
+.ristorante-seller .indirizzo-7 {
+  border-radius: 4.84px 4.84px 0px 0px !important;
+  height: 67px !important;
+  left: 0 !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 281px !important;
+}
+
+.ristorante-seller .indirizzo-8 {
+  border: 1.21px solid !important;
+  border-radius: 4.84px !important;
+  flex: unset !important;
+  flex-grow: unset !important;
+  gap: 12.1px !important;
+  height: 67.76px !important;
+  margin-bottom: -0.76px !important;
+}
+
+.ristorante-seller .indirizzo-9 {
+  border-radius: 4.84px 4.84px 0px 0px !important;
+  padding: 4.84px 0px 4.84px 19.36px !important;
+}
+
+.ristorante-seller .indirizzo-10 {
+  height: 58.08px !important;
+  padding: 4.84px 0px !important;
+}
+
+.ristorante-seller .indirizzo-11 {
+  color: #999d99 !important;
+  font-family: "Roboto-Regular", Helvetica !important;
+  font-size: 14.5px !important;
+  font-style: unset !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.6px !important;
+  line-height: 29px !important;
+  margin-top: -1.21px !important;
+}
+
+.ristorante-seller .indirizzo-12 {
+  left: -5px !important;
+  padding: 0px 4.84px !important;
+  top: -15px !important;
+}
+
+.ristorante-seller .indirizzo-13 {
+  font-family: "Roboto-Regular", Helvetica !important;
+  font-size: 14.5px !important;
+  font-style: unset !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.48px !important;
+  line-height: 19.4px !important;
+  margin-top: -1.21px !important;
+}
+
+.ristorante-seller .write-icon-2 {
+  height: 23px !important;
+  left: 245px !important;
+  position: absolute !important;
+  top: 22px !important;
+  width: 27px !important;
+}
+
+.ristorante-seller .line-4 {
+  height: 67px;
+  left: 236px;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+.ristorante-seller .text-wrapper-6 {
+  color: #000000;
+  font-family: "Roboto-Regular", Helvetica;
+  font-size: 14.5px;
+  font-weight: 400;
+  height: 49px;
+  left: 154px;
+  letter-spacing: 0.6px;
+  line-height: 29px;
+  position: absolute;
+  top: 729px;
+  width: 208px;
+}
+
+.ristorante-seller .text-wrapper-7 {
+  color: #000000;
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 20px;
+  font-weight: 700;
+  height: 69px;
+  left: 124px;
+  letter-spacing: -0.1px;
+  line-height: normal;
+  position: absolute;
+  top: 1px;
+  width: 255px;
+}
+
+.ristorante-seller .overlap-3 {
+  height: 172px;
+  left: 54px;
+  position: absolute;
+  top: 108px;
+  width: 417px;
+}
+
+.ristorante-seller .recapiti-2 {
+  height: 170px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 330px;
+}
+
+.ristorante-seller .overlap-4 {
+  border-radius: 4.84px 4.84px 0px 0px;
+  height: 67px;
+  left: 49px;
+  position: absolute;
+  top: 0;
+  width: 281px;
+}
+
+.ristorante-seller .overlap-group-wrapper {
+  height: 67px;
+  left: 0;
+  position: absolute;
+  top: 103px;
+  width: 199px;
+}
+
+.ristorante-seller .indirizzo-14 {
+  border-radius: 4.84px 4.84px 0px 0px !important;
+  height: 67px !important;
+  left: 0 !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 199px !important;
+}
+
+.ristorante-seller .write-icon-3 {
+  height: 23px !important;
+  left: 166px !important;
+  position: absolute !important;
+  top: 22px !important;
+  width: 27px !important;
+}
+
+.ristorante-seller .line-5 {
+  height: 67px;
+  left: 160px;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+.ristorante-seller .indirizzo-15 {
+  border-radius: 4.91px 4.91px 0px 0px !important;
+  height: 67px !important;
+  left: 236px !important;
+  position: absolute !important;
+  top: 103px !important;
+  width: 181px !important;
+}
+
+.ristorante-seller .indirizzo-16 {
+  border: 1.23px solid !important;
+  border-radius: 4.91px !important;
+  flex: unset !important;
+  flex-grow: unset !important;
+  gap: 12.29px !important;
+  height: 68.8px !important;
+  margin-bottom: -1.42px !important;
+}
+
+.ristorante-seller .indirizzo-17 {
+  border-radius: 4.91px 4.91px 0px 0px !important;
+  padding: 4.91px 0px 4.91px 19.66px !important;
+}
+
+.ristorante-seller .indirizzo-18 {
+  height: 58.97px !important;
+  padding: 4.91px 0px !important;
+}
+
+.ristorante-seller .indirizzo-19 {
+  color: #999d99 !important;
+  font-family: "Roboto-Regular", Helvetica !important;
+  font-size: 14.7px !important;
+  font-style: unset !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.61px !important;
+  line-height: 29.5px !important;
+  margin-top: -1.23px !important;
+}
+
+.ristorante-seller .indirizzo-20 {
+  left: -5px !important;
+  padding: 0px 4.91px !important;
+  top: -15px !important;
+}
+
+.ristorante-seller .indirizzo-21 {
+  font-family: "Roboto-Regular", Helvetica !important;
+  font-size: 14.7px !important;
+  font-style: unset !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.49px !important;
+  line-height: 19.7px !important;
+  margin-top: -1.23px !important;
+}
+
+.ristorante-seller .line-6 {
+  height: 67px;
+  left: 382px;
+  object-fit: cover;
+  position: absolute;
+  top: 105px;
+  width: 1px;
+}
+
+.ristorante-seller .write-icon-4 {
+  height: 23px !important;
+  left: 383px !important;
+  position: absolute !important;
+  top: 125px !important;
+  width: 27px !important;
+}
+
+.ristorante-seller .check-out-3 {
+  background-color: #2f6a43 !important;
+  border-radius: 113.89px !important;
+  gap: 11.39px !important;
+  left: 139px !important;
+  padding: 9.11px 13.67px !important;
+  position: absolute !important;
+  top: 553px !important;
+  width: 225px !important;
+}
