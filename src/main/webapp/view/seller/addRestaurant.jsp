@@ -24,7 +24,7 @@
             </h1>
 
             <label for="name" id="name_label">Nome</label>
-            <input type="text" id="name" name="name" placeholder="Inserisci il tuo nome" required>
+            <input type="text" id="name" name="name" placeholder="Inserisci il tuo nome" maxlength="25" required>
 
             <label for="autocomplete">Indirizzo</label>
             <search>
@@ -41,13 +41,13 @@
             <input name="city" id="city" type="text" style="display: none" hidden="hidden">
 
             <label for="deliveryCost" id="deliveryCost_label">Costo di Consegna</label>
-            <input type="text" id="deliveryCost" name="deliveryCost" placeholder="Inserisci il costo di consegna" required>
+            <input type="text" id="deliveryCost" name="deliveryCost" placeholder="Inserisci il costo di consegna" maxlength="5" required>
 
             <label for="category" id="category_label">Categoria</label>
-            <input type="text" id="category" name="category" placeholder="Inserisci la categoria" required>
+            <input type="text" id="category" name="category" placeholder="Inserisci la categoria" maxlength="25" required>
 
             <label for="description" id="description_label">Descrizione</label>
-            <textarea id="description" name="description" placeholder="Inserisci la descrizione" required></textarea>
+            <textarea id="description" name="description" placeholder="Inserisci la descrizione" maxlength="2000" required></textarea>
 
 
             <button disabled>
