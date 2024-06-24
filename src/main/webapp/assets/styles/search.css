@@ -142,7 +142,27 @@ aside form select {
     display: block;
 }
 
+button.showMoreButton {
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-left: 46.5vw;
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+    margin-right: auto;
+    font-size: 1.2rem;
+}
+
+button.showMoreButton:active {
+    background-color: var(--md-sys-color-on-primary-container);
+}
+
 @media screen and (max-width: 600px) {
+
+    button.showMoreButton {
+        margin-left: 25vw;
+        margin-right: 25vw;
+        min-width: 50vw;
+    }
 
     aside {
         display: none;
@@ -183,6 +203,9 @@ aside form select {
         -moz-appearance: none;
     }
 
+   .showMoreButton {
+       font-size: 1rem;
+   }
 
     /* arrows */
 

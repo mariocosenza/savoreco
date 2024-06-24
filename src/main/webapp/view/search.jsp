@@ -69,6 +69,15 @@
             </c:forEach>
         </div>
     </main>
+    <c:if test="${requestScope.maxResult > 0}">
+        <form action="search" method="get">
+            <button name="maxResult" class="showMoreButton" value="${requestScope.maxResult}">
+                Mostra di più
+            </button>
+            <input style="display: none" name="lat" value="${requestScope.lat}">
+            <input style="display: none" name="lon" value="${requestScope.lon}">
+        </form>
+    </c:if>
 <%@ include file="/components/footer.jsp"%>
 </body>
 </html>
