@@ -45,7 +45,7 @@
                 </c:otherwise>
                 </c:choose>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Inserisci la tua email" required>
+                <input type="email" id="email" name="email" placeholder="Inserisci la tua email" required maxlength="128">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required
                        onfocusin="showTooltip()" onfocusout="hideTooltip()">
