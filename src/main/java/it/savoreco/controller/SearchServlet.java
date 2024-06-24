@@ -15,8 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @WebServlet(
@@ -32,14 +31,28 @@ public class SearchServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/search.jsp");
+        req.setAttribute("lat", req.getParameter("lat"));
+        req.setAttribute("lon", req.getParameter("lon"));
         try {
             SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
             Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
 
-            Query<Integer> query = session.createNativeQuery("SELECT restaurant_id FROM savoreco.restaurant r " +
-                    "INNER JOIN savoreco.address b " +
-                    "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000", Integer.class);
+            Query<Integer> query;
+            if(Objects.isNull(req.getParameter("sort")) || req.getParameter("sort").equals("distance")) {
+                query =  session.createNativeQuery("SELECT restaurant_id FROM savoreco.restaurant r " +
+                        "INNER JOIN savoreco.address b " +
+                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000", Integer.class);
+            } else if(req.getParameter("sort").equals("name")) {
+                query =  session.createNativeQuery("SELECT restaurant_id FROM savoreco.restaurant r " +
+                        "INNER JOIN savoreco.address b " +
+                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000 ORDER BY UPPER(r.name) ", Integer.class);
+            } else {
+                query =  session.createNativeQuery("SELECT restaurant_id FROM savoreco.restaurant r " +
+                        "INNER JOIN savoreco.address b " +
+                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000 ORDER BY r.delivery_cost", Integer.class);
+            }
+
 
             query.setParameter("longitude", Double.parseDouble(req.getParameter("lon")), Double.class);
             query.setParameter("latitude", Double.parseDouble(req.getParameter("lat")), Double.class);
