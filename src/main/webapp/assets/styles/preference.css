@@ -5,6 +5,8 @@
     flex-direction: column;
     justify-content: center;
     max-width: 75vw;
+    padding-bottom: 2em;
+    border-radius: 0.5em;
     margin: 5vh auto auto;
     background-color: var(--md-sys-color-background);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -21,7 +23,7 @@
 }
 
 label {
-    font-size: 1.1em;
+    font-size: 1.2em;
     margin-top: 0.5em;
 }
 
@@ -94,13 +96,10 @@ button {
 
 .point {
     text-align: left;
-    background-color: var(--md-sys-color-tertiary-container);
     min-width: 15vw;
-    border-radius: 1vw;
     margin-right: 83vw;
     color: var(--md-sys-color-on-tertiary-container);
     padding: 0.8em;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .point h1 {
