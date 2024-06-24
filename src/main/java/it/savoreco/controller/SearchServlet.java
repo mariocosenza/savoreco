@@ -42,18 +42,23 @@ public class SearchServlet extends HttpServlet {
             if(Objects.isNull(req.getParameter("sort")) || req.getParameter("sort").equals("distance")) {
                 query =  session.createNativeQuery("SELECT restaurant_id FROM savoreco.restaurant r " +
                         "INNER JOIN savoreco.address b " +
-                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000", Integer.class);
+                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000 LIMIT :maxResult", Integer.class);
             } else if(req.getParameter("sort").equals("name")) {
                 query =  session.createNativeQuery("SELECT restaurant_id FROM savoreco.restaurant r " +
                         "INNER JOIN savoreco.address b " +
-                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000 ORDER BY UPPER(r.name) ", Integer.class);
+                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000 ORDER BY UPPER(r.name) LIMIT  :maxResult", Integer.class);
             } else {
                 query =  session.createNativeQuery("SELECT restaurant_id FROM savoreco.restaurant r " +
                         "INNER JOIN savoreco.address b " +
-                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000 ORDER BY r.delivery_cost", Integer.class);
+                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000 ORDER BY r.delivery_cost LIMIT :maxResult", Integer.class);
             }
 
+            int result = 10;
+            if(Objects.nonNull(req.getParameter("maxResult"))) {
+                result = Math.max(Integer.parseInt(req.getParameter("maxResult")), 10);
+            }
 
+            query.setParameter("maxResult", result);
             query.setParameter("longitude", Double.parseDouble(req.getParameter("lon")), Double.class);
             query.setParameter("latitude", Double.parseDouble(req.getParameter("lat")), Double.class);
             List<Restaurant> restaurantList = new ArrayList<>();
@@ -64,6 +69,11 @@ public class SearchServlet extends HttpServlet {
             }
 
             transaction.commit();
+            if(restaurantList.size() < result) {
+                req.setAttribute("maxResult", 0);
+            } else {
+                req.setAttribute("maxResult", result + 5);
+            }
             req.setAttribute("restaurants", restaurantList);
             requestDispatcher.forward(req, resp);
         } catch (IOException | ServletException e) {
