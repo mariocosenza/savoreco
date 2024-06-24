@@ -24,14 +24,14 @@ VALUES
     ('FrancescaNeri@gmail.com', 'Francesca', 'Neri', encode(sha512('Francesca123*'::bytea), 'hex'), '1987-09-29', true, '2024-07-24', 'Via Giuseppe Cosenza', '80053', 'IT', null),
     ('RobertoVioli@gmail.com', 'Roberto', 'Violi', encode(sha512('Roberto123*'::bytea), 'hex'), '1990-09-11', false, null, null, null, 'IT', null);
 
-INSERT INTO restaurant (name, street, zipcode, description, image_object, delivery_cost, category, deleted, creation_time)
+INSERT INTO restaurant (name, street, zipcode, image_object, delivery_cost, category, deleted, creation_time, description)
 VALUES
-    ('McDonald', 'Viale del Besento', '85100', 'Fast Food Chain', 'https://t3.ftcdn.net/jpg/03/24/73/92/360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg', 2.00, 'Fast Food', '2024-06-18 13:48:56.867141'),
-    ('KFC', 'Via Nicola Santangelo', '85100', 'Fast Food Chain', null, 2.50, 'Fast Food', false, '2024-06-18 13:48:56.867141'),
-    ('Il ritrovo dei golosi', 'Via Unità D''Italia', '85100', 'Pasticceria', null, 4.00, 'Pasticceria', false, '2024-06-18 13:48:56.867141'),
-    ('Buon Boccone', 'Piazza Principe Umberto', '80053', 'Buon Boccone, con troppa fila', null, 2.00, 'Rosticceria', false, '2024-06-22 17:44:16.785705'),
-    ('Mare e sole', 'Via Nazario Sauro', '85100', 'Buon mare, buon sole, buonissima pizza', null, 1.50, 'Pizzeria', false, '2024-06-23 05:06:21.693811'),
-    ('Sushi King', 'Via Luigi Denza', '80053', 'Ristorante Giapponese', null, 5.00, 'Giapponese', false);
+    ('McDonald', 'Viale del Besento', '85100', 'https://t3.ftcdn.net/jpg/03/24/73/92/360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg', 2.00, 'Fast Food', false, '2024-06-18 13:48:56.867141', 'McDonald è sinonimo di gusto veloce e conveniente. Offriamo un ampia gamma di panini iconici come il Big Mac e i Chicken McNuggets, preparati con ingredienti freschi e di alta qualità. Goditi i nostri menu in un ambiente accogliente e moderno, perfetto per pranzi veloci o serate in famiglia.'),
+    ('KFC', 'Via Nicola Santangelo', '85100', null, 2.50, 'Fast Food', false, '2024-06-18 13:48:56.867141', 'KFC è il leader mondiale del pollo fritto, celebre per la sua croccantezza unica e le 11 spezie segrete. Da noi puoi trovare gustosi panini, deliziosi wrap e irresistibili bucket di pollo che faranno la gioia di tutta la famiglia. Un viaggio di sapori avvolti in un’atmosfera amichevole e dinamica.'),
+    ('Il ritrovo dei golosi', 'Via Unità D''Italia', '85100', null, 4.00, 'Pasticceria', false, '2024-06-18 13:48:56.867141', 'Il Ritrovo dei Golosi è un paradiso per gli amanti dei dolci. Offriamo una varietà di pasticceria italiana classica, dalle sfogliatelle croccanti ai tiramisù vellutati. Ogni creazione è preparata con ingredienti di alta qualità e una passione per la tradizione che si riflette in ogni morso.'),
+    ('Buon Boccone', 'Piazza Principe Umberto', '80053', null, 2.00, 'Rosticceria', false, '2024-06-22 17:44:16.785705',  'Buon Boccone è il tuo angolo di gusto dedicato alla cucina di rosticceria tradizionale. Con piatti preparati come una volta, da arancini dorati a frittatine cremose, il nostro menu è pensato per portare sulla tua tavola il sapore genuino dei piatti caserecci, perfetti per ogni occasione.'),
+    ('Mare e sole', 'Via Nazario Sauro', '85100', null, 1.50, 'Pizzeria', false, '2024-06-23 05:06:21.693811', 'Mare e Sole ti invita a gustare l’autentica pizza napoletana, preparata con passione e ingredienti freschi. Il nostro menu varia dalle classiche Margherita e Diavola alle creazioni più innovative, tutte cotte nel nostro forno a legna per un’esperienza culinaria indimenticabile.'),
+    ('Sushi King', 'Via Luigi Denza', '80053', null, 5.00, 'Giapponese', false, '2024-06-24 11:38:51.867141', 'Sushi King è il ristorante giapponese che offre un’autentica esperienza di sushi e sashimi. Scopri la freschezza dei nostri nigiri, uramaki creativi e tempura leggera. Ogni piatto è preparato con maestria e attenzione ai dettagli per portare sulla tua tavola il meglio della cucina nipponica.');
 
 INSERT INTO seller_account (email, name, surname, password, restaurant_id)
 VALUES
@@ -49,33 +49,33 @@ VALUES
     ('GiuseppeCavallaro@gmail.com', 'Giuseppe', 'Cavallaro', encode(sha512('Giuseppe123*'::bytea), 'hex')),
     ('MarioFasolino@gmail.com', 'Mario', 'Fasolino', encode(sha512('Mario123*'::bytea), 'hex'));
 
-INSERT INTO food (restaurant_id, image_object, name, description, available, green_point, category, allergens, price, quantity)
+INSERT INTO food (restaurant_id, image_object, name, available, green_point, category, allergens, price, quantity, description)
 VALUES
-    (1, null, 'Big Mac', 'Due fette di manzo 100% con formaggio, lattuga, cipolle e cetriolini, tutto su un panino con semi di sesamo.', true, 10, 'Panino', 'Glutine, Latte, Uova', 10.00, 100),
-    (1, null, 'Chicken McNuggets', 'Bocconcini di pollo croccanti serviti con la salsa a scelta.', true, 8, 'Pollo', 'Glutine', 6.00, 200),
-    (1, null, 'Cheeseburger', 'Un classico con carne 100% bovina, formaggio, cetriolini, cipolle, ketchup e senape.', true, 5, 'Panino', 'Glutine, Latte', 4.00, 150),
+    (1, null, 'Big Mac', true, 10, 'Panino', 'Glutine, Latte, Uova', 10.00, 100, 'Due fette di manzo 100% con formaggio, lattuga, cipolle e cetriolini, tutto su un panino con semi di sesamo.'),
+    (1, null, 'Chicken McNuggets', true, 8, 'Pollo', 'Glutine', 6.00, 200, 'Bocconcini di pollo croccanti serviti con la salsa a scelta.'),
+    (1, null, 'Cheeseburger', true, 5, 'Panino', 'Glutine, Latte', 4.00, 150, 'Un classico con carne 100% bovina, formaggio, cetriolini, cipolle, ketchup e senape.'),
     (1, null, 'Filet-O-Fish', 'Pesce panato con formaggio e salsa tartara su un panino morbido.', true, 7, 'Panino', 'Glutine, Latte, Pesce', 5.00, 100),
-    (1, null, 'McSundae', 'Gelato alla vaniglia con topping a scelta tra caramello, cioccolato o fragola.', false, 3, 'Dolce', 'Latte', 2.50, 0),
-    (2, null, 'Original Recipe Chicken', 'Pollo fritto con la ricetta segreta di 11 erbe e spezie.', true, 10, 'Pollo', 'Glutine', 8.00, 150),
+    (1, null, 'McSundae', false, 3, 'Dolce', 'Latte', 2.50, 0, 'Gelato alla vaniglia con topping a scelta tra caramello, cioccolato o fragola.'),
+    (2, null, 'Original Recipe Chicken', true, 10, 'Pollo', 'Glutine', 8.00, 150, 'Pollo fritto con la ricetta segreta di 11 erbe e spezie.'),
     (2, null, 'Zinger Burger', 'Panino piccante con filetto di pollo croccante, lattuga e maionese.', true, 5, 'Panino', 'Glutine, Latte, Uova', 7.50, 100),
-    (2, null, 'Popcorn Chicken', 'Bocconcini di pollo fritto croccanti e gustosi.', true, 8, 'Pollo', 'Glutine', 6.00, 200),
-    (2, null, 'Twister Wrap', 'Wrap con pollo croccante, lattuga, pomodoro e salsa speciale.', false, 7, 'Panino', 'Glutine, Latte, Uova', 5.50, 0),
-    (3, null, 'Tiramisù', 'Dessert classico italiano con savoiardi, mascarpone, caffè e cacao.', true, 20, 'Dolce', 'Glutine, Latte, Uova', 5.00, 80),
-    (3, null, 'Cannoli Siciliani', 'Dolce tipico siciliano con ricotta dolce e canditi.', true, 15, 'Dolce', 'Glutine, Latte, Uova', 4.50, 100),
-    (3, null, 'Sfogliatella', 'Pasticcino napoletano croccante con ripieno di ricotta e canditi.', true, 18, 'Dolce', 'Glutine, Latte, Uova', 3.50, 120),
-    (3, null, 'Pastiera Napoletana', 'Dolce napoletano con grano cotto, ricotta e arancia candita.', false, 25, 'Dolce', 'Glutine, Latte, Uova', 6.00, 0),
-    (4, null, 'Arancini', 'Riso ripieno di ragù, piselli e mozzarella, impanato e fritto.', true, 12, 'Antipasto', 'Glutine, Latte, Uova', 2.50, 150),
-    (4, null, 'Frittatina di Maccheroni', 'Pasta con besciamella, piselli e prosciutto cotto, impanata e fritta.', true, 15, 'Antipasto', 'Glutine, Latte, Uova', 3.00, 120),
-    (4, null, 'Panino con la Milza', 'Panino farcito con milza di vitello soffritta, con o senza ricotta.', true, 8, 'Panino', 'Glutine, Latte', 5.00, 100),
-    (5, null, 'Pizza Margherita', 'Classica pizza con pomodoro, mozzarella e basilico.', true, 15, 'Pizza', 'Glutine, Latte', 6.00, 100),
-    (5, null, 'Pizza Diavola', 'Pizza piccante con salame piccante e mozzarella.', true, 18, 'Pizza', 'Glutine, Latte', 7.00, 80),
-    (5, null, 'Pizza Capricciosa', 'Pizza con pomodoro, mozzarella, funghi, prosciutto, carciofi e olive.', false, 20, 'Pizza', 'Glutine, Latte', 8.00, 0),
-    (5, null, 'Pizza Napoletana', 'Pizza con pomodoro, mozzarella, acciughe e capperi.', true, 22, 'Pizza', 'Glutine, Latte, Pesce', 7.50, 60),
-    (6, null, 'Nigiri di Salmone', 'Nigiri con riso e fettine di salmone fresco.', true, 25, 'Nigiri', 'Pesce, Soia', 12.00, 50),
-    (6, null, 'Nigiri di Tonno', 'Nigiri con riso e fettine di tonno fresco.', true, 20, 'Nigiri', 'Pesce, Soia', 10.00, 60),
-    (6, null, 'Ramen', 'Zuppa tradizionale giapponese con uova, alghe e carne.', true, 18, 'Zuppa', 'Glutine, Soia, Uova', 15.00, 70),
-    (6, null, 'Uramaki California Roll', 'Uramaki con polpa di granchio, avocado e cetriolo.', false, 22, 'Uramaki', 'Glutine, Pesce, Soia', 14.00, 0),
-    (6, null, 'Zuppa di Miso', 'Zuppa tradizionale giapponese con tofu, alga wakame e miso.', true, 12, 'Zuppa', 'Soia', 5.00, 90);
+    (2, null, 'Popcorn Chicken', true, 8, 'Pollo', 'Glutine', 6.00, 200, 'Bocconcini di pollo fritto croccanti e gustosi.'),
+    (2, null, 'Twister Wrap', false, 7, 'Panino', 'Glutine, Latte, Uova', 5.50, 0, 'Wrap con pollo croccante, lattuga, pomodoro e salsa speciale.'),
+    (3, null, 'Tiramisù', true, 20, 'Dolce', 'Glutine, Latte, Uova', 5.00, 80, 'Dessert classico italiano con savoiardi, mascarpone, caffè e cacao.'),
+    (3, null, 'Cannoli Siciliani', true, 15, 'Dolce', 'Glutine, Latte, Uova', 4.50, 100, 'Dolce tipico siciliano con ricotta dolce e canditi.'),
+    (3, null, 'Sfogliatella', true, 18, 'Dolce', 'Glutine, Latte, Uova', 3.50, 120, 'Pasticcino napoletano croccante con ripieno di ricotta e canditi.'),
+    (3, null, 'Pastiera Napoletana', false, 25, 'Dolce', 'Glutine, Latte, Uova', 6.00, 0, 'Dolce napoletano con grano cotto, ricotta e arancia candita.'),
+    (4, null, 'Arancini', true, 12, 'Antipasto', 'Glutine, Latte, Uova', 2.50, 150, 'Riso ripieno di ragù, piselli e mozzarella, impanato e fritto.'),
+    (4, null, 'Frittatina di Maccheroni', true, 15, 'Antipasto', 'Glutine, Latte, Uova', 3.00, 120, 'Pasta con besciamella, piselli e prosciutto cotto, impanata e fritta.'),
+    (4, null, 'Panino con la Milza', true, 8, 'Panino', 'Glutine, Latte', 5.00, 100, 'Panino farcito con milza di vitello soffritta, con o senza ricotta.'),
+    (5, null, 'Pizza Margherita', true, 15, 'Pizza', 'Glutine, Latte', 6.00, 100, 'Classica pizza con pomodoro, mozzarella e basilico.'),
+    (5, null, 'Pizza Diavola', true, 18, 'Pizza', 'Glutine, Latte', 7.00, 80, 'Pizza piccante con salame piccante e mozzarella.'),
+    (5, null, 'Pizza Capricciosa', false, 20, 'Pizza', 'Glutine, Latte', 8.00, 0, 'Pizza con pomodoro, mozzarella, funghi, prosciutto, carciofi e olive.'),
+    (5, null, 'Pizza Napoletana', true, 22, 'Pizza', 'Glutine, Latte, Pesce', 7.50, 60, 'Pizza con pomodoro, mozzarella, acciughe e capperi.'),
+    (6, null, 'Nigiri di Salmone', true, 25, 'Nigiri', 'Pesce, Soia', 12.00, 50, 'Nigiri con riso e fettine di salmone fresco.'),
+    (6, null, 'Nigiri di Tonno', true, 20, 'Nigiri', 'Pesce, Soia', 10.00, 60, 'Nigiri con riso e fettine di tonno fresco.'),
+    (6, null, 'Ramen', true, 18, 'Zuppa', 'Glutine, Soia, Uova', 15.00, 70, 'Zuppa tradizionale giapponese con uova, alghe e carne.'),
+    (6, null, 'Uramaki California Roll', false, 22, 'Uramaki', 'Glutine, Pesce, Soia', 14.00, 0, 'Uramaki con polpa di granchio, avocado e cetriolo.'),
+    (6, null, 'Zuppa di Miso', true, 12, 'Zuppa', 'Soia', 5.00, 90, 'Zuppa tradizionale giapponese con tofu, alga wakame e miso.');
 
 INSERT INTO purchase (user_id, delivery_cost, time, iva, status, total_cost, payment_method, pick_up, street, zipcode)
 VALUES
