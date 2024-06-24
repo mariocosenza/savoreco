@@ -21,7 +21,7 @@ import java.util.List;
         name = "moderatorPageServlet",
         displayName = "Moderator - Home",
         description = "Moderator page",
-        value = "/moderatorPage"
+        value = "/moderator/moderatorPage"
 )
 public class ModeratorPageServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(ModeratorPageServlet.class);
