@@ -5,9 +5,8 @@
 }
 
 main {
-   display: flex;
+    display: flex;
 }
-
 
 
 label {
@@ -31,11 +30,16 @@ label {
 }
 
 aside {
-    padding: 1vw;
+    padding: 2em 1vw;
     margin-top: 15vh;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     float: left;
     color: var(--md-sys-color-on-secondary-container);
+    background-color: var(--md-sys-color-on-primary-container);
+    border-radius: 0.5em;
     min-height: 100%;
     height: 100%;
     margin-right: 2vw;
@@ -101,14 +105,6 @@ h2 {
     border-radius: 0.4em;
 }
 
-select {
-    display: none;
-}
-
-label {
-    display: none;
-}
-
 .mobileSelector {
     display: none;
 }
@@ -116,6 +112,34 @@ label {
 aside h1 {
     text-align: center;
     font-size: 1.2em;
+}
+
+aside form {
+    text-align: center;
+    margin-top: 1em;
+    display: block;
+    color: var(--md-sys-color-on-background);
+    max-width: 95%;
+}
+
+aside form label {
+    all: revert;
+    display: block;
+    min-width: 100%;
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1.2em;
+    font-size: 1em;
+}
+
+aside form select {
+    text-align: center;
+    margin: auto;
+    max-width: 100%;
+    font-size: 1.2em;
+    border-radius: 0.5em;
+    overflow: hidden;
+    display: block;
 }
 
 @media screen and (max-width: 600px) {
@@ -141,6 +165,55 @@ aside h1 {
         justify-content: center;
     }
 
+   .mobileSelector select {
+        all: revert;
+        /* styling */
+        background-color: var(--md-sys-color-background);
+        border: thin solid var(--md-sys-color-primary);
+        border-radius: 4px;
+        display: inline-block;
+        font: inherit;
+        line-height: 1.5em;
+        padding: 0.5em 15vw 5vw 1em;
+        margin: 0;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+
+
+    /* arrows */
+
+    .mobileSelector select.classic {
+        background-image: linear-gradient(45deg, transparent 50%, var(--md-sys-color-tertiary-fixed-dim) 50%),
+        linear-gradient(135deg, var(--md-sys-color-tertiary-fixed-dim) 50%, transparent 50%),
+        linear-gradient(to right, var(--md-sys-color-on-tertiary-fixed-variant), var(--md-sys-color-on-tertiary-fixed-variant));
+        background-position: calc(100% - 20px) calc(1em + 2px),
+        calc(100% - 15px) calc(1em + 2px),
+        100% 0;
+        background-size: 5px 5px,
+        5px 5px,
+        2.5em 2.5em;
+        background-repeat: no-repeat;
+    }
+
+   .mobileSelector select.classic:focus {
+        background-image: linear-gradient(45deg, var(--md-sys-color-primary-container) 50%, transparent 50%),
+        linear-gradient(135deg, transparent 50%, var(--md-sys-color-primary-container) 50%),
+        linear-gradient(to right, var(--md-sys-color-on-primary-container), var(--md-sys-color-on-primary-container));
+        background-position: calc(100% - 15px) 1em,
+        calc(100% - 20px) 1em,
+        100% 0;
+        background-size: 5px 5px,
+        5px 5px,
+        2.5em 2.5em;
+        background-repeat: no-repeat;
+        border-color: grey;
+        outline: 0;
+    }
+
     main {
         display: flex;
         flex-direction: column;
@@ -164,62 +237,8 @@ aside h1 {
         text-align: center;
     }
 
-    select {
 
-        /* styling */
-        background-color: var(--md-sys-color-background);
-        border: thin solid var(--md-sys-color-primary);
-        border-radius: 4px;
-        display: inline-block;
-        font: inherit;
-        line-height: 1.5em;
-        padding: 0.5em 15vw 5vw 1em;
-        margin: 0;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-    }
-
-
-    /* arrows */
-
-    select.classic {
-        background-image:
-                linear-gradient(45deg, transparent 50%, var(--md-sys-color-tertiary-fixed-dim) 50%),
-                linear-gradient(135deg, var(--md-sys-color-tertiary-fixed-dim) 50%, transparent 50%),
-                linear-gradient(to right, var(--md-sys-color-on-tertiary-fixed-variant), var(--md-sys-color-on-tertiary-fixed-variant));
-        background-position:
-                calc(100% - 20px) calc(1em + 2px),
-                calc(100% - 15px) calc(1em + 2px),
-                100% 0;
-        background-size:
-                5px 5px,
-                5px 5px,
-                2.5em 2.5em;
-        background-repeat: no-repeat;
-    }
-
-    select.classic:focus {
-        background-image:
-                linear-gradient(45deg, var(--md-sys-color-primary-container) 50%, transparent 50%),
-                linear-gradient(135deg, transparent 50%,  var(--md-sys-color-primary-container) 50%),
-                linear-gradient(to right, var(--md-sys-color-on-primary-container), var(--md-sys-color-on-primary-container));
-        background-position:
-                calc(100% - 15px) 1em,
-                calc(100% - 20px) 1em,
-                100% 0;
-        background-size:
-                5px 5px,
-                5px 5px,
-                2.5em 2.5em;
-        background-repeat: no-repeat;
-        border-color: grey;
-        outline: 0;
-    }
-
-    select {
+    .mobileSelector select {
         display: flex;
         margin-left: 15vw;
         margin-right: 15vw;

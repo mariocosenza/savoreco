@@ -12,10 +12,10 @@
 <body>
     <jsp:include page="../components/navbar.jsp"/>
     <div class="mobileSelector">
-        <label for="mobileCategory">
-            Scegli categoria ristorante
+        <label>
+            Scegli categoria ristorante <!--Per motivi di sicurezza non usare id di elementi html-->
         </label>
-        <select id="mobileCategory" class="classic" onclick=toggleSelect(this)>
+        <select class="mobile classic" onclick=toggleSelect(this)>
             <c:forEach items="${requestScope.restaurants.stream().map(r -> r.category).sorted().distinct().toList()}" var="category">
                 <option value="${category.replaceAll("\\s+","")}">
                         ${category}
@@ -31,6 +31,25 @@
                         ${category}
                 </div>
             </c:forEach>
+                <form action="search" method="get" onchange="this.submit()">
+                <label>
+                    Ordina risultati
+                </label>
+                        <select name="sort" class="classic">
+                            <option disabled selected value> -- Seleziona un opzione -- </option>
+                            <option  value="distance">
+                                Rage di 30km
+                            </option>
+                            <option  value="name">
+                                Nome
+                            </option>
+                            <option  value="deliveryPrice">
+                                Costo consegna
+                            </option>
+                        </select>
+                    <input style="display: none" name="lat" value="${requestScope.lat}">
+                    <input style="display: none" name="lon" value="${requestScope.lon}">
+                </form>
         </aside>
         <div class="allResult">
             <c:forEach items="${requestScope.restaurants}" var="resto">
@@ -49,7 +68,6 @@
                 </div>
             </c:forEach>
         </div>
-
     </main>
 <%@ include file="/components/footer.jsp"%>
 </body>
