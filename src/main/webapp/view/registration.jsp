@@ -29,11 +29,11 @@
                 <input type="radio" id="seller" name="profile_type" value="seller" onchange="radioChange()">
             </div>
             <label for="name" id="name_label">Nome</label>
-            <input type="text" id="name" name="name" placeholder="Inserisci il tuo nome" required maxlength="48">
+            <input  type="text" id="name" name="name" placeholder="Inserisci il tuo nome" required maxlength="48">
             <label for="surname" id="surname_label">Cognome</label>
             <input type="text" id="surname" name="surname" placeholder="Inserisci il tuo cognome" required maxlength="48">
             <label for="email" id="email_label">Email</label>
-            <input type="email" id="email" name="email" placeholder="Inserisci la tua email" required maxlength="128">
+            <input inputmode="email" type="email" id="email" name="email" placeholder="Inserisci la tua email" required maxlength="128">
             <label for="password">Password</label>
             <span class="tooltiptext">La password deve avere 8 caratteri almeno un numero e un carattere speciale</span>
             <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required onfocusin="showTooltip()" onfocusout="hideTooltip()">
