@@ -40,15 +40,15 @@
             <input name="address" id="address" type="text" style="display: none" hidden="hidden">
             <input name="city" id="city" type="text" style="display: none" hidden="hidden">
 
-
-            <label for="description" id="description_label">Descrizione</label>
-            <input type="text" id="description" name="description" placeholder="Inserisci la descrizione" required>
-
             <label for="deliveryCost" id="deliveryCost_label">Costo di Consegna</label>
             <input type="text" id="deliveryCost" name="deliveryCost" placeholder="Inserisci il costo di consegna" required>
 
             <label for="category" id="category_label">Categoria</label>
             <input type="text" id="category" name="category" placeholder="Inserisci la categoria" required>
+
+            <label for="description" id="description_label">Descrizione</label>
+            <textarea id="description" name="description" placeholder="Inserisci la descrizione" required></textarea>
+
 
             <button disabled>
                 Crea ristorante
