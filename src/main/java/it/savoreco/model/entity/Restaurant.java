@@ -51,7 +51,7 @@ public class Restaurant {
     private String category;
 
     @NotNull
-    @ColumnDefault("true")
+    @ColumnDefault("false")
     @Column(name = "deleted", nullable = false)
     private boolean deleted;
 
