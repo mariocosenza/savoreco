@@ -57,12 +57,28 @@
                 Aggiorna Account
             </button>
         </form>
-        <form>
-
-        </form>
-
     </div>
 </main>
+<div class="wrapper">
+    <a href="#demo-modal">Elimina Account</a>
+</div>
+
+<div id="demo-modal" class="modal">
+    <div class="modal__content">
+        <h1>Conferma cancellazione account</h1>
+        <p>
+            Il tuo account verrà eliminato potrai ripristinarlo entro 7 giorni<br>
+            Invia una email a
+        </p>
+        <form action="../user/preference" method="post">
+            <button class="deleteUser" onclick="" name="delete" value="true">
+                Conferma
+            </button>
+        </form>
+
+        <a href="#" class="modal__close">&times;</a>
+    </div>
+</div>
 <%@include file="../../components/footer.jsp"%>
 </body>
 </html>
