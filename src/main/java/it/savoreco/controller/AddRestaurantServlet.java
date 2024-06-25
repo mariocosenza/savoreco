@@ -40,10 +40,10 @@ public class AddRestaurantServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        nameMatcher = Pattern.compile("^[a-zA-Z][a-zA-Z0-9-_\\s]{2,15}$");
-        descriptionMatcher = Pattern.compile("^.{2,255}$");
+        nameMatcher = Pattern.compile("^[a-zA-Z][a-zA-Z0-9-_\\s]{2,24}$");
+        descriptionMatcher = Pattern.compile("^.{2,2000}$");
         deliveryCostMatcher = Pattern.compile("^\\d+(\\.\\d{1,2})?$");
-        categoryMatcher = Pattern.compile("^[a-zA-Z\\s]{2,50}$");
+        categoryMatcher = Pattern.compile("^[a-zA-Z\\s]{2,25}$");
     }
 
     @Override
