@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.Properties;
 
 public class ConfigurationProvider {
-    Properties properties = new Properties();
+    private final Properties properties = new Properties();
 
     public ConfigurationProvider() {
         File file = new File("C:\\Users\\proge\\Desktop\\bucket.cfg.xml");

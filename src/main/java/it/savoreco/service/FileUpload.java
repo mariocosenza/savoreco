@@ -6,7 +6,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import java.io.InputStream;
 
 public class FileUpload {
-    private static AmazonS3Client amazonS3 = null;
+    private static AmazonS3Client amazonS3;
 
     static {
         amazonS3 = CloudFlareR2Config.getCloudFlareR2Client().orElseThrow();

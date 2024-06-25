@@ -18,7 +18,7 @@ public class PasswordSHA512 {
 
 
     private static String sha512(String password) {
-        MessageDigest sha = null;
+        MessageDigest sha;
         byte[] hash = null;
         try {
             sha = MessageDigest.getInstance("SHA-512");
