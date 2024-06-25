@@ -53,7 +53,7 @@ CREATE TABLE restaurant
     image_object  varchar(1024),
     delivery_cost decimal(16, 8)        default 0 not null,
     category      varchar(128),
-    deleted       boolean      not null default true,
+    deleted       boolean      not null default false,
     creation_time timestamp    not null default now(),
 
     CONSTRAINT pk_restaurant PRIMARY KEY (restaurant_id),
