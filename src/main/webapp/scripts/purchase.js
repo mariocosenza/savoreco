@@ -131,7 +131,7 @@ function onGooglePaymentButtonClicked() {
         });
 }
 
-function processPayment(paymentData) {
-        const response = document.getElementById("form").submit();
+function processPayment() {
+    document.getElementById("form").submit();
 }
 
