@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="it.savoreco.model.entity.UserAccount" %>
-
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%
     List<UserAccount> usersList = (List<UserAccount>) request.getAttribute("usersList");
@@ -14,7 +14,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Moderatore</title>
-    <link rel="stylesheet" type="text/css" href="../../assets/styles/table.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/styles/moderatorPage.css">
+    <%@ include file="/components/header.jsp"%>
 </head>
 <body>
 <%@ include file="../../components/navbar.jsp" %>

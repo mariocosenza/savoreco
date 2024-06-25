@@ -25,6 +25,10 @@ th {
     background-color: var(--md-sys-color-on-primary-fixed-variant);
 }
 
+button {
+    color: var(--md-sys-color-primary-fixed);
+}
+
 button.active-users {
     background-color: var(--md-sys-color-on-primary-fixed-variant);
 }
