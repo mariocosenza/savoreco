@@ -4,7 +4,7 @@
 <c:set var="serverPath" value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}"/>
 <nav id="topNavBar">
     <script src="../scripts/navbar.js"></script>
-    <a href="../../home">
+    <a href="/home">
         <img src="../assets/images/savoreco-logo.webp" alt="Logo Savoreco" class="logoImage">
     </a>
     <a href="${serverPath}/home" class="siteLink">
@@ -39,6 +39,7 @@
                                   </c:when>
                                   <c:otherwise>
                                       <a href="${serverPath}/restaurantOrders">Visualizza Ordini</a>
+                                      <a href="${serverPath}/sellerRestaurant">Gestisci Ristorante</a>
                                   </c:otherwise>
                               </c:choose>
                               <a href="${serverPath}/exit">Esci</a>

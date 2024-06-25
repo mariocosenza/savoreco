@@ -54,10 +54,13 @@
             <p><strong>Stato:</strong> <%= purchase.getStatus() %></p>
             <p><strong>Metodo di pagamento:</strong> <%= purchase.getPaymentMethod() %></p>
             <p><strong>Costo totale:</strong> <%= String.format("%.2f", purchase.getTotalCost()) %>€</p>
-            <% if (purchase.getAddress() == null) {%>
+            <% if (purchase.getAddress() == null) {
+                //sostituire con purchase.getPickUp()
+                if (user.getAddress() != null) {
+            %>
             <p><strong>Indirizzo: </strong> <%= user.getAddress().getId().getStreet() %>
                 , <%= user.getAddress().getId().getZipcode() %></p>
-            <% } else {%>
+            <% } } else {%>
             <p><strong>Indirizzo: </strong> <%= purchase.getAddress().getId().getStreet() %>
                 , <%= purchase.getAddress().getId().getZipcode() %></p>
             <% } %>
@@ -68,8 +71,12 @@
             <p><strong>Email:</strong> <%= user.getEmail() %></p>
             <p><strong>Nome:</strong> <%= user.getName() %> <%= user.getSurname() %></p>
             <p><strong>Data di Nascita:</strong> <%= user.getBirthdate() %></p>
+            <%
+                if (user.getAddress() != null) {
+            %>
             <p><strong>Indirizzo:</strong> <%= user.getAddress().getId().getStreet() %>
                 , <%= user.getAddress().getId().getZipcode() %>, <%= user.getCountryCode() %></p>
+            <% } %>
             <p><strong>Eco Points:</strong> <%= user.getEcoPoint() %></p>
             <% if (user.getDeleted()) {%>
             <p>Verrà <strong>eliminato</strong> il: <%= DateTimeFormatter.ofPattern("yyyy-MM-dd")
