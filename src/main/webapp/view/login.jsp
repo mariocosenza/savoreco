@@ -11,7 +11,7 @@
 <body>
 <c:set var="serverPath" value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}"/>
 <a href="${serverPath}/home">
-    <img src="../assets/images/savoreco-logo.webp" alt="page logo" class="accessLogo">
+    <img src="../assets/images/savoreco-logo.svg" alt="page logo" class="accessLogo">
 </a>
 <div class="alert">
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
