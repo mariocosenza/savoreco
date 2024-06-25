@@ -250,6 +250,10 @@ button {
     border-radius: calc(100px + 1.5625vw);
     background-color: var(--md-sys-color-primary-container);
     color: var(--md-sys-color-on-primary-container);
+    text-transform: uppercase;
+    word-spacing: 0.2em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 }
 
 button.big {

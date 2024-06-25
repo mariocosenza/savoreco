@@ -22,7 +22,10 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 @WebServlet(
@@ -56,6 +59,24 @@ public class UserPreferenceServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) {
+
+        if(Objects.nonNull(req.getParameter("delete"))) {
+            SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
+            Session session = sessionFactory.getCurrentSession();
+            Transaction transaction = session.beginTransaction();
+            var user = (UserAccount) req.getSession().getAttribute("user");
+            user.setDeleted(true);
+            user.setExpires(Instant.now().plus(7, ChronoUnit.DAYS));
+            session.merge(user);
+            transaction.commit();
+            req.getSession().invalidate();
+            try {
+                resp.sendRedirect("/home");
+            } catch (IOException e) {
+                logger.warn("Cannot redirect to home", e);
+            }
+        }
+
         Type mapType = new TypeToken<Map<String, String>>() {
         }.getType();
         Map<String, String> map = null;

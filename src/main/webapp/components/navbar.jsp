@@ -5,7 +5,7 @@
 <nav id="topNavBar">
     <script src="../scripts/navbar.js"></script>
     <a href="/home">
-        <img src="../assets/images/savoreco-logo.webp" alt="Logo Savoreco" class="logoImage">
+        <img src="../assets/images/savoreco-logo.svg" alt="Logo Savoreco" class="logoImage">
     </a>
     <a href="${serverPath}/home" class="siteLink">
         <em id="bigTextLogo">SAVOR</em><em id="ecoLogoText">ECO</em>

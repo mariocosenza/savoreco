@@ -37,8 +37,8 @@ aside {
     justify-content: center;
     flex-direction: column;
     float: left;
-    color: var(--md-sys-color-on-secondary-container);
-    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-surface-variant);
+    background-color: var(--md-sys-color-surface-variant);
     border-radius: 0.5em;
     min-height: 100%;
     height: 100%;
@@ -47,6 +47,12 @@ aside {
     min-width: 14vw;
     max-width: 14vw;
     box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
+}
+
+img.svgLogo {
+    max-width: 2%;
+    object-fit: scale-down;
+    filter: invert(35%) sepia(95%) saturate(1200%) hue-rotate(88deg) brightness(90%) contrast(88%);
 }
 
 h1 {
@@ -81,7 +87,7 @@ h2 {
     margin-right: 5%;
     height: auto;
     overflow: hidden;
-    border-radius: 0.4em;
+    border-radius: 0.8em;
 }
 
 .restaurantInfo {
@@ -90,8 +96,9 @@ h2 {
 }
 
 .allResult button {
-    font-size: 1.5em;
-    margin-bottom: 0.2em;
+    font-size: 1.2em;
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
 }
 
 .filter {
@@ -124,7 +131,7 @@ aside form {
 }
 
 search {
-    background-color: var(--md-sys-color-secondary-container);
+    background-color: var(--md-sys-color-primary-container);
     color: var(--md-sys-color-on-background);
     min-width: 100%;
     display: flex;
@@ -142,6 +149,7 @@ search form {
     align-items: center;
     justify-content: center;
 }
+
 search input[type="search"] {
     text-align: center;
     background-color: var(--md-sys-color-background);
@@ -159,7 +167,7 @@ search input[type="search"]::placeholder {
 
 button.searchLogo {
     border-style: none;
-    background-color: var(--md-sys-color-secondary-container);
+    background-color: transparent;
     margin-left: 2vw;
     display: flex;
     flex-direction: row;
@@ -174,11 +182,11 @@ button.searchLogo img {
     object-fit: scale-down;
     max-width: 15vw;
     max-height: 3em;
-    filter: invert(35%) sepia(95%) saturate(1200%) hue-rotate(88deg) brightness(90%) contrast(88%);
+    filter: invert(86%) sepia(6%) saturate(3643%) hue-rotate(346deg) brightness(102%) contrast(89%);
 }
 
 button.searchLogo img:hover {
-    filter: invert(86%) sepia(6%) saturate(3643%) hue-rotate(346deg) brightness(102%) contrast(89%);
+    filter: invert(35%) sepia(95%) saturate(1200%) hue-rotate(88deg) brightness(90%) contrast(88%);
 }
 
 
@@ -221,6 +229,10 @@ button.showMoreButton:active {
     background-color: var(--md-sys-color-on-primary-container);
 }
 
+h2.price {
+    font-size: 0.8em;
+}
+
 @media screen and (max-width: 600px) {
 
     button.showMoreButton {
@@ -240,6 +252,7 @@ button.showMoreButton:active {
     img.resultImage {
         all: revert;
         margin-right: 5vw;
+        border-radius: 0.5em;
         max-width: 30%;
         max-height: 100%;
     }
@@ -306,6 +319,8 @@ button.showMoreButton:active {
     search input[type="search"]::placeholder {
         font-size: 0.8em;
     }
+
+
 
     main {
         display: flex;

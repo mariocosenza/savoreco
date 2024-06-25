@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
             Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
             if (req.getParameter("profile_type").equals("user")) {
-                Query<UserAccount> query = session.createQuery("FROM UserAccount u WHERE u.email= :email AND u.password= :password", UserAccount.class);
+                Query<UserAccount> query = session.createQuery("FROM UserAccount u WHERE u.email= :email AND u.password= :password AND u.deleted is false", UserAccount.class);
                 query.setParameter("email", email.trim());
                 query.setParameter("password", PasswordSHA512.SHA512Hash(password));
                 account = query.stream().findAny().orElse(null);
