@@ -68,7 +68,8 @@
         <h1>Conferma cancellazione account</h1>
         <p>
             Il tuo account verrà eliminato potrai ripristinarlo entro 7 giorni<br>
-            Invia una email a
+            Invia una email a  <a href="mailto:info@savoreco.it">
+            info@savoreco.it </a>
         </p>
         <form action="../user/preference" method="post">
             <button class="deleteUser" onclick="" name="delete" value="true">
