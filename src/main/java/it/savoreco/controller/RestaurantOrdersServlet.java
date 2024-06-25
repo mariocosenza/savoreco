@@ -17,20 +17,20 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(
-        name = "ordersServlet",
-        displayName = "Orders - Home",
-        description = "Orders page",
-        value = "/orders"
+        name = "restaurantOrdersServlet",
+        displayName = "RestaurantOrders - Home",
+        description = "RestaurantOrders page",
+        value = "/restaurantOrders"
 )
-public class OrdersServlet extends HttpServlet {
-    private static final Logger logger = LoggerFactory.getLogger(OrdersServlet.class);
+public class RestaurantOrdersServlet extends HttpServlet {
+    private static final Logger logger = LoggerFactory.getLogger(RestaurantOrdersServlet.class);
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/seller/orders.jsp");
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/seller/restaurantOrders.jsp");
 
         SellerAccount seller = (SellerAccount) request.getSession().getAttribute("seller");
-        if ((seller == null)||(seller.getRestaurant() == null)) {
+        if ((seller == null) || (seller.getRestaurant() == null)) {
             try {
                 response.sendError(HttpServletResponse.SC_FORBIDDEN);
             } catch (IOException e) {
@@ -58,7 +58,7 @@ public class OrdersServlet extends HttpServlet {
 
             requestDispatcher.forward(request, response);
         } catch (IOException | ServletException e) {
-            logger.warn("Cannot forward to orders.jsp", e);
+            logger.warn("Cannot forward to restaurantOrders.jsp", e);
         }
     }
 }
