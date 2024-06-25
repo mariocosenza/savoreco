@@ -20,7 +20,7 @@ function toggleCategory(obj, className) {
     divs.forEach(d => {
         if(d !== obj && d.style.borderColor === "var(--md-sys-color-secondary-container)") {
             console.log(d.id)
-            for (const element of document.querySelectorAll(".resultCategory" + d.id)) {
+            for (const element of document.querySelectorAll(".resultCategory" + d.id.replace('searchCategory',''))) {
                 element.style.display = "none"
             }
             d.style.borderColor = "red"
