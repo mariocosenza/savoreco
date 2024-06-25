@@ -13,6 +13,7 @@
 
 .purchaseBox {
     margin: 1vh auto 4vh auto;
+    width: calc(100% - 10rem);
 }
 
 p {
