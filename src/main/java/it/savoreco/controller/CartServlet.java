@@ -22,7 +22,7 @@ import java.util.Objects;
         name = "cartServlet",
         displayName = "Savoreco - Carrello",
         description = "Carrello home page",
-        value = "/cart"
+        value = "/user/cart"
 )
 public class CartServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(CartServlet.class);
@@ -33,78 +33,62 @@ public class CartServlet extends HttpServlet {
         SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        if (Objects.isNull(req.getParameter("add"))) {
-            RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/cart.jsp");
-            try {
-                if(Objects.isNull(req.getSession(false)) || (Objects.nonNull(req.getSession(false)) && Objects.nonNull(req.getSession(false).getAttribute("cart")))) {
-                    req.setAttribute("noItem", 1);
-                }  else {
+        if(Objects.nonNull(req.getParameter("id"))){
+            Query<Basket> query = session.createQuery("from Basket where user = :user", Basket.class);
+            query.setParameter("user", req.getSession().getAttribute("user"));
+            var basket = query.getSingleResult();
+            Query<BasketContain> query2 = session.createQuery("from BasketContain c where c.basket = basket and food.id = :foodId", BasketContain.class);
+            query2.setParameter("foodId", Integer.parseInt(req.getParameter("foodId")));
+            var basketContain = query2.list();
+            if(basketContain.isEmpty()){
+                var foodInBasket = new BasketContain();
+                foodInBasket.setQuantity(1);
+                var food = session.get(Food.class, Integer.parseInt(req.getParameter("foodId")));
+                if(Objects.isNull(food) || !food.getAvailable()) {
+                    resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                }
+                foodInBasket.setFood(food);
+                foodInBasket.setBasket(basket);
+                session.persist(foodInBasket);
+            } else {
+                if(basketContain.getFirst().getFood().getAvailable()) {
+                    basketContain.getFirst().setQuantity(basketContain.getFirst().getQuantity() + 1);
+                    session.merge(basketContain.getFirst());
+                } else  {
+                    resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                }
+            }
+            transaction.commit();
+        } else {
+            if (Objects.isNull(req.getParameter("add"))) {
+                RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/cart.jsp");
+                try {
+                    if (Objects.isNull(req.getSession(false)) || (Objects.nonNull(req.getSession(false)) && Objects.nonNull(req.getSession(false).getAttribute("cart")))) {
+                        req.setAttribute("noItem", 1);
+                    } else {
 
-                    if(Objects.nonNull(req.getSession(false).getAttribute("user"))) {
-                        var user = (UserAccount) req.getSession().getAttribute("user");
-                        Query<BasketContain> basketContainQuery = session.createQuery("from BasketContain b where b.basket.user = :user", BasketContain.class);
-                        basketContainQuery.setParameter("user", user);
-                        List<BasketContain> basketContains = basketContainQuery.list();
-                        transaction.commit();
-                        if(basketContains.isEmpty()) {
-                            System.out.println("test");
-                            req.setAttribute("noItem", 1);
-                        } else {
-                            req.setAttribute("noItem", 2);
-                            req.setAttribute("basketList", basketContains);
-                            req.setAttribute("tot", basketContains.stream().mapToDouble(b -> b.getFood().getPrice()).sum());
+                        if (Objects.nonNull(req.getSession(false).getAttribute("user"))) {
+                            var user = (UserAccount) req.getSession().getAttribute("user");
+                            Query<BasketContain> basketContainQuery = session.createQuery("from BasketContain b where b.basket.user = :user", BasketContain.class);
+                            basketContainQuery.setParameter("user", user);
+                            List<BasketContain> basketContains = basketContainQuery.list();
+                            transaction.commit();
+                            if (basketContains.isEmpty()) {
+                                System.out.println("test");
+                                req.setAttribute("noItem", 1);
+                            } else {
+                                req.setAttribute("noItem", 2);
+                                req.setAttribute("basketList", basketContains);
+                                req.setAttribute("tot", basketContains.stream().mapToDouble(b -> b.getFood().getPrice()).sum());
+                            }
                         }
                     }
-                }
-                requestDispatcher.forward(req, resp);
-            } catch (IOException | ServletException e) {
-                transaction.commit();
-                logger.warn("Cannot forward to cart.jsp", e);
-            }
-        } /* else if (Objects.isNull(req.getSession(false)) || Objects.isNull(req.getSession(false).getAttribute("logged"))) {
-            var httpSession = req.getSession();
-            if (Objects.isNull(httpSession.getAttribute("cart"))) {
-                var cartMap = new HashMap<Integer, Integer>();
-                httpSession.setAttribute("cart", cartMap);
-            }
-            if (httpSession.getAttribute("cart") instanceof HashMap<?, ?> map) {
-                var typeMap = (HashMap<Integer, Integer>) map;
-                var quant = typeMap.get(Integer.parseInt(req.getParameter("foodId")));
-                if (quant != null) {
-                    quant++;
-                    typeMap.replace(Integer.parseInt(req.getParameter("foodId")), quant);
+                    requestDispatcher.forward(req, resp);
+                } catch (IOException | ServletException e) {
+                    transaction.commit();
+                    logger.warn("Cannot forward to cart.jsp", e);
                 }
             }
-        } else if (Objects.nonNull(req.getSession(false))
-                && Objects.nonNull(req.getSession().getAttribute("logged"))
-                && req.getSession().getAttribute("logged").equals("user")) {
-            var user = (UserAccount) req.getSession().getAttribute("user");
-            try {
-                Transaction transaction = session.beginTransaction();
-                Query<Basket> query = session.createQuery("FROM Basket b WHERE b.user = :user", Basket.class);
-                var quantity = 1;
-                var basket = query.stream().findAny().orElse(null);
-                if (basket == null) {
-                    basket = new Basket();
-                    basket.setUser(user);
-                    session.persist(basket);
-                }
-                var contains = new BasketContain();
-                var id = new BasketContainId();
-                Query<Food> foodQuery = session.createQuery("FROM Food WHERE id = :id", Food.class);
-                foodQuery.setParameter("id", Integer.parseInt(req.getParameter("id")));
-                var food = foodQuery.stream().findAny().orElseThrow();
-                id.setBasketId(basket.getId());
-                id.setFoodId(food.getId());
-                contains.setId(id);
-                contains.setBasket(basket);
-                contains.setQuantity(quantity);
-                contains.setFood(food);
-                session.persist(contains);
-                transaction.commit();
-            } catch (Exception e) {
-                logger.warn("Cannot persist cart.", e);
-            }
-        }*/
+        }
     }
 }
