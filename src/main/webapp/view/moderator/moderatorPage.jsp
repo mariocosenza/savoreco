@@ -37,13 +37,13 @@
             <td data-label="Cognome:"><%= user.getSurname() %></td>
             <td data-label="Data di nascita:"><%= user.getBirthdate() %></td>
             <td data-label="Green Points:"><%= user.getEcoPoint() %></td>
-            <% if(user.getDeleted()){ %>
+            <% %>if(user.getDeleted()){
             <td data-label="Expires:"><%= user.getExpires() %></td>
             <td data-label=""><button class="deleted-users">Ripristina</button></td>
-            <% } else {%>
+            } else {
             <td class="disappearSmall">/</td>
             <td data-label=""><button class="active-users">Elimina</button></td>
-            <% } %>
+            }<% %>
         </tr>
     <%
         }

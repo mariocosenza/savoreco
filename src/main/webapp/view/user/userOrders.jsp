@@ -29,7 +29,7 @@
 <main>
     <h1 class="title"><strong>Tutti I Tuoi Ordini</strong></h1>
     <% if (orders.isEmpty()) { %>
-    <h1>Non hai ancora effetuato nessun'ordine</h1>
+    <h1>Non hai ancora effettuato nessun ordine</h1>
     <% }
 
         Map<Purchase, List<BoughtFood>> categorizedBoughtFood = new HashMap<>();
@@ -50,13 +50,11 @@
             <p><strong>Stato:</strong> <%= purchase.getStatus() %></p>
             <p><strong>Metodo di pagamento:</strong> <%= purchase.getPaymentMethod() %></p>
             <p><strong>Costo totale:</strong> <%= String.format("%.2f", purchase.getTotalCost()) %>€</p>
-            <% if (purchase.getAddress() == null) {%>
-            <p><strong>Indirizzo: </strong> <%= user.getAddress().getId().getStreet() %>
-                , <%= user.getAddress().getId().getZipcode() %></p>
-            <% } else {%>
-            <p><strong>Indirizzo: </strong> <%= purchase.getAddress().getId().getStreet() %>
-                , <%= purchase.getAddress().getId().getZipcode() %></p>
-            <% } %>
+            <% %>
+            <p><strong>Indirizzo: </strong> if (purchase.getAddress() == null) {<%= user.getAddress().getId().getStreet() %>
+                , <%= user.getAddress().getId().getZipcode() %> } else {<%= purchase.getAddress().getId().getStreet() %>
+                , <%= purchase.getAddress().getId().getZipcode() %> }</p>
+            <% %>
         </div>
 
         <% for (BoughtFood boughtFood : boughtFoods) {
