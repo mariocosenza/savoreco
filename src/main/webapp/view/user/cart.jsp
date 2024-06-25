@@ -4,17 +4,17 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <%@include file="../components/header.jsp"%>
+    <%@include file="../../components/header.jsp"%>
     <title>Carrello</title>
-    <link rel="stylesheet" href="../assets/styles/cart.css">
+    <link rel="stylesheet" href="../../assets/styles/cart.css">
 </head>
 <body>
-<jsp:include page="../components/navbar.jsp"/>
+<jsp:include page="../../components/navbar.jsp"/>
 <main>
     <c:choose>
         <c:when test="${requestScope.noItem <= 1 || requestScope.noItem == null}">
             <div class="empty">
-                <img src="../assets/images/shopping-cart-logo.webp" alt="Cart logo">
+                <img src="../../assets/images/shopping-cart-logo.webp" alt="Cart logo">
                 <h1 class="empty">
                     Il tuo carrello è vuoto
                 </h1>
@@ -86,6 +86,6 @@
         </c:otherwise>
     </c:choose>
 </main>
-<%@include file="../components/footer.jsp"%>
+<%@include file="../../components/footer.jsp"%>
 </body>
 </html>
