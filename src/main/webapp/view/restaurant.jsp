@@ -20,6 +20,8 @@
     <%@ include file="/components/header.jsp"%>
     <title>Ristorante</title>
     <link rel="stylesheet" type="text/css" href="../assets/styles/restaurant.css">
+    <script>window.isLoggedIn = <%=request.getSession().getAttribute("user") != null%>;</script>
+    <script src="../scripts/restaurant.js"></script>
 </head>
 <body>
 <%@ include file="../components/navbar.jsp" %>
@@ -49,8 +51,7 @@
                 List<Food> foods = entry.getValue();
         %>
         <div class="categoryBox">
-            <h2><%= category %>
-            </h2>
+            <h2><%= category %></h2>
             <div class="categoryContent">
                 <% for (Food food : foods) {
                     if(food.getAvailable()){%>
@@ -64,9 +65,13 @@
                         <p><strong>Allergeni: </strong> <%= food.getAllergens() %></p>
                         <p><strong>Quantità: </strong> <%= food.getQuantity() %></p>
                     </div>
-                    <button>Aggiungi al carrello</button>
+
+                    <div class="tooltipDiv">
+                        <span class="tooltiptext">Devi essere registrato per aggiungere il prodotto al carrello</span>
+                        <button class="add-to-cart" data-food-id="<%= food.getId() %>"> Aggiungi al carrello </button>
+                    </div>
                 </div>
-                <% }
+                <%}
                 }%>
             </div>
         </div>
@@ -78,4 +83,3 @@
 <%@ include file="../components/footer.jsp" %>
 </body>
 </html>
-
