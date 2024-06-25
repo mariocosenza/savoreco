@@ -2,6 +2,7 @@ DROP SCHEMA IF EXISTS savoreco CASCADE;
 CREATE SCHEMA savoreco;
 SET SCHEMA 'savoreco';
 CREATE EXTENSION postgis;
+CREATE EXTENSION pg_trgm;
 
 CREATE TABLE address
 (
@@ -58,6 +59,7 @@ CREATE TABLE restaurant
     CONSTRAINT pk_restaurant PRIMARY KEY (restaurant_id),
     CONSTRAINT fk_restaurant_address FOREIGN KEY (street, zipcode) REFERENCES address (street, zipcode) ON UPDATE CASCADE ON DELETE RESTRICT
 );
+CREATE INDEX ON restaurant USING gin (name gin_trgm_ops);
 
 CREATE TABLE seller_account
 (

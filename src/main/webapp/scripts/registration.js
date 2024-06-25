@@ -174,3 +174,6 @@ function radioChange() {
     }
 }
 
+window.onload = function() {
+    document.querySelector("#birthdate").max = new Date().toLocaleDateString('it-IT')
+}

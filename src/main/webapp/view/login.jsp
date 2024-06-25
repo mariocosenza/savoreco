@@ -26,7 +26,7 @@
     <div class="centerLogin">
         <c:choose>
         <c:when test="${!requestScope.moderator}">
-        <form method="post" id="form" action="login" onchange="validate()">
+        <form method="post" id="form" action="${serverPath}/login" onchange="validate()">
             <h1>
                 Accedi a Savoreco
             </h1>
@@ -38,14 +38,14 @@
             </div>
             </c:when>
             <c:otherwise>
-            <form method="post" id="form" action="login/moderator" onchange="validate()">
+            <form method="post" id="form" action="${serverPath}/login/moderator" onchange="validate()">
                 <h1>
                     Accedi a Savoreco
                 </h1>
                 </c:otherwise>
                 </c:choose>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Inserisci la tua email" required>
+                <input inputmode="email" type="email" id="email" name="email" placeholder="Inserisci la tua email" required maxlength="128">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required
                        onfocusin="showTooltip()" onfocusout="hideTooltip()">
