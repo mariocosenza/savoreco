@@ -5,10 +5,11 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.time.ZoneId" %>
 <%@ page import="it.savoreco.model.entity.*" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%
-    List<BoughtFood> orders = (List<BoughtFood>) request.getAttribute("orders");
+    @SuppressWarnings("unchecked") List<BoughtFood> orders = (List<BoughtFood>) request.getAttribute("orders");
     UserAccount user = (UserAccount) request.getAttribute("user");
     if ((orders == null) || (user == null)) {
         response.sendRedirect("./home.jsp");
@@ -63,7 +64,7 @@
         <div class="foodItem">
             <div>
                 <h2><%= boughtFood.getName() %></h2>
-                <p><strong>Da</strong> <a href="/restaurant?id=<%=restaurant.getId()%>"><%= restaurant.getName()%></a></p>
+                <p><strong>Da</strong> <a href="<c:url value="/restaurant?id=<%=restaurant.getId()%>"/>"><%= restaurant.getName()%></a></p>
                 <p><strong>Quantità:</strong> <%= boughtFood.getQuantity() %></p>
                 <p><strong>Prezzo:</strong> <%= String.format("%.2f", boughtFood.getPrice()) %>€</p>
                 <p><strong>Green Points:</strong> <%= boughtFood.getGreenPoint() %></p>
