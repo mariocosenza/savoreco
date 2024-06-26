@@ -47,8 +47,7 @@
                 <label for="email">Email</label>
                 <input inputmode="email" type="email" id="email" name="email" placeholder="Inserisci la tua email" required maxlength="128">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required
-                       onfocusin="showTooltip()" onfocusout="hideTooltip()">
+                <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required>
 
                 <button disabled>
                     Accedi

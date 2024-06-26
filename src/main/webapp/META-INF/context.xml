@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/">
+    <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor"
+                     sameSiteCookies="strict" />
+
     <ResourceLink name="jdbc/MyLocalDB"
                   global="jdbc/MyLocalDB"
                   auth="Container"
                   type="javax.sql.DataSource" />
-
-    <CookieProcessor sameSiteCookies="strict" />
 </Context>
