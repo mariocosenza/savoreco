@@ -4,10 +4,15 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.google.common.io.Files;
+import org.apache.commons.lang3.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.nio.file.attribute.FileAttribute;
+import java.nio.file.attribute.PosixFilePermission;
+import java.nio.file.attribute.PosixFilePermissions;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -24,16 +29,32 @@ public class FileUpload {
     public String saveImage(String path, InputStream stream) {
 
         try {
-            var file = File.createTempFile("upload", ".png");
-            ObjectMetadata meta = new ObjectMetadata();
+
+            File file = null;
+            if(SystemUtils.IS_OS_UNIX) {
+                file = File.createTempFile("upload", ".png", new File("/opt"));
+                FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rwx------"));
+                java.nio.file.Files.createTempFile("upload", ".png", attr); // Compliant
+            }
+            else {
+                file = File.createTempFile("upload", ".png");  // Compliant
+                if(!file.setReadable(true, true)
+                        || !file.setWritable(true, true)
+                        || !file.setExecutable(true, true)) {
+                    throw new RuntimeException("Cannot create temp file");
+                }
+            }
+
             try  {
                 Files.write(stream.readAllBytes(), file);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+
+            var meta = new ObjectMetadata();
             meta.setContentType("image/png");
             meta.setContentLength(file.length());
-            PutObjectRequest putObjectRequest = new PutObjectRequest("savoreco", path, file);
+            var putObjectRequest = new PutObjectRequest("savoreco", path, file);
             putObjectRequest.setMetadata(meta);
             amazonS3.putObject(putObjectRequest);
             executor.schedule(file::delete, 5, TimeUnit.MINUTES);
