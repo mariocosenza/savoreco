@@ -35,3 +35,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build sonar --info
+
+  dependency-submission:
+
+    runs-on: windows-latest
+    permissions:
+      contents: write
+      deployments: write
