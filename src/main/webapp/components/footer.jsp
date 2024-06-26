@@ -16,7 +16,7 @@
     </p>
     <p class="footer">
         <span class="footerTitle">Servizio Clienti</span> <br>
-        <a href="help">
+        <a href="${serverPath}/help">
             Domande frequenti
         </a> <br>
         <a href="${serverPath}/login">
@@ -42,7 +42,7 @@
     </p>
     <p class="footer">
         <span class="footerTitle">Teniamo alla tua privacy</span> <br>
-        <a href="help">Informativa privacy</a><br>
+        <a href="${serverPath}/help">Informativa privacy</a><br>
         <a href="https://github.com/mariocosenza/savoreco?tab=readme-ov-file#authors" target="_blank" rel="noopener">Il nostro team</a><br><br>
         <span class="copyright">© 2024 Savoreco</span><br>
         <img class="footerLogo" src="${serverPath}/assets/icons/google-pay-primary-logo-logo-svgrepo-com.svg" alt="GPay Logo">

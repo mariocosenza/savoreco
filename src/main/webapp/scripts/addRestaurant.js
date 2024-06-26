@@ -13,13 +13,48 @@ async function submitRegistration() {
         document.querySelector("#postal").value = address.postalCode
         document.querySelector("#address").value = address.street
         document.querySelector("#city").value = address.city
+
+        const imageFile = document.querySelector('input[type="file"]').files[0];
+        if (imageFile) {
+            const imageFormData = new FormData();
+            const maxSizeInBytes = 10 * 1024 * 1024; //10 MB
+
+            if (imageFile.type !== "image/png") {
+                alert("Please select a PNG image file.");
+                formError();
+                return;
+            }
+
+            if (imageFile.size > maxSizeInBytes) {
+                alert("The file size should not exceed 10 MB.");
+                formError();
+                return;
+            }
+
+            const mode = "restaurant";
+            imageFormData.append("mode", mode)
+            imageFormData.append("image", imageFile);
+            const imageResponse = await fetch("/fileUpload", {
+                method: "POST",
+                body: imageFormData
+            });
+
+            if (!imageResponse.ok) {
+                throw new Error("Failed to upload image");
+            }
+
+            document.querySelector("#imageUrl").value = await imageResponse.text();
+        }
+
         const formData = new FormData(document.querySelector("#form"))
         try {
+            formData.delete('image');
             const response = await fetch("/addRestaurant", {
                 method: "POST",
                 body: JSON.stringify(Object.fromEntries(formData)),
                 contentType: "application/json"
             });
+
             if (response.ok) {
                 window.location.href = "/home"
             } else {
@@ -72,7 +107,7 @@ function validate() {
                 arg.style.color = "var(--md-sys-color-error)"
                 error = true
             }
-        } else if (element.value === "") {
+        } else if (element.value === "" && element.id !== "image") {
             error = true
         }
     }

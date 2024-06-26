@@ -14,14 +14,13 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 @WebServlet(
         name = "moderatorPageServlet",
         displayName = "Moderator - Home",
         description = "Moderator page",
-        value = "/moderatorPage"
+        value = "/moderator/moderatorPage"
 )
 public class ModeratorPageServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(ModeratorPageServlet.class);

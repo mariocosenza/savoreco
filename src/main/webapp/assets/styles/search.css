@@ -4,12 +4,10 @@
 
 }
 
-aside {
-    display: block;
-    float: left;
-    min-width: 20vw;
-    max-width: 20vw;
+main {
+    display: flex;
 }
+
 
 label {
     text-align: center;
@@ -22,12 +20,39 @@ label {
 
 .allResult {
     margin-right: 5vw;
-    min-width: 75vw;
+    margin-left: 5vw;
+    min-width: 70vw;
     float: right;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+aside {
+    padding: 2em 1vw;
+    margin-top: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    float: left;
+    color: var(--md-sys-color-on-surface-variant);
+    background-color: var(--md-sys-color-surface-variant);
+    border-radius: 0.5em;
+    min-height: 100%;
+    height: 100%;
+    margin-right: 1vw;
+    margin-left: 2vw;
+    min-width: 14vw;
+    max-width: 14vw;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
+}
+
+img.svgLogo {
+    max-width: 2%;
+    object-fit: scale-down;
+    filter: invert(35%) sepia(95%) saturate(1200%) hue-rotate(88deg) brightness(90%) contrast(88%);
 }
 
 h1 {
@@ -54,7 +79,7 @@ h2 {
     padding-bottom: 1em;
 }
 
-.result img {
+.resultImage {
     margin-top: 5%;
     min-width: 25%;
     max-width: 25%;
@@ -62,7 +87,7 @@ h2 {
     margin-right: 5%;
     height: auto;
     overflow: hidden;
-    border-radius: 0.4em;
+    border-radius: 0.8em;
 }
 
 .restaurantInfo {
@@ -71,6 +96,259 @@ h2 {
 }
 
 .allResult button {
-    font-size: 1.5em;
-    margin-bottom: 0.2em;
+    font-size: 1.2em;
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+}
+
+.filter {
+    padding: 4%;
+    min-width: 95%;
+    text-align: center;
+    margin-top: 1em;
+    border-width: 0.1em;
+    border-style: solid;
+    background-color: var(--md-sys-color-secondary-container);
+    box-shadow: rgba(0, 0, 0, 0.25) 0 7px 14px, rgba(0, 0, 0, 0.22) 0 5px 5px;
+    border-radius: 0.4em;
+}
+
+.mobileSelector {
+    display: none;
+}
+
+aside h1 {
+    text-align: center;
+    font-size: 1.2em;
+}
+
+aside form {
+    text-align: center;
+    margin-top: 1em;
+    display: block;
+    color: var(--md-sys-color-on-background);
+    max-width: 95%;
+}
+
+search {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-background);
+    min-width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+search form {
+    min-width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+search input[type="search"] {
+    text-align: center;
+    background-color: var(--md-sys-color-background);
+    color: var(--md-sys-color-on-background);
+    border-radius: 0.4em;
+    font-size: 1.2em;
+    line-height: 1.5;
+    min-height: 3em;
+    min-width: 50vw;
+}
+
+search input[type="search"]::placeholder {
+    color: var(--md-sys-color-on-background);
+}
+
+button.searchLogo {
+    border-style: none;
+    background-color: transparent;
+    margin-left: 2vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    max-width: 15vw;
+    max-height: 3em;
+}
+
+button.searchLogo img {
+    fill: var(--md-sys-color-primary);
+    object-fit: scale-down;
+    max-width: 15vw;
+    max-height: 3em;
+    filter: invert(86%) sepia(6%) saturate(3643%) hue-rotate(346deg) brightness(102%) contrast(89%);
+}
+
+button.searchLogo img:hover {
+    filter: invert(35%) sepia(95%) saturate(1200%) hue-rotate(88deg) brightness(90%) contrast(88%);
+}
+
+
+aside form label {
+    all: revert;
+    font-weight: bold;
+    display: block;
+    min-width: 100%;
+    text-align: center;
+    padding-top: 1.1em;
+    padding-bottom: 1.2em;
+    font-size: 1em;
+}
+
+aside form select {
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-background);
+    text-align: center;
+    margin: auto;
+    max-width: 100%;
+    font-size: 1em;
+    border-radius: 0.5em;
+    overflow: hidden;
+    display: block;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+button.showMoreButton {
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-left: 46.5vw;
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+    margin-right: auto;
+    font-size: 1.2rem;
+}
+
+button.showMoreButton:active {
+    background-color: var(--md-sys-color-on-primary-container);
+}
+
+h2.price {
+    font-size: 0.8em;
+}
+
+@media screen and (max-width: 600px) {
+
+    button.showMoreButton {
+        margin-left: 25vw;
+        margin-right: 25vw;
+        min-width: 50vw;
+    }
+
+    aside {
+        display: none;
+    }
+
+    .filter {
+        display: none;
+    }
+
+    img.resultImage {
+        all: revert;
+        margin-right: 5vw;
+        border-radius: 0.5em;
+        max-width: 30%;
+        max-height: 100%;
+    }
+
+    .mobileSelector {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+   .mobileSelector select {
+        all: revert;
+        /* styling */
+        background-color: var(--md-sys-color-background);
+        border: thin solid var(--md-sys-color-primary);
+        color: var(--md-sys-color-on-background);
+        border-radius: 4px;
+        display: inline-block;
+        font: inherit;
+        line-height: 1.5em;
+        padding: 0.5em 15vw 5vw 1em;
+       -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+       margin: 0 0 2em;
+   }
+
+   .showMoreButton {
+       font-size: 1rem;
+   }
+
+    /* arrows */
+
+    .mobileSelector select.classic {
+        background-image: linear-gradient(45deg, transparent 50%, var(--md-sys-color-tertiary-fixed-dim) 50%),
+        linear-gradient(135deg, var(--md-sys-color-tertiary-fixed-dim) 50%, transparent 50%),
+        linear-gradient(to right, var(--md-sys-color-on-tertiary-fixed-variant), var(--md-sys-color-on-tertiary-fixed-variant));
+        background-position: calc(100% - 20px) calc(1em + 2px),
+        calc(100% - 15px) calc(1em + 2px),
+        100% 0;
+        background-size: 5px 5px,
+        5px 5px,
+        2.5em 2.5em;
+        background-repeat: no-repeat;
+    }
+
+   .mobileSelector select.classic:focus {
+        background-image: linear-gradient(45deg, var(--md-sys-color-primary-container) 50%, transparent 50%),
+        linear-gradient(135deg, transparent 50%, var(--md-sys-color-primary-container) 50%),
+        linear-gradient(to right, var(--md-sys-color-on-primary-container), var(--md-sys-color-on-primary-container));
+        background-position: calc(100% - 15px) 1em,
+        calc(100% - 20px) 1em,
+        100% 0;
+        background-size: 5px 5px,
+        5px 5px,
+        2.5em 2.5em;
+        background-repeat: no-repeat;
+        border-color: grey;
+        outline: 0;
+    }
+
+    search input[type="search"]::placeholder {
+        font-size: 0.8em;
+    }
+
+
+
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    div.allResult {
+        margin-left: 10vw;
+        margin-right: 10vw;
+        min-width: 80vw;
+    }
+
+    label {
+        all: revert;
+        margin-top: 2em;
+        font-size: 1.5em;
+        margin-bottom: 1em;
+        display: block;
+        color: var(--md-sys-color-on-background);
+        text-align: center;
+    }
+
+
+    .mobileSelector select {
+        display: flex;
+        margin-left: 15vw;
+        margin-right: 15vw;
+    }
 }

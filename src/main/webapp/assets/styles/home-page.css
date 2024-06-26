@@ -154,3 +154,10 @@ div.left p, div.right p {
     }
 
 }
+
+
+@media screen and (max-width: 1280px) {
+    div.overlay {
+        background-image: url("/assets/images/banner-home-1280.webp");
+    }
+}

@@ -34,7 +34,7 @@ public class CartServlet extends HttpServlet {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         if (Objects.isNull(req.getParameter("add"))) {
-            RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/cart.jsp");
+            RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/user/cart.jsp");
             try {
                 if(Objects.isNull(req.getSession(false)) || (Objects.nonNull(req.getSession(false)) && Objects.nonNull(req.getSession(false).getAttribute("cart")))) {
                     req.setAttribute("noItem", 1);
