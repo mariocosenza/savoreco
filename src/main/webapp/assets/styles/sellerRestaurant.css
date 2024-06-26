@@ -78,7 +78,7 @@ textarea:focus {
 button {
   display: block;
   width: 100%;
-  padding: 0.5em;
+  padding: 0.5em 1em;
   font-size: 1.1em;
   color: var(--md-sys-color-on-primary);
   background-color: var(--md-sys-color-primary);
