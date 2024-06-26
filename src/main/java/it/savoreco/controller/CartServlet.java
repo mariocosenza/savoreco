@@ -30,10 +30,11 @@ import java.util.Objects;
 )
 public class CartServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(CartServlet.class);
+    private static final String foodId = "foodId";
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)  {
-        if(Objects.isNull(req.getParameter("foodId"))) {
+        if(Objects.isNull(req.getParameter(foodId))) {
             try {
                 resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             } catch (IOException e) {
@@ -49,7 +50,7 @@ public class CartServlet extends HttpServlet {
         query.setParameter("user", req.getSession().getAttribute("user"));
         var basket = query.getSingleResult();
         Query<BasketContain> query2 = session.createQuery("from BasketContain c where c.basket = basket and food.id = :foodId", BasketContain.class);
-        query2.setParameter("foodId", Integer.parseInt(req.getParameter("foodId")));
+        query2.setParameter(foodId, Integer.parseInt(req.getParameter("foodId")));
 
         try {
             if (Objects.nonNull(req.getParameter("delete"))) {
@@ -57,13 +58,13 @@ public class CartServlet extends HttpServlet {
                 transaction.commit();
                 resp.setStatus(HttpServletResponse.SC_ACCEPTED);
             }  else if (Objects.nonNull(req.getParameter("add"))) {
-                query2.setParameter("foodId", Integer.parseInt(req.getParameter("foodId")));
+                query2.setParameter(foodId, Integer.parseInt(req.getParameter(foodId)));
                 var basketContain = query2.list();
 
                 if (basketContain.isEmpty()) {
                     var foodInBasket = new BasketContain();
                     foodInBasket.setQuantity(1);
-                    var food = session.get(Food.class, Integer.parseInt(req.getParameter("foodId")));
+                    var food = session.get(Food.class, Integer.parseInt(req.getParameter(foodId)));
                     if (Objects.isNull(food) || !food.getAvailable()) {
                         resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
                     }
