@@ -79,7 +79,7 @@ public class UserPreferenceServlet extends HttpServlet {
 
         Type mapType = new TypeToken<Map<String, String>>() {
         }.getType();
-        Map<String, String> map = null;
+        Map<String, String> map;
         try {
             Gson gson = new Gson();
             map = gson.fromJson(req.getReader(), mapType);
@@ -94,7 +94,7 @@ public class UserPreferenceServlet extends HttpServlet {
             Transaction transaction = session.beginTransaction();
             var userAccount = (UserAccount) req.getSession().getAttribute("user");
             if (emailMatcher.matcher(map.get("email")).matches() && passwordMatcher.matcher(map.get("password")).matches()) {
-                userAccount.setEmail(map.get("email"));
+                userAccount.setEmail(map.get("email").trim());
                 userAccount.setPassword(PasswordSHA512.SHA512Hash(map.get("password")));
             }
                 var address = new Address();
@@ -102,9 +102,9 @@ public class UserPreferenceServlet extends HttpServlet {
                 address.setLat(Double.valueOf(map.get("lat")));
                 address.setLon(Double.valueOf(map.get("lon")));
                 var id = new AddressId();
-                id.setStreet(HtmlEscapers.htmlEscaper().escape(map.get("address")));
-                id.setZipcode(HtmlEscapers.htmlEscaper().escape(map.get("postal")));
-                address.setCity(HtmlEscapers.htmlEscaper().escape(map.get("city")));
+                id.setStreet(HtmlEscapers.htmlEscaper().escape(map.get("address")).trim());
+                id.setZipcode(HtmlEscapers.htmlEscaper().escape(map.get("postal")).trim());
+                address.setCity(HtmlEscapers.htmlEscaper().escape(map.get("city")).trim());
                 address.setId(id);
                 if(session.get(Address.class, id) == null) {
                     session.persist(address);

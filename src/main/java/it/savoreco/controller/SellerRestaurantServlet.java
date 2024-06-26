@@ -24,7 +24,7 @@ import java.util.List;
         name = "sellerRestaurantServlet",
         displayName = "SellerRestaurant - Home",
         description = "SellerRestaurant management page",
-        value = "/sellerRestaurant"
+        value = "/seller/sellerRestaurant"
 )
 public class SellerRestaurantServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(SellerRestaurantServlet.class);
@@ -34,14 +34,6 @@ public class SellerRestaurantServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/seller/sellerRestaurant.jsp");
 
         SellerAccount seller = (SellerAccount) request.getSession().getAttribute("seller");
-        if ((seller == null) || (seller.getRestaurant() == null)) {
-            try {
-                response.sendError(HttpServletResponse.SC_FORBIDDEN);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            return;
-        }
 
         try {
             SessionFactory sessionFactory = (SessionFactory) request.getServletContext().getAttribute("SessionFactory");

@@ -53,7 +53,7 @@ public class RegistrationServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) {
         Type mapType = new TypeToken<Map<String, String>>() {
         }.getType();
-        Map<String, String> map = null;
+        Map<String, String> map;
         try {
             Gson gson = new Gson();
             map = gson.fromJson(req.getReader(), mapType);

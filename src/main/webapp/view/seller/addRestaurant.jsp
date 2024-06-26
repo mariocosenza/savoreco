@@ -10,7 +10,7 @@
 </head>
 <body>
 <a href="home">
-    <img src="../assets/images/savoreco-logo.webp" alt="page logo" class="accessLogo">
+    <img src="../assets/images/savoreco-logo.svg" alt="page logo" class="accessLogo">
 </a>
 <div class="alert">
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>

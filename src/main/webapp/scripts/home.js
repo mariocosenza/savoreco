@@ -8,12 +8,11 @@ function autocomplete() {
         markerColor: '#ACBDC8',
         responsive: true,
         minWidth: '100%',
-        maxHeight: '45vh',
+        countryCode: 'IT',
+        maxHeight: '50vh',
         placeholder: 'Inserisci indirizzo',
         limit: 8,
         minCharacters: 3,
-        // omit near to use default IP address location
-        near: null,
         onSelection:(address) => {
             window.location.href = `/search?lat=${address.latitude}&lon=${address.longitude}`;
         },

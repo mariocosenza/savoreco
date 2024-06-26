@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -33,7 +34,7 @@ public class PurchaseServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(PurchaseServlet.class);
     private static final short IVA = 10;
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)  {
         var httpSession = req.getSession();
         httpSession.setAttribute("auth", null);
         httpSession.setAttribute("readyBoughtFood", null);
@@ -54,7 +55,7 @@ public class PurchaseServlet extends HttpServlet {
 
             RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/user/purchase.jsp");
             req.setAttribute("basketList", basketList);
-            req.setAttribute("tot", basketList.stream().map(b -> b.getFood().getPrice()).reduce(Double::sum).orElse(0.0) *  ((IVA + 100)/ 100.0));
+            req.setAttribute("tot", basketList.stream().map(b -> b.getFood().getPrice() * b.getQuantity()).reduce(Double::sum).orElse(0.0) *  ((IVA + 100)/ 100.0));
             var delivery = basketList.stream().map(b -> b.getFood().getRestaurant()).distinct().map(Restaurant::getDeliveryCost).reduce(BigDecimal::add).orElse(new BigDecimal(0)).doubleValue();
             req.setAttribute("deliveryCost", delivery);
             var random = new SecureRandom();
@@ -104,23 +105,35 @@ public class PurchaseServlet extends HttpServlet {
                 purchase.setDeliveryCost(BigDecimal.valueOf((Double) httpSession.getAttribute("deliveryCost")));
 
                 List<BoughtFood> boughtFoodList = new ArrayList<>();
-                for (var food:  (List<Food>) httpSession.getAttribute("readyBoughtFood")) {
-                    var soldFood = boughtFoodList.stream().filter(b -> b.getName().equals(food.getName())).findAny().orElse(null);
-                    var boughtFood = new BoughtFood();
-                    if(soldFood == null) {
-                        boughtFood.setPurchase(purchase);
-                        boughtFood.setName(food.getName());
-                        boughtFood.setGreenPoint(food.getGreenPoint());
-                        boughtFood.setQuantity((short) 1);
-                        boughtFood.setPrice(BigDecimal.valueOf(food.getPrice()));
-                        boughtFoodList.add(boughtFood);
-                        boughtFood.setRestaurant(food.getRestaurant());
+                for (var detachedFood : (List<Food>) httpSession.getAttribute("readyBoughtFood")) {
+                    var soldFood = boughtFoodList.stream().filter(b -> b.getName().equals(detachedFood.getName())).findAny().orElse(null);
+                    var food = session.get(Food.class, detachedFood.getId());
+                    session.lock(food, LockMode.PESSIMISTIC_READ);
+                    if(food.getAvailable()) {
+                        var boughtFood = new BoughtFood();
+                        if (soldFood == null) {
+                            boughtFood.setPurchase(purchase);
+                            boughtFood.setName(detachedFood.getName());
+                            boughtFood.setGreenPoint(detachedFood.getGreenPoint());
+                            boughtFood.setQuantity((short) 1);
+                            boughtFood.setPrice(BigDecimal.valueOf(detachedFood.getPrice()));
+                            boughtFoodList.add(boughtFood);
+                            boughtFood.setRestaurant(detachedFood.getRestaurant());
+                        } else {
+                            soldFood.setPrice(soldFood.getPrice().add(BigDecimal.valueOf(detachedFood.getPrice())));
+                            soldFood.setQuantity((short) (soldFood.getQuantity() + 1));
+                            soldFood.setGreenPoint(soldFood.getGreenPoint() + detachedFood.getGreenPoint());
+                        }
+                        food.setQuantity((short) (food.getQuantity() - 1));
+                        if(food.getQuantity() == 0) {
+                            food.setAvailable(true);
+                        }
+                        session.refresh(food, LockMode.PESSIMISTIC_READ);
                     } else {
-                        soldFood.setPrice(soldFood.getPrice().add(BigDecimal.valueOf(food.getPrice())));
-                        soldFood.setQuantity((short) (soldFood.getQuantity() + 1));
-                        soldFood.setGreenPoint(soldFood.getGreenPoint() + food.getGreenPoint());
+                        resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                        return;
                     }
-                    user.setEcoPoint(user.getEcoPoint() + food.getGreenPoint());
+                    user.setEcoPoint(user.getEcoPoint() + detachedFood.getGreenPoint());
                 }
 
                 purchase.setStatus(Purchase.Statuses.payed);

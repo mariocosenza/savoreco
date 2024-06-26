@@ -89,6 +89,7 @@ button:hover {
 }
 
 
+
 li {
     list-style-type: none;
     min-width: 100%;
@@ -130,10 +131,11 @@ h2 {
 
 ol {
     color: var(--md-sys-color-on-background);
-    display: flex;
+    display: list-item;
     justify-content: left;
+    list-style-type: none;
     border-bottom: 0.1em solid #ddd;
-    padding: 1vw 0;
+    padding: 2em 0;
 }
 
 h2, h1  {
@@ -189,6 +191,11 @@ div.summaryPayment h2 {
     font-size: 0.9em;
     text-align: right;
 }
+
+svg {
+    filter: invert(35%) sepia(95%) saturate(1200%) hue-rotate(88deg) brightness(90%) contrast(88%);
+}
+
 
 @media  screen and (max-width: 600px) {
     main img {

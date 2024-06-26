@@ -29,7 +29,7 @@
 <main>
     <h1 class="title"><strong>Tutti I Tuoi Ordini</strong></h1>
     <% if (orders.isEmpty()) { %>
-    <h1>Non hai ancora effetuato nessun'ordine</h1>
+    <h1>Non hai ancora effettuato nessun ordine</h1>
     <% }
 
         Map<Purchase, List<BoughtFood>> categorizedBoughtFood = new HashMap<>();

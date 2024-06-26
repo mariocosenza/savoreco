@@ -10,8 +10,8 @@ async function submitRegistration() {
         const address = searchResult()
         document.querySelector("#lat").value = address.latitude
         document.querySelector("#lon").value = address.longitude
-        document.querySelector("#postal").value = address.postalCode
-        document.querySelector("#address").value = address.street
+        document.querySelector("#postal").value = address.postalCode + ` ${address.postalCode === undefined? "00042" : address.postalCode}`
+        document.querySelector("#address").value = address.street + ` ${address.number === undefined? "" : address.number}`
         document.querySelector("#city").value = address.city
 
         const imageFile = document.querySelector('input[type="file"]').files[0];
@@ -49,7 +49,7 @@ async function submitRegistration() {
         const formData = new FormData(document.querySelector("#form"))
         try {
             formData.delete('image');
-            const response = await fetch("/addRestaurant", {
+            const response = await fetch("/seller/addRestaurant", {
                 method: "POST",
                 body: JSON.stringify(Object.fromEntries(formData)),
                 contentType: "application/json"

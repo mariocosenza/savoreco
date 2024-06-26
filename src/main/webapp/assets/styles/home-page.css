@@ -43,6 +43,7 @@ div.info {
     max-width: 50vw;
     height: 15rem;
     margin-left: 25vw;
+    overflow: hidden;
     display: flex;
     margin-right: 25vw;
     box-shadow: 0 0.1em 2em 0.2em rgba(0, 0, 0, 0.25);
@@ -52,28 +53,29 @@ div.info img.center {
     width: 50%;
     object-fit: fill;
     overflow: hidden;
-    max-width: 75%;
+    min-width: 40%;
     max-height: 100%;
 }
 
 
 div.info p {
+    margin: 1rem 2%;
     padding: 1rem 2%;
     text-align: justify;
 }
 
 div.left img, div.right img {
     vertical-align: top;
-    max-height: 10em;
     max-width: 100%;
     width: 100%;
-    height: 10em;
+    max-height: 15em;
+    margin-bottom: 1em;
 }
 
 div.left, div.right{
-    height: 25rem;
+    height: 28rem;
     max-height: 30rem;
-    border-radius: 2rem;
+    border-radius: 2.2rem;
     background: var(--md-sys-color-on-primary, #FFFFFF);
     margin-top: 10vh;
     min-width: 25vw;
@@ -115,22 +117,24 @@ div.left p, div.right p {
 @media screen and (max-width: 900px) {
     div.info {
         height: auto;
+        padding-bottom: 1em;
         min-width: 75vw;
         display: block;
         margin: 15vh auto 5rem;
     }
     div.info img.center {
         vertical-align: top;
-        max-height: 10em;
+        max-height: 15em;
         max-width: 100%;
         width: 100%;
-        height: 10em;
+        height: 15em;
     }
 
     div.center {
         min-width: 75vw;
         margin-left: auto;
         margin-right: auto;
+        border-radius: 2.4rem;
     }
 
     div.info img.center {
@@ -145,12 +149,14 @@ div.left p, div.right p {
     }
 
     div.left, div.right{
+        padding-bottom: 1em;
         float: none;
         height: auto;
-        max-height: 2000px;
+        max-height: 50%;
         margin-left: auto;
         margin-right: auto;
         min-width: 75vw;
+        border-radius: 2.4rem;
     }
 
 }

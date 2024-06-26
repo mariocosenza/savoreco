@@ -27,13 +27,13 @@
         <form id="form" action="user/preference" method="post" onsubmit="submitRegistration(); return false" onchange="validate()">
             <div class="formPreference">
                 <label for="email" id="email_label">Email: ${sessionScope.user.email}</label>
-                <input type="email"  value="" id="email" name="email">
+                <input type="email"  inputmode="email" value="" id="email" name="email" placeholder="Inserisci la tua nuova email">
 
                 <label id="password_label" for="password">Nuova Password:</label>
-                <input type="password"  value="" id="password" name="password">
+                <input type="password"  value="" id="password" name="password" placeholder="Inserisci password">
 
                 <label id="check_label" for="check_password">Conferma Password:</label>
-                <input type="password" value="" id="check_password" name="confirm-password">
+                <input type="password" value="" id="check_password" name="confirm-password" placeholder="Conferma password">
             </div>
             <h2>Puoi modificare anche solo il tuo indirizzo</h2>
             <c:if test="${sessionScope.user.address.city != null}">

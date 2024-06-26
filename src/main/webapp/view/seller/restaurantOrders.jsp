@@ -32,7 +32,7 @@
 <main>
     <h1 class="title"><strong>Tutti Gli Ordini del Ristorante</strong></h1>
     <% if (orders.isEmpty()) { %>
-    <h1 class="center">Il tuo Ristorante non ha ancora ricevuto nessun'ordine</h1>
+    <h1 class="center">Il tuo Ristorante non ha ancora ricevuto nessun ordine</h1>
     <% }
 
         Map<Purchase, List<BoughtFood>> categorizedBoughtFood = new HashMap<>();
