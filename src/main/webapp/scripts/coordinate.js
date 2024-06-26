@@ -10,10 +10,11 @@ function autocomplete() {
         showMarkers: true,
         markerColor: 'white',
         responsive: true,
+        countryCode: 'IT',
         minWidth: '75%',
         maxHeight: '45vh',
         placeholder: 'Inserisci indirizzo',
-        limit: 8,
+        limit: 6,
         minCharacters: 3,
         onSelection:(address) => {
             selectedAddress = address;
