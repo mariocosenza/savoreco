@@ -8,10 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.hibernate.LockMode;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,7 +87,8 @@ public class PurchaseServlet extends HttpServlet {
                 SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
                 Session session = sessionFactory.getCurrentSession();
                 Transaction transaction = session.beginTransaction();
-                var user = (UserAccount) req.getSession().getAttribute("user");
+                var user = session.get(UserAccount.class, ((UserAccount) req.getSession().getAttribute("user")).getId());
+
                 var purchase = new Purchase();
                 purchase.setIva(IVA);
                 purchase.setUser(user);
@@ -152,8 +150,9 @@ public class PurchaseServlet extends HttpServlet {
                 req.setAttribute("confirmed", true);
                 try {
                     requestDispatcher.include(req, resp);
-                } catch (ServletException | IOException e) {
+                } catch (HibernateException | ServletException | IOException e) {
                    logger.warn("Cannot forward to purchaseStatus.jsp", e);
+                   transaction.rollback();
                 }
             }
     }
