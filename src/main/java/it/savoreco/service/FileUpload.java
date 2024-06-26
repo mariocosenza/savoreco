@@ -30,7 +30,7 @@ public class FileUpload {
 
         try {
 
-            File file = null;
+            File file;
             if(SystemUtils.IS_OS_UNIX) {
                 file = File.createTempFile("upload", ".png", new File("/opt"));
                 FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rwx------"));
