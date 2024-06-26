@@ -55,7 +55,7 @@ public class PurchaseServlet extends HttpServlet {
 
             RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/user/purchase.jsp");
             req.setAttribute("basketList", basketList);
-            req.setAttribute("tot", basketList.stream().map(b -> b.getFood().getPrice()).reduce(Double::sum).orElse(0.0) *  ((IVA + 100)/ 100.0));
+            req.setAttribute("tot", basketList.stream().map(b -> b.getFood().getPrice() * b.getQuantity()).reduce(Double::sum).orElse(0.0) *  ((IVA + 100)/ 100.0));
             var delivery = basketList.stream().map(b -> b.getFood().getRestaurant()).distinct().map(Restaurant::getDeliveryCost).reduce(BigDecimal::add).orElse(new BigDecimal(0)).doubleValue();
             req.setAttribute("deliveryCost", delivery);
             var random = new SecureRandom();

@@ -105,7 +105,7 @@ public class CartServlet extends HttpServlet {
             } else {
                 req.setAttribute("noItem", 2);
                 req.setAttribute("basketList", basketContains);
-                req.setAttribute("tot", basketContains.stream().mapToDouble(b -> b.getFood().getPrice()).sum());
+                req.setAttribute("tot", basketContains.stream().mapToDouble(b -> b.getFood().getPrice() * b.getQuantity()).sum());
             }
 
             requestDispatcher.forward(req, resp);
