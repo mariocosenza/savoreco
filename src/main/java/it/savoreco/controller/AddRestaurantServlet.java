@@ -69,6 +69,7 @@ public class AddRestaurantServlet extends HttpServlet {
         var description = map.get("description");
         var deliveryCost = map.get("deliveryCost");
         var category = map.get("category");
+        var imageUrl = map.get("imageUrl");
 
         SellerAccount seller = (SellerAccount) req.getSession().getAttribute("seller");
         if ((seller == null)||(seller.getRestaurant() != null)) {
@@ -108,6 +109,7 @@ public class AddRestaurantServlet extends HttpServlet {
                 restaurant.setDeliveryCost(BigDecimal.valueOf(Double.parseDouble(deliveryCost.trim())));
                 restaurant.setCategory(HtmlEscapers.htmlEscaper().escape(category.trim()));
                 restaurant.setCreationTime(Instant.now());
+                restaurant.setImageObject(HtmlEscapers.htmlEscaper().escape(imageUrl));
                 restaurant.setDeleted(false);
 
                 seller.setRestaurant(restaurant);
