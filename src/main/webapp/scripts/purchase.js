@@ -123,7 +123,7 @@ function onGooglePaymentButtonClicked() {
     paymentsClient.loadPaymentData(paymentDataRequest)
         .then(function(paymentData) {
             // handle the response
-            processPayment(paymentData);
+            processPayment();
         })
         .catch(function(err) {
             // show error in developer console for debugging
