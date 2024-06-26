@@ -7,7 +7,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%
-    List<Food> foodList = (List<Food>) request.getAttribute("foodList");
+    @SuppressWarnings("unchecked") List<Food> foodList = (List<Food>) request.getAttribute("foodList");
     Restaurant restaurant = (Restaurant) request.getAttribute("restaurant");
     if ((foodList == null) || (restaurant == null)) {
         response.sendRedirect("./home.jsp");

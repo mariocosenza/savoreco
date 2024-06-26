@@ -11,7 +11,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%
-    List<BoughtFood> orders = (List<BoughtFood>) request.getAttribute("orders");
+
+    @SuppressWarnings("unchecked") List<BoughtFood> orders = (List<BoughtFood>) request.getAttribute("orders");
     Restaurant restaurant = (Restaurant) request.getAttribute("restaurant");
     if ((orders == null) || (restaurant == null)) {
         response.sendRedirect("./home.jsp");

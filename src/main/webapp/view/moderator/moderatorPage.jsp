@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%
-    List<UserAccount> usersList = (List<UserAccount>) request.getAttribute("usersList");
+    @SuppressWarnings("unchecked") List<UserAccount> usersList = (List<UserAccount>) request.getAttribute("usersList");
     if (usersList == null) {
         response.sendRedirect("./home.jsp");
         return;

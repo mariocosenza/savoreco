@@ -3,7 +3,7 @@
 <%@ page import="it.savoreco.model.entity.Food" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%
-    List<Food> products = (List<Food>) request.getAttribute("products");
+    @SuppressWarnings("unchecked") List<Food> products = (List<Food>) request.getAttribute("products");
     Restaurant restaurant = (Restaurant) request.getAttribute("restaurant");
     String totalCost = (String) request.getAttribute("totalCost");
     if ((products == null) || (restaurant == null) || (totalCost == null)) {
