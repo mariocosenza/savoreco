@@ -19,10 +19,6 @@
 </div>
 <main>
     <div class="form-container">
-        <div class="point">
-            <h1>I tuoi punti ECO: ${sessionScope.user.ecoPoint}</h1>
-            <h1>Il tuo livello è <%=PointLevel.calcolaLivello(((UserAccount) session.getAttribute("user")).getEcoPoint())%></h1>
-        </div>
         <h3>Aggiorna le informazioni del tuo account</h3>
         <form id="form" action="user/preference" method="post" onsubmit="submitRegistration(); return false" onchange="validate()">
             <div class="formPreference">
