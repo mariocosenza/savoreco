@@ -22,6 +22,7 @@
                                   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                                   <a href="${serverPath}/user/cart">Carrello</a>
                                   <a href="${serverPath}/user/userOrders">Ordini</a>
+                                  <a href="${serverPath}/user/ecopoint">Ecopunti</a>
                                   <a href="${serverPath}/user/preference">Preferenze</a>
                                   <a href="${serverPath}/exit">Esci</a>
                              </div>
