@@ -54,17 +54,17 @@ public class CartServlet extends HttpServlet {
         query.setParameter("user", req.getSession().getAttribute("user"));
         var basket = query.getSingleResult();
 
-        Query<BasketContain> query2 = session.createQuery("from BasketContain c where c.basket = basket and food.id = :foodId", BasketContain.class);
-        query2.setParameter("foodId", foodId);
+        Query<BasketContain> queryBasketContain = session.createQuery("from BasketContain c where c.basket = basket and food.id = :foodId", BasketContain.class);
+        queryBasketContain.setParameter("foodId", foodId);
 
 
         if (Objects.nonNull(req.getParameter("delete"))) {
-            session.remove(query2.list().getFirst());
+            session.remove(queryBasketContain.list().getFirst());
             transaction.commit();
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);
         } else if (Objects.nonNull(req.getParameter("add"))) {
-            query2.setParameter("foodId", foodId);
-            var basketContain = query2.list();
+            queryBasketContain.setParameter("foodId", foodId);
+            var basketContain = queryBasketContain.list();
             var foodInBasket = new BasketContain();
             foodInBasket.setQuantity(1);
             var food = session.get(Food.class, foodId);
