@@ -47,12 +47,12 @@ main p {
 
 .title {
     text-align: center;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 main a {
     text-decoration: none;
-    font-size: 1.4em;
+    font-size: 1.2em;
     color: var(--md-sys-color-on-surface);
     transition: 0.3s;
 }
