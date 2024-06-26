@@ -10,7 +10,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -30,60 +29,61 @@ import java.util.Objects;
 )
 public class CartServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(CartServlet.class);
-    private static final String foodId = "foodId";
+
 
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp)  {
-        if(Objects.isNull(req.getParameter(foodId))) {
-            try {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        int foodId = 0;
+
+        try {
+            if (Objects.nonNull(req.getParameter("foodId"))) {
+                foodId = Integer.parseInt(req.getParameter("foodId"));
+            } else {
                 resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-            } catch (IOException e) {
-                logger.warn("Error sending error", e);
             }
+        } catch (NumberFormatException | IOException e) {
+            logger.warn("Error sending error", e);
             return;
         }
 
         SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
+
         Query<Basket> query = session.createQuery("from Basket where user = :user", Basket.class);
         query.setParameter("user", req.getSession().getAttribute("user"));
         var basket = query.getSingleResult();
+
         Query<BasketContain> query2 = session.createQuery("from BasketContain c where c.basket = basket and food.id = :foodId", BasketContain.class);
-        query2.setParameter(foodId, Integer.parseInt(req.getParameter("foodId")));
+        query2.setParameter("foodId", foodId);
 
-        try {
-            if (Objects.nonNull(req.getParameter("delete"))) {
-                session.remove(query2.list().getFirst());
-                transaction.commit();
-                resp.setStatus(HttpServletResponse.SC_ACCEPTED);
-            }  else if (Objects.nonNull(req.getParameter("add"))) {
-                query2.setParameter(foodId, Integer.parseInt(req.getParameter(foodId)));
-                var basketContain = query2.list();
 
-                if (basketContain.isEmpty()) {
-                    var foodInBasket = new BasketContain();
-                    foodInBasket.setQuantity(1);
-                    var food = session.get(Food.class, Integer.parseInt(req.getParameter(foodId)));
-                    if (Objects.isNull(food) || !food.getAvailable()) {
-                        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-                    }
-                    foodInBasket.setFood(food);
-                    foodInBasket.setBasket(basket);
-                    session.persist(foodInBasket);
-                } else {
-                    if (basketContain.getFirst().getFood().getAvailable()) {
-                        basketContain.getFirst().setQuantity(basketContain.getFirst().getQuantity() + 1);
-                        session.merge(basketContain.getFirst());
-                    } else {
-                        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-                    }
-                }
-                transaction.commit();
+        if (Objects.nonNull(req.getParameter("delete"))) {
+            session.remove(query2.list().getFirst());
+            transaction.commit();
+            resp.setStatus(HttpServletResponse.SC_ACCEPTED);
+        } else if (Objects.nonNull(req.getParameter("add"))) {
+            query2.setParameter("foodId", foodId);
+            var basketContain = query2.list();
+            var foodInBasket = new BasketContain();
+            foodInBasket.setQuantity(1);
+            var food = session.get(Food.class, foodId);
+
+            if (basketContain.isEmpty() && Objects.nonNull(food) && food.getAvailable()) {
+                foodInBasket.setFood(food);
+                foodInBasket.setBasket(basket);
+                session.persist(foodInBasket);
+            } else if (!basketContain.isEmpty() && basketContain.getFirst().getFood().getAvailable()) {
+                basketContain.getFirst().setQuantity(basketContain.getFirst().getQuantity() + 1);
+                session.merge(basketContain.getFirst());
+            } else {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                return;
             }
-        } catch (NumberFormatException | IOException| HibernateException e) {
-            logger.info("");
+
+            transaction.commit();
         }
+
     }
 
     @SuppressWarnings("unchecked")
