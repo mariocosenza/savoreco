@@ -18,7 +18,7 @@
     <%@ include file="/components/header.jsp"%>
 </head>
 <body>
-<%@ include file="../../components/navbar.jsp" %>
+<jsp:include page="../../components/navbar.jsp" />
 <main>
 
     <h1>Dettagli Utenti</h1>

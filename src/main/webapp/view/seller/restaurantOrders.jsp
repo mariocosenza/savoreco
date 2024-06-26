@@ -26,6 +26,7 @@
     <meta charset="UTF-8">
     <title>Ordini</title>
     <link rel="stylesheet" type="text/css" href="../../assets/styles/orders.css">
+    <%@ include file="/components/header.jsp"%>
 </head>
 <body>
 <%@ include file="../../components/navbar.jsp" %>

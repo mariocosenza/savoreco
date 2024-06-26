@@ -23,9 +23,10 @@
     <meta charset="UTF-8">
     <title>Ordini</title>
     <link rel="stylesheet" type="text/css" href="../../assets/styles/orders.css">
+    <%@include file="../../components/header.jsp"%>
 </head>
 <body>
-<%@ include file="../../components/navbar.jsp" %>
+<jsp:include page="../../components/navbar.jsp"/>
 
 <main>
     <h1 class="title"><strong>Tutti I Tuoi Ordini</strong></h1>
