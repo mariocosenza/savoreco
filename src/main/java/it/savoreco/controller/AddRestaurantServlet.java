@@ -60,10 +60,10 @@ public class AddRestaurantServlet extends HttpServlet {
             return;
         }
 
-        var name = map.get("name");
-        var street = map.get("address");
-        var zipcode = map.get("postal");
-        var city = map.get("city");
+        var name = map.get("name").trim();
+        var street = map.get("address").trim();
+        var zipcode = map.get("postal").trim();
+        var city = map.get("city").trim();
         var lat = map.get("lat");
         var lon = map.get("lon");
         var description = map.get("description");

@@ -84,7 +84,7 @@ public class CartServlet extends HttpServlet {
                         }
                     }
                     requestDispatcher.forward(req, resp);
-                } catch (IOException | ServletException e) {
+                } catch (NumberFormatException |IOException | ServletException e) {
                     transaction.commit();
                     logger.warn("Cannot forward to cart.jsp", e);
                 }

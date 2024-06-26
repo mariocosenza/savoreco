@@ -38,7 +38,7 @@ public class SellerRestaurantServlet extends HttpServlet {
             try {
                 response.sendError(HttpServletResponse.SC_FORBIDDEN);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+               logger.warn("Error sending error", e);
             }
             return;
         }
