@@ -1,9 +1,6 @@
 package it.savoreco.controller;
 
-import it.savoreco.model.entity.Basket;
-import it.savoreco.model.entity.BasketContain;
-import it.savoreco.model.entity.Food;
-import it.savoreco.model.entity.UserAccount;
+import it.savoreco.model.entity.*;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -65,13 +62,20 @@ public class CartServlet extends HttpServlet {
         } else if (Objects.nonNull(req.getParameter("add"))) {
             queryBasketContain.setParameter("foodId", foodId);
             var basketContain = queryBasketContain.list();
-            var foodInBasket = new BasketContain();
-            foodInBasket.setQuantity(1);
             var food = session.get(Food.class, foodId);
 
             if (basketContain.isEmpty() && Objects.nonNull(food) && food.getAvailable()) {
+
+                var foodInBasketID = new BasketContainId();
+                foodInBasketID.setBasketId(basket.getId());
+                foodInBasketID.setFoodId(foodId);
+
+                var foodInBasket = new BasketContain();
+                foodInBasket.setQuantity(1);
                 foodInBasket.setFood(food);
                 foodInBasket.setBasket(basket);
+                foodInBasket.setId(foodInBasketID);
+
                 session.persist(foodInBasket);
             } else if (!basketContain.isEmpty() && basketContain.getFirst().getFood().getAvailable()) {
                 basketContain.getFirst().setQuantity(basketContain.getFirst().getQuantity() + 1);
