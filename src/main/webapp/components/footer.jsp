@@ -44,7 +44,7 @@
         <span class="footerTitle">Teniamo alla tua privacy</span> <br>
         <a href="${serverPath}/help">Informativa privacy</a><br>
         <a href="https://github.com/mariocosenza/savoreco?tab=readme-ov-file#authors" target="_blank" rel="noopener">Il nostro team</a><br>
-        <a href="#" onclick="if(window.__lxG__consent__!==undefined&amp;&amp;window.__lxG__consent__.getState()!==null){window.__lxG__consent__.showConsent()} else {alert('This function only for users from European Economic Area (EEA)')}; return false">Modifica consenso</a><br><br>
+        <a href="#" onclick="if(window.__lxG__consent__!==undefined&amp;&amp;window.__lxG__consent__.getState()!==null){window.__lxG__consent__.showConsent()} else {alert('This function only for users from European Economic Area (EEA)')} return false">Modifica consenso</a><br><br>
         <span class="copyright">© 2024 Savoreco</span><br>
         <img class="footerLogo" src="${serverPath}/assets/icons/google-pay-primary-logo-logo-svgrepo-com.svg" alt="GPay Logo">
     </p>
