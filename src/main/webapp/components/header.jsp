@@ -10,6 +10,7 @@
 <link href="${serverPath}/assets/icons/favicon-48x48.ico" rel="icon" sizes="48x48" type="image/png">
 <link href="${serverPath}/assets/icons/favicon-192x192.ico" rel="icon">
 <link href="https://js.radar.com/v4.3.0/radar.css" rel="stylesheet">
+<script defer data-cfasync='false' src='https://s.clickiocdn.com/t/236815_wv.js'></script>
 <script src="https://js.radar.com/v4.3.0/radar.min.js"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
