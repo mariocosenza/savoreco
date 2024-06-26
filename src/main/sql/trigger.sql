@@ -16,3 +16,21 @@ create trigger user_creation
     on user_account
     for each row
 execute procedure inserisci_in_basket();
+
+
+create or replace function inserisci_in_purchase()
+    returns trigger as
+$$
+begin
+    if (new.pick_up is false and new.street is null or new.zipcode is null)  then
+         RAISE EXCEPTION 'must enter address';
+    end if;
+    return NEW;
+end ;
+$$ language plpgsql;
+
+create trigger purchase
+    before insert
+    on purchase
+    for each row
+execute procedure inserisci_in_purchase();
