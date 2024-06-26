@@ -37,7 +37,7 @@ public class UserOrdersServlet extends HttpServlet {
             Transaction transaction = session.beginTransaction();
 
             Query<BoughtFood> bFoodQuery = session.createQuery("FROM BoughtFood bf " +
-                    "WHERE bf.purchase.user = :user ORDER BY bf.purchase.time", BoughtFood.class);
+                    "WHERE bf.purchase.user = :user ORDER BY bf.purchase.time LIMIT 20", BoughtFood.class);
             bFoodQuery.setParameter("user", user);
             List<BoughtFood> orders = bFoodQuery.list();
 
