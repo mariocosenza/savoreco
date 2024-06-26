@@ -50,12 +50,11 @@
             <p><strong>Stato:</strong> <%= purchase.getStatus() %></p>
             <p><strong>Metodo di pagamento:</strong> <%= purchase.getPaymentMethod() %></p>
             <p><strong>Costo totale:</strong> <%= String.format("%.2f", purchase.getTotalCost()) %>€</p>
-            <% if (purchase.getAddress() == null) {%>
+            <% if(purchase.getPickUp()) { %>
+            <p><strong>Consegna:</strong> Ritiro al ristorante </p>
+            <%} else {%>
             <p><strong>Indirizzo: </strong> <%= user.getAddress().getId().getStreet() %>
                 , <%= user.getAddress().getId().getZipcode() %></p>
-            <% } else {%>
-            <p><strong>Indirizzo: </strong> <%= purchase.getAddress().getId().getStreet() %>
-                , <%= purchase.getAddress().getId().getZipcode() %></p>
             <% } %>
         </div>
 
