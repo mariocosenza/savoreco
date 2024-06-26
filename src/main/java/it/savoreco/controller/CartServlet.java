@@ -86,7 +86,7 @@ public class CartServlet extends HttpServlet {
 
     }
 
-    @SuppressWarnings("unchecked")
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
