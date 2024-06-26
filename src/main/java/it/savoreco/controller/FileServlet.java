@@ -1,10 +1,12 @@
 package it.savoreco.controller;
 
+import com.google.common.html.HtmlEscapers;
 import it.savoreco.model.entity.SellerAccount;
 import it.savoreco.service.FileUpload;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -24,7 +26,7 @@ import java.util.Base64;
         description = "Upload",
         value = "/fileUpload"
 )
-public class FileServlet extends HomeServlet {
+public class FileServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(FileServlet.class);
 
     @Override
@@ -38,7 +40,7 @@ public class FileServlet extends HomeServlet {
                 if(mode.equals("restaurant")){
                     var filePart = req.getPart("image");
                     Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes());
-                    String imageUrl = fileUpload.saveImage(Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes()) + ".png", filePart.getInputStream());
+                    String imageUrl = fileUpload.saveImage(HtmlEscapers.htmlEscaper().escape(Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes()) + ".png"), filePart.getInputStream());
 
                     resp.setContentType("text/plain");
                     resp.setCharacterEncoding("UTF-8");
@@ -56,4 +58,5 @@ public class FileServlet extends HomeServlet {
             logger.warn("Error while uploading file", e);
         }
     }
+
 }
