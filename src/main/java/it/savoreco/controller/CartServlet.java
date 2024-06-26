@@ -38,25 +38,31 @@ public class CartServlet extends HttpServlet {
             query.setParameter("user", req.getSession().getAttribute("user"));
             var basket = query.getSingleResult();
             Query<BasketContain> query2 = session.createQuery("from BasketContain c where c.basket = basket and food.id = :foodId", BasketContain.class);
-            query2.setParameter("foodId", Integer.parseInt(req.getParameter("foodId")));
-            var basketContain = query2.list();
-            if(basketContain.isEmpty()){
-                var foodInBasket = new BasketContain();
-                foodInBasket.setQuantity(1);
-                var food = session.get(Food.class, Integer.parseInt(req.getParameter("foodId")));
-                if(Objects.isNull(food) || !food.getAvailable()) {
-                    resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            try {
+                query2.setParameter("foodId", Integer.parseInt(req.getParameter("foodId")));
+                var basketContain = query2.list();
+
+                if(basketContain.isEmpty()){
+                    var foodInBasket = new BasketContain();
+                    foodInBasket.setQuantity(1);
+                    var food = session.get(Food.class, Integer.parseInt(req.getParameter("foodId")));
+                    if(Objects.isNull(food) || !food.getAvailable()) {
+                        resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    }
+                    foodInBasket.setFood(food);
+                    foodInBasket.setBasket(basket);
+                    session.persist(foodInBasket);
+                } else {
+                    if(basketContain.getFirst().getFood().getAvailable()) {
+                        basketContain.getFirst().setQuantity(basketContain.getFirst().getQuantity() + 1);
+                        session.merge(basketContain.getFirst());
+                    } else  {
+                        resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    }
                 }
-                foodInBasket.setFood(food);
-                foodInBasket.setBasket(basket);
-                session.persist(foodInBasket);
-            } else {
-                if(basketContain.getFirst().getFood().getAvailable()) {
-                    basketContain.getFirst().setQuantity(basketContain.getFirst().getQuantity() + 1);
-                    session.merge(basketContain.getFirst());
-                } else  {
-                    resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                }
+            } catch (NumberFormatException e) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                return;
             }
             transaction.commit();
         } else {
@@ -84,7 +90,7 @@ public class CartServlet extends HttpServlet {
                         }
                     }
                     requestDispatcher.forward(req, resp);
-                } catch (NumberFormatException |IOException | ServletException e) {
+                } catch (IOException | ServletException e) {
                     transaction.commit();
                     logger.warn("Cannot forward to cart.jsp", e);
                 }
