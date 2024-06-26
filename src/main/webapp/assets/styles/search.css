@@ -165,6 +165,10 @@ search input[type="search"]::placeholder {
     color: var(--md-sys-color-on-background);
 }
 
+search input[type="search"]:focus::placeholder {
+    color: transparent;
+}
+
 button.searchLogo {
     border-style: none;
     background-color: transparent;
@@ -189,6 +193,9 @@ button.searchLogo img:hover {
     filter: invert(35%) sepia(95%) saturate(1200%) hue-rotate(88deg) brightness(90%) contrast(88%);
 }
 
+.filter{
+    cursor: pointer;
+}
 
 aside form label {
     all: revert;

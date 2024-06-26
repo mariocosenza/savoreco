@@ -113,6 +113,9 @@ h2 {
     font-size: 0.9em;
 }
 
+input {
+    text-align: center;
+}
 
 .wrapper {
     height: auto;
