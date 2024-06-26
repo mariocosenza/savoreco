@@ -1,0 +1,116 @@
+@import "global.css";
+
+
+main {
+    background-image: url("/assets/images/tree.webp");
+    background-repeat: no-repeat;
+    z-index: 0;
+    background-size: 54em;
+    min-height: 55em;
+}
+
+footer {
+    margin-top: 0;
+}
+
+div.progressDiv {
+    margin-top: 20vh;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+
+div.content {
+    width: auto;
+    margin-bottom: 2em;
+    padding: min(2em, 4vw);
+    border-radius: 1.5rem;
+}
+
+@media (prefers-color-scheme: light) {
+    div.content {
+        background-color: rgba(193, 201, 191, 0.88);
+        box-shadow: 0 4px 8px rgba(44, 62, 80, 0.2);
+    }
+}
+
+h1 {
+
+    font-size: 2em;
+    color: var(--md-sys-color-secondary);
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--md-sys-color-tertiary);
+}
+
+.paragrafo-stilizzato {
+    margin-left: 25vw;
+    margin-right: 25vw;
+    line-height: 1.6;
+    font-size: 1.2em;
+    text-align: center;
+    color: var(--md-sys-color-on-surface-variant);
+    background-color: var(--md-sys-color-surface-variant);
+    border-left: 5px solid var(--md-sys-color-primary);
+    padding: clamp(2em, 4vw, 3em);
+    height: auto;
+    box-shadow: 0 4px 8px rgba(44, 62, 80, 0.2);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+.paragrafo-stilizzato:hover {
+    border-left-color: var(--md-sys-color-tertiary);
+    box-shadow: 0 6px 12px var(--md-sys-color-tertiary-container);
+}
+progress {
+    width: 40vw;
+    height: 2em;
+    -webkit-appearance: none;
+    appearance: none;
+}
+progress::-webkit-progress-bar {
+    background-color: var(--md-sys-color-on-background);
+    border-radius: 10px;
+    overflow: hidden;
+}
+progress::-webkit-progress-value {
+    background-color: #4caf50;
+    border-radius: 10px;
+    position: relative;
+}
+progress::-webkit-progress-value:after {
+    content: '';
+    position: absolute;
+    width: 5vw;
+    height: 5vw;
+    background-size: contain;
+    right: -10px;
+    top: -3px;
+}
+
+
+@media screen and (max-width: 900px) {
+    .paragrafo-stilizzato {
+        margin-left: 5vw;
+        margin-right: 5vw;
+        padding: 5vw;
+        width: auto;
+        height: auto;
+    }
+
+    div.content {
+        margin-left: 20vw;
+        margin-right: 20vw;
+    }
+
+    progress {
+        width: 75vw;
+    }
+}
