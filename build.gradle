@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'war'
+    id("org.sonarqube") version "4.4.1.3373"
 }
 
 group 'it.savoreco'
@@ -29,7 +30,13 @@ tasks.register('explodedWar', Sync) {
     with war
 }
 
-
+sonar {
+    properties {
+        property("sonar.projectKey", "mariocosenza_savoreco")
+        property("sonar.organization", "mariocosenza")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
+}
 
 dependencies {
     compileOnly("jakarta.servlet.jsp:jakarta.servlet.jsp-api:4.0.0")
