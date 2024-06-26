@@ -20,7 +20,7 @@ import java.util.List;
         name = "restaurantOrdersServlet",
         displayName = "RestaurantOrders - Home",
         description = "RestaurantOrders page",
-        value = "/restaurantOrders"
+        value = "/seller/restaurantOrders"
 )
 public class RestaurantOrdersServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(RestaurantOrdersServlet.class);
@@ -30,14 +30,6 @@ public class RestaurantOrdersServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/seller/restaurantOrders.jsp");
 
         SellerAccount seller = (SellerAccount) request.getSession().getAttribute("seller");
-        if ((seller == null) || (seller.getRestaurant() == null)) {
-            try {
-                response.sendError(HttpServletResponse.SC_FORBIDDEN);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            return;
-        }
 
         try {
             SessionFactory sessionFactory = (SessionFactory) request.getServletContext().getAttribute("SessionFactory");
