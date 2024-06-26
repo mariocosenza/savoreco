@@ -39,7 +39,7 @@ public class RestaurantOrdersServlet extends HttpServlet {
             Restaurant restaurant = seller.getRestaurant();
 
             Query<BoughtFood> bFoodQuery = session.createQuery("FROM BoughtFood bf " +
-                    "WHERE bf.restaurant = :restaurant", BoughtFood.class);
+                    "WHERE bf.restaurant = :restaurant ORDER BY bf.purchase.time", BoughtFood.class);
             bFoodQuery.setParameter("restaurant", restaurant);
             List<BoughtFood> orders = bFoodQuery.list();
 
