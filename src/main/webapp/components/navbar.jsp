@@ -65,7 +65,6 @@
             <a href="${serverPath}/help" class="siteLink">
                 Aiuto
             </a>
-
     </span>
 </nav>
 </html>
