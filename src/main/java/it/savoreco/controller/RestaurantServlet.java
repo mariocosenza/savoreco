@@ -1,6 +1,5 @@
 package it.savoreco.controller;
 
-import com.google.common.html.HtmlEscapers;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import it.savoreco.model.entity.*;
@@ -84,7 +83,7 @@ public class RestaurantServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) {
         Type mapType = new TypeToken<Map<String, String>>() {
         }.getType();
-        Map<String, String> map = null;
+        Map<String, String> map;
 
         try {
             Gson gson = new Gson();
