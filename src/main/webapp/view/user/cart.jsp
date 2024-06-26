@@ -7,6 +7,7 @@
     <%@include file="../../components/header.jsp"%>
     <title>Carrello</title>
     <link rel="stylesheet" href="../../assets/styles/cart.css">
+    <script src="../../scripts/cart.js"></script>
 </head>
 <body>
 <jsp:include page="../../components/navbar.jsp"/>
@@ -33,7 +34,7 @@
                             <h1>
                                 <c:out value="${item.food.name}"/>
                                 <fmt:formatNumber value="${item.food.price}" pattern="#.#"/> €
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 27 26" fill="none">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 27 26" fill="none" onclick="deleteProduct(this, '<c:out value="${item.food.id}"/>')">
                                     <path d="M8.01465 18.4197L13.2303 13.0506L18.446 7.68152" stroke="#2F6A43" stroke-width="1.67038" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M8.01465 7.68162L13.2303 13.0507L18.446 18.4198" stroke="#2F6A43" stroke-width="1.67038" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M13.2646 24.8626C19.854 24.8626 25.1959 19.5208 25.1959 12.9313C25.1959 6.34183 19.854 1 13.2646 1C6.67508 1 1.33325 6.34183 1.33325 12.9313C1.33325 19.5208 6.67508 24.8626 13.2646 24.8626Z" stroke="#2F6A43" stroke-width="1.67038" stroke-linecap="round" stroke-linejoin="round"/>
