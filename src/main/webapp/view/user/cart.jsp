@@ -19,7 +19,7 @@
                 <h1 class="empty">
                     Il tuo carrello è vuoto
                 </h1>
-                <form action="home" method="get" class="empty">
+                <form action="/home" method="get" class="empty">
                     <button class="empty">Torna alla Home</button>
                 </form>
             </div>
