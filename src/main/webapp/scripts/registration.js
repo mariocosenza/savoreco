@@ -82,7 +82,7 @@ function validateUser() {
                             document.querySelector("#check_label").style.color = "var(--md-sys-color-error)"
                             error = true
                         }
-                    } else if (element.id === "age") {
+                    } else if (element.id === "birthdate") {
                         if(element.value !== "") {
                             arg.style.color = "var(--md-sys-color-primary)"
                         }
@@ -147,7 +147,7 @@ function validateSeller() {
                         error = true
                     }
                 }
-            } else if(element.value === "" && element.id !== "age") {
+            } else if(element.value === "" && element.id !== "birthdate") {
                 error = true
             }
         }
@@ -160,7 +160,7 @@ function validateSeller() {
 }
 
 function radioChange() {
-    const age = document.querySelector("#age")
+    const age = document.querySelector("#birthdate")
     const title = document.querySelector("#age_label")
 
     if (document.querySelector("#user").checked) {
