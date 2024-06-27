@@ -1,5 +1,3 @@
-<%@ page import="it.savoreco.service.PointLevel" %>
-<%@ page import="it.savoreco.model.entity.UserAccount" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
@@ -25,10 +23,13 @@
                 <label for="email" id="email_label">Email: ${sessionScope.user.email}</label>
                 <input type="email"  inputmode="email" value="" id="email" name="email" placeholder="Inserisci la tua nuova email">
 
-                <label id="password_label" for="password">Nuova Password:</label>
-                <input type="password"  value="" id="password" name="password" placeholder="Inserisci password">
+                <label id="old_password_label" for="old_password">Vecchia Password</label>
+                <input type="password"  value="" id="old_password" name="old_password" placeholder="Inserisci vecchia password">
 
-                <label id="check_label" for="check_password">Conferma Password:</label>
+                <label id="password_label" for="password">Nuova Password</label>
+                <input type="password"  value="" id="password" name="password" placeholder="Inserisci nuova password">
+
+                <label id="check_label" for="check_password">Conferma Password</label>
                 <input type="password" value="" id="check_password" name="confirm-password" placeholder="Conferma password">
             </div>
             <h2>Puoi modificare anche solo il tuo indirizzo</h2>
