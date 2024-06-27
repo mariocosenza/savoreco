@@ -56,11 +56,11 @@
         </form>
     </div>
 </main>
-<div class="wrapper">
-    <a href="#demo-modal">Elimina Account</a>
+<div class="wrapper" onclick="noScroll()">
+    <a href="#delete-modal">Elimina Account</a>
 </div>
 
-<div id="demo-modal" class="modal">
+<div id="delete-modal" class="modal">
     <div class="modal__content">
         <h1>Conferma cancellazione account</h1>
         <p>
@@ -74,7 +74,7 @@
             </button>
         </form>
 
-        <a href="#" class="modal__close">&times;</a>
+        <a href="#" onclick="revertScroll()" class="modal__close">&times;</a>
     </div>
 </div>
 <%@include file="../../components/footer.jsp"%>
