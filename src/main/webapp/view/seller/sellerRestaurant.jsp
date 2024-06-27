@@ -56,7 +56,7 @@
                         <div class="attribute">
                             <label for="price" id="price_label">Prezzo</label>
                             <input type="text" id="price" name="price" placeholder="Inserisci il Prezzo"
-                                   value="<%= food.getPrice()%>" maxlength="5" required>
+                                   value="<%=String.format("%.2f", food.getPrice())%>" maxlength="5" required>
                         </div>
                         <div class="attribute">
                             <label for="allergens" id="allergens_label">Allergeni</label>
@@ -76,7 +76,7 @@
                                    maxlength="5" required>
                         </div>
                         <div class="attribute">
-                            <label for="image" id="image_label">image</label>
+                            <label for="image" id="image_label">Immagine</label>
                             <input accept=".png" type="file" id="image" name="image" placeholder="Inserisci la image">
                             <input name="imageUrl" id="imageUrl" type="text" value="<%= food.getImageObject()%>" style="display: none" hidden="hidden">
                         </div>
@@ -124,7 +124,7 @@
                         <label for="deliveryCost" id="deliveryCost_label">Costo di Consegna</label>
                         <input type="text" id="deliveryCost" name="deliveryCost"
                                placeholder="Inserisci il Costo di Consegna"
-                               value="<%= restaurant.getDeliveryCost()%>" maxlength="5" required>
+                               value="<%=String.format("%.2f",restaurant.getDeliveryCost())%>" maxlength="5" required>
                     </div>
                     <div class="attribute">
                         <label for="autocomplete">Indirizzo</label>
@@ -142,7 +142,7 @@
                         <input name="city" id="city" type="text" style="display: none" hidden="hidden">
                     </div>
                     <div class="attribute">
-                        <label for="logo" id="logo_label">image</label>
+                        <label for="logo" id="logo_label">Immagine</label>
                         <input accept=".png" type="file" id="logo" name="logo" placeholder="Inserisci la image">
                         <input name="logoUrl" id="logoUrl" type="text" value="<%= restaurant.getImageObject()%>" style="display: none" hidden="hidden">
                     </div>
