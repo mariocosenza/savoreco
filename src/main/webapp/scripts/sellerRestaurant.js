@@ -52,8 +52,9 @@ async function submitFoodUpdate(foodId) {
                 body: JSON.stringify(Object.fromEntries(formData)),
                 contentType: "application/json"
             });
-
-            if (!response.ok){
+            if(response.ok) {
+                location.reload();
+            } else {
                 formError(form);
             }
         } catch (e) {
