@@ -48,7 +48,6 @@ public class UserPreferenceServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        System.out.println(req.getSession().getAttribute("user"));
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/user/preference.jsp");
         try {
             requestDispatcher.forward(req, resp);
