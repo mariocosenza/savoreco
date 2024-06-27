@@ -107,19 +107,33 @@ div.empty h1 {
     display: inline;
 }
 
-svg {
-   float: right;
-    width: 1em;
-    height: 1em;
-}
 
 svg.addIcon {
     clear: both;
-    float: none;
-    min-width: 1.2em;
+    min-width: 1.4em;
     min-height: 2em;
     margin-left: 2%;
+    transition: transform 0.3s ease-out;
+    filter: invert(35%) sepia(95%) saturate(1200%) hue-rotate(88deg) brightness(90%) contrast(88%);
 }
+
+svg.addIcon:hover {
+    transform: scale(1.1);
+}
+
+svg.delete {
+    float: right;
+    width: 1.5em;
+    height: 1.5em;
+    transition: transform 0.7s ease-out;
+    filter: brightness(0) saturate(100%) invert(13%) sepia(99%) saturate(7477%) hue-rotate(356deg) brightness(104%) contrast(101%);
+    transform-origin: center; /* Imposta il centro dell'animazione */
+}
+
+svg.delete:hover {
+    transform: scale(1.3) rotate(-360deg); /* Ruota attorno al centro */
+}
+
 
 h2 {
     min-width: 100%;
@@ -189,9 +203,9 @@ div.summaryPayment h2 {
     text-align: right;
 }
 
-svg {
-    filter: invert(35%) sepia(95%) saturate(1200%) hue-rotate(88deg) brightness(90%) contrast(88%);
-}
+
+
+
 
 
 @media  screen and (max-width: 600px) {
