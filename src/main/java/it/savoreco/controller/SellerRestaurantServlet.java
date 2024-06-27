@@ -235,8 +235,6 @@ public class SellerRestaurantServlet extends HttpServlet {
                             address.setCountryCode("IT");
                             address.setLat(Double.valueOf(lat));
                             address.setLon(Double.valueOf(lon));
-
-                            session.persist(addressId);
                             session.persist(address);
                         }
                     } else {
@@ -273,7 +271,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                 }
             }
         } else {
-            //l'if per il delete
+            //if per il delete
             try {
                 resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             } catch (IOException e) {
