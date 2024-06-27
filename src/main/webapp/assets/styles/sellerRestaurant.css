@@ -107,6 +107,14 @@ button:disabled {
   background-color: var(--md-sys-color-primary-container);
 }
 
+.foodImage {
+  max-height: 100%;
+  object-fit: cover;
+  margin-right: 1em;
+  height: 10em;
+  width: 10em;
+}
+
 input.radar-autocomplete-input {
   width: 100%;
   margin: auto;
