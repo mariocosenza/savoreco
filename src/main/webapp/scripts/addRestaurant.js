@@ -10,7 +10,7 @@ async function submitRegistration() {
         const address = searchResult()
         document.querySelector("#lat").value = address.latitude
         document.querySelector("#lon").value = address.longitude
-        document.querySelector("#postal").value = address.postalCode + ` ${address.postalCode === undefined? "00042" : address.postalCode}`
+        document.querySelector("#postal").value = ` ${address.postalCode === undefined? "00042" : address.postalCode}`
         document.querySelector("#address").value = address.street + ` ${address.number === undefined? "" : address.number}`
         document.querySelector("#city").value = address.city
 
