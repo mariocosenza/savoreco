@@ -48,13 +48,12 @@
             UserAccount user = purchase.getUser();
     %>
     <div class="purchaseBox">
-        <h3>Acquisto del  <%= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+        <h3>Ordine del  <%= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
                 .format(purchase.getTime().atZone(ZoneId.systemDefault()))%>:</h3>
         <div class="info">
             <p><strong>Costo consegna:</strong> <%= String.format("%.2f", purchase.getDeliveryCost()) %>€</p>
             <p><strong>IVA:</strong> <%= purchase.getIva() %>%</p>
             <p><strong>Stato:</strong> <%= purchase.getStatus() %></p>
-            <p><strong>Metodo di pagamento:</strong> <%= purchase.getPaymentMethod() %></p>
             <p><strong>Costo totale:</strong> <%= String.format("%.2f", purchase.getTotalCost()) %>€</p>
             <% if(purchase.getPickUp()) { %>
             <p><strong>Consegna:</strong> Ritiro al ristorante </p>
@@ -68,15 +67,9 @@
         <div class="info">
             <p><strong>Email:</strong> <%= user.getEmail() %></p>
             <p><strong>Nome:</strong> <%= user.getName() %> <%= user.getSurname() %></p>
-            <p><strong>Data di Nascita:</strong> <%= user.getBirthdate() %></p>
             <%if (user.getAddress() != null) {%>
             <p><strong>Indirizzo:</strong> <%= user.getAddress().getId().getStreet() %>
                 , <%= user.getAddress().getId().getZipcode() %>, <%= user.getCountryCode() %></p>
-            <% } %>
-            <p><strong>Eco Points:</strong> <%= user.getEcoPoint() %></p>
-            <% if (user.getDeleted()) {%>
-            <p>Verrà <strong>eliminato</strong> il: <%= DateTimeFormatter.ofPattern("yyyy-MM-dd")
-                    .format(user.getExpires().atZone(ZoneId.systemDefault()))%></p>
             <% } %>
         </div>
 
