@@ -148,22 +148,19 @@ button.empty {
 }
 
 div.summaryPayment {
-    display: block;
+    display: inline-flex;
 }
 
 div.summaryPayment h1 {
-    display: block;
-    float: left;
+    display: inline;
     min-width: 50%;
-    width: auto;
     margin: auto auto 0.6rem;
+    text-align: left;
 }
 
 div.summaryPayment h2 {
-    display: inline-block;
-    float: right;
+    display: inline;
     margin: auto auto 0.6rem;
-    width: auto;
     font-size: 1em;
     min-width: 50%;
     text-align: right;

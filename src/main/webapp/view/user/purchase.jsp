@@ -40,8 +40,8 @@
         </c:forEach>
     </ol>
     <div class="rightCost">
-        <h1>Costo spedizione: <fmt:formatNumber value="${requestScope.deliveryCost}" pattern="#.##"/>€ </h1><br>
-        <h1>Totale costo: <fmt:formatNumber value="${requestScope.tot}" pattern="#.##"/>€</h1>
+        <h1>Costo spedizione: <fmt:formatNumber value="${requestScope.deliveryCost}" pattern="#.##"/> €</h1><br>
+        <h1>Totale costo: <fmt:formatNumber value="${requestScope.tot}" pattern="#.##"/> €</h1>
         <h2>Iva 10%</h2>
     </div>
     <form id="form" action="purchase" method="post" enctype="application/x-www-form-urlencoded">
