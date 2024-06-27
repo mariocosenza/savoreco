@@ -13,7 +13,7 @@ public class PointLevel {
 
     public static int minLivello(int livello) {
         if (livello > 1) {
-            return (int) Math.pow(10, livello - 1);
+            return (int) Math.pow(10, livello - 1.0);
         } else {
             return 0; // Livello 1 inizia da 0 punti
         }
