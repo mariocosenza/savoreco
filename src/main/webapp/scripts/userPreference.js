@@ -102,5 +102,11 @@ function validate() {
 }
 
 
+function noScroll() {
+    document.querySelector("body").style.overflowY = "hidden"
+}
 
+function revertScroll() {
+    document.querySelector("body").style.overflowY = "auto"
+}
 
