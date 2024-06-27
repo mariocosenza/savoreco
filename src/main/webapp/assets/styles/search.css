@@ -1,8 +1,6 @@
 @import "global.css";
 
-.result {
 
-}
 
 main {
     display: flex;
@@ -131,7 +129,7 @@ aside form {
 }
 
 search {
-    background-color: var(--md-sys-color-primary-container);
+    background-color: var(--md-sys-color-surface-variant);
     color: var(--md-sys-color-on-background);
     min-width: 100%;
     display: flex;

@@ -380,6 +380,12 @@ button {
     cursor: pointer;
 }
 
+.radar-autocomplete-input {
+    background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-background);
+}
+
+
 @media screen and (max-height: 450px) {
     .sidenav {
         padding-top: 15px;
