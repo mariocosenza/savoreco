@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 
 @WebServlet(
         name = "AddRestaurant Page",
-        value = "/addRestaurant",
+        value = "/seller/addRestaurant",
         asyncSupported = true
 )
 public class AddRestaurantServlet extends HttpServlet {
@@ -50,7 +50,7 @@ public class AddRestaurantServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) {
         Type mapType = new TypeToken<Map<String, String>>() {
         }.getType();
-        Map<String, String> map = null;
+        Map<String, String> map;
 
         try {
             Gson gson = new Gson();
@@ -60,26 +60,18 @@ public class AddRestaurantServlet extends HttpServlet {
             return;
         }
 
-        var name = map.get("name");
-        var street = map.get("address");
-        var zipcode = map.get("postal");
-        var city = map.get("city");
+        var name = map.get("name").trim();
+        var street = map.get("address").trim();
+        var zipcode = map.get("postal").trim();
+        var city = map.get("city").trim();
         var lat = map.get("lat");
         var lon = map.get("lon");
         var description = map.get("description");
         var deliveryCost = map.get("deliveryCost");
-        var category = map.get("category");
-        var imageUrl = map.get("imageUrl");
+        var category = map.get("category").trim();
+        var imageUrl = map.get("imageUrl").trim();
 
         SellerAccount seller = (SellerAccount) req.getSession().getAttribute("seller");
-        if ((seller == null)||(seller.getRestaurant() != null)) {
-            try {
-                resp.sendError(HttpServletResponse.SC_FORBIDDEN);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            return;
-        }
 
         if (nameMatcher.matcher(name).matches()
                 && descriptionMatcher.matcher(description).matches()
@@ -95,12 +87,17 @@ public class AddRestaurantServlet extends HttpServlet {
                 addressId.setStreet(HtmlEscapers.htmlEscaper().escape(street));
                 addressId.setZipcode(HtmlEscapers.htmlEscaper().escape(zipcode.trim()));
 
-                var address = new Address();
-                address.setId(addressId);
-                address.setCity(HtmlEscapers.htmlEscaper().escape(city));
-                address.setCountryCode("IT");
-                address.setLat(Double.valueOf(lat));
-                address.setLon(Double.valueOf(lon));
+                var address = session.get(Address.class, addressId);
+
+                if(address == null) {
+                    address = new Address();
+                    address.setId(addressId);
+                    address.setCity(HtmlEscapers.htmlEscaper().escape(city));
+                    address.setCountryCode("IT");
+                    address.setLat(Double.valueOf(lat));
+                    address.setLon(Double.valueOf(lon));
+                    session.persist(address);
+                }
 
                 var restaurant = new Restaurant();
                 restaurant.setName(HtmlEscapers.htmlEscaper().escape(name));
@@ -114,7 +111,7 @@ public class AddRestaurantServlet extends HttpServlet {
 
                 seller.setRestaurant(restaurant);
 
-                session.persist(address);
+
                 session.persist(restaurant);
                 session.merge(seller);
                 transaction.commit();
@@ -143,7 +140,6 @@ public class AddRestaurantServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/seller/addRestaurant.jsp");
-
         try {
             requestDispatcher.forward(request, response);
         } catch (IOException | ServletException e) {

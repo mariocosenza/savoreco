@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
     <title>Registrazione - Savoreco</title>
     <link href="../assets/styles/access.css" rel="stylesheet">

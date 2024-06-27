@@ -34,9 +34,12 @@
     <div class="center info">
         <img src="assets/images/center-info.webp" class="center" alt="Info center">
         <p>
-            Savoreco è una piattaforma di food delivery che promuove la sostenibilità ambientale, <br>
-            incentivando scelte green con un sistema di punteggio e sconti basati sulle ordinazioni. <br>
-            Per attrarre utenti, è essenziale sviluppare un sito web responsive compatibile con la maggior parte dei dispositivi.
+            Savoreco si distingue nel panorama del food delivery per il suo impegno nella promozione di uno stile di vita sostenibile.
+            La piattaforma incoraggia attivamente i propri utenti a fare scelte ecologiche attraverso un innovativo
+            sistema di punteggio che converte le ordinazioni in sconti e vantaggi,
+            premiando così coloro che optano per opzioni più rispettose dell’ambiente.
+            Savoreco si impegna nello sviluppo di un sito web responsive e intuitivo, progettato per essere perfettamente fruibile su una vasta gamma di dispositivi,
+            dai telefoni cellulari ai tablet, fino ai computer desktop.
         </p>
     </div>
     <div class="bottomInfo">

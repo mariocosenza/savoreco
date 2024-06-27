@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
     <title>Accedi - Savoreco</title>
     <link href="../assets/styles/access.css" rel="stylesheet">
@@ -47,8 +47,7 @@
                 <label for="email">Email</label>
                 <input inputmode="email" type="email" id="email" name="email" placeholder="Inserisci la tua email" required maxlength="128">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required
-                       onfocusin="showTooltip()" onfocusout="hideTooltip()">
+                <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required>
 
                 <button disabled>
                     Accedi

@@ -13,10 +13,9 @@
 
 .purchaseBox {
     margin: 1vh auto 4vh auto;
-    width: calc(100% - 10rem);
 }
 
-p {
+main p {
     padding-right: 1em;
 }
 
@@ -48,25 +47,32 @@ p {
 
 .title {
     text-align: center;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
-a {
+main a {
     text-decoration: none;
-    font-size: 1.4em;
+    font-size: 1.2em;
     color: var(--md-sys-color-on-surface);
     transition: 0.3s;
 }
 
-a:hover {
+main a:hover {
     color: var(--md-sys-color-secondary-fixed-dim);
 }
 
 @media (max-width: 768px) {
+
+
     .purchaseBox, .foodBox {
         padding: 4vw;
         width: calc(100% - 4rem);
-        min-width: 100%;
+        min-width: 80%;
+    }
+
+    .purchaseBox {
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .foodImage {
@@ -84,16 +90,19 @@ a:hover {
         align-items: flex-start;
     }
 
-    p {
+    main p {
         padding-right: 0;
     }
 }
 
 @media (max-width: 480px) {
+
     .purchaseBox, .foodBox {
-        padding: 6vw;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        padding: 8vw;
         width: calc(100% - 4rem);
-        min-width: 100%;
         box-shadow: none;
     }
 
@@ -115,7 +124,7 @@ a:hover {
         margin-bottom: 0.5em;
     }
 
-    p {
+    main p {
         padding-right: 0;
         width: 100%;
         text-align: center;

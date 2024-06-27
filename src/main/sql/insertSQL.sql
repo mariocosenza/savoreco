@@ -107,7 +107,7 @@ VALUES
     
 
 INSERT INTO purchase (user_id, delivery_cost, time, iva, status, total_cost, payment_method, pick_up, street, zipcode)
-VALUES
+VALUES (
     (1, 2.50, '2024-06-18 13:48:58.062140', 10, 'payed', 25.50, 'paypal', true, null, null),
     (2, 5.50, '2024-06-18 13:48:58.062140', 10, 'payed', 41.00, 'visa', false, 'Via Nicola Vaccaro', '85100'),
     (1, 2.00, '2024-06-22 18:29:56.889459', 10, 'payed', 16.00, 'paypal', true, null, null),
@@ -116,7 +116,7 @@ VALUES
     (5, 4.00, '2024-06-22 19:23:14.961214', 10, 'payed', 7.00, 'visa', false, 'Corso Umberto I', '85100'),
     (3, 7.00, '2024-06-23 16:37:56.829330', 10, 'payed', 10.00, 'google', true, null, null),
     (2, 2.00, '2024-06-23 17:09:57.037974', 10, 'payed', 14.00, 'google', true, null, null),
-    (1, 6.50, '2024-06-23 20:35:52.483929', 10, 'payed', 10.50, 'google', true, null, null),
+    (1, 6.50, '2024-06-23 20:35:52.483929', 10, 'payed', 10.50, 'google', true, null, null));
 
 
 

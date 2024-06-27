@@ -1,5 +1,3 @@
-<%@ page import="it.savoreco.service.PointLevel" %>
-<%@ page import="it.savoreco.model.entity.UserAccount" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
@@ -19,21 +17,20 @@
 </div>
 <main>
     <div class="form-container">
-        <div class="point">
-            <h1>I tuoi punti ECO: ${sessionScope.user.ecoPoint}</h1>
-            <h1>Il tuo livello è <%=PointLevel.calcolaLivello(((UserAccount) session.getAttribute("user")).getEcoPoint())%></h1>
-        </div>
         <h3>Aggiorna le informazioni del tuo account</h3>
         <form id="form" action="user/preference" method="post" onsubmit="submitRegistration(); return false" onchange="validate()">
             <div class="formPreference">
                 <label for="email" id="email_label">Email: ${sessionScope.user.email}</label>
-                <input type="email"  value="" id="email" name="email">
+                <input type="email"  inputmode="email" value="" id="email" name="email" placeholder="Inserisci la tua nuova email">
 
-                <label id="password_label" for="password">Nuova Password:</label>
-                <input type="password"  value="" id="password" name="password">
+                <label id="old_password_label" for="old_password">Vecchia Password</label>
+                <input type="password"  value="" id="old_password" name="old_password" placeholder="Inserisci vecchia password">
 
-                <label id="check_label" for="check_password">Conferma Password:</label>
-                <input type="password" value="" id="check_password" name="confirm-password">
+                <label id="password_label" for="password">Nuova Password</label>
+                <input type="password"  value="" id="password" name="password" placeholder="Inserisci nuova password">
+
+                <label id="check_label" for="check_password">Conferma Password</label>
+                <input type="password" value="" id="check_password" name="confirm-password" placeholder="Conferma password">
             </div>
             <h2>Puoi modificare anche solo il tuo indirizzo</h2>
             <c:if test="${sessionScope.user.address.city != null}">
@@ -59,11 +56,11 @@
         </form>
     </div>
 </main>
-<div class="wrapper">
-    <a href="#demo-modal">Elimina Account</a>
+<div class="wrapper" onclick="noScroll()">
+    <a href="#delete-modal">Elimina Account</a>
 </div>
 
-<div id="demo-modal" class="modal">
+<div id="delete-modal" class="modal">
     <div class="modal__content">
         <h1>Conferma cancellazione account</h1>
         <p>
@@ -77,7 +74,7 @@
             </button>
         </form>
 
-        <a href="#" class="modal__close">&times;</a>
+        <a href="#" onclick="revertScroll()" class="modal__close">&times;</a>
     </div>
 </div>
 <%@include file="../../components/footer.jsp"%>

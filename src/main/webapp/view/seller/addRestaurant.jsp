@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
     <title>Registrazione Ristorante</title>
     <link href="../../assets/styles/addRestaurant.css" rel="stylesheet">
@@ -10,7 +10,7 @@
 </head>
 <body>
 <a href="home">
-    <img src="../assets/images/savoreco-logo.webp" alt="page logo" class="accessLogo">
+    <img src="../assets/images/savoreco-logo.svg" alt="page logo" class="accessLogo">
 </a>
 <div class="alert">
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -50,7 +50,7 @@
             <textarea id="description" name="description" placeholder="Inserisci la descrizione" maxlength="2000" required></textarea>
 
             <label for="image" id="image_label">image</label>
-            <input type="file" id="image" name="image" placeholder="Inserisci la image">
+            <input accept=".png" type="file" id="image" name="image" placeholder="Inserisci la image">
             <input name="imageUrl" id="imageUrl" type="text" style="display: none" hidden="hidden">
 
             <button disabled>

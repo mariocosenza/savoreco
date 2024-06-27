@@ -48,7 +48,6 @@ public class UserPreferenceServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        System.out.println(req.getSession().getAttribute("user"));
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/user/preference.jsp");
         try {
             requestDispatcher.forward(req, resp);
@@ -59,11 +58,11 @@ public class UserPreferenceServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
 
         if(Objects.nonNull(req.getParameter("delete"))) {
-            SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
-            Session session = sessionFactory.getCurrentSession();
-            Transaction transaction = session.beginTransaction();
             var user = (UserAccount) req.getSession().getAttribute("user");
             user.setDeleted(true);
             user.setExpires(Instant.now().plus(7, ChronoUnit.DAYS));
@@ -74,12 +73,15 @@ public class UserPreferenceServlet extends HttpServlet {
                 resp.sendRedirect("/home");
             } catch (IOException e) {
                 logger.warn("Cannot redirect to home", e);
+                transaction.rollback();
+                resp.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+                return;
             }
         }
 
         Type mapType = new TypeToken<Map<String, String>>() {
         }.getType();
-        Map<String, String> map = null;
+        Map<String, String> map;
         try {
             Gson gson = new Gson();
             map = gson.fromJson(req.getReader(), mapType);
@@ -88,33 +90,63 @@ public class UserPreferenceServlet extends HttpServlet {
             return;
         }
 
-        SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
-        Session session = sessionFactory.getCurrentSession();
+
         try {
-            Transaction transaction = session.beginTransaction();
+            var check = false;
             var userAccount = (UserAccount) req.getSession().getAttribute("user");
-            if (emailMatcher.matcher(map.get("email")).matches() && passwordMatcher.matcher(map.get("password")).matches()) {
-                userAccount.setEmail(map.get("email"));
-                userAccount.setPassword(PasswordSHA512.SHA512Hash(map.get("password")));
+
+            if (emailMatcher.matcher(map.get("email")).matches() && passwordMatcher.matcher(map.get("password")).matches() && Objects.nonNull(map.get("old_password"))) {
+
+                var oldPassword = PasswordSHA512.SHA512Hash(map.get("old_password"));
+                var newPassword = PasswordSHA512.SHA512Hash(map.get("password"));
+                var user = session.get(UserAccount.class, userAccount.getId());
+                if(user.getPassword().equals(oldPassword) && !newPassword.equals(oldPassword)) {
+                    userAccount.setEmail(map.get("email").trim());
+                    userAccount.setPassword(newPassword);
+                    check = true;
+                } else {
+                    resp.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+                    return;
+                }
             }
+
+
+            if(Objects.nonNull(map.get("lat"))
+                    && Objects.nonNull(map.get("lon"))
+                    && Objects.nonNull(map.get("address"))
+                    && Objects.nonNull(map.get("postal"))
+                    && Objects.nonNull(map.get("city"))) {
+                var lat = Double.valueOf(map.get("lat"));
+                var lon = Double.valueOf(map.get("lon"));
+                var street = HtmlEscapers.htmlEscaper().escape(map.get("address")).trim();
+                var zipcode = HtmlEscapers.htmlEscaper().escape(map.get("postal")).trim();
+                var city = HtmlEscapers.htmlEscaper().escape(map.get("city")).trim();
                 var address = new Address();
-                address.setCountryCode("IT");
-                address.setLat(Double.valueOf(map.get("lat")));
-                address.setLon(Double.valueOf(map.get("lon")));
                 var id = new AddressId();
-                id.setStreet(HtmlEscapers.htmlEscaper().escape(map.get("address")));
-                id.setZipcode(HtmlEscapers.htmlEscaper().escape(map.get("postal")));
-                address.setCity(HtmlEscapers.htmlEscaper().escape(map.get("city")));
+                address.setCountryCode("IT");
+                address.setLat(lat);
+                address.setLon(lon);
+                id.setStreet(street);
+                id.setZipcode(zipcode);
+                address.setCity(city);
                 address.setId(id);
                 if(session.get(Address.class, id) == null) {
                     session.persist(address);
                 }
                 userAccount.setAddress(address);
+            }
                 session.merge(userAccount);
                 transaction.commit();
-                resp.setStatus(HttpServletResponse.SC_OK);
+
+                if(check) {
+                    req.getSession().invalidate();
+                    resp.setStatus(HttpServletResponse.SC_CREATED);
+                } else {
+                    resp.setStatus(HttpServletResponse.SC_OK);
+                }
         } catch (Exception e) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            transaction.rollback();
             logger.warn("Cannot get UserAccount", e);
         }
     }

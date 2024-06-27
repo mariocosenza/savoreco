@@ -18,7 +18,9 @@ async function submitRegistration() {
                 body: JSON.stringify(Object.fromEntries(formData)),
                 contentType: "application/json"
             });
-            if (response.ok) {
+            if (response.status === 201) {
+                window.location.href = "/home"
+            } else if (response.ok) {
                 formOk()
             } else {
                 formError()
@@ -100,5 +102,11 @@ function validate() {
 }
 
 
+function noScroll() {
+    document.querySelector("body").style.overflowY = "hidden"
+}
 
+function revertScroll() {
+    document.querySelector("body").style.overflowY = "auto"
+}
 

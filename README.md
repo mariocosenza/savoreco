@@ -31,7 +31,7 @@ ensuring every meal supports both your well-being and the planet's.
 To build the WAR file, use the following command in your terminal:
 
 ```bash
-gradle run
+gradle war
 ```
 
 The WAR file will be located in the `build/libs` directory.

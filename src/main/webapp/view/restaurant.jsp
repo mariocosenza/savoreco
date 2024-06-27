@@ -7,7 +7,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%
-    List<Food> foodList = (List<Food>) request.getAttribute("foodList");
+    @SuppressWarnings("unchecked") List<Food> foodList = (List<Food>) request.getAttribute("foodList");
     Restaurant restaurant = (Restaurant) request.getAttribute("restaurant");
     if ((foodList == null) || (restaurant == null)) {
         response.sendRedirect("./home.jsp");
@@ -22,10 +22,10 @@
     <link rel="stylesheet" type="text/css" href="../assets/styles/restaurant.css">
     <script>window.isLoggedIn = <%=request.getSession().getAttribute("user") != null%>;</script>
     <script src="../scripts/restaurant.js"></script>
+
 </head>
 <body>
 <%@ include file="../components/navbar.jsp" %>
-
 <main>
     <div class="restaurantBox">
         <div class="restaurantInfo">
@@ -60,10 +60,9 @@
                     <div class="foodInfo">
                         <h3><%= food.getName() %></h3>
                         <p><%= food.getDescription() %></p>
-                        <p><strong>Prezzo: </strong><%= String.format("%.2f", food.getPrice()) %>€</p>
+                        <p><strong>Prezzo: </strong><%= String.format("%.2f", food.getPrice()) %> €</p>
                         <p><strong>Green Points: </strong> <%= food.getGreenPoint() %></p>
                         <p><strong>Allergeni: </strong> <%= food.getAllergens() %></p>
-                        <p><strong>Quantità: </strong> <%= food.getQuantity() %></p>
                     </div>
 
                     <div class="tooltipDiv">
@@ -78,6 +77,12 @@
         <%
             }
         %>
+        <h1>Ecco dove siamo</h1>
+        <div id="map" style="width: 100%; height: 100%;">
+        </div>
+        <script>
+            initializeMap(<%=restaurant.getAddress().getLon()%>, <%=restaurant.getAddress().getLat()%>)
+        </script>
     </div>
 </main>
 <%@ include file="../components/footer.jsp" %>

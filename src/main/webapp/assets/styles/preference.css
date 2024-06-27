@@ -13,18 +13,18 @@
     text-align: center;
 }
 
+label {
+    font-size: 1.2em;
+    margin-top: 0.8em;
+}
+
 .formPreference label, .formPreference input{
     color: var(--md-sys-color-on-background);
     display: flex;
     flex-direction: column;
-    margin: auto auto 0.2em;
+    margin: auto auto 0.6em;
     align-items: center;
     justify-content: center;
-}
-
-label {
-    font-size: 1.2em;
-    margin-top: 0.5em;
 }
 
 .formPreference {
@@ -40,21 +40,20 @@ form {
     color: var(--md-sys-color-on-background);
     vertical-align: middle;
     background-color: var(--md-sys-color-on-primary);
-    border: 1% solid var(--md-sys-color-primary);
-    border-radius: 0.4em;
+    border: 2px solid var(--md-sys-color-primary);
+    border-radius: 0.5em;
     outline: none;
-    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 0 inset;
-    :focus{
-        border-color: var(--md-sys-color-secondary-fixed-dim);;
-        outline: none;
-        box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
-    }
+    box-shadow: rgba(225, 228, 232, 0.3) 0 2px 4px 0 inset;
+    transition: border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
     width: 75%;
-    min-width: 75%;
-    max-width: 75%;
-    max-height: 10em;
-    margin-bottom: 1.1em;
+    padding: 0.5em;
+    margin-bottom: 1em;
 }
+
+.formPreference input:focus {
+    border-color: var(--md-sys-color-secondary);
+}
+
 
 button {
     font-size: 1.2em;
@@ -113,6 +112,9 @@ h2 {
     font-size: 0.9em;
 }
 
+input {
+    text-align: center;
+}
 
 .wrapper {
     height: auto;
@@ -135,7 +137,8 @@ h2 {
 .modal {
     visibility: hidden;
     opacity: 0;
-    position: absolute;
+    z-index: 2;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
@@ -153,15 +156,17 @@ h2 {
 }
 
 .modal__content {
+    z-index: 2;
     border-radius: 4px;
     position: relative;
-    width: 500px;
+    width: 45vw;
     max-width: 90%;
-    background: #fff;
+    background: var(--md-sys-color-surface);
     padding: 1em 2em;
 }
 
 .modal__close {
+    z-index: 2;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -170,21 +175,29 @@ h2 {
 }
 
 .modal button {
+    z-index: 2;
     text-align: center;
     background-color: var(--md-sys-color-error-container);
     color: var(--md-sys-color-on-error-container);
 }
 
 .modal button:hover {
+    z-index: 2;
     background-color: var(--md-sys-color-primary-container);
     color: var(--md-sys-color-on-primary-container);
 }
 
 .modal form {
+    z-index: 2;
     background-color: transparent;
     display: flex;
     align-content: center;
     justify-content: center;
+}
+
+.radar-autocomplete-input {
+    background-color: var(--md-sys-color-on-primary);
+    color: var(--md-sys-color-on-background);
 }
 
 @media screen and (max-width: 600px) {

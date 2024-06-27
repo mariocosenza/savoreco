@@ -1,3 +1,4 @@
+"use strict";
 
 function toggleCategory(obj, className) {
     const divs = document.querySelectorAll(".filter");

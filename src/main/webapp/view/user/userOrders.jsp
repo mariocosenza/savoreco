@@ -5,10 +5,11 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.time.ZoneId" %>
 <%@ page import="it.savoreco.model.entity.*" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%
-    List<BoughtFood> orders = (List<BoughtFood>) request.getAttribute("orders");
+    @SuppressWarnings("unchecked") List<BoughtFood> orders = (List<BoughtFood>) request.getAttribute("orders");
     UserAccount user = (UserAccount) request.getAttribute("user");
     if ((orders == null) || (user == null)) {
         response.sendRedirect("./home.jsp");
@@ -22,14 +23,15 @@
     <meta charset="UTF-8">
     <title>Ordini</title>
     <link rel="stylesheet" type="text/css" href="../../assets/styles/orders.css">
+    <%@include file="../../components/header.jsp"%>
 </head>
 <body>
-<%@ include file="../../components/navbar.jsp" %>
+<jsp:include page="../../components/navbar.jsp"/>
 
 <main>
     <h1 class="title"><strong>Tutti I Tuoi Ordini</strong></h1>
     <% if (orders.isEmpty()) { %>
-    <h1>Non hai ancora effetuato nessun'ordine</h1>
+    <h1>Non hai ancora effettuato nessun ordine</h1>
     <% }
 
         Map<Purchase, List<BoughtFood>> categorizedBoughtFood = new HashMap<>();
@@ -50,12 +52,11 @@
             <p><strong>Stato:</strong> <%= purchase.getStatus() %></p>
             <p><strong>Metodo di pagamento:</strong> <%= purchase.getPaymentMethod() %></p>
             <p><strong>Costo totale:</strong> <%= String.format("%.2f", purchase.getTotalCost()) %>€</p>
-            <% if (purchase.getAddress() == null) {%>
+            <% if(purchase.getPickUp()) { %>
+            <p><strong>Consegna:</strong> Ritiro al ristorante </p>
+            <%} else {%>
             <p><strong>Indirizzo: </strong> <%= user.getAddress().getId().getStreet() %>
                 , <%= user.getAddress().getId().getZipcode() %></p>
-            <% } else {%>
-            <p><strong>Indirizzo: </strong> <%= purchase.getAddress().getId().getStreet() %>
-                , <%= purchase.getAddress().getId().getZipcode() %></p>
             <% } %>
         </div>
 
@@ -65,7 +66,7 @@
         <div class="foodItem">
             <div>
                 <h2><%= boughtFood.getName() %></h2>
-                <p><strong>Da</strong> <a href="/restaurant?id=<%=restaurant.getId()%>"><%= restaurant.getName()%></a></p>
+                <p><strong>Da</strong> <a href="<c:url value="/restaurant?id=<%=restaurant.getId()%>"/>"><%= restaurant.getName()%></a></p>
                 <p><strong>Quantità:</strong> <%= boughtFood.getQuantity() %></p>
                 <p><strong>Prezzo:</strong> <%= String.format("%.2f", boughtFood.getPrice()) %>€</p>
                 <p><strong>Green Points:</strong> <%= boughtFood.getGreenPoint() %></p>

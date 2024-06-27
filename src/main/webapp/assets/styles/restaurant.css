@@ -16,6 +16,11 @@
     object-fit: cover;
 }
 
+div#map {
+    min-width: 20%;
+    min-height: 30em;
+}
+
 .restaurantBox {
     border-radius: 1.1rem;
     border: 0.1rem solid var(--md-sys-color-secondary);
@@ -42,12 +47,14 @@
     margin: 1rem 0;
     display: flex;
     align-items: center;
-    width: calc(100% - 2rem);
-    background-color: var(--md-sys-color-primary-container);
+    min-width: calc(100% - 2rem);
+    max-width: calc(100% - 2rem);
+    background-color: var(--md-sys-color-surface-variant);
 }
 
 .foodInfo {
     margin-left: 1em;
+    min-width: 50%;
 }
 
 .categoryBox {
@@ -61,12 +68,15 @@
 
 button {
     height: auto;
-    padding: 0.5em;
+    border: none;
+    min-width: 50%;
+    padding: 0.8em;
     margin-left: 8em;
-    background-color: var(--md-sys-color-primary);
-    color: var(--md-sys-color-on-primary);
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
     margin-right: 8em;
 }
+
 
 .tooltipDiv {
     width: fit-content;
@@ -77,6 +87,12 @@ button {
 }
 
 @media screen and (max-width: 900px) {
+    .tooltipDiv {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
     .restaurantBox {
         width: 90vw;
     }

@@ -23,6 +23,8 @@ div.center {
     min-width: 50vw;
 }
 
+
+
 h1.search {
     font-size: 1.5em;
 }
@@ -41,8 +43,9 @@ h1#searchBoxRight {
 div.info {
     margin-top: 10rem;
     max-width: 50vw;
-    height: 15rem;
+    height: auto;
     margin-left: 25vw;
+    overflow: hidden;
     display: flex;
     margin-right: 25vw;
     box-shadow: 0 0.1em 2em 0.2em rgba(0, 0, 0, 0.25);
@@ -52,27 +55,29 @@ div.info img.center {
     width: 50%;
     object-fit: fill;
     overflow: hidden;
-    max-width: 75%;
+    min-width: 40%;
     max-height: 100%;
 }
 
 
 div.info p {
+    margin: 1rem 2%;
     padding: 1rem 2%;
     text-align: justify;
 }
 
 div.left img, div.right img {
     vertical-align: top;
-    max-height: 10em;
     max-width: 100%;
     width: 100%;
-    height: 10em;
+    max-height: 11em;
+    margin-bottom: 1em;
 }
 
-div.left, div.right{
-    height: 25rem;
-    max-height: 30rem;
+div.left, div.right {
+    height: auto;
+    min-height: 28rem;
+    max-height: 34rem;
     border-radius: 2rem;
     background: var(--md-sys-color-on-primary, #FFFFFF);
     margin-top: 10vh;
@@ -80,7 +85,23 @@ div.left, div.right{
     width: 25vw;
     overflow: hidden;
     box-shadow: 0 0.1em 2em 0.2em rgba(0, 0, 0, 0.25);
+    transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+    will-change: box-shadow, transform, background-color;
 }
+
+div.left:hover  {
+    transform: translateY(-1rem) rotate(-3deg);
+    box-shadow: 0 0.5em 3em 0.3em rgba(0, 0, 0, 0.3);
+    background: var(--md-sys-color-on-secondary, #DDDDDD); /* Colore di sfondo al passaggio del mouse */
+}
+
+div.right:hover {
+    transform: translateY(-1rem) rotate(3deg);
+    box-shadow: 0 0.5em 3em 0.3em rgba(0, 0, 0, 0.3);
+    background: var(--md-sys-color-on-secondary, #DDDDDD); /* Colore di sfondo al passaggio del mouse */
+}
+
+
 
 div.left {
     flex: 1;
@@ -115,22 +136,24 @@ div.left p, div.right p {
 @media screen and (max-width: 900px) {
     div.info {
         height: auto;
+        padding-bottom: 1em;
         min-width: 75vw;
         display: block;
         margin: 15vh auto 5rem;
     }
     div.info img.center {
         vertical-align: top;
-        max-height: 10em;
+        max-height: 15em;
         max-width: 100%;
         width: 100%;
-        height: 10em;
+        height: 15em;
     }
 
     div.center {
         min-width: 75vw;
         margin-left: auto;
         margin-right: auto;
+        border-radius: 2.4rem;
     }
 
     div.info img.center {
@@ -145,12 +168,14 @@ div.left p, div.right p {
     }
 
     div.left, div.right{
+        padding-bottom: 1em;
         float: none;
         height: auto;
-        max-height: 2000px;
+        max-height: 50%;
         margin-left: auto;
         margin-right: auto;
         min-width: 75vw;
+        border-radius: 2.4rem;
     }
 
 }
