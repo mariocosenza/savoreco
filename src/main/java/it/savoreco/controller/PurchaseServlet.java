@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,7 @@ public class PurchaseServlet extends HttpServlet {
             req.setAttribute("auth", PasswordSHA512.SHA512Hash(number));
                 httpSession.setAttribute("deliveryCost", delivery);
                 httpSession.setAttribute("auth", number);
+                httpSession.setAttribute("authTimer", Instant.now());
                 httpSession.setAttribute("readyBoughtFood", basketList.stream().map(BasketContain::getFood).toList());
 
             requestDispatcher.forward(req, resp);
@@ -76,7 +78,8 @@ public class PurchaseServlet extends HttpServlet {
             if(Objects.isNull(req.getSession().getAttribute("auth"))
                     ||  Objects.isNull(req.getParameter("auth"))
                     ||  !req.getParameter("auth").equals(PasswordSHA512.SHA512Hash((String) httpSession.getAttribute("auth")))
-                    ||  Objects.isNull(httpSession.getAttribute("readyBoughtFood")) || Objects.isNull(req.getParameter("pick_up"))) {
+                    ||  Objects.isNull(httpSession.getAttribute("readyBoughtFood")) || Objects.isNull(req.getParameter("pick_up"))
+                    ||  Objects.isNull(httpSession.getAttribute("authTimer"))  || Duration.between((Instant) httpSession.getAttribute("authTimer"), Instant.now()).toMinutes() > 10) {
                 try {
                      req.setAttribute("confirmed", false);
                      requestDispatcher.include(req, resp);
