@@ -25,7 +25,7 @@
 
 </head>
 <body>
-<%@ include file="../components/navbar.jsp" %>
+<jsp:include page="../components/navbar.jsp"/>
 <main>
     <div class="restaurantBox">
         <div class="restaurantInfo">
@@ -78,7 +78,7 @@
             }
         %>
         <h1>Ecco dove siamo</h1>
-        <div id="map" style="width: 100%; height: 100%;">
+        <div id="map" class="map">
         </div>
         <script>
             initializeMap(<%=restaurant.getAddress().getLon()%>, <%=restaurant.getAddress().getLat()%>)
