@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.lucene.util.SloppyMath;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -41,27 +42,32 @@ public class SearchServlet extends HttpServlet {
             SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
             Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
+            var lon = Double.parseDouble(req.getParameter("lon"));
+            var lat = Double.parseDouble(req.getParameter("lat"));
 
-            Query<Integer> query;
-            if(Objects.nonNull(req.getParameter("byName")) && !req.getParameter("byName").isEmpty()) {
-                query =  session.createNativeQuery("SELECT restaurant_id FROM savoreco.restaurant r " +
+            Query<Restaurant> query;
+            if(Objects.isNull(req.getParameter("sort")) || req.getParameter("sort").equals("distance")) {
+               query = session.createNativeQuery("SELECT r.restaurant_id, r.name, r.street, r.zipcode, r.description, r.image_object, r.delivery_cost, r.category, r.deleted, r.creation_time FROM savoreco.restaurant r " +
                         "INNER JOIN savoreco.address b " +
-                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000 and r.deleted is false and savoreco.similarity(r.name, :name) > 0.3 LIMIT :maxResult", Integer.class);
-                query.setParameter("name", req.getParameter("byName").trim());
+                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 10000 and r.deleted is false LIMIT :maxResult", Restaurant.class);
+
             }
-            else if(Objects.isNull(req.getParameter("sort")) || req.getParameter("sort").equals("distance")) {
-                query =  session.createNativeQuery("SELECT restaurant_id FROM savoreco.restaurant r " +
+            else if(Objects.nonNull(req.getParameter("byName")) && !req.getParameter("byName").isEmpty()) {
+                query =  session.createNativeQuery("SELECT r.restaurant_id, r.name, r.street, r.zipcode, r.description, r.image_object, r.delivery_cost, r.category, r.deleted, r.creation_time  FROM savoreco.restaurant r " +
                         "INNER JOIN savoreco.address b " +
-                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000 and r.deleted is false LIMIT :maxResult", Integer.class);
-            } else if(req.getParameter("sort").equals("name")) {
-                query =  session.createNativeQuery("SELECT restaurant_id FROM savoreco.restaurant r " +
+                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 10000 and r.deleted is false and savoreco.similarity(r.name, :name) > 0.3 LIMIT :maxResult", Restaurant.class);
+                query.setParameter("name", req.getParameter("byName"));
+            }
+             else if(req.getParameter("sort").equals("name")) {
+                query =  session.createNativeQuery("SELECT r.restaurant_id, r.name, r.street, r.zipcode, r.description, r.image_object, r.delivery_cost, r.category, r.deleted, r.creation_time  FROM savoreco.restaurant r " +
                         "INNER JOIN savoreco.address b " +
-                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000 and r.deleted is false ORDER BY UPPER(r.name) LIMIT  :maxResult", Integer.class);
+                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 10000 and r.deleted is false ORDER BY UPPER(r.name) LIMIT  :maxResult", Restaurant.class);
             } else {
-                query =  session.createNativeQuery("SELECT restaurant_id FROM savoreco.restaurant r " +
+                query =  session.createNativeQuery("SELECT r.restaurant_id, r.name, r.street, r.zipcode, r.description, r.image_object, r.delivery_cost, r.category, r.deleted, r.creation_time FROM savoreco.restaurant r " +
                         "INNER JOIN savoreco.address b " +
-                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 30000 and r.deleted is false ORDER BY r.delivery_cost LIMIT :maxResult", Integer.class);
+                        "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 10000 and r.deleted is false ORDER BY r.delivery_cost LIMIT :maxResult", Restaurant.class);
             }
+
 
             int result = 10;
             if(Objects.nonNull(req.getParameter("maxResult"))) {
@@ -69,13 +75,12 @@ public class SearchServlet extends HttpServlet {
             }
 
             query.setParameter("maxResult", result);
-            query.setParameter("longitude", Double.parseDouble(req.getParameter("lon")), Double.class);
-            query.setParameter("latitude", Double.parseDouble(req.getParameter("lat")), Double.class);
-            List<Restaurant> restaurantList = new ArrayList<>();
-            for (Integer restaurantId : query.list()) {
-                Query<Restaurant> restaurantQuery = session.createQuery("FROM Restaurant r WHERE r.id = :id", Restaurant.class);
-                restaurantQuery.setParameter("id", restaurantId);
-                restaurantList.add(restaurantQuery.getSingleResult());
+            query.setParameter("longitude", lon);
+            query.setParameter("latitude", lat);
+            var restaurantList = query.list();
+
+            if (Objects.isNull(req.getParameter("sort")) || req.getParameter("sort").equals("distance")) {
+                restaurantList.sort(Comparator.comparingDouble(a -> SloppyMath.haversinMeters(a.getAddress().getLat(), a.getAddress().getLon(), lat, lon)));
             }
 
             transaction.commit();
