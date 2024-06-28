@@ -2,7 +2,7 @@
 
 const regexName = /^[a-zA-Z][a-zA-Z0-9-_\s]{2,24}$/;
 const regexDescription = /^.{2,2000}$/;
-const regexDeliveryCost = /^\d+(\.\d{1,2})?$/;
+const regexDeliveryCost = /^\d+(\.\d{1,2})?$|^\d+(,\d{1,2})?$/;
 const regexCategory = /^[a-zA-Z\s]{2,25}$/;
 
 async function submitRegistration() {

@@ -3,7 +3,7 @@
 const regexName = /^[a-zA-Z][a-zA-Z0-9-_\s]{2,24}$/;
 const regexDescription = /^.{2,2000}$/;
 const regexCategory = /^[a-zA-Z\s]{2,25}$/;
-const regexCost = /^\d+(\.\d{1,2})?$/;
+const regexCost = /^\d+(\.\d{1,2})?$|^\d+(,\d{1,2})?$/;
 const regexAllergens = /^[A-Za-z]+(?:,\s*[A-Za-z]+){0,49}$/;
 const regexGreenPoints = /^\d{1,2}$/;
 const regexQuantity = /^\d{1,5}$/;
@@ -166,7 +166,9 @@ async function submitRestaurantUpdate() {
                 contentType: "application/json"
             });
 
-            if (!response.ok) {
+            if(response.ok) {
+              location.reload()
+            } else {
                 formError('Rest');
             }
         } catch (e) {

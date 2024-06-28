@@ -45,7 +45,7 @@ public class AddRestaurantServlet extends HttpServlet {
         super.init(config);
         nameMatcher = Pattern.compile("^[a-zA-Z][a-zA-Z0-9-_\\s]{2,24}$");
         descriptionMatcher = Pattern.compile("^.{2,2000}$");
-        deliveryCostMatcher = Pattern.compile("^\\d+(\\.\\d{1,2})?$");
+        deliveryCostMatcher = Pattern.compile("^\\d+(\\.\\d{1,2})?$|^\\d+(,\\d{1,2})?$");
         categoryMatcher = Pattern.compile("^[a-zA-Z\\s]{2,25}$");
     }
 
@@ -106,7 +106,7 @@ public class AddRestaurantServlet extends HttpServlet {
                 restaurant.setName(HtmlEscapers.htmlEscaper().escape(name));
                 restaurant.setAddress(address);
                 restaurant.setDescription(HtmlEscapers.htmlEscaper().escape(description));
-                restaurant.setDeliveryCost(BigDecimal.valueOf(Double.parseDouble(deliveryCost.trim())));
+                restaurant.setDeliveryCost(BigDecimal.valueOf(Double.parseDouble(deliveryCost.trim().replace(',','.'))));
                 restaurant.setCategory(HtmlEscapers.htmlEscaper().escape(category.trim()));
                 restaurant.setCreationTime(Instant.now());
                 restaurant.setImageObject(HtmlEscapers.htmlEscaper().escape(imageUrl));

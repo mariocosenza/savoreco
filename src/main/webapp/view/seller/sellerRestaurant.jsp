@@ -129,7 +129,7 @@
                         <label for="deliveryCost" id="deliveryCost_label">Costo di Consegna</label>
                         <input type="text" id="deliveryCost" name="deliveryCost"
                                placeholder="Inserisci il Costo di Consegna"
-                               value="<%=String.format("%.2f",restaurant.getDeliveryCost())%>" maxlength="5" required>
+                               value="<%=String.format("%,.2f",restaurant.getDeliveryCost())%>" maxlength="5" required>
                     </div>
                     <div class="attribute">
                         <label for="autocomplete">Indirizzo</label>
