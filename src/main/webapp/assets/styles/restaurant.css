@@ -94,6 +94,15 @@ button {
     position: relative;
 }
 
+
+@media screen and (prefers-color-scheme: dark) {
+    .restaurantImage {
+        mix-blend-mode: normal;
+    }
+}
+
+
+
 @media screen and (max-width: 900px) {
     .tooltipDiv {
         margin-left: auto;
@@ -149,12 +158,5 @@ button {
     100% {
         transform: translate(calc(-50%), calc(-50% - 18vh)) scale(0);
         opacity: 0;
-    }
-}
-
-
-@media screen and (prefers-color-scheme: dark) {
-    .resultImage {
-        mix-blend-mode: normal;
     }
 }

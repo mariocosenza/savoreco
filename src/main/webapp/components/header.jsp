@@ -9,7 +9,7 @@
 <meta content="Cibo, Ecologico, Saporito" name="keywords">
 <meta content="Savoreco" name="author">
 <link href="${serverPath}/assets/icons/favicon-48x48.ico" rel="icon" sizes="48x48" type="image/png">
-<link href="${serverPath}/assets/icons/favicon-192x192.ico" rel="icon">
+<link href="${serverPath}/assets/icons/favicon-192x192.ico" rel="icon" type="image/png">
 <link href="https://js.radar.com/v4.3.0/radar.css" rel="stylesheet">
 <script defer data-cfasync='false' src='https://s.clickiocdn.com/t/236815_wv.js'
         integrity="sha384-hCFg6iAESE26AABi68WLCAOvVgXcT49X0pikPltnyUnclKsFrs4pRcdnqIB3F+Sn"
