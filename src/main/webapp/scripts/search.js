@@ -5,7 +5,6 @@ function toggleCategory(obj, className) {
     const elementCategory = document.querySelectorAll(".resultCategory" + className);
     const resultElements = document.querySelectorAll(".result");
 
-    console.log(obj)
     if(obj.style.borderColor === "var(--md-sys-color-secondary-container)" || obj.style.borderColor === "red") {
         for (const element of elementCategory) {
             element.style.display = "flex"
@@ -20,7 +19,6 @@ function toggleCategory(obj, className) {
 
     divs.forEach(d => {
         if(d !== obj && d.style.borderColor === "var(--md-sys-color-secondary-container)") {
-            console.log(d.id)
             for (const element of document.querySelectorAll(".resultCategory" + d.id.replace('searchCategory',''))) {
                 element.style.display = "none"
             }
@@ -58,14 +56,14 @@ function toggleSelect(obj) {
     const elementCategory = document.querySelectorAll(".resultCategory" + className);
     const resultElements = document.querySelectorAll(".result");
 
-    console.log("test")
     for (const element of elementCategory) {
         element.style.display = "flex"
     }
 
-    for (const element of resultElements) {
-        if(!element.classList.contains("resultCategory" + className))
-        element.style.display = "none"
+    if(obj.options[obj.selectedIndex].value !== "noCategory") {
+        for (const element of resultElements) {
+            if(!element.classList.contains("resultCategory" + className))
+                element.style.display = "none"
+        }
     }
-
 }

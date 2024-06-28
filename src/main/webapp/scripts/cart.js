@@ -52,7 +52,6 @@ async function addProduct (obj, id, price) {
             location.reload();
         }
     } catch (e) {
-        console.log(e)
         window.location.href = "/home"
     }
 }
