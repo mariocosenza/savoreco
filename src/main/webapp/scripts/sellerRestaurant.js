@@ -52,7 +52,7 @@ async function submitFoodUpdate(foodId) {
                 body: JSON.stringify(Object.fromEntries(formData)),
                 contentType: "application/json"
             });
-            if(response.ok) {
+            if (response.ok) {
                 location.reload();
             } else {
                 formError(form);
@@ -71,7 +71,6 @@ function formError(foodId) {
     form.querySelector("button.save").disabled = true;
     form.querySelectorAll("label").forEach(label => label.style.color = "var(--md-sys-color-error)");
 }
-
 
 
 function validateFood(foodId) {
@@ -114,24 +113,15 @@ function validateFood(foodId) {
 }
 
 
-
-
-
-
-
-
-
-
-
 async function submitRestaurantUpdate() {
     const form = document.querySelector(`#formRest`);
     if (validateRestaurant()) {
         const address = searchResult();
-        if(address !== undefined) {
+        if (address !== undefined) {
             form.querySelector("#lat").value = address.latitude
             form.querySelector("#lon").value = address.longitude
-            form.querySelector("#postal").value = address.postalCode + ` ${address.postalCode === undefined? "00042" : address.postalCode}`
-            form.querySelector("#address").value = address.street + ` ${address.number === undefined? "" : address.number}`
+            form.querySelector("#postal").value = address.postalCode + ` ${address.postalCode === undefined ? "00042" : address.postalCode}`
+            form.querySelector("#address").value = address.street + ` ${address.number === undefined ? "" : address.number}`
             form.querySelector("#city").value = address.city
         }
         const imageFile = form.querySelector('input[type="file"]').files[0];
@@ -224,7 +214,7 @@ function validateRestaurant() {
                 label.style.color = "var(--md-sys-color-error)";
                 error = true;
             }
-        } else  if (element.value === "" && element.id !== "logo") {
+        } else if (element.value === "" && element.id !== "logo") {
             error = true;
         }
     });

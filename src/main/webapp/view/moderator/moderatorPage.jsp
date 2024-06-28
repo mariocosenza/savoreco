@@ -17,10 +17,10 @@
     <meta charset="UTF-8">
     <title>Moderatore</title>
     <link rel="stylesheet" type="text/css" href="../../assets/styles/moderatorPage.css">
-    <%@ include file="/components/header.jsp"%>
+    <%@ include file="/components/header.jsp" %>
 </head>
 <body>
-<jsp:include page="../../components/navbar.jsp" />
+<jsp:include page="../../components/navbar.jsp"/>
 <main>
 
     <h1 class="title">Dettagli Utenti</h1>
@@ -35,23 +35,32 @@
         </tr>
 
         <% for (UserAccount user : usersList) {%>
-        <tr class=<%= (user.getDeleted()) ? "deleted-users" : "active-users" %> >
-            <td data-label="Nome:"><%= user.getName() %></td>
-            <td data-label="Cognome:"><%= user.getSurname() %></td>
-            <td data-label="Data di nascita:"><%= user.getBirthdate() %></td>
-            <td data-label="Green Points:"><%= user.getEcoPoint() %></td>
-            <% if(user.getDeleted()){ %>
+        <tr class=<%= (user.getDeleted()) ? "deleted-users" : "active-users" %>>
+            <td data-label="Nome:"><%= user.getName() %>
+            </td>
+            <td data-label="Cognome:"><%= user.getSurname() %>
+            </td>
+            <td data-label="Data di nascita:"><%= user.getBirthdate() %>
+            </td>
+            <td data-label="Green Points:"><%= user.getEcoPoint() %>
+            </td>
+            <% if (user.getDeleted()) { %>
             <td data-label="Expires:"><%= DateTimeFormatter.ofPattern("yyyy-MM-dd")
-                    .format(user.getExpires().atZone(ZoneId.systemDefault()))%></td>
-            <td data-label=""><button class="deleted-users">Ripristina</button></td>
+                    .format(user.getExpires().atZone(ZoneId.systemDefault()))%>
+            </td>
+            <td data-label="">
+                <button class="deleted-users">Ripristina</button>
+            </td>
             <% } else { %>
             <td class="disappearSmall">/</td>
-            <td data-label=""><button class="active-users">Elimina</button></td>
+            <td data-label="">
+                <button class="active-users">Elimina</button>
+            </td>
             <% } %>
         </tr>
-    <%
-        }
-    %>
+        <%
+            }
+        %>
     </table>
 
 </main>

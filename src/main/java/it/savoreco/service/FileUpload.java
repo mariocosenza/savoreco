@@ -8,7 +8,9 @@ import org.apache.commons.lang3.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.attribute.FileAttribute;
 import java.nio.file.attribute.PosixFilePermission;
 import java.nio.file.attribute.PosixFilePermissions;
@@ -31,21 +33,20 @@ public class FileUpload {
         try {
 
             File file;
-            if(SystemUtils.IS_OS_UNIX) {
+            if (SystemUtils.IS_OS_UNIX) {
                 file = File.createTempFile("upload", ".png", new File("/opt"));
                 FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rwx------"));
                 java.nio.file.Files.createTempFile("upload", ".png", attr); // Compliant
-            }
-            else {
+            } else {
                 file = File.createTempFile("upload", ".png");  // Compliant
-                if(!file.setReadable(true, true)
+                if (!file.setReadable(true, true)
                         || !file.setWritable(true, true)
                         || !file.setExecutable(true, true)) {
                     throw new RuntimeException("Cannot create temp file");
                 }
             }
 
-            try  {
+            try {
                 Files.write(stream.readAllBytes(), file);
             } catch (IOException e) {
                 throw new RuntimeException(e);

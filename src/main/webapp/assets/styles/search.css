@@ -1,7 +1,6 @@
 @import "global.css";
 
 
-
 main {
     display: flex;
 }
@@ -199,7 +198,7 @@ button.searchLogo:active {
 }
 
 
-.filter{
+.filter {
     cursor: pointer;
 }
 
@@ -276,7 +275,7 @@ h2.price {
         justify-content: center;
     }
 
-   .mobileSelector select {
+    .mobileSelector select {
         all: revert;
         /* styling */
         background-color: var(--md-sys-color-background);
@@ -287,20 +286,19 @@ h2.price {
         font: inherit;
         line-height: 1.5em;
         padding: 0.5em 15vw 5vw 1em;
-       -webkit-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
         -webkit-appearance: none;
         -moz-appearance: none;
-       margin: 0 0 2em;
-   }
+        margin: 0 0 2em;
+    }
 
-   .showMoreButton {
-       font-size: 1rem;
-   }
+    .showMoreButton {
+        font-size: 1rem;
+    }
 
     /* arrows */
-
     .mobileSelector select.classic {
         background-image: linear-gradient(45deg, transparent 50%, var(--md-sys-color-tertiary-fixed-dim) 50%),
         linear-gradient(135deg, var(--md-sys-color-tertiary-fixed-dim) 50%, transparent 50%),
@@ -314,7 +312,7 @@ h2.price {
         background-repeat: no-repeat;
     }
 
-   .mobileSelector select.classic:focus {
+    .mobileSelector select.classic:focus {
         background-image: linear-gradient(45deg, var(--md-sys-color-primary-container) 50%, transparent 50%),
         linear-gradient(135deg, transparent 50%, var(--md-sys-color-primary-container) 50%),
         linear-gradient(to right, var(--md-sys-color-on-primary-container), var(--md-sys-color-on-primary-container));
@@ -332,7 +330,6 @@ h2.price {
     search input[type="search"]::placeholder {
         font-size: 0.8em;
     }
-
 
 
     main {
@@ -376,7 +373,7 @@ h2.price {
 }
 
 
-@media screen and (prefers-color-scheme: dark){
+@media screen and (prefers-color-scheme: dark) {
     .resultImage {
         mix-blend-mode: normal;
     }

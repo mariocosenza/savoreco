@@ -12,11 +12,13 @@ input[type="text"], input[type="password"], input[type="email"], input[type="dat
     border-radius: 0.4em;
     outline: none;
     box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 0 inset;
-    :focus{
+
+    :focus {
         border-color: var(--md-sys-color-secondary-fixed-dim);;
         outline: none;
         box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
     }
+
     width: 65%;
     min-width: 65%;
     max-width: 75%;
@@ -43,7 +45,7 @@ div.centerLogin {
     margin-top: 15vh;
 }
 
-label,input, span.form{
+label, input, span.form {
     color: var(--md-sys-color-on-background);
     display: flex;
     flex-direction: column;
@@ -55,8 +57,6 @@ label,input, span.form{
 label {
     font-size: 1.1em;
 }
-
-
 
 
 input {
@@ -76,7 +76,7 @@ form {
 }
 
 p {
-  text-align: center;
+    text-align: center;
 }
 
 button {
@@ -155,7 +155,7 @@ p.policy {
     font-size: 0.8em;
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
 
     div.center, div.centerLogin {
         min-width: 74vw;

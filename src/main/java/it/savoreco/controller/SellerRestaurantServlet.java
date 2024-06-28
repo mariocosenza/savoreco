@@ -18,7 +18,6 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
@@ -125,7 +124,7 @@ public class SellerRestaurantServlet extends HttpServlet {
 
         SellerAccount seller = (SellerAccount) req.getSession().getAttribute("seller");
 
-        if(map.get("mode").equals("saveFood")) {
+        if (map.get("mode").equals("saveFood")) {
             var name = map.get("fname").trim();
             var description = map.get("fdescription").trim();
             var category = map.get("fcategory").trim();
@@ -192,7 +191,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                     logger.warn("Error sending error", e);
                 }
             }
-        } else if(map.get("mode").equals("modifyRestaurant")) {
+        } else if (map.get("mode").equals("modifyRestaurant")) {
             var name = map.get("name").trim();
             var description = map.get("description").trim();
             var category = map.get("category").trim();
@@ -221,14 +220,14 @@ public class SellerRestaurantServlet extends HttpServlet {
 
                     Address address;
 
-                    if(!street.isEmpty()){
+                    if (!street.isEmpty()) {
                         var addressId = new AddressId();
                         addressId.setStreet(HtmlEscapers.htmlEscaper().escape(street));
                         addressId.setZipcode(HtmlEscapers.htmlEscaper().escape(zipcode));
 
                         address = session.get(Address.class, addressId);
 
-                        if(address == null) {
+                        if (address == null) {
                             address = new Address();
                             address.setId(addressId);
                             address.setCity(HtmlEscapers.htmlEscaper().escape(city));

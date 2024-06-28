@@ -13,7 +13,8 @@ async function submitRegistration() {
         document.querySelector("#address").value = address.street + ` ${address.number}`
         document.querySelector("#city").value = address.city
         const formData = new FormData(document.querySelector("#form"))
-        try { const response = await fetch("/user/preference", {
+        try {
+            const response = await fetch("/user/preference", {
                 method: "POST",
                 body: JSON.stringify(Object.fromEntries(formData)),
                 contentType: "application/json"
@@ -38,7 +39,7 @@ function formError() {
     document.querySelector("label").style.color = "var(--md-sys-color-on-background)"
     const alert = document.querySelector(".alert")
     alert.style.backgroundColor = "var(--md-sys-color-error-container)"
-    alert.style.visibility ="visible"
+    alert.style.visibility = "visible"
     alert.style.color = "var(--md-sys-color-on-error-container)"
     document.querySelector("#textAlert").innerHTML = "Errore nell'aggiornamento"
 }
@@ -47,7 +48,7 @@ function formOk() {
     document.querySelector("button").disabled = true
     document.querySelector("label").style.color = "var(--md-sys-color-on-background)"
     const alert = document.querySelector(".alert")
-    alert.style.visibility ="visible"
+    alert.style.visibility = "visible"
     alert.style.backgroundColor = "var(--md-sys-color-primary)"
     alert.style.color = "var(--md-sys-color-on-background)"
     document.querySelector("#textAlert").innerHTML = "Aggiornato con successo"
@@ -60,7 +61,7 @@ function validate() {
     for (const arg of document.querySelectorAll("label")) {
         const element = document.getElementById(arg.htmlFor)
         if (element.id === "email") {
-            if(element.value === "") {
+            if (element.value === "") {
                 count++
             } else if (regexEmail.test(element.value)) {
                 arg.style.color = "var(--md-sys-color-primary)"
@@ -69,7 +70,7 @@ function validate() {
                 error = true
             }
         } else if (element.id === "password") {
-            if(element.value === "") {
+            if (element.value === "") {
                 count++
             } else if (regexPassword.test(element.value)) {
                 arg.style.color = "var(--md-sys-color-primary)"
@@ -77,13 +78,13 @@ function validate() {
                 arg.style.color = "var(--md-sys-color-error)"
                 error = true
             }
-            if(element.value === document.querySelector("#check_password").value) {
-                if(element.value === "") {
+            if (element.value === document.querySelector("#check_password").value) {
+                if (element.value === "") {
                     count++
                 } else {
                     document.querySelector("#check_label").style.color = "var(--md-sys-color-primary)"
                 }
-            } else if(document.querySelector("#check_password").value !== "") {
+            } else if (document.querySelector("#check_password").value !== "") {
                 arg.style.color = "var(--md-sys-color-error)"
                 document.querySelector("#check_label").style.color = "var(--md-sys-color-error)"
                 error = true
@@ -91,7 +92,7 @@ function validate() {
         }
     }
 
-    if(count === 3)
+    if (count === 3)
         error = false
 
     if (!error) {

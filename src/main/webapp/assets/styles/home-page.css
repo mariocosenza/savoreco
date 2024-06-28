@@ -24,7 +24,6 @@ div.center {
 }
 
 
-
 h1.search {
     font-size: 1.5em;
 }
@@ -89,7 +88,7 @@ div.left, div.right {
     will-change: box-shadow, transform, background-color;
 }
 
-div.left:hover  {
+div.left:hover {
     transform: translateY(-1rem) rotate(-3deg);
     box-shadow: 0 0.5em 3em 0.3em rgba(0, 0, 0, 0.3);
     background: var(--md-sys-color-on-secondary, #DDDDDD); /* Colore di sfondo al passaggio del mouse */
@@ -100,7 +99,6 @@ div.right:hover {
     box-shadow: 0 0.5em 3em 0.3em rgba(0, 0, 0, 0.3);
     background: var(--md-sys-color-on-secondary, #DDDDDD); /* Colore di sfondo al passaggio del mouse */
 }
-
 
 
 div.left {
@@ -144,6 +142,7 @@ div.left p, div.right p {
         display: block;
         margin: 15vh auto 5rem;
     }
+
     div.info img.center {
         vertical-align: top;
         max-height: 15em;
@@ -170,7 +169,7 @@ div.left p, div.right p {
         margin: 0;
     }
 
-    div.left, div.right{
+    div.left, div.right {
         padding-bottom: 1em;
         float: none;
         height: auto;

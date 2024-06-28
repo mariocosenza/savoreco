@@ -13,9 +13,10 @@ import java.io.IOException;
 public class InvalidateServlet extends HttpServlet {
 
     private static final Logger logger = LoggerFactory.getLogger(InvalidateServlet.class);
+
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp)  {
-        if(req.getSession(false) != null) {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        if (req.getSession(false) != null) {
             req.getSession().invalidate();
         }
         try {

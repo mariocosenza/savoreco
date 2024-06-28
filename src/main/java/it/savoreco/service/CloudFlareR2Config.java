@@ -19,7 +19,7 @@ public class CloudFlareR2Config {
         return Optional.ofNullable((AmazonS3Client) AmazonS3ClientBuilder
                 .standard()
                 .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(configurationProvider.getProperties("url") ,""))
+                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(configurationProvider.getProperties("url"), ""))
                 .build());
 
     }

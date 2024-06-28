@@ -18,7 +18,7 @@ label {
     margin-top: 0.8em;
 }
 
-.formPreference label, .formPreference input{
+.formPreference label, .formPreference input {
     color: var(--md-sys-color-on-background);
     display: flex;
     flex-direction: column;

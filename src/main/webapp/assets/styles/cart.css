@@ -22,14 +22,18 @@ main div {
 .rightCost h1 {
     margin: auto auto 1.5em;
 }
+
 .rightCost h2 {
     font-size: 1.0em;
 }
 
 #container {
-    margin-left: 60%; !important;
-    max-width:  25%; !important;
-    max-height: 25%; !important;
+    margin-left: 60%;
+!important;
+    max-width: 25%;
+!important;
+    max-height: 25%;
+!important;
 }
 
 
@@ -87,7 +91,6 @@ h1.orderTitle {
 button:hover {
     background-color: var(--md-sys-color-tertiary);
 }
-
 
 
 li {
@@ -152,7 +155,7 @@ ol {
     padding: 2em 0;
 }
 
-h2, h1  {
+h2, h1 {
     color: var(--md-sys-color-on-background);
 }
 
@@ -204,11 +207,7 @@ div.summaryPayment h2 {
 }
 
 
-
-
-
-
-@media  screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
     main img {
         max-width: 45vw;
     }
@@ -218,12 +217,13 @@ div.summaryPayment h2 {
         text-align: center;
         font-size: 0.7em;
     }
+
     #container {
         margin-left: 30%;
     }
 }
 
-@media  screen and (max-width: 400px) {
+@media screen and (max-width: 400px) {
 
     #container {
         margin-left: 20%;

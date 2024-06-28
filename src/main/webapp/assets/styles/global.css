@@ -158,6 +158,7 @@ span.siteLinkRight {
     float: right;
     margin-right: 10vw;
 }
+
 span.siteLinkRight a {
     margin-left: 1vw;
     display: inline-block;
@@ -171,7 +172,7 @@ span.siteLinkRight a {
     color: var(--md-sys-color-on-background, black);
 }
 
-#ecoLogoText, #bigTextLogo{
+#ecoLogoText, #bigTextLogo {
     font-size: 2rem;
     font-style: normal;
     font-weight: 700;
@@ -271,7 +272,7 @@ button.big {
 }
 
 div.cardCentral {
-    border-radius:  calc(100px + 1.5625vw);
+    border-radius: calc(100px + 1.5625vw);
     box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
     padding: 1rem 9vw;
     margin: 1rem 16vw;
@@ -323,7 +324,7 @@ form {
 
 footer {
     all: revert;
-    background:  var(--md-sys-color-secondary-container);
+    background: var(--md-sys-color-secondary-container);
     display: flex;
     min-height: 50px;
     bottom: 0;
@@ -341,7 +342,7 @@ span.copyright {
 
 p.footer {
     all: revert;
-    background-color:  var(--md-sys-color-secondary-container);
+    background-color: var(--md-sys-color-secondary-container);
     min-width: 31.33vw;
     margin-left: 1vw;
     margin-right: 1vw;
@@ -390,6 +391,7 @@ button {
     .sidenav {
         padding-top: 15px;
     }
+
     .sidenav a {
         font-size: 1.2rem;
     }

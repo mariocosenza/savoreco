@@ -3,7 +3,10 @@ package it.savoreco.controller;
 import com.google.common.html.HtmlEscapers;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import it.savoreco.model.entity.*;
+import it.savoreco.model.entity.Address;
+import it.savoreco.model.entity.AddressId;
+import it.savoreco.model.entity.Restaurant;
+import it.savoreco.model.entity.SellerAccount;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -89,7 +92,7 @@ public class AddRestaurantServlet extends HttpServlet {
 
                 var address = session.get(Address.class, addressId);
 
-                if(address == null) {
+                if (address == null) {
                     address = new Address();
                     address.setId(addressId);
                     address.setCity(HtmlEscapers.htmlEscaper().escape(city));

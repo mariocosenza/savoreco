@@ -9,7 +9,7 @@
     <title>Savoreco</title>
 </head>
 <body>
-    <jsp:include page="/components/navbar.jsp"/>
+<jsp:include page="/components/navbar.jsp"/>
 
 <main>
     <div class="overlay">
@@ -22,11 +22,11 @@
             </h1>
             <span class="tooltiptext" style="display: none">Indirizzo non trovato riprova</span>
             <search>
-                    <div id="autocomplete">
-                    </div>
-                    <script>
-                       autocomplete()
-                    </script>
+                <div id="autocomplete">
+                </div>
+                <script>
+                    autocomplete()
+                </script>
             </search>
         </div>
     </div>
@@ -34,11 +34,13 @@
     <div class="center info">
         <img src="assets/images/center-info.webp" class="center" alt="Info center">
         <p>
-            Savoreco si distingue nel panorama del food delivery per il suo impegno nella promozione di uno stile di vita sostenibile.
+            Savoreco si distingue nel panorama del food delivery per il suo impegno nella promozione di uno stile di
+            vita sostenibile.
             La piattaforma incoraggia attivamente i propri utenti a fare scelte ecologiche attraverso un innovativo
             sistema di punteggio che converte le ordinazioni in sconti e vantaggi,
             premiando così coloro che optano per opzioni più rispettose dell’ambiente.
-            Savoreco si impegna nello sviluppo di un sito web responsive e intuitivo, progettato per essere perfettamente fruibile su una vasta gamma di dispositivi,
+            Savoreco si impegna nello sviluppo di un sito web responsive e intuitivo, progettato per essere
+            perfettamente fruibile su una vasta gamma di dispositivi,
             dai telefoni cellulari ai tablet, fino ai computer desktop.
         </p>
     </div>
@@ -46,8 +48,10 @@
         <div class="left">
             <img src="assets/images/left-info.webp" class="left" alt="Info left">
             <p>
-                Potrai aggiungere prodotti al carrello, gestire le informazioni di consegna e completare l'ordine facilmente.
-                Effettua scelte sostenibili per ottenere sconti, sottoscrivi un abbonamento per consegne gratuite e monitora il tuo ordine in tempo reale.
+                Potrai aggiungere prodotti al carrello, gestire le informazioni di consegna e completare l'ordine
+                facilmente.
+                Effettua scelte sostenibili per ottenere sconti, sottoscrivi un abbonamento per consegne gratuite e
+                monitora il tuo ordine in tempo reale.
                 Ricevi messaggi promozionali, cerca ristoranti e contatta il supporto clienti per assistenza.
             </p>
         </div>
@@ -61,6 +65,6 @@
         </div>
     </div>
 </main>
-<%@ include file="components/footer.jsp"%>
+<%@ include file="components/footer.jsp" %>
 </body>
 </html>

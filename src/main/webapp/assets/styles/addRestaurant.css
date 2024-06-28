@@ -21,11 +21,13 @@ textarea {
     border-radius: 0.4em;
     outline: none;
     box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 0 inset;
-    :focus{
+
+    :focus {
         border-color: var(--md-sys-color-secondary-fixed-dim);;
         outline: none;
         box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
     }
+
     width: 65%;
     min-width: 65%;
     max-width: 75%;

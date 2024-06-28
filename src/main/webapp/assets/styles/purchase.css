@@ -1,6 +1,6 @@
 @import "global.css";
 
-body.confirmed{
+body.confirmed {
     padding-top: 25vh;
     display: block;
     text-align: center;
@@ -10,14 +10,16 @@ body.confirmed{
     font-size: 2em;
     margin-top: 2em;
 }
+
 .checkmark, .error-mark {
     min-height: max(5vw, 50px);
-    min-width: max(5vw,  50px);
+    min-width: max(5vw, 50px);
     background-color: var(--md-sys-color-primary-container);
     border-radius: 50%;
     display: inline-block;
     position: relative;
 }
+
 .checkmark:after, .error-mark:after {
     content: '';
     position: absolute;

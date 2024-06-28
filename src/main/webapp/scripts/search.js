@@ -5,7 +5,7 @@ function toggleCategory(obj, className) {
     const elementCategory = document.querySelectorAll(".resultCategory" + className);
     const resultElements = document.querySelectorAll(".result");
 
-    if(obj.style.borderColor === "var(--md-sys-color-secondary-container)" || obj.style.borderColor === "red") {
+    if (obj.style.borderColor === "var(--md-sys-color-secondary-container)" || obj.style.borderColor === "red") {
         for (const element of elementCategory) {
             element.style.display = "flex"
         }
@@ -18,8 +18,8 @@ function toggleCategory(obj, className) {
     }
 
     divs.forEach(d => {
-        if(d !== obj && d.style.borderColor === "var(--md-sys-color-secondary-container)") {
-            for (const element of document.querySelectorAll(".resultCategory" + d.id.replace('searchCategory',''))) {
+        if (d !== obj && d.style.borderColor === "var(--md-sys-color-secondary-container)") {
+            for (const element of document.querySelectorAll(".resultCategory" + d.id.replace('searchCategory', ''))) {
                 element.style.display = "none"
             }
             d.style.borderColor = "red"
@@ -30,15 +30,14 @@ function toggleCategory(obj, className) {
     let green = false;
 
     for (const element of divs) {
-        if(element.style.borderColor === "red") {
+        if (element.style.borderColor === "red") {
             red = true;
-        }
-        else if(element.style.borderColor === "green") {
+        } else if (element.style.borderColor === "green") {
             green = true
         }
     }
 
-    if(red && green)
+    if (red && green)
         return;
 
     for (const element of resultElements) {
@@ -60,9 +59,9 @@ function toggleSelect(obj) {
         element.style.display = "flex"
     }
 
-    if(obj.options[obj.selectedIndex].value !== "noCategory") {
+    if (obj.options[obj.selectedIndex].value !== "noCategory") {
         for (const element of resultElements) {
-            if(!element.classList.contains("resultCategory" + className))
+            if (!element.classList.contains("resultCategory" + className))
                 element.style.display = "none"
         }
     }

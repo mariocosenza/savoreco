@@ -2,7 +2,8 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html lang="it">
 <footer>
-    <c:set var="serverPath" value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}"/>
+    <c:set var="serverPath"
+           value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}"/>
     <p class="footer">
         <span class="footerTitle">Apprezziamo la tua opinione</span> <br>
         <a href="mailto:feedback@savoreco.it">
@@ -43,10 +44,14 @@
     <p class="footer">
         <span class="footerTitle">Teniamo alla tua privacy</span> <br>
         <a href="${serverPath}/help">Informativa privacy</a><br>
-        <a href="https://github.com/mariocosenza/savoreco?tab=readme-ov-file#authors" target="_blank" rel="noopener">Il nostro team</a><br>
-        <a href="#" onclick="if(window.__lxG__consent__!==undefined&amp;&amp;window.__lxG__consent__.getState()!==null){window.__lxG__consent__.showConsent()} else {alert('This function only for users from European Economic Area (EEA)')} return false">Modifica consenso</a><br><br>
+        <a href="https://github.com/mariocosenza/savoreco?tab=readme-ov-file#authors" target="_blank" rel="noopener">Il
+            nostro team</a><br>
+        <a href="#"
+           onclick="if(window.__lxG__consent__!==undefined&amp;&amp;window.__lxG__consent__.getState()!==null){window.__lxG__consent__.showConsent()} else {alert('This function only for users from European Economic Area (EEA)')} return false">Modifica
+            consenso</a><br><br>
         <span class="copyright">© 2024 Savoreco</span><br>
-        <img class="footerLogo" src="${serverPath}/assets/icons/google-pay-primary-logo-logo-svgrepo-com.svg" alt="GPay Logo">
+        <img class="footerLogo" src="${serverPath}/assets/icons/google-pay-primary-logo-logo-svgrepo-com.svg"
+             alt="GPay Logo">
     </p>
 </footer>
 </html>

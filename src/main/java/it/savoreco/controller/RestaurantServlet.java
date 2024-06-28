@@ -2,7 +2,10 @@ package it.savoreco.controller;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import it.savoreco.model.entity.*;
+import it.savoreco.model.entity.Basket;
+import it.savoreco.model.entity.Food;
+import it.savoreco.model.entity.Restaurant;
+import it.savoreco.model.entity.UserAccount;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -16,6 +19,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -51,18 +55,18 @@ public class RestaurantServlet extends HttpServlet {
             int id = Integer.parseInt(req.getParameter("id"));
 
             Query<Restaurant> restaurantQuery = session.createQuery("FROM Restaurant r "
-                    +"WHERE r.id = :id", Restaurant.class);
+                    + "WHERE r.id = :id", Restaurant.class);
             restaurantQuery.setParameter("id", id);
             Restaurant restaurant = restaurantQuery.getSingleResult();
 
             Query<Food> foodQuery = session.createQuery("FROM Food f "
-                    +"WHERE f.restaurant = :restaurant AND f.available = true", Food.class);
+                    + "WHERE f.restaurant = :restaurant AND f.available = true", Food.class);
             foodQuery.setParameter("restaurant", restaurant);
             List<Food> foodList = foodQuery.list();
 
             transaction.commit();
 
-            if(restaurant.getDeleted()){
+            if (restaurant.getDeleted()) {
                 try {
                     resp.sendError(HttpServletResponse.SC_FORBIDDEN);
                 } catch (IOException ioException) {
@@ -113,15 +117,14 @@ public class RestaurantServlet extends HttpServlet {
 
             try {
                 Query<Food> foodQuery = session.createQuery("FROM Food f "
-                        +"WHERE f.id = :foodId", Food.class);
+                        + "WHERE f.id = :foodId", Food.class);
                 foodQuery.setParameter("foodId", foodId.trim());
                 Food food = foodQuery.getSingleResult();
 
                 Query<Basket> basketQuery = session.createQuery("FROM Basket b "
-                        +"WHERE b.user = :user", Basket.class);
+                        + "WHERE b.user = :user", Basket.class);
                 basketQuery.setParameter("user", user);
                 Basket basket = basketQuery.getSingleResult();
-
 
 
                 transaction.commit();

@@ -16,7 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Comparator;
+import java.util.Objects;
 
 
 @WebServlet(
@@ -32,7 +33,7 @@ public class SearchServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
 
-        if(Objects.isNull(req.getParameter("lat")) || Objects.isNull(req.getParameter("lon"))) {
+        if (Objects.isNull(req.getParameter("lat")) || Objects.isNull(req.getParameter("lon"))) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
@@ -46,31 +47,29 @@ public class SearchServlet extends HttpServlet {
             var lat = Double.parseDouble(req.getParameter("lat"));
 
             Query<Restaurant> query;
-            if(Objects.isNull(req.getParameter("sort")) || req.getParameter("sort").equals("distance")) {
-               query = session.createNativeQuery("SELECT r.restaurant_id, r.name, r.street, r.zipcode, r.description, r.image_object, r.delivery_cost, r.category, r.deleted, r.creation_time FROM savoreco.restaurant r " +
+            if (Objects.isNull(req.getParameter("sort")) || req.getParameter("sort").equals("distance")) {
+                query = session.createNativeQuery("SELECT r.restaurant_id, r.name, r.street, r.zipcode, r.description, r.image_object, r.delivery_cost, r.category, r.deleted, r.creation_time FROM savoreco.restaurant r " +
                         "INNER JOIN savoreco.address b " +
                         "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 10000 and r.deleted is false LIMIT :maxResult", Restaurant.class);
 
-            }
-            else if(Objects.nonNull(req.getParameter("byName")) && !req.getParameter("byName").isEmpty()) {
-                query =  session.createNativeQuery("SELECT r.restaurant_id, r.name, r.street, r.zipcode, r.description, r.image_object, r.delivery_cost, r.category, r.deleted, r.creation_time  FROM savoreco.restaurant r " +
+            } else if (Objects.nonNull(req.getParameter("byName")) && !req.getParameter("byName").isEmpty()) {
+                query = session.createNativeQuery("SELECT r.restaurant_id, r.name, r.street, r.zipcode, r.description, r.image_object, r.delivery_cost, r.category, r.deleted, r.creation_time  FROM savoreco.restaurant r " +
                         "INNER JOIN savoreco.address b " +
                         "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 10000 and r.deleted is false and savoreco.similarity(r.name, :name) > 0.3 LIMIT :maxResult", Restaurant.class);
                 query.setParameter("name", req.getParameter("byName"));
-            }
-             else if(req.getParameter("sort").equals("name")) {
-                query =  session.createNativeQuery("SELECT r.restaurant_id, r.name, r.street, r.zipcode, r.description, r.image_object, r.delivery_cost, r.category, r.deleted, r.creation_time  FROM savoreco.restaurant r " +
+            } else if (req.getParameter("sort").equals("name")) {
+                query = session.createNativeQuery("SELECT r.restaurant_id, r.name, r.street, r.zipcode, r.description, r.image_object, r.delivery_cost, r.category, r.deleted, r.creation_time  FROM savoreco.restaurant r " +
                         "INNER JOIN savoreco.address b " +
                         "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 10000 and r.deleted is false ORDER BY UPPER(r.name) LIMIT  :maxResult", Restaurant.class);
             } else {
-                query =  session.createNativeQuery("SELECT r.restaurant_id, r.name, r.street, r.zipcode, r.description, r.image_object, r.delivery_cost, r.category, r.deleted, r.creation_time FROM savoreco.restaurant r " +
+                query = session.createNativeQuery("SELECT r.restaurant_id, r.name, r.street, r.zipcode, r.description, r.image_object, r.delivery_cost, r.category, r.deleted, r.creation_time FROM savoreco.restaurant r " +
                         "INNER JOIN savoreco.address b " +
                         "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 10000 and r.deleted is false ORDER BY r.delivery_cost LIMIT :maxResult", Restaurant.class);
             }
 
 
             int result = 10;
-            if(Objects.nonNull(req.getParameter("maxResult"))) {
+            if (Objects.nonNull(req.getParameter("maxResult"))) {
                 result = Math.max(Integer.parseInt(req.getParameter("maxResult")), 10);
             }
 
@@ -84,7 +83,7 @@ public class SearchServlet extends HttpServlet {
             }
 
             transaction.commit();
-            if(restaurantList.size() < result) {
+            if (restaurantList.size() < result) {
                 req.setAttribute("maxResult", 0);
             } else {
                 req.setAttribute("maxResult", result + 5);
