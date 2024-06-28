@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.nio.file.attribute.FileAttribute;
 import java.nio.file.attribute.PosixFilePermission;
 import java.nio.file.attribute.PosixFilePermissions;
+import java.security.SecureRandom;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -29,6 +30,9 @@ public class FileUpload {
     }
 
     public String saveImage(String path, InputStream stream) {
+
+        var random = new SecureRandom();
+        path = path + random.nextDouble();
 
         try {
 
