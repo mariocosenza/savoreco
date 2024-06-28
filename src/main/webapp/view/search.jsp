@@ -27,10 +27,13 @@
         </form>
     </search>
     <div class="mobileSelector">
-        <label>
+        <label for="selectSearch">
             Scegli categoria ristorante <!--Per motivi di sicurezza non usare id che iniziano con searchCategory-->
         </label>
-        <select class="mobile classic" onclick=toggleSelect(this)>
+        <select id="selectSearch" class="mobile classic" onclick=toggleSelect(this)>
+            <option value="noCategory" selected>
+                Nessun Filtro
+            </option>
             <c:forEach items="${requestScope.restaurants.stream().map(r -> r.category).sorted().distinct().toList()}" var="category">
                 <option value="${category.replaceAll("\\s+","")}">
                          <c:out value="${category}"/>
@@ -54,7 +57,7 @@
                             <option <c:if test="${param.sort == 'distance' or param.sort == null}">
                                 selected
                             </c:if> value="distance">
-                                Rage di 30 km
+                                Rage di 10 km
                             </option>
                             <option <c:if test="${param.sort == 'name'}">
                                 selected
