@@ -37,8 +37,8 @@ public class FileServlet extends HttpServlet {
             if (req.getSession(false) != null && req.getSession().getAttribute("seller") instanceof SellerAccount) {
 
                 String mode = req.getParameter("mode");
-                if (mode.equals("restaurant")) {
-                    var filePart = req.getPart("image");
+                var filePart = req.getPart("image");
+                if (mode.equals("restaurant") && filePart.getSubmittedFileName().length() <= 256) {
                     Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes());
                     String imageUrl = fileUpload.saveImage(HtmlEscapers.htmlEscaper().escape(Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes()) + ".png"), filePart.getInputStream());
 

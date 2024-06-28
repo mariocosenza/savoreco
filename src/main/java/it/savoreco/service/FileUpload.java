@@ -32,7 +32,7 @@ public class FileUpload {
     public String saveImage(String path, InputStream stream) {
 
         var random = new SecureRandom();
-        path = path + random.nextDouble();
+        path = path + random.nextInt();
 
         try {
 
