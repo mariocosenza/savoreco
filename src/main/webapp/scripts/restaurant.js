@@ -2,6 +2,34 @@
 
 const regexId = /^\d+$/;
 
+function initializeMap(lon, lat) {
+    Radar.initialize('prj_live_pk_bc9bb756fa7f36a4b5b2ce09cd0c587f58ada95c');
+    // create a new map
+    let map
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        map = Radar.ui.map({
+            container: 'map',
+            style: 'radar-dark-v1',
+            center: [lon, lat],
+            language: 'local',
+            zoom: 11,
+        });
+    } else {
+        map = Radar.ui.map({
+            container: 'map',
+            style: 'radar-default-v1',
+            center: [lon, lat],
+            language: 'local',
+            zoom: 11,
+        });
+    }
+    // create marker and add to map
+    const marker = Radar.ui.marker({color: '#14512DFF'})
+        .setLngLat([lon, lat])
+        .addTo(map);
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll('.add-to-cart');
 
@@ -60,3 +88,6 @@ function startEffect(button) {
         effect.remove();
     }, 1500);
 }
+
+
+

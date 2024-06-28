@@ -1,6 +1,8 @@
-package it.savoreco.controller;
+package it.savoreco.controller.seller;
 
-import it.savoreco.model.entity.*;
+import it.savoreco.model.entity.BoughtFood;
+import it.savoreco.model.entity.Restaurant;
+import it.savoreco.model.entity.SellerAccount;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,6 +15,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.util.List;
 

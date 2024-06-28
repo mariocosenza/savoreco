@@ -1,4 +1,4 @@
-package it.savoreco.controller;
+package it.savoreco.controller.seller;
 
 import com.google.common.html.HtmlEscapers;
 import com.google.common.reflect.TypeToken;
@@ -18,7 +18,6 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
@@ -51,7 +50,7 @@ public class SellerRestaurantServlet extends HttpServlet {
         nameMatcher = Pattern.compile("^[a-zA-Z][a-zA-Z0-9-_\\s]{2,24}$");
         descriptionMatcher = Pattern.compile("^.{2,2000}$");
         categoryMatcher = Pattern.compile("^[a-zA-Z\\s]{2,25}$");
-        priceMatcher = Pattern.compile("^\\d+(\\.\\d{1,2})?$");
+        priceMatcher = Pattern.compile("^\\d+(\\.\\d{1,2})?$|^\\d+(,\\d{1,2})?$");
         allergensMatcher = Pattern.compile("^[A-Za-z]+(?:,\\s*[A-Za-z]+){0,49}$");
         greenPointsMatcher = Pattern.compile("^\\d{1,2}$");
         quantityMatcher = Pattern.compile("^\\d{1,5}$");
@@ -118,14 +117,14 @@ public class SellerRestaurantServlet extends HttpServlet {
         try {
             Gson gson = new Gson();
             map = gson.fromJson(req.getReader(), mapType);
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("Error parsing JSON", e);
             return;
         }
 
         SellerAccount seller = (SellerAccount) req.getSession().getAttribute("seller");
 
-        if(map.get("mode").equals("saveFood")) {
+        if (map.get("mode").equals("saveFood")) {
             var name = map.get("fname").trim();
             var description = map.get("fdescription").trim();
             var category = map.get("fcategory").trim();
@@ -192,7 +191,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                     logger.warn("Error sending error", e);
                 }
             }
-        } else if(map.get("mode").equals("modifyRestaurant")) {
+        } else if (map.get("mode").equals("modifyRestaurant")) {
             var name = map.get("name").trim();
             var description = map.get("description").trim();
             var category = map.get("category").trim();
@@ -221,22 +220,20 @@ public class SellerRestaurantServlet extends HttpServlet {
 
                     Address address;
 
-                    if(!street.isEmpty()){
+                    if (!street.isEmpty()) {
                         var addressId = new AddressId();
                         addressId.setStreet(HtmlEscapers.htmlEscaper().escape(street));
                         addressId.setZipcode(HtmlEscapers.htmlEscaper().escape(zipcode));
 
                         address = session.get(Address.class, addressId);
 
-                        if(address == null) {
+                        if (address == null) {
                             address = new Address();
                             address.setId(addressId);
                             address.setCity(HtmlEscapers.htmlEscaper().escape(city));
                             address.setCountryCode("IT");
                             address.setLat(Double.valueOf(lat));
                             address.setLon(Double.valueOf(lon));
-
-                            session.persist(addressId);
                             session.persist(address);
                         }
                     } else {
@@ -246,7 +243,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                     restaurant.setName(HtmlEscapers.htmlEscaper().escape(name));
                     restaurant.setAddress(address);
                     restaurant.setDescription(HtmlEscapers.htmlEscaper().escape(description));
-                    restaurant.setDeliveryCost(BigDecimal.valueOf(Double.parseDouble(deliveryCost)));
+                    restaurant.setDeliveryCost(BigDecimal.valueOf(Double.parseDouble(deliveryCost.replace(',','.'))));
                     restaurant.setCategory(HtmlEscapers.htmlEscaper().escape(category));
                     restaurant.setCreationTime(Instant.now());
                     restaurant.setImageObject(HtmlEscapers.htmlEscaper().escape(logoUrl));
@@ -273,7 +270,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                 }
             }
         } else {
-            //l'if per il delete
+            //if per il delete
             try {
                 resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             } catch (IOException e) {

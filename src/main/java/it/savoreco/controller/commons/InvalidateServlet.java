@@ -1,4 +1,4 @@
-package it.savoreco.controller;
+package it.savoreco.controller.commons;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,9 +13,10 @@ import java.io.IOException;
 public class InvalidateServlet extends HttpServlet {
 
     private static final Logger logger = LoggerFactory.getLogger(InvalidateServlet.class);
+
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp)  {
-        if(req.getSession(false) != null) {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        if (req.getSession(false) != null) {
             req.getSession().invalidate();
         }
         try {

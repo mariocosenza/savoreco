@@ -19,17 +19,21 @@ header, article, main div {
     border-radius: 0.4em;
     background-color: var(--md-sys-color-background);
 }
+
 header {
     background-color: var(--md-sys-color-primary-container);
     color: var(--md-sys-color-on-primary-container);
 }
+
 main h1, main h2, main h3 {
     color: var(--md-sys-color-on-background);
 }
+
 main a {
     color: var(--md-sys-color-primary);
     text-decoration: none;
 }
+
 main a:hover {
     text-decoration: underline;
 }

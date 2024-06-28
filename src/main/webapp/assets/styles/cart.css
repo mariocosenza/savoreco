@@ -22,14 +22,18 @@ main div {
 .rightCost h1 {
     margin: auto auto 1.5em;
 }
+
 .rightCost h2 {
     font-size: 1.0em;
 }
 
 #container {
-    margin-left: 60%; !important;
-    max-width:  25%; !important;
-    max-height: 25%; !important;
+    margin-left: 60%;
+!important;
+    max-width: 25%;
+!important;
+    max-height: 25%;
+!important;
 }
 
 
@@ -89,7 +93,6 @@ button:hover {
 }
 
 
-
 li {
     list-style-type: none;
     min-width: 100%;
@@ -107,19 +110,33 @@ div.empty h1 {
     display: inline;
 }
 
-svg {
-   float: right;
-    width: 1em;
-    height: 1em;
-}
 
 svg.addIcon {
     clear: both;
-    float: none;
-    min-width: 1.2em;
+    min-width: 1.4em;
     min-height: 2em;
     margin-left: 2%;
+    transition: transform 0.3s ease-out;
+    filter: invert(35%) sepia(95%) saturate(1200%) hue-rotate(88deg) brightness(90%) contrast(88%);
 }
+
+svg.addIcon:hover {
+    transform: scale(1.1);
+}
+
+svg.delete {
+    float: right;
+    width: 1.5em;
+    height: 1.5em;
+    transition: transform 0.7s ease-out;
+    filter: brightness(0) saturate(100%) invert(13%) sepia(99%) saturate(7477%) hue-rotate(356deg) brightness(104%) contrast(101%);
+    transform-origin: center; /* Imposta il centro dell'animazione */
+}
+
+svg.delete:hover {
+    transform: scale(1.3) rotate(-360deg); /* Ruota attorno al centro */
+}
+
 
 h2 {
     min-width: 100%;
@@ -138,7 +155,7 @@ ol {
     padding: 2em 0;
 }
 
-h2, h1  {
+h2, h1 {
     color: var(--md-sys-color-on-background);
 }
 
@@ -148,22 +165,19 @@ button.empty {
 }
 
 div.summaryPayment {
-    display: block;
+    display: inline-flex;
 }
 
 div.summaryPayment h1 {
-    display: block;
-    float: left;
+    display: inline;
     min-width: 50%;
-    width: auto;
     margin: auto auto 0.6rem;
+    text-align: left;
 }
 
 div.summaryPayment h2 {
-    display: inline-block;
-    float: right;
+    display: inline;
     margin: auto auto 0.6rem;
-    width: auto;
     font-size: 1em;
     min-width: 50%;
     text-align: right;
@@ -192,12 +206,8 @@ div.summaryPayment h2 {
     text-align: right;
 }
 
-svg {
-    filter: invert(35%) sepia(95%) saturate(1200%) hue-rotate(88deg) brightness(90%) contrast(88%);
-}
 
-
-@media  screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
     main img {
         max-width: 45vw;
     }
@@ -207,12 +217,13 @@ svg {
         text-align: center;
         font-size: 0.7em;
     }
+
     #container {
         margin-left: 30%;
     }
 }
 
-@media  screen and (max-width: 400px) {
+@media screen and (max-width: 400px) {
 
     #container {
         margin-left: 20%;

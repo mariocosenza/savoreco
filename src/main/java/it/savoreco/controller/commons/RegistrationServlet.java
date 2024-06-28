@@ -1,4 +1,4 @@
-package it.savoreco.controller;
+package it.savoreco.controller.commons;
 
 
 import com.google.common.reflect.TypeToken;
@@ -129,7 +129,7 @@ public class RegistrationServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
 
         try {
-            if(Objects.isNull(req.getSession(false)) || Objects.isNull(req.getSession(false).getAttribute("logged"))) {
+            if (Objects.isNull(req.getSession(false)) || Objects.isNull(req.getSession(false).getAttribute("logged"))) {
                 RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/registration.jsp");
                 requestDispatcher.forward(req, resp);
             } else {

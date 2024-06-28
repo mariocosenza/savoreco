@@ -1,4 +1,4 @@
-package it.savoreco.controller;
+package it.savoreco.controller.commons;
 
 
 import jakarta.servlet.RequestDispatcher;

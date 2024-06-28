@@ -8,10 +8,13 @@ import org.apache.commons.lang3.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.attribute.FileAttribute;
 import java.nio.file.attribute.PosixFilePermission;
 import java.nio.file.attribute.PosixFilePermissions;
+import java.security.SecureRandom;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -28,24 +31,26 @@ public class FileUpload {
 
     public String saveImage(String path, InputStream stream) {
 
+        var random = new SecureRandom();
+        path = path + random.nextInt();
+
         try {
 
             File file;
-            if(SystemUtils.IS_OS_UNIX) {
+            if (SystemUtils.IS_OS_UNIX) {
                 file = File.createTempFile("upload", ".png", new File("/opt"));
                 FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rwx------"));
                 java.nio.file.Files.createTempFile("upload", ".png", attr); // Compliant
-            }
-            else {
+            } else {
                 file = File.createTempFile("upload", ".png");  // Compliant
-                if(!file.setReadable(true, true)
+                if (!file.setReadable(true, true)
                         || !file.setWritable(true, true)
                         || !file.setExecutable(true, true)) {
                     throw new RuntimeException("Cannot create temp file");
                 }
             }
 
-            try  {
+            try {
                 Files.write(stream.readAllBytes(), file);
             } catch (IOException e) {
                 throw new RuntimeException(e);

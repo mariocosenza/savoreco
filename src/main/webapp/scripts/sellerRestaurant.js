@@ -3,7 +3,7 @@
 const regexName = /^[a-zA-Z][a-zA-Z0-9-_\s]{2,24}$/;
 const regexDescription = /^.{2,2000}$/;
 const regexCategory = /^[a-zA-Z\s]{2,25}$/;
-const regexCost = /^\d+(\.\d{1,2})?$/;
+const regexCost = /^\d+(\.\d{1,2})?$|^\d+(,\d{1,2})?$/;
 const regexAllergens = /^[A-Za-z]+(?:,\s*[A-Za-z]+){0,49}$/;
 const regexGreenPoints = /^\d{1,2}$/;
 const regexQuantity = /^\d{1,5}$/;
@@ -52,8 +52,9 @@ async function submitFoodUpdate(foodId) {
                 body: JSON.stringify(Object.fromEntries(formData)),
                 contentType: "application/json"
             });
-
-            if (!response.ok){
+            if (response.ok) {
+                location.reload();
+            } else {
                 formError(form);
             }
         } catch (e) {
@@ -70,7 +71,6 @@ function formError(foodId) {
     form.querySelector("button.save").disabled = true;
     form.querySelectorAll("label").forEach(label => label.style.color = "var(--md-sys-color-error)");
 }
-
 
 
 function validateFood(foodId) {
@@ -113,24 +113,15 @@ function validateFood(foodId) {
 }
 
 
-
-
-
-
-
-
-
-
-
 async function submitRestaurantUpdate() {
     const form = document.querySelector(`#formRest`);
     if (validateRestaurant()) {
         const address = searchResult();
-        if(address !== undefined) {
+        if (address !== undefined) {
             form.querySelector("#lat").value = address.latitude
             form.querySelector("#lon").value = address.longitude
-            form.querySelector("#postal").value = address.postalCode + ` ${address.postalCode === undefined? "00042" : address.postalCode}`
-            form.querySelector("#address").value = address.street + ` ${address.number === undefined? "" : address.number}`
+            form.querySelector("#postal").value = address.postalCode + ` ${address.postalCode === undefined ? "00042" : address.postalCode}`
+            form.querySelector("#address").value = address.street + ` ${address.number === undefined ? "" : address.number}`
             form.querySelector("#city").value = address.city
         }
         const imageFile = form.querySelector('input[type="file"]').files[0];
@@ -175,7 +166,9 @@ async function submitRestaurantUpdate() {
                 contentType: "application/json"
             });
 
-            if (!response.ok) {
+            if(response.ok) {
+              location.reload()
+            } else {
                 formError('Rest');
             }
         } catch (e) {
@@ -223,7 +216,7 @@ function validateRestaurant() {
                 label.style.color = "var(--md-sys-color-error)";
                 error = true;
             }
-        } else  if (element.value === "" && element.id !== "logo") {
+        } else if (element.value === "" && element.id !== "logo") {
             error = true;
         }
     });
