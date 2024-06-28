@@ -132,6 +132,9 @@ div.left p, div.right p {
     margin-right: 5%;
 }
 
+.radar-autocomplete-input {
+    border-radius: 0.8rem;
+}
 
 @media screen and (max-width: 900px) {
     div.info {

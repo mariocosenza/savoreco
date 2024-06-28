@@ -67,25 +67,25 @@ h2 {
     display: flex;
     flex-direction: row;
     margin: 2vw;
-    padding-left: 2vw;
     min-width: 72vw;
-    min-height: 25vh;
-    max-height: 50vh;
+    min-height: 20em;
+    max-height: 20em;
     border-radius: 0.4em;
     box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
-    padding-top: 1em;
-    padding-bottom: 1em;
 }
 
 .resultImage {
-    margin-top: 5%;
+    padding-left: 1%;
+    padding-right: 1%;
+    object-fit: scale-down;
+    min-height: inherit;
+    background-color: var(--md-sys-color-surface-variant);
     min-width: 25%;
     max-width: 25%;
-    margin-bottom: 5%;
     margin-right: 5%;
     height: auto;
+    mix-blend-mode: multiply;
     overflow: hidden;
-    border-radius: 0.8em;
 }
 
 .restaurantInfo {
@@ -129,7 +129,7 @@ aside form {
 }
 
 search {
-    background-color: var(--md-sys-color-surface-variant);
+    background-color: var(--md-sys-color-on-surface-variant);
     color: var(--md-sys-color-on-background);
     min-width: 100%;
     display: flex;
@@ -168,28 +168,36 @@ search input[type="search"]:focus::placeholder {
 }
 
 button.searchLogo {
+    position: absolute;
+    right: 26vw;
     border-style: none;
     background-color: transparent;
-    margin-left: 2vw;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    max-width: 15vw;
-    max-height: 3em;
+    width: 3em;
+    height: 3em;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
 }
 
 button.searchLogo img {
     fill: var(--md-sys-color-primary);
     object-fit: scale-down;
-    max-width: 15vw;
-    max-height: 3em;
+    width: 100%;
+    height: 100%;
     filter: invert(86%) sepia(6%) saturate(3643%) hue-rotate(346deg) brightness(102%) contrast(89%);
 }
 
 button.searchLogo img:hover {
     filter: invert(35%) sepia(95%) saturate(1200%) hue-rotate(88deg) brightness(90%) contrast(88%);
 }
+
+button.searchLogo:active {
+    transform: scale(0.9); /* Scale down the button when clicked */
+}
+
 
 .filter{
     cursor: pointer;
@@ -355,5 +363,21 @@ h2.price {
         display: flex;
         margin-left: 15vw;
         margin-right: 15vw;
+    }
+
+
+    search input[type="search"] {
+        min-width: 75vw;
+    }
+
+    button.searchLogo {
+        right: 15vw;
+    }
+}
+
+
+@media screen and (prefers-color-scheme: dark){
+    .resultImage {
+        mix-blend-mode: normal;
     }
 }
