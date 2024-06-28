@@ -3,8 +3,8 @@
     <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor"
                      sameSiteCookies="strict" />
 
-    <ResourceLink name="jdbc/MyLocalDB"
-                  global="jdbc/MyLocalDB"
+    <ResourceLink name="jdbc/database"
+                  global="jdbc/database"
                   auth="Container"
                   type="javax.sql.DataSource" />
 </Context>
