@@ -1,4 +1,4 @@
-package it.savoreco.controller;
+package it.savoreco.controller.seller;
 
 import it.savoreco.model.entity.BoughtFood;
 import it.savoreco.model.entity.Restaurant;

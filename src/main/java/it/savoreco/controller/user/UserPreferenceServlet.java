@@ -1,4 +1,4 @@
-package it.savoreco.controller;
+package it.savoreco.controller.user;
 
 import com.google.common.html.HtmlEscapers;
 import com.google.common.reflect.TypeToken;

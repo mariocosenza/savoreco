@@ -1,4 +1,4 @@
-package it.savoreco.controller;
+package it.savoreco.controller.commons;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

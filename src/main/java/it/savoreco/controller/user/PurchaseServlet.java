@@ -1,4 +1,4 @@
-package it.savoreco.controller;
+package it.savoreco.controller.user;
 
 import it.savoreco.model.entity.*;
 import it.savoreco.service.PasswordSHA512;

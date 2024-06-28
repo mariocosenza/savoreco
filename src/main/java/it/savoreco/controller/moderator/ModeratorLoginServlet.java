@@ -1,4 +1,4 @@
-package it.savoreco.controller;
+package it.savoreco.controller.moderator;
 
 import it.savoreco.model.entity.ModeratorAccount;
 import it.savoreco.service.PasswordSHA512;

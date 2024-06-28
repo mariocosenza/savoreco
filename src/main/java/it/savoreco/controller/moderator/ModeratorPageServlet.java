@@ -1,6 +1,5 @@
-package it.savoreco.controller;
+package it.savoreco.controller.moderator;
 
-import it.savoreco.model.entity.BoughtFood;
 import it.savoreco.model.entity.UserAccount;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -19,38 +18,33 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(
-        name = "UserOrdersServlet",
-        displayName = "UserOrders - Home",
-        description = "UserOrders page",
-        value = "/user/userOrders"
+        name = "moderatorPageServlet",
+        displayName = "Moderator - Home",
+        description = "Moderator page",
+        value = "/moderator/moderatorPage"
 )
-public class UserOrdersServlet extends HttpServlet {
-    private static final Logger logger = LoggerFactory.getLogger(UserOrdersServlet.class);
+public class ModeratorPageServlet extends HttpServlet {
+    private static final Logger logger = LoggerFactory.getLogger(ModeratorPageServlet.class);
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/user/userOrders.jsp");
-
-        UserAccount user = (UserAccount) request.getSession().getAttribute("user");
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/moderator/moderatorPage.jsp");
 
         try {
             SessionFactory sessionFactory = (SessionFactory) request.getServletContext().getAttribute("SessionFactory");
             Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
 
-            Query<BoughtFood> bFoodQuery = session.createQuery("FROM BoughtFood bf " +
-                    "WHERE bf.purchase.user = :user ORDER BY bf.purchase.time LIMIT 20", BoughtFood.class);
-            bFoodQuery.setParameter("user", user);
-            List<BoughtFood> orders = bFoodQuery.list();
+            Query<UserAccount> userQuery = session.createQuery("FROM UserAccount us ", UserAccount.class);
+            List<UserAccount> usersList = userQuery.list();
 
             transaction.commit();
 
-            request.setAttribute("orders", orders);
-            request.setAttribute("user", user);
+            request.setAttribute("usersList", usersList);
 
             requestDispatcher.forward(request, response);
         } catch (IOException | ServletException e) {
-            logger.warn("Cannot forward to userOrders.jsp", e);
+            logger.warn("Cannot forward to moderatorPage.jsp", e);
         }
     }
 }

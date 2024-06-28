@@ -1,4 +1,4 @@
-package it.savoreco.controller;
+package it.savoreco.controller.commons.util;
 
 import com.google.common.html.HtmlEscapers;
 import it.savoreco.model.entity.SellerAccount;
