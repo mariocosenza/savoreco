@@ -60,7 +60,7 @@ public class RestaurantServlet extends HttpServlet {
             Restaurant restaurant = restaurantQuery.getSingleResult();
 
             Query<Food> foodQuery = session.createQuery("FROM Food f "
-                    + "WHERE f.restaurant = :restaurant AND f.available = true", Food.class);
+                    + "WHERE f.restaurant = :restaurant AND f.available = true ORDER BY f.category", Food.class);
             foodQuery.setParameter("restaurant", restaurant);
             List<Food> foodList = foodQuery.list();
 
