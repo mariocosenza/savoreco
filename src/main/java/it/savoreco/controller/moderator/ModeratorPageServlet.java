@@ -1,6 +1,9 @@
 package it.savoreco.controller.moderator;
 
-import it.savoreco.model.entity.UserAccount;
+import com.google.common.html.HtmlEscapers;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import it.savoreco.model.entity.*;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,7 +18,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(
         name = "moderatorPageServlet",
@@ -45,6 +52,57 @@ public class ModeratorPageServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         } catch (IOException | ServletException e) {
             logger.warn("Cannot forward to moderatorPage.jsp", e);
+        }
+    }
+
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) {
+        Type mapType = new TypeToken<Map<String, String>>() {
+        }.getType();
+        Map<String, String> map;
+
+        try {
+            Gson gson = new Gson();
+            map = gson.fromJson(request.getReader(), mapType);
+        } catch (IOException e) {
+            logger.error("Error parsing JSON", e);
+            return;
+        }
+
+        var id = map.get("id").trim();
+        var mode = map.get("mode").trim();
+
+        SessionFactory sessionFactory = (SessionFactory) request.getServletContext().getAttribute("SessionFactory");
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Query<UserAccount> userQuery = session.createQuery("FROM UserAccount u " +
+                    "WHERE u.id = :id", UserAccount.class);
+            userQuery.setParameter("id", id);
+            UserAccount user = userQuery.getSingleResult();
+
+            if(mode.equals("delete")){
+                System.out.println("DELETED");
+            } else if(mode.equals("recover")){
+                System.out.println("RECOVERED");
+            } else {
+                System.out.println("ERROR");
+            }
+
+
+            session.merge(user);
+            transaction.commit();
+            response.setStatus(HttpServletResponse.SC_ACCEPTED);
+
+        } catch (Exception e) {
+            transaction.rollback();
+            logger.error("Error deleting or recovering user", e);
+            try {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            } catch (IOException ioException) {
+                logger.warn("Error sending error", ioException);
+            }
         }
     }
 }

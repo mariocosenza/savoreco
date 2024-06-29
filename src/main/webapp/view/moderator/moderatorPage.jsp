@@ -18,6 +18,7 @@
     <title>Moderatore</title>
     <link rel="stylesheet" type="text/css" href="../../assets/styles/moderatorPage.css">
     <%@ include file="/components/header.jsp" %>
+    <script src="../../scripts/moderator.js"></script>
 </head>
 <body>
 <jsp:include page="../../components/navbar.jsp"/>
@@ -49,12 +50,12 @@
                     .format(user.getExpires().atZone(ZoneId.systemDefault()))%>
             </td>
             <td data-label="">
-                <button class="deleted-users">Ripristina</button>
+                <button class="deleted-users" onclick="changeState(<%= user.getId() %>, 'recover');">Ripristina</button>
             </td>
             <% } else { %>
             <td class="disappearSmall">/</td>
             <td data-label="">
-                <button class="active-users">Elimina</button>
+                <button class="active-users" onclick="changeState(<%= user.getId() %>, 'delete');">Elimina</button>
             </td>
             <% } %>
         </tr>
