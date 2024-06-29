@@ -34,3 +34,20 @@ CREATE TRIGGER purchase
     ON purchase
     FOR EACH ROW
 EXECUTE FUNCTION inserisci_in_purchase();
+
+
+CREATE OR REPLACE FUNCTION update_food_availability()
+    RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.quantity = 0 THEN
+        NEW.available := false;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_food_quantity
+    AFTER UPDATE OF quantity ON food
+    FOR EACH ROW
+    WHEN (NEW.quantity = 0)
+EXECUTE FUNCTION update_food_availability();
