@@ -81,7 +81,7 @@ public class SellerRestaurantServlet extends HttpServlet {
             Query<BigDecimal> CostQuery = session.createQuery("SELECT SUM(bf.price * bf.quantity) FROM BoughtFood bf " +
                     "WHERE bf.restaurant = :restaurant", BigDecimal.class);
             CostQuery.setParameter("restaurant", restaurant);
-            String totalCost = String.format("%.2f", CostQuery.getSingleResult().doubleValue());
+            String totalCost = (CostQuery.getSingleResult() == null) ? "0.00" : String.format("%.2f", CostQuery.getSingleResult().doubleValue());
 
             transaction.commit();
 
@@ -269,8 +269,50 @@ public class SellerRestaurantServlet extends HttpServlet {
                     logger.warn("Error sending error", e);
                 }
             }
+        } if (map.get("mode").equals("deleteFood")) {
+            var id = map.get("id").trim();
+
+            if (idMatcher.matcher(id).matches()) {
+                SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
+                Session session = sessionFactory.getCurrentSession();
+                Transaction transaction = session.beginTransaction();
+
+                try {
+                    Query<Restaurant> RestaurantQuery = session.createQuery("FROM Restaurant r " +
+                            "WHERE r.id = :id", Restaurant.class);
+                    RestaurantQuery.setParameter("id", seller.getRestaurant().getId());
+                    Restaurant restaurant = RestaurantQuery.getSingleResult();
+
+                    Query<Food> foodQuery = session.createQuery("FROM Food f " +
+                            "WHERE f.id = :id AND f.restaurant = :restaurant", Food.class);
+                    foodQuery.setParameter("id", id);
+                    foodQuery.setParameter("restaurant", restaurant);
+                    Food food = foodQuery.getSingleResult();
+
+                    if(food != null){
+                        session.remove(food);
+                    }
+
+                    transaction.commit();
+                    resp.setStatus(HttpServletResponse.SC_ACCEPTED);
+
+                } catch (Exception e) {
+                    transaction.rollback();
+                    logger.error("Error deleting food", e);
+                    try {
+                        resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    } catch (IOException ioException) {
+                        logger.warn("Error sending error", ioException);
+                    }
+                }
+            } else {
+                try {
+                    resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                } catch (IOException e) {
+                    logger.warn("Error sending error", e);
+                }
+            }
         } else {
-            //if per il delete
             try {
                 resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             } catch (IOException e) {

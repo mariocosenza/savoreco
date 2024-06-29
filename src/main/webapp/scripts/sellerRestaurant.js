@@ -194,3 +194,29 @@ function validateRestaurant() {
     return !error;
 }
 
+async function deleteFood(foodId) {
+    if (!regexId.test(foodId)) {
+        console.error('Errore di ID:', foodId);
+        window.location.href = "/home";
+        return;
+    }
+
+    const formData = new FormData();
+    try {
+        formData.append("mode", "deleteFood");
+        formData.append("id", foodId);
+        const response = await fetch("/seller/sellerRestaurant", {
+            method: "POST",
+            body: JSON.stringify(Object.fromEntries(formData)),
+            contentType: "application/json"
+        });
+
+        if (response.ok) {
+            location.reload()
+        }
+    } catch (e) {
+        console.error("Error submitting form", e);
+    }
+}
+
+
