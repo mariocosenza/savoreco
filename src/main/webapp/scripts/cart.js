@@ -1,4 +1,7 @@
-function deleteProduct(obj, id, price) {
+"use strict";
+
+
+function deleteProduct(obj, id, price, quantity) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/user/cart", true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
@@ -7,10 +10,10 @@ function deleteProduct(obj, id, price) {
             if (xhr.status >= 200 && xhr.status < 300) {
                 const sel = document.querySelector("#price");
                 const selPrice = parseFloat(sel.innerHTML);
-                if (selPrice - parseFloat(price) <= 0) {
+                if (selPrice - (price * quantity) <= 0) {
                     location.reload();
                 } else {
-                    sel.innerHTML = `${selPrice - parseFloat(price)}`;
+                    sel.innerHTML = `${selPrice - price * quantity}`;
                 }
                 obj.closest("li").remove();
             } else {
