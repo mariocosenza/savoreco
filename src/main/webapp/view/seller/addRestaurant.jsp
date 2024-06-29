@@ -61,7 +61,8 @@
                 Crea ristorante
             </button>
             <p>
-                Condizioni
+                Accetto di fornire informazioni accurate e aggiornate sul mio ristorante,
+                inclusi menu e prezzi, e confermo di rispettare le normative sanitarie locali per garantire un servizio di qualità su Savoreco.
             </p>
         </form>
     </div>
