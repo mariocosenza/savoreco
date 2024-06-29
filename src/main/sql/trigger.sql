@@ -41,13 +41,14 @@ CREATE OR REPLACE FUNCTION update_food_availability()
 BEGIN
     IF NEW.quantity = 0 THEN
         NEW.available := false;
+    ELSE
+        NEW.available := true;
     END IF;
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER check_food_quantity
-    AFTER UPDATE OF quantity ON food
+    BEFORE UPDATE OF quantity ON food
     FOR EACH ROW
-    WHEN (NEW.quantity = 0)
 EXECUTE FUNCTION update_food_availability();
