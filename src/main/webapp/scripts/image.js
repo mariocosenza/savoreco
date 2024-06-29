@@ -15,8 +15,6 @@ async function saveImage(imageFile) {
             return "error";
         }
 
-        const mode = "restaurant";
-        imageFormData.append("mode", mode)
         imageFormData.append("image", imageFile);
         const imageResponse = await fetch("/fileUpload", {
             method: "POST",
@@ -24,7 +22,6 @@ async function saveImage(imageFile) {
         });
 
         if (!imageResponse.ok) {
-            alert(":(");
             throw new Error("Failed to upload image");
         }
 
