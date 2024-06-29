@@ -105,7 +105,7 @@ async function submitRestaurantUpdate() {
         if (address !== undefined) {
             form.querySelector("#lat").value = address.latitude
             form.querySelector("#lon").value = address.longitude
-            form.querySelector("#postal").value = address.postalCode + ` ${address.postalCode === undefined ? "00042" : address.postalCode}`
+            form.querySelector("#postal").value = ` ${address.postalCode === undefined ? "" : address.postalCode}`
             form.querySelector("#address").value = address.street + ` ${address.number === undefined ? "" : address.number}`
             form.querySelector("#city").value = address.city
         }
