@@ -2,8 +2,8 @@
 
 const regexId = /^\d+$/;
 
-async function changeState(userId, mode) {
-    if ((!regexId.test(userId))||((mode !== "delete")&&(mode !== "recover"))) {
+async function updateStatus(mode, purchId) {
+    if ((!regexId.test(purchId))||((mode !== "sendRider")&&(mode !== "arrived")&&(mode !== "confirmed"))) {
         console.error('Errore di Input:');
         window.location.href = "/home";
         return;
@@ -11,17 +11,19 @@ async function changeState(userId, mode) {
 
     const formData = new FormData();
     try {
+        formData.append("id", purchId);
         formData.append("mode", mode);
-        formData.append("id", userId);
-        const response = await fetch("/moderator/moderatorPage", {
+
+        var path = (mode === "confirmed")? "/user/userOrders" : "/seller/restaurantOrders";
+
+        const response = await fetch(path, {
             method: "POST",
             body: JSON.stringify(Object.fromEntries(formData)),
             contentType: "application/json"
         });
 
         if (response.ok) {
-            const line = document.getElementById(`${userId}`);
-            line.className = ((mode === "delete") ? 'deleted-users' : 'active-users' );
+            location.reload();
         }
     } catch (e) {
         console.error("Error submitting form", e);

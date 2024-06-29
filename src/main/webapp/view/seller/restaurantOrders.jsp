@@ -27,6 +27,7 @@
     <title>Ordini</title>
     <link rel="stylesheet" type="text/css" href="../../assets/styles/orders.css">
     <%@ include file="/components/header.jsp" %>
+    <script src="../../scripts/orders.js"></script>
 </head>
 <body>
 <%@ include file="../../components/navbar.jsp" %>
@@ -50,44 +51,48 @@
     <div class="purchaseBox">
         <h3>Ordine del  <%= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
                 .format(purchase.getTime().atZone(ZoneId.systemDefault()))%>:</h3>
-        <div class="info">
+        <div>
+            <div class="info">
             <p><strong>Costo consegna:</strong> <%= String.format("%.2f", purchase.getDeliveryCost()) %>€</p>
             <p><strong>IVA:</strong> <%= purchase.getIva() %>%</p>
-            <p><strong>Stato:</strong> <%= purchase.getStatus() %>
-            </p>
+            <p><strong>Stato:</strong> <%= purchase.getStatus() %></p>
             <p><strong>Costo totale:</strong> <%= String.format("%.2f", purchase.getTotalCost()) %>€</p>
             <% if (purchase.getPickUp()) { %>
             <p><strong>Consegna:</strong> Ritiro al ristorante </p>
             <%} else {%>
             <p><strong>Indirizzo: </strong> <%= user.getAddress().getId().getStreet() %>
-                , <%= user.getAddress().getId().getZipcode() %>
-            </p>
+                , <%= user.getAddress().getId().getZipcode() %></p>
             <% } %>
         </div>
+            <div class="info">
+            <p><strong>Stato dell'ordine: </strong> <%= purchase.getStatus() %>   </p>
+            <% if(purchase.getStatus().toString().equals("pending")) {%>
+            <button onclick="updateStatus('sendRider', '<%= purchase.getId()%>')"> Manda Rider </button>
+            <% }else if(purchase.getStatus().toString().equals("delivering")){ %>
+            <button onclick="updateStatus('arrived', '<%= purchase.getId()%>')"> Arrivo del Rider </button>
+            <% } %>
+        </div>
+        </div>
+
+
 
         <h3>Dettagli utente:</h3>
         <div class="info">
-            <p><strong>Email:</strong> <%= user.getEmail() %>
-            </p>
-            <p><strong>Nome:</strong> <%= user.getName() %> <%= user.getSurname() %>
-            </p>
+            <p><strong>Email:</strong> <%= user.getEmail() %></p>
+            <p><strong>Nome:</strong> <%= user.getName() %> <%= user.getSurname() %></p>
             <%if (user.getAddress() != null) {%>
             <p><strong>Indirizzo:</strong> <%= user.getAddress().getId().getStreet() %>
-                , <%= user.getAddress().getId().getZipcode() %>, <%= user.getCountryCode() %>
-            </p>
+                , <%= user.getAddress().getId().getZipcode() %>, <%= user.getCountryCode() %></p>
             <% } %>
         </div>
 
         <% for (BoughtFood boughtFood : boughtFoods) {%>
         <div class="foodItem">
             <div>
-                <h2><%= boughtFood.getName() %>
-                </h2>
-                <p><strong>Quantità:</strong> <%= boughtFood.getQuantity() %>
-                </p>
+                <h2><%= boughtFood.getName() %></h2>
+                <p><strong>Quantità:</strong> <%= boughtFood.getQuantity() %></p>
                 <p><strong>Prezzo:</strong> <%= String.format("%.2f", boughtFood.getPrice()) %>€</p>
-                <p><strong>Green Points:</strong> <%= boughtFood.getGreenPoint() %>
-                </p>
+                <p><strong>Green Points:</strong> <%= boughtFood.getGreenPoint() %></p>
             </div>
         </div>
         <% } %>

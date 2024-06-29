@@ -24,6 +24,7 @@
     <title>Ordini</title>
     <link rel="stylesheet" type="text/css" href="../../assets/styles/orders.css">
     <%@include file="../../components/header.jsp" %>
+    <script src="../../scripts/orders.js"></script>
 </head>
 <body>
 <jsp:include page="../../components/navbar.jsp"/>
@@ -48,11 +49,8 @@
                 .format(purchase.getTime().atZone(ZoneId.systemDefault()))%>:</h3>
         <div class="info">
             <p><strong>Costo consegna:</strong> <%= String.format("%.2f", purchase.getDeliveryCost()) %>€</p>
-            <p><strong>IVA:</strong> <%= purchase.getIva() %>%</p>
-            <p><strong>Stato:</strong> <%= purchase.getStatus() %>
-            </p>
-            <p><strong>Metodo di pagamento:</strong> <%= purchase.getPaymentMethod() %>
-            </p>
+            <p><strong>IVA:</strong> <%= purchase.getIva() %>%</p></p>
+            <p><strong>Metodo di pagamento:</strong> <%= purchase.getPaymentMethod() %></p>
             <p><strong>Costo totale:</strong> <%= String.format("%.2f", purchase.getTotalCost()) %>€</p>
             <% if (purchase.getPickUp()) { %>
             <p><strong>Consegna:</strong> Ritiro al ristorante </p>
@@ -60,6 +58,12 @@
             <p><strong>Indirizzo: </strong> <%= user.getAddress().getId().getStreet() %>
                 , <%= user.getAddress().getId().getZipcode() %>
             </p>
+            <% } %>
+        </div>
+        <div class="info">
+            <p><strong>Stato dell'ordine: </strong> <%= purchase.getStatus() %>   </p>
+            <% if(purchase.getStatus().toString().equals("delivered")) {%>
+            <button onclick="updateStatus('confirmed', '<%= purchase.getId()%>')"> Conferma Ordine </button>
             <% } %>
         </div>
 

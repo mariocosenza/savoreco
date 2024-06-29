@@ -1,8 +1,8 @@
 package it.savoreco.controller.seller;
 
-import it.savoreco.model.entity.BoughtFood;
-import it.savoreco.model.entity.Restaurant;
-import it.savoreco.model.entity.SellerAccount;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import it.savoreco.model.entity.*;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,7 +17,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(
         name = "restaurantOrdersServlet",
@@ -54,6 +57,66 @@ public class RestaurantOrdersServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         } catch (IOException | ServletException e) {
             logger.warn("Cannot forward to restaurantOrders.jsp", e);
+        }
+    }
+
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) {
+        Type mapType = new TypeToken<Map<String, String>>() {
+        }.getType();
+        Map<String, String> map;
+
+        try {
+            Gson gson = new Gson();
+            map = gson.fromJson(request.getReader(), mapType);
+        } catch (IOException e) {
+            logger.error("Error parsing JSON", e);
+            return;
+        }
+
+        var id = map.get("id").trim();
+        var mode = map.get("mode").trim();
+
+        SessionFactory sessionFactory = (SessionFactory) request.getServletContext().getAttribute("SessionFactory");
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Query<Purchase> purchaseQuery = session.createQuery("FROM Purchase p " +
+                    "WHERE p.id = :id", Purchase.class);
+            purchaseQuery.setParameter("id", id);
+            Purchase purchase = purchaseQuery.getSingleResult();
+
+            if(purchase != null) {
+                if ((mode.equals("sendRider")) && (purchase.getStatus().equals(Purchase.Statuses.pending))) {
+                    purchase.setStatus(Purchase.Statuses.delivering);
+                    session.merge(purchase);
+                    transaction.commit();
+                    response.setStatus(HttpServletResponse.SC_ACCEPTED);
+                    return;
+                } else if ((mode.equals("arrived")) && (purchase.getStatus().equals(Purchase.Statuses.delivering))) {
+                    purchase.setStatus(Purchase.Statuses.delivered);
+                    session.merge(purchase);
+                    transaction.commit();
+                    response.setStatus(HttpServletResponse.SC_ACCEPTED);
+                    return;
+                }
+            }
+
+            try {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            } catch (IOException e) {
+                logger.warn("Error sending error", e);
+            }
+
+        } catch (Exception e) {
+            transaction.rollback();
+            logger.error("Error updating status", e);
+            try {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            } catch (IOException ioException) {
+                logger.warn("Error sending error", ioException);
+            }
         }
     }
 }
