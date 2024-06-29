@@ -50,7 +50,7 @@ CREATE TABLE restaurant
     street        varchar(256) not null,
     zipcode       varchar(16)  not null,
     description   text                  default '',
-    image_object  varchar(2048),
+    image_object  varchar(2048)         default '/assets/images/savoreco-logo.svg',
     delivery_cost decimal(16, 8)        default 0 not null,
     category      varchar(128),
     deleted       boolean      not null default false,
