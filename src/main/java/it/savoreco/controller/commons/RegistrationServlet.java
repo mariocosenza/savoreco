@@ -115,6 +115,10 @@ public class RegistrationServlet extends HttpServlet {
                     transaction.commit();
                     resp.setStatus(HttpServletResponse.SC_ACCEPTED);
                 }
+
+                default -> {
+                    resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                }
             }
         } else {
             try {
