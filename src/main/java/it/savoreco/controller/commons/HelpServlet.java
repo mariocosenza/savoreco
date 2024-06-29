@@ -32,7 +32,7 @@ public class HelpServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)  {
+        resp.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
     }
 }

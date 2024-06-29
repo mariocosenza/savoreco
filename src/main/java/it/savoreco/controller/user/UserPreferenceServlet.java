@@ -85,7 +85,7 @@ public class UserPreferenceServlet extends HttpServlet {
         try {
             Gson gson = new Gson();
             map = gson.fromJson(req.getReader(), mapType);
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("Error parsing JSON", e);
             return;
         }
