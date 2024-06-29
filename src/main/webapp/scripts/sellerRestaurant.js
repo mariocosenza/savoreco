@@ -10,10 +10,7 @@ const regexGreenPoints = /^\d{1,2}$/;
 const regexQuantity = /^\d{1,5}$/;
 
 async function submitFoodUpdate(foodId) {
-    alert("submit stuff");
-    return;
-
-    if (!regexId.test(foodId)) {
+    if (!(foodId == null || regexId.test(foodId))) {
         console.error('Errore di ID:', foodId);
         window.location.href = "/home";
         return;
@@ -43,14 +40,14 @@ async function submitFoodUpdate(foodId) {
             if (response.ok) {
                 location.reload();
             } else {
-                formError(form);
+                formError(foodId);
             }
         } catch (e) {
             console.error("Error submitting form", e);
-            formError(form);
+            formError(foodId);
         }
     } else {
-        formError(form);
+        formError(foodId);
     }
 }
 
@@ -218,5 +215,3 @@ async function deleteFood(foodId) {
         console.error("Error submitting form", e);
     }
 }
-
-

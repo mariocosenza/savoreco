@@ -172,6 +172,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                         food.setId(Integer.parseInt(HtmlEscapers.htmlEscaper().escape(id)));
                         session.merge(food);
                     }
+
                     transaction.commit();
                     resp.setStatus(HttpServletResponse.SC_ACCEPTED);
 
@@ -269,7 +270,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                     logger.warn("Error sending error", e);
                 }
             }
-        } if (map.get("mode").equals("deleteFood")) {
+        } else if (map.get("mode").equals("deleteFood")) {
             var id = map.get("id").trim();
 
             if (idMatcher.matcher(id).matches()) {
