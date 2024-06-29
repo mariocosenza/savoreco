@@ -106,7 +106,7 @@ public class AddRestaurantServlet extends HttpServlet {
                 restaurant.setName(HtmlEscapers.htmlEscaper().escape(name));
                 restaurant.setAddress(address);
                 restaurant.setDescription(HtmlEscapers.htmlEscaper().escape(description));
-                restaurant.setDeliveryCost(BigDecimal.valueOf(Double.parseDouble(deliveryCost.trim().replace(',','.'))));
+                restaurant.setDeliveryCost(BigDecimal.valueOf(Double.parseDouble(deliveryCost.replace(',','.'))));
                 restaurant.setCategory(HtmlEscapers.htmlEscaper().escape(category.trim()));
                 restaurant.setCreationTime(Instant.now());
                 restaurant.setImageObject(HtmlEscapers.htmlEscaper().escape(imageUrl));
