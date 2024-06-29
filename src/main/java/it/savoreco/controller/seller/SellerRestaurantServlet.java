@@ -157,11 +157,11 @@ public class SellerRestaurantServlet extends HttpServlet {
                     food.setName(HtmlEscapers.htmlEscaper().escape(name));
                     food.setDescription(HtmlEscapers.htmlEscaper().escape(description));
                     food.setCategory(HtmlEscapers.htmlEscaper().escape(category));
-                    food.setPrice(Double.parseDouble(HtmlEscapers.htmlEscaper().escape(price)));
+                    food.setPrice(Double.parseDouble(price.replace(',','.')));
                     food.setAllergens(HtmlEscapers.htmlEscaper().escape(allergens));
-                    food.setGreenPoint(Integer.parseInt(HtmlEscapers.htmlEscaper().escape(greenPoints)));
+                    food.setGreenPoint(Integer.parseInt(greenPoints));
                     food.setImageObject(HtmlEscapers.htmlEscaper().escape(imageUrl));
-                    short quan = (short) Integer.parseInt(HtmlEscapers.htmlEscaper().escape(quantity));
+                    short quan = (short) Integer.parseInt(quantity);
                     food.setQuantity(quan);
                     food.setAvailable(quan > 0);
                     food.setRestaurant(restaurant);
@@ -169,7 +169,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                     if (id.equals("null")) {
                         session.persist(food);
                     } else {
-                        food.setId(Integer.parseInt(HtmlEscapers.htmlEscaper().escape(id)));
+                        food.setId(Integer.parseInt(id));
                         session.merge(food);
                     }
 
