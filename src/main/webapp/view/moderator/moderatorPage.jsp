@@ -36,7 +36,7 @@
         </tr>
 
         <% for (UserAccount user : usersList) {%>
-        <tr class=<%= (user.getDeleted()) ? "deleted-users" : "active-users" %>>
+        <tr id="<%= user.getId()%>" class=<%= (user.getDeleted()) ? "deleted-users" : "active-users" %>>
             <td data-label="Nome:"><%= user.getName() %>
             </td>
             <td data-label="Cognome:"><%= user.getSurname() %>

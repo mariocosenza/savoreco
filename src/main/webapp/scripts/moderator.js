@@ -20,7 +20,8 @@ async function changeState(userId, mode) {
         });
 
         if (response.ok) {
-            location.reload()
+            const line = document.getElementById(`${userId}`);
+            line.className = ((mode === "delete") ? 'deleted-users' : 'active-users' );
         }
     } catch (e) {
         console.error("Error submitting form", e);
