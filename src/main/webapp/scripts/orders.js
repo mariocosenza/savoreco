@@ -14,7 +14,7 @@ async function updateStatus(mode, purchId) {
         formData.append("id", purchId);
         formData.append("mode", mode);
 
-        var path = (mode === "confirmed")? "/user/userOrders" : "/seller/restaurantOrders";
+        const path = (mode === "confirmed")? "/user/userOrders" : "/seller/restaurantOrders";
 
         const response = await fetch(path, {
             method: "POST",
