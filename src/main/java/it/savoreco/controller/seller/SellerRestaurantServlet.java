@@ -68,20 +68,17 @@ public class SellerRestaurantServlet extends HttpServlet {
             Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
 
-            Query<Restaurant> RestaurantQuery = session.createQuery("FROM Restaurant r " +
-                    "WHERE r.id = :id", Restaurant.class);
-            RestaurantQuery.setParameter("id", seller.getRestaurant().getId());
-            Restaurant restaurant = RestaurantQuery.getSingleResult();
+            Restaurant restaurant = session.get(Restaurant.class, seller.getRestaurant().getId());
 
-            Query<Food> FoodQuery = session.createQuery("FROM Food f " +
+            Query<Food> foodQuery = session.createQuery("FROM Food f " +
                     "WHERE f.restaurant = :restaurant", Food.class);
-            FoodQuery.setParameter("restaurant", restaurant);
-            List<Food> products = FoodQuery.list();
+            foodQuery.setParameter("restaurant", restaurant);
+            List<Food> products = foodQuery.list();
 
-            Query<BigDecimal> CostQuery = session.createQuery("SELECT SUM(bf.price * bf.quantity) FROM BoughtFood bf " +
+            Query<BigDecimal> costQuery = session.createQuery("SELECT SUM(bf.price * bf.quantity) FROM BoughtFood bf " +
                     "WHERE bf.restaurant = :restaurant", BigDecimal.class);
-            CostQuery.setParameter("restaurant", restaurant);
-            String totalCost = (CostQuery.getSingleResult() == null) ? "0.00" : String.format("%.2f", CostQuery.getSingleResult().doubleValue());
+            costQuery.setParameter("restaurant", restaurant);
+            String totalCost = (costQuery.getSingleResult() == null) ? "0.00" : String.format("%.2f", costQuery.getSingleResult().doubleValue());
 
             transaction.commit();
 
@@ -148,10 +145,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                 Transaction transaction = session.beginTransaction();
 
                 try {
-                    Query<Restaurant> RestaurantQuery = session.createQuery("FROM Restaurant r " +
-                            "WHERE r.id = :id", Restaurant.class);
-                    RestaurantQuery.setParameter("id", seller.getRestaurant().getId());
-                    Restaurant restaurant = RestaurantQuery.getSingleResult();
+                    Restaurant restaurant = session.get(Restaurant.class, seller.getRestaurant().getId());
 
                     Food food = new Food();
                     food.setName(HtmlEscapers.htmlEscaper().escape(name));
@@ -214,10 +208,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                 Transaction transaction = session.beginTransaction();
 
                 try {
-                    Query<Restaurant> RestaurantQuery = session.createQuery("FROM Restaurant r " +
-                            "WHERE r.id = :id", Restaurant.class);
-                    RestaurantQuery.setParameter("id", seller.getRestaurant().getId());
-                    Restaurant restaurant = RestaurantQuery.getSingleResult();
+                    Restaurant restaurant = session.get(Restaurant.class, seller.getRestaurant().getId());
 
                     Address address;
 
@@ -279,10 +270,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                 Transaction transaction = session.beginTransaction();
 
                 try {
-                    Query<Restaurant> RestaurantQuery = session.createQuery("FROM Restaurant r " +
-                            "WHERE r.id = :id", Restaurant.class);
-                    RestaurantQuery.setParameter("id", seller.getRestaurant().getId());
-                    Restaurant restaurant = RestaurantQuery.getSingleResult();
+                    Restaurant restaurant = session.get(Restaurant.class, seller.getRestaurant().getId());
 
                     Query<Food> foodQuery = session.createQuery("FROM Food f " +
                             "WHERE f.id = :id AND f.restaurant = :restaurant", Food.class);
