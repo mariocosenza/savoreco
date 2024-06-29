@@ -38,7 +38,7 @@ public class FileServlet extends HttpServlet {
                 var filePart = req.getPart("image");
                 if (filePart.getSubmittedFileName().length() <= 256) {
                     Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes());
-                    String imageUrl = fileUpload.saveImage(HtmlEscapers.htmlEscaper().escape(Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes()) + ".png"), filePart.getInputStream());
+                    String imageUrl = fileUpload.saveImage(HtmlEscapers.htmlEscaper().escape(Base64.getEncoder().encodeToString(filePart.getSubmittedFileName().getBytes())), filePart.getInputStream());
 
                     resp.setContentType("text/plain");
                     resp.setCharacterEncoding("UTF-8");

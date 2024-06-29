@@ -32,41 +32,45 @@ public class FileUpload {
     public String saveImage(String path, InputStream stream) {
 
         var random = new SecureRandom();
-        path = path + random.nextInt();
+        var original = path;
 
-        try {
+        File file;
 
-            File file;
-            if (SystemUtils.IS_OS_UNIX) {
-                file = File.createTempFile("upload", ".png", new File("/opt"));
-                FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rwx------"));
-                java.nio.file.Files.createTempFile("upload", ".png", attr); // Compliant
-            } else {
-                file = File.createTempFile("upload", ".png");  // Compliant
-                if (!file.setReadable(true, true)
-                        || !file.setWritable(true, true)
-                        || !file.setExecutable(true, true)) {
-                    throw new RuntimeException("Cannot create temp file");
-                }
-            }
-
+        for (var i = 0; i < 2; i++) {
             try {
-                Files.write(stream.readAllBytes(), file);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+                path = original + random.nextLong() + ".png";
+                if (SystemUtils.IS_OS_UNIX) {
+                    file = File.createTempFile("upload", ".png", new File("/opt"));
+                    FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rwx------"));
+                    java.nio.file.Files.createTempFile("upload", ".png", attr); // Compliant
+                } else {
+                    file = File.createTempFile("upload", ".png");  // Compliant
+                    if (!file.setReadable(true, true)
+                            || !file.setWritable(true, true)
+                            || !file.setExecutable(true, true)) {
+                        throw new RuntimeException("Cannot create temp file");
+                    }
+                }
+
+                try {
+                    Files.write(stream.readAllBytes(), file);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                var meta = new ObjectMetadata();
+                meta.setContentType("image/png");
+                meta.setContentLength(file.length());
+                var putObjectRequest = new PutObjectRequest("savoreco", path, file);
+                putObjectRequest.setMetadata(meta);
+                amazonS3.putObject(putObjectRequest);
+                executor.schedule(file::delete, 10, TimeUnit.MINUTES);
+                break;
+            } catch (Exception e) {
+                logger.warn("Could not save image", e);
             }
-
-            var meta = new ObjectMetadata();
-            meta.setContentType("image/png");
-            meta.setContentLength(file.length());
-            var putObjectRequest = new PutObjectRequest("savoreco", path, file);
-            putObjectRequest.setMetadata(meta);
-            amazonS3.putObject(putObjectRequest);
-            executor.schedule(file::delete, 5, TimeUnit.MINUTES);
-        } catch (IOException e) {
-            logger.warn("Could not save image", e);
-
         }
+
 
         return "https://r2.savoreco.it/" + path;
     }

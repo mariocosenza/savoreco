@@ -37,8 +37,9 @@ public class Restaurant {
     @Column(name = "description", length = Integer.MAX_VALUE)
     private String description;
 
-    @Size(max = 1024)
-    @Column(name = "image_object", length = 1024)
+    @Size(max = 2048)
+    @ColumnDefault("/assets/images/savoreco-logo.svg")
+    @Column(name = "image_object", length = 2048)
     private String imageObject;
 
     @NotNull
