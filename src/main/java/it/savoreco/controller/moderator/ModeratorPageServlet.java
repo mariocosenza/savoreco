@@ -83,7 +83,7 @@ public class ModeratorPageServlet extends HttpServlet {
             if(user != null){
                 if(mode.equals("delete")){
                     user.setDeleted(true);
-                    user.setExpires(Instant.now().plusSeconds(30*24*60*60));//30 giorni
+                    user.setExpires(Instant.now().plusSeconds(30*24*60* ((long) 60)));//30 giorni
 
                     session.merge(user);
                     transaction.commit();
