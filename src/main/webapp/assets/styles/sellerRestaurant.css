@@ -33,6 +33,22 @@ h1 {
     min-width: 48%;
 }
 
+input[type="file"]::file-selector-button {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border: none;
+    padding: 0.5em 2%;
+    border-radius: 0.4em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: #004d00; /* Darker green background on hover */
+}
+
+
+
 @media screen and (max-width: 900px) {
     .main-container {
         flex-direction: column;
@@ -46,7 +62,7 @@ h1 {
 }
 
 .attribute {
-    margin: 0.5em;
+    margin: 2%;
 }
 
 label {
@@ -64,15 +80,14 @@ search input[type="text"] {
 }
 
 .center {
-    margin: auto;
-    margin-top: 1em;
+    margin: 1em auto auto;
     text-align: center;
 }
 
 input[type="text"],
 textarea {
     width: 100%;
-    padding: 0.5em;
+    padding: 1%;
     margin-bottom: 1em;
     border: 1px solid var(--md-sys-color-primary);
     border-radius: 0.4em;
@@ -89,8 +104,8 @@ textarea:focus {
 
 button {
     display: block;
-    width: 100%;
-    padding: 0.5em 1em;
+    min-width: 100%;
+    padding: 0.6em 4%;
     font-size: 1.1em;
     color: var(--md-sys-color-on-primary);
     background-color: var(--md-sys-color-primary);
@@ -155,9 +170,7 @@ textarea {
         box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
     }
 
-    width: 65%;
-    min-width: 65%;
-    max-width: 75%;
+    min-width: 100%;
     margin: auto auto 1em auto;
     display: flex;
     justify-content: center;
