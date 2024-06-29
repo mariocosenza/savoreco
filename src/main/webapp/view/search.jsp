@@ -85,7 +85,9 @@
             <c:when test="${requestScope.restaurants.size() > 0}">
                 <c:forEach items="${requestScope.restaurants}" var="resto">
                     <div class="result resultCategory${resto.category.replaceAll("\\s+","")}">
-                        <img class="resultImage" src="${resto.imageObject}" alt="ristorante">
+                        <div class="resultImageDiv">
+                            <img class="resultImage" src="${resto.imageObject}" alt="ristorante">
+                        </div>
                         <div class="infoResto">
                             <h1><c:out value="${resto.name}"/></h1>
                             <h2><img class="svgLogo" src="../assets/icons/placeholder-pin-svgrepo-com.svg"

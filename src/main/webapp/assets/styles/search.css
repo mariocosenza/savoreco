@@ -47,7 +47,7 @@ aside {
 }
 
 img.svgLogo {
-    max-width: 2%;
+    max-width: 1.5em;
     object-fit: scale-down;
     filter: invert(35%) sepia(95%) saturate(1200%) hue-rotate(88deg) brightness(90%) contrast(88%);
 }
@@ -67,24 +67,35 @@ h2 {
     flex-direction: row;
     margin: 2vw;
     min-width: 72vw;
+    max-width: 72vw;
     min-height: 20em;
     max-height: 20em;
     border-radius: 0.4em;
     box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
 }
 
-.resultImage {
-    padding-left: 1%;
-    padding-right: 1%;
-    object-fit: scale-down;
-    min-height: inherit;
-    background-color: var(--md-sys-color-surface-variant);
-    min-width: 25%;
-    max-width: 25%;
+div.resultImageDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2%;
+    padding-right: 2%;
+    min-width: 30%;
+    max-width: 30%;
     margin-right: 5%;
+    min-height: inherit;
+    overflow: hidden;
+    background-color: var(--md-sys-color-surface-variant);
+}
+
+img.resultImage {
+    object-fit: scale-down;
+    max-width: 98%;
+    max-height: 98%;
+    border-radius: 0.5em;
     height: auto;
     mix-blend-mode: multiply;
-    overflow: hidden;
 }
 
 .restaurantInfo {
@@ -261,11 +272,11 @@ h2.price {
         display: none;
     }
 
-    img.resultImage {
-        all: revert;
+
+    div.resultImageDiv {
         margin-right: 5vw;
-        border-radius: 0.5em;
-        max-width: 30%;
+        min-width: 40%;
+        max-width: 40%;
         max-height: 100%;
     }
 
@@ -369,6 +380,10 @@ h2.price {
 
     button.searchLogo {
         right: 15vw;
+    }
+
+    img.svgLogo {
+        max-width: 1em;
     }
 }
 
