@@ -1,6 +1,5 @@
 package it.savoreco.controller.moderator;
 
-import com.google.common.html.HtmlEscapers;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import it.savoreco.model.entity.*;
@@ -19,7 +18,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -82,18 +80,35 @@ public class ModeratorPageServlet extends HttpServlet {
             userQuery.setParameter("id", id);
             UserAccount user = userQuery.getSingleResult();
 
-            if(mode.equals("delete")){
-                System.out.println("DELETED");
-            } else if(mode.equals("recover")){
-                System.out.println("RECOVERED");
-            } else {
-                System.out.println("ERROR");
+            if(user != null){
+                if(mode.equals("delete")){
+                    user.setDeleted(true);
+                    user.setExpires(Instant.now().plusSeconds(30*24*60*60));//30 giorni
+
+                    session.merge(user);
+                    transaction.commit();
+                    response.setStatus(HttpServletResponse.SC_ACCEPTED);
+
+                    return;
+
+                } else if(mode.equals("recover")){
+                    user.setDeleted(false);
+                    user.setExpires(null);
+
+                    session.merge(user);
+                    transaction.commit();
+                    response.setStatus(HttpServletResponse.SC_ACCEPTED);
+
+                    return;
+                }
             }
 
+            try {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            } catch (IOException e) {
+                logger.warn("Error sending error", e);
+            }
 
-            session.merge(user);
-            transaction.commit();
-            response.setStatus(HttpServletResponse.SC_ACCEPTED);
 
         } catch (Exception e) {
             transaction.rollback();
