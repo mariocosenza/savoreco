@@ -22,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/styles/restaurant.css">
     <script>window.isLoggedIn = <%=request.getSession().getAttribute("user") != null%>;</script>
     <script src="../scripts/restaurant.js"></script>
+    <script src="../scripts/animation.js"></script>
 
 </head>
 <body>

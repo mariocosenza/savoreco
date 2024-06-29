@@ -1,5 +1,6 @@
 "use strict";
 
+const regexId = /^\d+$/;
 const regexName = /^[a-zA-Z][a-zA-Z0-9-_\s]{2,24}$/;
 const regexDescription = /^.{2,2000}$/;
 const regexCategory = /^[a-zA-Z\s]{2,25}$/;
@@ -9,37 +10,24 @@ const regexGreenPoints = /^\d{1,2}$/;
 const regexQuantity = /^\d{1,5}$/;
 
 async function submitFoodUpdate(foodId) {
+    alert("submit stuff");
+    return;
+
+    if (!regexId.test(foodId)) {
+        console.error('Errore di ID:', foodId);
+        window.location.href = "/home";
+        return;
+    }
+
     const form = document.getElementById(`form${foodId}`);
     if (validateFood(foodId)) {
-        const imageFile = form.querySelector('input[type="file"]').files[0];
-        if (imageFile) {
-            const imageFormData = new FormData();
-            const maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
-
-            if (imageFile.type !== "image/png") {
-                alert("Please select a PNG image file.");
-                formError(form);
+        const imageUrl = (await saveImage(form.querySelector('input[type="file"]').files[0]));
+        if(imageUrl !== ""){
+            if(imageUrl === "error"){
+                formError();
                 return;
             }
-
-            if (imageFile.size > maxSizeInBytes) {
-                alert("The file size should not exceed 10 MB.");
-                formError(form);
-                return;
-            }
-
-            const mode = "restaurant";
-            imageFormData.append("mode", mode);
-            imageFormData.append("image", imageFile);
-            const imageResponse = await fetch("/fileUpload", {
-                method: "POST",
-                body: imageFormData
-            });
-
-            if (!imageResponse.ok) {
-                throw new Error("Failed to upload image");
-            }
-            form.querySelector("#imageUrl").value = await imageResponse.text();
+            form.querySelector("#imageUrl").value = imageUrl;
         }
 
         const formData = new FormData(form);
@@ -124,36 +112,14 @@ async function submitRestaurantUpdate() {
             form.querySelector("#address").value = address.street + ` ${address.number === undefined ? "" : address.number}`
             form.querySelector("#city").value = address.city
         }
-        const imageFile = form.querySelector('input[type="file"]').files[0];
-        if (imageFile) {
-            const imageFormData = new FormData();
-            const maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
 
-            if (imageFile.type !== "image/png") {
-                alert("Please select a PNG image file.");
-                formError('#formRest');
+        const imageUrl = (await saveImage(form.querySelector('input[type="file"]').files[0]));
+        if(imageUrl !== ""){
+            if(imageUrl === "error"){
+                formError();
                 return;
             }
-
-            if (imageFile.size > maxSizeInBytes) {
-                alert("The file size should not exceed 10 MB.");
-                formError('#formRest');
-                return;
-            }
-
-            const mode = "restaurant";
-            imageFormData.append("mode", mode);
-            imageFormData.append("image", imageFile);
-            const imageResponse = await fetch("/fileUpload", {
-                method: "POST",
-                body: imageFormData
-            });
-
-            if (!imageResponse.ok) {
-                throw new Error("Failed to upload image");
-            }
-
-            form.querySelector("#logoUrl").value = await imageResponse.text();
+            form.querySelector("#logoUrl").value = imageUrl;
         }
 
         const formData = new FormData(form);
@@ -227,5 +193,4 @@ function validateRestaurant() {
 
     return !error;
 }
-
 

@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="../../assets/styles/sellerRestaurant.css">
     <script src="../../scripts/coordinate.js"></script>
     <script src="../../scripts/sellerRestaurant.js"></script>
+    <script src="../../scripts/image.js"></script>
 </head>
 <body>
 <%@ include file="../../components/navbar.jsp" %>
@@ -85,14 +86,14 @@
                         </div>
                         <%if (food.getId() != null) {%>
                         <div class="attribute">
-                            <button class="save" disabled>Salva</button>
+                            <button type="submit" class="save" disabled>Salva</button>
                         </div>
                         <div class="attribute">
-                            <button class="delete">Rimuovi</button>
+                            <button type="button" class="delete" onclick="deleteFood(<%= food.getId() %>)">Rimuovi</button>
                         </div>
                         <% } else {%>
                         <div class="attribute">
-                            <button class="save" disabled>Aggiungi</button>
+                            <button type="submit" class="save" disabled>Aggiungi</button>
                         </div>
                         <% } %>
                     </div>

@@ -7,6 +7,7 @@
     <%@ include file="/components/header.jsp" %>
     <script src="../../scripts/addRestaurant.js"></script>
     <script src="../../scripts/coordinate.js"></script>
+    <script src="../../scripts/image.js"></script>
 </head>
 <body>
 <a href="home">
