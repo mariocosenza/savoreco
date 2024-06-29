@@ -91,11 +91,17 @@ div.resultImageDiv {
 
 img.resultImage {
     object-fit: scale-down;
-    max-width: 98%;
-    max-height: 98%;
+    max-width: 95%;
+    max-height: 95%;
     border-radius: 0.5em;
     height: auto;
     mix-blend-mode: multiply;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    img.resultImage {
+        mix-blend-mode: normal;
+    }
 }
 
 .restaurantInfo {
@@ -388,8 +394,3 @@ h2.price {
 }
 
 
-@media screen and (prefers-color-scheme: dark) {
-    .resultImage {
-        mix-blend-mode: normal;
-    }
-}
