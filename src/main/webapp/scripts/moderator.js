@@ -2,7 +2,7 @@
 
 const regexId = /^\d+$/;
 
-async function changeState(userId, mode) {
+async function changeState(userId, mode, element) {
     if ((!regexId.test(userId))||((mode !== "delete")&&(mode !== "recover"))) {
         console.error('Errore di Input:');
         window.location.href = "/home";
@@ -21,6 +21,7 @@ async function changeState(userId, mode) {
 
         if (response.ok) {
             const line = document.getElementById(`${userId}`);
+            element.style.display = "none"
             line.className = ((mode === "delete") ? 'deleted-users' : 'active-users' );
         }
     } catch (e) {
