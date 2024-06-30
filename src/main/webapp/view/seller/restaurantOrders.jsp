@@ -53,28 +53,37 @@
                 .format(purchase.getTime().atZone(ZoneId.systemDefault()))%>:</h3>
         <div>
             <div class="info">
-            <p><strong>Costo consegna:</strong> <%= String.format("%.2f", purchase.getDeliveryCost()) %>€</p>
-            <p><strong>IVA:</strong> <%= purchase.getIva() %>%</p>
-            <p><strong>Stato:</strong> <%= purchase.getStatus() %></p>
-            <p><strong>Costo totale:</strong> <%= String.format("%.2f", purchase.getTotalCost()) %>€</p>
-            <% if (purchase.getPickUp()) { %>
-            <p><strong>Consegna:</strong> Ritiro al ristorante </p>
-            <%} else {%>
-            <p><strong>Indirizzo: </strong> <%= user.getAddress().getId().getStreet() %>
-                , <%= user.getAddress().getId().getZipcode() %></p>
-            <% } %>
-        </div>
-            <div class="info">
-            <p><strong>Stato dell'ordine: </strong> <%= purchase.getStatus() %>   </p>
-            <% if(purchase.getStatus().toString().equals("pending")) {%>
-            <button onclick="updateStatus('sendRider', '<%= purchase.getId()%>')"> Manda Rider </button>
-            <% }else if(purchase.getStatus().toString().equals("delivering")){ %>
-            <button onclick="updateStatus('arrived', '<%= purchase.getId()%>')"> Arrivo del Rider </button>
-            <% } %>
-        </div>
-        </div>
+                <p><strong>Costo consegna:</strong> <%= String.format("%.2f", purchase.getDeliveryCost()) %>€</p>
+                <p><strong>IVA:</strong> <%= purchase.getIva() %>%</p>
+                <p><strong>Stato:</strong> <%= purchase.getStatus() %></p>
+                <p><strong>Costo totale:</strong> <%= String.format("%.2f", purchase.getTotalCost()) %>€</p>
+                <% if (purchase.getPickUp()) { %>
+                <p><strong>Consegna:</strong> Ritiro al ristorante </p>
+                <%} else {%>
+                <p><strong>Indirizzo: </strong> <%= user.getAddress().getId().getStreet() %>
+                    , <%= user.getAddress().getId().getZipcode() %></p>
+                <% } %>
+            </div>
+            <div id="<%= purchase.getId()%>" class="info">
+                <strong>Stato dell'ordine: </strong>
+                <p> <%= purchase.getStatus() %></p>
+                <select name="dropdown" onchange="updateStatus(this.value, '<%= purchase.getId()%>')">
+                    <option value="change">Change</option>
+                    <% if(!purchase.getStatus().equals(Purchase.Statuses.pending)){ %>
+                    <option value="delivering">Delivering</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="confirmed">Confirmed</option>
+                    <% } %>
+                    <% if(purchase.getStatus().equals(Purchase.Statuses.canceled)){ %>
+                    <option value="payed">Payed</option>
+                    <option value="pending">Pending</option>
+                    <% } else { %>
+                    <option value="canceled">Canceled</option>
+                    <% } %>
 
-
+                </select>
+            </div>
+        </div>
 
         <h3>Dettagli utente:</h3>
         <div class="info">

@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -88,14 +87,45 @@ public class RestaurantOrdersServlet extends HttpServlet {
             Purchase purchase = purchaseQuery.getSingleResult();
 
             if(purchase != null) {
-                if ((mode.equals("sendRider")) && (purchase.getStatus().equals(Purchase.Statuses.pending))) {
-                    purchase.setStatus(Purchase.Statuses.delivering);
-                    session.merge(purchase);
-                    transaction.commit();
-                    response.setStatus(HttpServletResponse.SC_ACCEPTED);
-                    return;
-                } else if ((mode.equals("arrived")) && (purchase.getStatus().equals(Purchase.Statuses.delivering))) {
-                    purchase.setStatus(Purchase.Statuses.delivered);
+                boolean flag = false;
+                switch (mode){
+                    case "delivering" -> {
+                        if(!purchase.getStatus().equals(Purchase.Statuses.pending)){
+                            purchase.setStatus(Purchase.Statuses.delivering);
+                            flag = true;
+                        }
+                    }
+                    case "delivered" -> {
+                        if(!purchase.getStatus().equals(Purchase.Statuses.pending)){
+                            purchase.setStatus(Purchase.Statuses.delivered);
+                            flag = true;
+                        }
+                    }
+                    case "confirmed" -> {
+                        if(!purchase.getStatus().equals(Purchase.Statuses.pending)){
+                            purchase.setStatus(Purchase.Statuses.confirmed);
+                            flag = true;
+                        }
+                    }
+                    case "payed" -> {
+                        if(purchase.getStatus().equals(Purchase.Statuses.canceled)){
+                            purchase.setStatus(Purchase.Statuses.payed);
+                            flag = true;
+                        }
+                    }
+                    case "pending" -> {
+                        if(purchase.getStatus().equals(Purchase.Statuses.canceled)){
+                            purchase.setStatus(Purchase.Statuses.pending);
+                            flag = true;
+                        }
+                    }
+                    case "canceled" -> {
+                        purchase.setStatus(Purchase.Statuses.canceled);
+                        flag = true;
+                    }
+                }
+
+                if(flag){
                     session.merge(purchase);
                     transaction.commit();
                     response.setStatus(HttpServletResponse.SC_ACCEPTED);
