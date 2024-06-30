@@ -40,8 +40,8 @@ public class FileUpload {
             try {
                 path = original + random.nextLong() + ".png";
                 if (SystemUtils.IS_OS_UNIX) {
-                    file = File.createTempFile("upload", ".png", new File("/opt/uploaded"));
-                    FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rwx------"));
+                    file = File.createTempFile("upload", ".png", new File("/upload"));
+                    FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rwxrwx---"));
                     java.nio.file.Files.createTempFile("upload", ".png", attr); // Compliant
                 } else {
                     file = File.createTempFile("upload", ".png");  // Compliant

@@ -57,7 +57,10 @@ div#map {
 }
 
 p {
+    max-width: 50%;
+    display: block;
     text-align: justify;
+    word-wrap: break-word;
 }
 
 .foodInfo {

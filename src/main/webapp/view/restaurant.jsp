@@ -17,13 +17,13 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <%@ include file="/components/header.jsp" %>
+
     <title>Ristorante</title>
     <link rel="stylesheet" type="text/css" href="../assets/styles/restaurant.css">
     <script>window.isLoggedIn = <%=request.getSession().getAttribute("user") != null%>;</script>
     <script src="../scripts/restaurant.js"></script>
     <script src="../scripts/animation.js"></script>
-
+    <%@ include file="/components/header.jsp" %>
 </head>
 <body>
 <jsp:include page="../components/navbar.jsp"/>

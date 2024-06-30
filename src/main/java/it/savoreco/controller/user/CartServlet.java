@@ -22,8 +22,7 @@ import java.util.Objects;
         name = "cartServlet",
         displayName = "Savoreco - Carrello",
         description = "Carrello home page",
-        value = "/user/cart",
-        asyncSupported = true
+        value = "/user/cart"
 )
 public class CartServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(CartServlet.class);

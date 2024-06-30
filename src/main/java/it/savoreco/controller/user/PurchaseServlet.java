@@ -130,7 +130,7 @@ public class PurchaseServlet extends HttpServlet {
                     if (food.getQuantity() == 0) {
                         food.setAvailable(true);
                     }
-                    session.refresh(food, LockMode.PESSIMISTIC_READ);
+                   session.refresh(food, LockMode.PESSIMISTIC_READ);
                 } else {
                     resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
                     return;

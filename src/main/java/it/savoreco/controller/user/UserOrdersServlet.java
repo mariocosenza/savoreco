@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +45,7 @@ public class UserOrdersServlet extends HttpServlet {
             Transaction transaction = session.beginTransaction();
 
             Query<BoughtFood> bFoodQuery = session.createQuery("FROM BoughtFood bf " +
-                    "WHERE bf.purchase.user = :user ORDER BY bf.purchase.time", BoughtFood.class);
+                    "WHERE bf.purchase.user = :user", BoughtFood.class);
             bFoodQuery.setParameter("user", user);
             List<BoughtFood> orders = bFoodQuery.list();
 

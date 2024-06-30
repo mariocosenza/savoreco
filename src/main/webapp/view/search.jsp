@@ -31,7 +31,7 @@
     <label for="selectSearch">
         Scegli categoria ristorante <!--Per motivi di sicurezza non usare id che iniziano con searchCategory-->
     </label>
-    <select id="selectSearch" class="mobile classic" onclick=toggleSelect(this)>
+    <select id="selectSearch" class="mobile classic" onchange="toggleSelect(this)">
         <option value="noCategory" selected>
             Nessun Filtro
         </option>
