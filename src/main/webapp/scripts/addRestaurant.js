@@ -15,8 +15,8 @@ async function submitRegistration() {
         document.querySelector("#city").value = address.city
 
         const imageUrl = (await saveImage(document.querySelector('input[type="file"]').files[0]));
-        if(imageUrl !== ""){
-            if(imageUrl === "error"){
+        if (imageUrl !== "") {
+            if (imageUrl === "error") {
                 formError();
                 return;
             }

@@ -8,7 +8,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.hibernate.*;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +21,6 @@ import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -114,23 +116,22 @@ public class PurchaseServlet extends HttpServlet {
             purchase.setStatus(Purchase.Statuses.payed);
             session.persist(purchase);
 
-            
-            
+
             var basketList = (List<BasketContain>) httpSession.getAttribute("basketList");
             for (var item : basketList) {
                 var food = session.get(Food.class, item.getFood().getId());
                 int quantity = item.getQuantity();
                 if (food != null && food.getAvailable()) {
                     var boughtFood = new BoughtFood();
-                        boughtFood.setPurchase(purchase);
-                        boughtFood.setName(item.getFood().getName());
-                        boughtFood.setGreenPoint(item.getFood().getGreenPoint() * quantity);
-                        boughtFood.setQuantity((short) quantity);
-                        boughtFood.setPrice(BigDecimal.valueOf(item.getFood().getPrice() * quantity));
-                        boughtFood.setRestaurant(food.getRestaurant());
-                        session.persist(boughtFood);
+                    boughtFood.setPurchase(purchase);
+                    boughtFood.setName(item.getFood().getName());
+                    boughtFood.setGreenPoint(item.getFood().getGreenPoint() * quantity);
+                    boughtFood.setQuantity((short) quantity);
+                    boughtFood.setPrice(BigDecimal.valueOf(item.getFood().getPrice() * quantity));
+                    boughtFood.setRestaurant(food.getRestaurant());
+                    session.persist(boughtFood);
                 } else {
-                   // session.refresh(food, LockMode.PESSIMISTIC_READ);
+                    // session.refresh(food, LockMode.PESSIMISTIC_READ);
                     resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
                     return;
                 }

@@ -57,7 +57,7 @@ public class SearchServlet extends HttpServlet {
                         "INNER JOIN savoreco.address b " +
                         "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 10000 and r.deleted is false LIMIT :maxResult", Restaurant.class);
 
-            }  else if (req.getParameter("sort").equals("name")) {
+            } else if (req.getParameter("sort").equals("name")) {
                 query = session.createNativeQuery("SELECT r.restaurant_id, r.name, r.street, r.zipcode, r.description, r.image_object, r.delivery_cost, r.category, r.deleted, r.creation_time  FROM savoreco.restaurant r " +
                         "INNER JOIN savoreco.address b " +
                         "ON r.street = b.street and r.zipcode = b.zipcode WHERE savoreco.st_distancesphere(savoreco.st_point(b.lon, b.lat, 4326), savoreco.st_point(:longitude, :latitude, 4326)) <= 10000 and r.deleted is false ORDER BY UPPER(r.name) LIMIT  :maxResult", Restaurant.class);

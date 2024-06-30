@@ -2,7 +2,10 @@ package it.savoreco.controller.seller;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import it.savoreco.model.entity.*;
+import it.savoreco.model.entity.BoughtFood;
+import it.savoreco.model.entity.Purchase;
+import it.savoreco.model.entity.Restaurant;
+import it.savoreco.model.entity.SellerAccount;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -86,35 +89,35 @@ public class RestaurantOrdersServlet extends HttpServlet {
             purchaseQuery.setParameter("id", id);
             Purchase purchase = purchaseQuery.getSingleResult();
 
-            if(purchase != null) {
+            if (purchase != null) {
                 boolean flag = false;
-                switch (mode){
+                switch (mode) {
                     case "delivering" -> {
-                        if(!purchase.getStatus().equals(Purchase.Statuses.pending)){
+                        if (!purchase.getStatus().equals(Purchase.Statuses.pending)) {
                             purchase.setStatus(Purchase.Statuses.delivering);
                             flag = true;
                         }
                     }
                     case "delivered" -> {
-                        if(!purchase.getStatus().equals(Purchase.Statuses.pending)){
+                        if (!purchase.getStatus().equals(Purchase.Statuses.pending)) {
                             purchase.setStatus(Purchase.Statuses.delivered);
                             flag = true;
                         }
                     }
                     case "confirmed" -> {
-                        if(!purchase.getStatus().equals(Purchase.Statuses.pending)){
+                        if (!purchase.getStatus().equals(Purchase.Statuses.pending)) {
                             purchase.setStatus(Purchase.Statuses.confirmed);
                             flag = true;
                         }
                     }
                     case "payed" -> {
-                        if(purchase.getStatus().equals(Purchase.Statuses.canceled)){
+                        if (purchase.getStatus().equals(Purchase.Statuses.canceled)) {
                             purchase.setStatus(Purchase.Statuses.payed);
                             flag = true;
                         }
                     }
                     case "pending" -> {
-                        if(purchase.getStatus().equals(Purchase.Statuses.canceled)){
+                        if (purchase.getStatus().equals(Purchase.Statuses.canceled)) {
                             purchase.setStatus(Purchase.Statuses.pending);
                             flag = true;
                         }
@@ -125,7 +128,7 @@ public class RestaurantOrdersServlet extends HttpServlet {
                     }
                 }
 
-                if(flag){
+                if (flag) {
                     session.merge(purchase);
                     transaction.commit();
                     response.setStatus(HttpServletResponse.SC_ACCEPTED);

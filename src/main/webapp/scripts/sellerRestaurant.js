@@ -19,8 +19,8 @@ async function submitFoodUpdate(foodId) {
     const form = document.getElementById(`form${foodId}`);
     if (validateFood(foodId)) {
         const imageUrl = (await saveImage(form.querySelector('input[type="file"]').files[0]));
-        if(imageUrl !== ""){
-            if(imageUrl === "error"){
+        if (imageUrl !== "") {
+            if (imageUrl === "error") {
                 formError();
                 return;
             }
@@ -111,8 +111,8 @@ async function submitRestaurantUpdate() {
         }
 
         const imageUrl = (await saveImage(form.querySelector('input[type="file"]').files[0]));
-        if(imageUrl !== ""){
-            if(imageUrl === "error"){
+        if (imageUrl !== "") {
+            if (imageUrl === "error") {
                 formError();
                 return;
             }
@@ -129,8 +129,8 @@ async function submitRestaurantUpdate() {
                 contentType: "application/json"
             });
 
-            if(response.ok) {
-              location.reload()
+            if (response.ok) {
+                location.reload()
             } else {
                 formError('Rest');
             }

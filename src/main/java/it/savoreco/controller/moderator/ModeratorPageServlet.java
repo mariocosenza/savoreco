@@ -2,7 +2,7 @@ package it.savoreco.controller.moderator;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import it.savoreco.model.entity.*;
+import it.savoreco.model.entity.UserAccount;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -80,10 +80,10 @@ public class ModeratorPageServlet extends HttpServlet {
             userQuery.setParameter("id", id);
             UserAccount user = userQuery.getSingleResult();
 
-            if(user != null){
-                if(mode.equals("delete")){
+            if (user != null) {
+                if (mode.equals("delete")) {
                     user.setDeleted(true);
-                    user.setExpires(Instant.now().plusSeconds(30*24*60* ((long) 60)));//30 giorni
+                    user.setExpires(Instant.now().plusSeconds(30 * 24 * 60 * ((long) 60)));//30 giorni
 
                     session.merge(user);
                     transaction.commit();
@@ -91,7 +91,7 @@ public class ModeratorPageServlet extends HttpServlet {
 
                     return;
 
-                } else if(mode.equals("recover")){
+                } else if (mode.equals("recover")) {
                     user.setDeleted(false);
                     user.setExpires(null);
 

@@ -55,26 +55,29 @@
             <div class="info">
                 <p><strong>Costo consegna:</strong> <%= String.format("%.2f", purchase.getDeliveryCost()) %>€</p>
                 <p><strong>IVA:</strong> <%= purchase.getIva() %>%</p>
-                <p><strong>Stato:</strong> <%= purchase.getStatus() %></p>
+                <p><strong>Stato:</strong> <%= purchase.getStatus() %>
+                </p>
                 <p><strong>Costo totale:</strong> <%= String.format("%.2f", purchase.getTotalCost()) %>€</p>
                 <% if (purchase.getPickUp()) { %>
                 <p><strong>Consegna:</strong> Ritiro al ristorante </p>
                 <%} else {%>
                 <p><strong>Indirizzo: </strong> <%= user.getAddress().getId().getStreet() %>
-                    , <%= user.getAddress().getId().getZipcode() %></p>
+                    , <%= user.getAddress().getId().getZipcode() %>
+                </p>
                 <% } %>
             </div>
             <div id="<%= purchase.getId()%>" class="info">
                 <strong class="status">Stato dell'ordine: </strong>
-                <p> <%= purchase.getStatus() %></p>
+                <p><%= purchase.getStatus() %>
+                </p>
                 <select name="dropdown" onchange="updateStatus(this.value, '<%= purchase.getId()%>')">
                     <option value="change">Change</option>
-                    <% if(!purchase.getStatus().equals(Purchase.Statuses.pending)){ %>
+                    <% if (!purchase.getStatus().equals(Purchase.Statuses.pending)) { %>
                     <option value="delivering">Delivering</option>
                     <option value="delivered">Delivered</option>
                     <option value="confirmed">Confirmed</option>
                     <% } %>
-                    <% if(purchase.getStatus().equals(Purchase.Statuses.canceled)){ %>
+                    <% if (purchase.getStatus().equals(Purchase.Statuses.canceled)) { %>
                     <option value="payed">Payed</option>
                     <option value="pending">Pending</option>
                     <% } else { %>
@@ -87,21 +90,27 @@
 
         <h3>Dettagli utente:</h3>
         <div class="info">
-            <p><strong>Email:</strong> <%= user.getEmail() %></p>
-            <p><strong>Nome:</strong> <%= user.getName() %> <%= user.getSurname() %></p>
+            <p><strong>Email:</strong> <%= user.getEmail() %>
+            </p>
+            <p><strong>Nome:</strong> <%= user.getName() %> <%= user.getSurname() %>
+            </p>
             <%if (user.getAddress() != null) {%>
             <p><strong>Indirizzo:</strong> <%= user.getAddress().getId().getStreet() %>
-                , <%= user.getAddress().getId().getZipcode() %>, <%= user.getCountryCode() %></p>
+                , <%= user.getAddress().getId().getZipcode() %>, <%= user.getCountryCode() %>
+            </p>
             <% } %>
         </div>
 
         <% for (BoughtFood boughtFood : boughtFoods) {%>
         <div class="foodItem">
             <div>
-                <h2><%= boughtFood.getName() %></h2>
-                <p><strong>Quantità:</strong> <%= boughtFood.getQuantity() %></p>
+                <h2><%= boughtFood.getName() %>
+                </h2>
+                <p><strong>Quantità:</strong> <%= boughtFood.getQuantity() %>
+                </p>
                 <p><strong>Prezzo:</strong> <%= String.format("%.2f", boughtFood.getPrice()) %>€</p>
-                <p><strong>Green Points:</strong> <%= boughtFood.getGreenPoint() %></p>
+                <p><strong>Green Points:</strong> <%= boughtFood.getGreenPoint() %>
+                </p>
             </div>
         </div>
         <% } %>

@@ -48,8 +48,10 @@
             <p class="policy">
                 <label class="privacy" for="privacyCheck">
                     <input id="privacyCheck" type="checkbox" class="privacyCheck" value="false">
-                    Creando un account, accetti i nostri Termini di Servizio e confermi di aver letto la nostra Privacy Policy. <br>
-                    Confermi inoltre di avere almeno 14 anni di età, in conformità con <br> le nostre politiche per l’età minima richiesta per la creazione di un account.  <br>
+                    Creando un account, accetti i nostri Termini di Servizio e confermi di aver letto la nostra Privacy
+                    Policy. <br>
+                    Confermi inoltre di avere almeno 14 anni di età, in conformità con <br> le nostre politiche per
+                    l’età minima richiesta per la creazione di un account. <br>
                     La tua privacy è garantita e i dati saranno trattati nel rispetto delle normative vigenti.
                 </label>
             </p>

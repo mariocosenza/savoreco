@@ -49,14 +49,17 @@
         <div class="info">
             <p><strong>Costo consegna:</strong> <%= String.format("%.2f", purchase.getDeliveryCost()) %>€</p>
             <p><strong>IVA:</strong> <%= purchase.getIva() %>%</p>
-            <p><strong>Metodo di pagamento:</strong> <%= purchase.getPaymentMethod() %></p>
+            <p><strong>Metodo di pagamento:</strong> <%= purchase.getPaymentMethod() %>
+            </p>
             <p><strong>Costo totale:</strong> <%= String.format("%.2f", purchase.getTotalCost()) %>€</p>
-            <p><strong>Stato dell'ordine:</strong> <%= purchase.getStatus() %></p>
+            <p><strong>Stato dell'ordine:</strong> <%= purchase.getStatus() %>
+            </p>
             <% if (purchase.getPickUp()) { %>
             <p><strong>Consegna:</strong> Ritiro al ristorante </p>
             <%} else {%>
             <p><strong>Indirizzo: </strong> <%= user.getAddress().getId().getStreet() %>
-                , <%= user.getAddress().getId().getZipcode() %></p>
+                , <%= user.getAddress().getId().getZipcode() %>
+            </p>
             <% } %>
         </div>
 
@@ -65,11 +68,16 @@
         %>
         <div class="foodItem">
             <div>
-                <h2><%= boughtFood.getName() %></h2>
-                <p><strong>Da</strong> <a href="${pageContext.request.contextPath}/restaurant?id=<%=restaurant.getId()%>"><%= restaurant.getName()%></a></p>
-                <p><strong>Quantità:</strong> <%= boughtFood.getQuantity() %></p>
+                <h2><%= boughtFood.getName() %>
+                </h2>
+                <p><strong>Da</strong> <a
+                        href="${pageContext.request.contextPath}/restaurant?id=<%=restaurant.getId()%>"><%= restaurant.getName()%>
+                </a></p>
+                <p><strong>Quantità:</strong> <%= boughtFood.getQuantity() %>
+                </p>
                 <p><strong>Prezzo:</strong> <%= String.format("%.2f", boughtFood.getPrice()) %>€</p>
-                <p><strong>Green Points:</strong> <%= boughtFood.getGreenPoint() %></p>
+                <p><strong>Green Points:</strong> <%= boughtFood.getGreenPoint() %>
+                </p>
             </div>
         </div>
         <% } %>

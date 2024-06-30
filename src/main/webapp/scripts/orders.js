@@ -3,9 +3,9 @@
 const regexId = /^\d+$/;
 
 async function updateStatus(mode, purchId) {
-    if ((!regexId.test(purchId))||
-        ((mode !== "payed")&&(mode !== "delivering")&&(mode !== "delivered")&&
-            (mode !== "confirmed") &&(mode !== "pending")&&(mode !== "canceled"))) {
+    if ((!regexId.test(purchId)) ||
+        ((mode !== "payed") && (mode !== "delivering") && (mode !== "delivered") &&
+            (mode !== "confirmed") && (mode !== "pending") && (mode !== "canceled"))) {
         console.error('Errore di Input:');
         window.location.href = "/home";
         return;

@@ -151,7 +151,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                     food.setName(HtmlEscapers.htmlEscaper().escape(name));
                     food.setDescription(HtmlEscapers.htmlEscaper().escape(description));
                     food.setCategory(HtmlEscapers.htmlEscaper().escape(category));
-                    food.setPrice(Double.parseDouble(price.replace(',','.')));
+                    food.setPrice(Double.parseDouble(price.replace(',', '.')));
                     food.setAllergens(HtmlEscapers.htmlEscaper().escape(allergens));
                     food.setGreenPoint(Integer.parseInt(greenPoints));
                     food.setImageObject(HtmlEscapers.htmlEscaper().escape(imageUrl));
@@ -235,7 +235,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                     restaurant.setName(HtmlEscapers.htmlEscaper().escape(name));
                     restaurant.setAddress(address);
                     restaurant.setDescription(HtmlEscapers.htmlEscaper().escape(description));
-                    restaurant.setDeliveryCost(BigDecimal.valueOf(Double.parseDouble(deliveryCost.replace(',','.'))));
+                    restaurant.setDeliveryCost(BigDecimal.valueOf(Double.parseDouble(deliveryCost.replace(',', '.'))));
                     restaurant.setCategory(HtmlEscapers.htmlEscaper().escape(category));
                     restaurant.setCreationTime(Instant.now());
                     restaurant.setImageObject(HtmlEscapers.htmlEscaper().escape(logoUrl));
@@ -278,7 +278,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                     foodQuery.setParameter("restaurant", restaurant);
                     Food food = foodQuery.getSingleResult();
 
-                    if(food != null){
+                    if (food != null) {
                         session.remove(food);
                     }
 

@@ -1,9 +1,6 @@
 package it.savoreco.controller.user;
 
-import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
 import it.savoreco.model.entity.BoughtFood;
-import it.savoreco.model.entity.Purchase;
 import it.savoreco.model.entity.UserAccount;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -19,10 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(
         name = "UserOrdersServlet",

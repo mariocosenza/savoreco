@@ -50,12 +50,14 @@
                     .format(user.getExpires().atZone(ZoneId.systemDefault()))%>
             </td>
             <td data-label="">
-                <button class="deleted-users" onclick="changeState(<%= user.getId() %>, 'recover', this);">Ripristina</button>
+                <button class="deleted-users" onclick="changeState(<%= user.getId() %>, 'recover', this);">Ripristina
+                </button>
             </td>
             <% } else { %>
             <td class="disappearSmall">/</td>
             <td data-label="">
-                <button class="active-users" onclick="changeState(<%= user.getId() %>, 'delete', this);">Elimina</button>
+                <button class="active-users" onclick="changeState(<%= user.getId() %>, 'delete', this);">Elimina
+                </button>
             </td>
             <% } %>
         </tr>
