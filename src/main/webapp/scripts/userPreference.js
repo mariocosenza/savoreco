@@ -5,7 +5,7 @@ const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$
 const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
 async function submitRegistration() {
-    if (validate()) {
+    if (validate() && searchResult() !== undefined) {
         const address = searchResult()
         document.querySelector("#lat").value = address.latitude
         document.querySelector("#lon").value = address.longitude
