@@ -171,5 +171,7 @@ function radioChange() {
 }
 
 window.onload = function () {
-    document.querySelector("#birthdate").max = new Date().toLocaleDateString('it-IT')
+    const dataCorrente = new Date();
+    dataCorrente.setFullYear(dataCorrente.getFullYear() - 14);
+    document.querySelector("#birthdate").max = dataCorrente.toISOString().split('T')[0];
 }
