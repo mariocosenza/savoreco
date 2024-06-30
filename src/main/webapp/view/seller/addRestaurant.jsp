@@ -53,7 +53,7 @@
             <textarea id="description" name="description" placeholder="Inserisci la descrizione" maxlength="2000"
                       required></textarea>
 
-            <label for="image" id="image_label">image</label>
+            <label for="image" id="image_label">Immagine</label>
             <input accept=".png" type="file" id="image" name="image" placeholder="Inserisci la image">
             <input name="imageUrl" id="imageUrl" type="text" style="display: none" hidden="hidden">
 
