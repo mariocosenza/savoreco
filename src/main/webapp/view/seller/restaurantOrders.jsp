@@ -45,6 +45,7 @@
         for (Map.Entry<Purchase, List<BoughtFood>> entry : entries) {
             Purchase purchase = entry.getKey();
             List<BoughtFood> boughtFoods = entry.getValue();
+            UserAccount user = purchase.getUser();
     %>
     <div class="purchaseBox">
         <h3>Ordine del  <%= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
