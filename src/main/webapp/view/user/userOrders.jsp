@@ -56,8 +56,7 @@
             <p><strong>Consegna:</strong> Ritiro al ristorante </p>
             <%} else {%>
             <p><strong>Indirizzo: </strong> <%= user.getAddress().getId().getStreet() %>
-                , <%= user.getAddress().getId().getZipcode() %>
-            </p>
+                , <%= user.getAddress().getId().getZipcode() %></p>
             <% } %>
         </div>
 
@@ -66,16 +65,11 @@
         %>
         <div class="foodItem">
             <div>
-                <h2><%= boughtFood.getName() %>
-                </h2>
-                <p><strong>Da</strong> <a
-                        href="<c:url value="/restaurant?id=<%=restaurant.getId()%>"/>"><%= restaurant.getName()%>
-                </a></p>
-                <p><strong>Quantità:</strong> <%= boughtFood.getQuantity() %>
-                </p>
+                <h2><%= boughtFood.getName() %></h2>
+                <p><strong>Da</strong> <a href="${pageContext.request.contextPath}/restaurant?id=<%=restaurant.getId()%>"><%= restaurant.getName()%></a></p>
+                <p><strong>Quantità:</strong> <%= boughtFood.getQuantity() %></p>
                 <p><strong>Prezzo:</strong> <%= String.format("%.2f", boughtFood.getPrice()) %>€</p>
-                <p><strong>Green Points:</strong> <%= boughtFood.getGreenPoint() %>
-                </p>
+                <p><strong>Green Points:</strong> <%= boughtFood.getGreenPoint() %></p>
             </div>
         </div>
         <% } %>
