@@ -15,6 +15,7 @@
         response.sendRedirect("./home.jsp");
         return;
     }
+    orders.sort(Comparator.comparing(a -> a.getPurchase().getTime()));
 %>
 
 <!DOCTYPE html>
