@@ -15,10 +15,10 @@
     <div class="overlay">
         <div class="center">
             <h1 id="searchBoxLeft" class="search">
-                E CH'
+                E CHE
             </h1>
             <h1 id="searchBoxRight" class="search">
-                SAPORE
+                SAPURE
             </h1>
             <span class="tooltiptext" style="display: none">Indirizzo non trovato riprova</span>
             <search>
