@@ -41,7 +41,7 @@
             <c:otherwise>
             <form method="post" id="form" action="${serverPath}/login/moderator" onchange="validate()">
                 <h1>
-                    Accedi a Savoreco
+                    Accedi a Savoreco - Moderatore
                 </h1>
                 </c:otherwise>
                 </c:choose>
