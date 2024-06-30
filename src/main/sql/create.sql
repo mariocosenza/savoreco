@@ -104,7 +104,8 @@ CREATE TABLE food
     quantity      smallint     not null default 1 check (quantity >= 0),
 
     CONSTRAINT pk_food PRIMARY KEY (food_id),
-    CONSTRAINT fk_food_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurant (restaurant_id) ON UPDATE CASCADE ON DELETE CASCADE
+    CONSTRAINT fk_food_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurant (restaurant_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT uk_food UNIQUE (restaurant_id, name, category)
 );
 
 CREATE TABLE purchase
