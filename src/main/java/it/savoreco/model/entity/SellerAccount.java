@@ -4,9 +4,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Entity
 @Table(name = "seller_account")
-public class SellerAccount {
+public class SellerAccount implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "seller_id", nullable = false)

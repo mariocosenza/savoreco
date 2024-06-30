@@ -1,5 +1,4 @@
-package it.savoreco.controller;
-
+package it.savoreco.controller.user;
 
 
 import it.savoreco.model.entity.UserAccount;
@@ -29,7 +28,7 @@ public class EcoPointServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(EcoPointServlet.class);
 
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp)  {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/user/ecopoint.jsp");
         try {
             SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");

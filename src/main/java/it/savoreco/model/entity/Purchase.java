@@ -14,6 +14,7 @@ import java.time.Instant;
 @Entity
 @Table(name = "purchase")
 public class Purchase {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "purchase_id", nullable = false)
@@ -54,6 +55,16 @@ public class Purchase {
             @JoinColumn(name = "zipcode", referencedColumnName = "zipcode")
     })
     private Address address;
+    @Enumerated
+    @ColumnDefault("pending")
+    @JdbcType(PostgreSQLEnumJdbcType.class)
+    @Column(name = "status", columnDefinition = "order_status not null")
+    private Statuses status;
+    @Enumerated
+    @ColumnDefault("google")
+    @JdbcType(PostgreSQLEnumJdbcType.class)
+    @Column(name = "payment_method", columnDefinition = "payment_type not null")
+    private PaymentMethods paymentMethod;
 
     public Long getId() {
         return id;
@@ -107,10 +118,6 @@ public class Purchase {
         return pickUp;
     }
 
-    public void setPickUp(boolean pickUp) {
-        this.pickUp = pickUp;
-    }
-
     public Address getAddress() {
         return address;
     }
@@ -119,20 +126,12 @@ public class Purchase {
         this.address = address;
     }
 
-    @Enumerated
-    @ColumnDefault("pending")
-    @JdbcType(PostgreSQLEnumJdbcType.class)
-    @Column(name = "status", columnDefinition = "order_status not null")
-    private Statuses status;
-
-    @Enumerated
-    @ColumnDefault("google")
-    @JdbcType(PostgreSQLEnumJdbcType.class)
-    @Column(name = "payment_method", columnDefinition = "payment_type not null")
-    private PaymentMethods paymentMethod;
-
     public boolean isPickUp() {
         return pickUp;
+    }
+
+    public void setPickUp(boolean pickUp) {
+        this.pickUp = pickUp;
     }
 
     public Statuses getStatus() {

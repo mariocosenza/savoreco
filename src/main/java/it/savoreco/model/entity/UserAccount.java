@@ -5,12 +5,17 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "user_account")
-public class UserAccount {
+public class UserAccount implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)

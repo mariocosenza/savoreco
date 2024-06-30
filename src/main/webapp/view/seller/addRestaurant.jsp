@@ -4,9 +4,10 @@
 <head>
     <title>Registrazione Ristorante</title>
     <link href="../../assets/styles/addRestaurant.css" rel="stylesheet">
-    <%@ include file="/components/header.jsp"%>
+    <%@ include file="/components/header.jsp" %>
     <script src="../../scripts/addRestaurant.js"></script>
     <script src="../../scripts/coordinate.js"></script>
+    <script src="../../scripts/image.js"></script>
 </head>
 <body>
 <a href="home">
@@ -41,13 +42,16 @@
             <input name="city" id="city" type="text" style="display: none" hidden="hidden">
 
             <label for="deliveryCost" id="deliveryCost_label">Costo di Consegna</label>
-            <input type="text" id="deliveryCost" name="deliveryCost" placeholder="Inserisci il costo di consegna" maxlength="5" required>
+            <input type="text" id="deliveryCost" name="deliveryCost" placeholder="Inserisci il costo di consegna"
+                   maxlength="5" required>
 
             <label for="category" id="category_label">Categoria</label>
-            <input type="text" id="category" name="category" placeholder="Inserisci la categoria" maxlength="25" required>
+            <input type="text" id="category" name="category" placeholder="Inserisci la categoria" maxlength="25"
+                   required>
 
             <label for="description" id="description_label">Descrizione</label>
-            <textarea id="description" name="description" placeholder="Inserisci la descrizione" maxlength="2000" required></textarea>
+            <textarea id="description" name="description" placeholder="Inserisci la descrizione" maxlength="2000"
+                      required></textarea>
 
             <label for="image" id="image_label">image</label>
             <input accept=".png" type="file" id="image" name="image" placeholder="Inserisci la image">
@@ -57,11 +61,12 @@
                 Crea ristorante
             </button>
             <p>
-                Condizioni
+                Accetto di fornire informazioni accurate e aggiornate sul mio ristorante,
+                inclusi menu e prezzi, e confermo di rispettare le normative sanitarie locali per garantire un servizio di qualità su Savoreco.
             </p>
         </form>
     </div>
 </main>
-<%@ include file="../../components/footer.jsp"%>
+<%@ include file="../../components/footer.jsp" %>
 </body>
 </html>

@@ -20,7 +20,7 @@
     <meta charset="UTF-8">
     <title>Ordini</title>
     <link rel="stylesheet" type="text/css" href="../../assets/styles/orders.css">
-    <%@include file="../../components/header.jsp"%>
+    <%@include file="../../components/header.jsp" %>
 </head>
 <body>
 <jsp:include page="../../components/navbar.jsp"/>
@@ -49,10 +49,10 @@
         <div class="info">
             <p><strong>Costo consegna:</strong> <%= String.format("%.2f", purchase.getDeliveryCost()) %>€</p>
             <p><strong>IVA:</strong> <%= purchase.getIva() %>%</p>
-            <p><strong>Stato:</strong> <%= purchase.getStatus() %></p>
             <p><strong>Metodo di pagamento:</strong> <%= purchase.getPaymentMethod() %></p>
             <p><strong>Costo totale:</strong> <%= String.format("%.2f", purchase.getTotalCost()) %>€</p>
-            <% if(purchase.getPickUp()) { %>
+            <p><strong>Stato dell'ordine:</strong> <%= purchase.getStatus() %></p>
+            <% if (purchase.getPickUp()) { %>
             <p><strong>Consegna:</strong> Ritiro al ristorante </p>
             <%} else {%>
             <p><strong>Indirizzo: </strong> <%= user.getAddress().getId().getStreet() %>
@@ -66,7 +66,7 @@
         <div class="foodItem">
             <div>
                 <h2><%= boughtFood.getName() %></h2>
-                <p><strong>Da</strong> <a href="<c:url value="/restaurant?id=<%=restaurant.getId()%>"/>"><%= restaurant.getName()%></a></p>
+                <p><strong>Da</strong> <a href="${pageContext.request.contextPath}/restaurant?id=<%=restaurant.getId()%>"><%= restaurant.getName()%></a></p>
                 <p><strong>Quantità:</strong> <%= boughtFood.getQuantity() %></p>
                 <p><strong>Prezzo:</strong> <%= String.format("%.2f", boughtFood.getPrice()) %>€</p>
                 <p><strong>Green Points:</strong> <%= boughtFood.getGreenPoint() %></p>

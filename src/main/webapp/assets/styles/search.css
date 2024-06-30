@@ -1,8 +1,5 @@
 @import "global.css";
 
-.result {
-
-}
 
 main {
     display: flex;
@@ -50,7 +47,7 @@ aside {
 }
 
 img.svgLogo {
-    max-width: 2%;
+    max-width: 1.5em;
     object-fit: scale-down;
     filter: invert(35%) sepia(95%) saturate(1200%) hue-rotate(88deg) brightness(90%) contrast(88%);
 }
@@ -69,25 +66,42 @@ h2 {
     display: flex;
     flex-direction: row;
     margin: 2vw;
-    padding-left: 2vw;
     min-width: 72vw;
-    min-height: 25vh;
-    max-height: 50vh;
+    max-width: 72vw;
+    min-height: 20em;
+    max-height: 20em;
     border-radius: 0.4em;
     box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
-    padding-top: 1em;
-    padding-bottom: 1em;
 }
 
-.resultImage {
-    margin-top: 5%;
-    min-width: 25%;
-    max-width: 25%;
-    margin-bottom: 5%;
+div.resultImageDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2%;
+    padding-right: 2%;
+    min-width: 30%;
+    max-width: 30%;
     margin-right: 5%;
-    height: auto;
+    min-height: inherit;
     overflow: hidden;
-    border-radius: 0.8em;
+    background-color: var(--md-sys-color-surface-variant);
+}
+
+img.resultImage {
+    object-fit: scale-down;
+    max-width: 95%;
+    max-height: 95%;
+    border-radius: 0.5em;
+    height: auto;
+    mix-blend-mode: multiply;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    img.resultImage {
+        mix-blend-mode: normal;
+    }
 }
 
 .restaurantInfo {
@@ -131,7 +145,7 @@ aside form {
 }
 
 search {
-    background-color: var(--md-sys-color-primary-container);
+    background-color: var(--md-sys-color-on-surface-variant);
     color: var(--md-sys-color-on-background);
     min-width: 100%;
     display: flex;
@@ -170,22 +184,25 @@ search input[type="search"]:focus::placeholder {
 }
 
 button.searchLogo {
+    position: absolute;
+    right: 26vw;
     border-style: none;
     background-color: transparent;
-    margin-left: 2vw;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    max-width: 15vw;
-    max-height: 3em;
+    width: 3em;
+    height: 3em;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
 }
 
 button.searchLogo img {
     fill: var(--md-sys-color-primary);
     object-fit: scale-down;
-    max-width: 15vw;
-    max-height: 3em;
+    width: 100%;
+    height: 100%;
     filter: invert(86%) sepia(6%) saturate(3643%) hue-rotate(346deg) brightness(102%) contrast(89%);
 }
 
@@ -193,7 +210,12 @@ button.searchLogo img:hover {
     filter: invert(35%) sepia(95%) saturate(1200%) hue-rotate(88deg) brightness(90%) contrast(88%);
 }
 
-.filter{
+button.searchLogo:active {
+    transform: scale(0.9); /* Scale down the button when clicked */
+}
+
+
+.filter {
     cursor: pointer;
 }
 
@@ -256,11 +278,11 @@ h2.price {
         display: none;
     }
 
-    img.resultImage {
-        all: revert;
+
+    div.resultImageDiv {
         margin-right: 5vw;
-        border-radius: 0.5em;
-        max-width: 30%;
+        min-width: 40%;
+        max-width: 40%;
         max-height: 100%;
     }
 
@@ -270,7 +292,7 @@ h2.price {
         justify-content: center;
     }
 
-   .mobileSelector select {
+    .mobileSelector select {
         all: revert;
         /* styling */
         background-color: var(--md-sys-color-background);
@@ -281,20 +303,19 @@ h2.price {
         font: inherit;
         line-height: 1.5em;
         padding: 0.5em 15vw 5vw 1em;
-       -webkit-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
         -webkit-appearance: none;
         -moz-appearance: none;
-       margin: 0 0 2em;
-   }
+        margin: 0 0 2em;
+    }
 
-   .showMoreButton {
-       font-size: 1rem;
-   }
+    .showMoreButton {
+        font-size: 1rem;
+    }
 
     /* arrows */
-
     .mobileSelector select.classic {
         background-image: linear-gradient(45deg, transparent 50%, var(--md-sys-color-tertiary-fixed-dim) 50%),
         linear-gradient(135deg, var(--md-sys-color-tertiary-fixed-dim) 50%, transparent 50%),
@@ -308,7 +329,7 @@ h2.price {
         background-repeat: no-repeat;
     }
 
-   .mobileSelector select.classic:focus {
+    .mobileSelector select.classic:focus {
         background-image: linear-gradient(45deg, var(--md-sys-color-primary-container) 50%, transparent 50%),
         linear-gradient(135deg, transparent 50%, var(--md-sys-color-primary-container) 50%),
         linear-gradient(to right, var(--md-sys-color-on-primary-container), var(--md-sys-color-on-primary-container));
@@ -326,7 +347,6 @@ h2.price {
     search input[type="search"]::placeholder {
         font-size: 0.8em;
     }
-
 
 
     main {
@@ -358,4 +378,19 @@ h2.price {
         margin-left: 15vw;
         margin-right: 15vw;
     }
+
+
+    search input[type="search"] {
+        min-width: 75vw;
+    }
+
+    button.searchLogo {
+        right: 15vw;
+    }
+
+    img.svgLogo {
+        max-width: 1em;
+    }
 }
+
+

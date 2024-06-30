@@ -13,7 +13,7 @@ function autocomplete() {
         placeholder: 'Inserisci indirizzo',
         limit: 8,
         minCharacters: 3,
-        onSelection:(address) => {
+        onSelection: (address) => {
             window.location.href = `/search?lat=${address.latitude}&lon=${address.longitude}`;
         },
     });

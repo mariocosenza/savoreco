@@ -9,6 +9,7 @@ table {
 }
 
 td, th {
+    color: black;
     padding: 0.75em;
     border: 1px solid;
     text-align: left;
@@ -45,7 +46,6 @@ button.deleted-users {
 .deleted-users {
     background-color: var(--md-sys-color-tertiary-fixed-dim);
 }
-
 
 
 @media screen and (max-width: 600px) {

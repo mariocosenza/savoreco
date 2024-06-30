@@ -7,12 +7,17 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
 
 @Entity
 @Table(name = "restaurant")
-public class Restaurant {
+public class Restaurant implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "restaurant_id", nullable = false)
@@ -37,8 +42,9 @@ public class Restaurant {
     @Column(name = "description", length = Integer.MAX_VALUE)
     private String description;
 
-    @Size(max = 1024)
-    @Column(name = "image_object", length = 1024)
+    @Size(max = 2048)
+    @ColumnDefault("/assets/images/savoreco-logo.svg")
+    @Column(name = "image_object", length = 2048)
     private String imageObject;
 
     @NotNull

@@ -1,6 +1,10 @@
-package it.savoreco.controller;
+package it.savoreco.controller.user;
 
-import it.savoreco.model.entity.*;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import it.savoreco.model.entity.BoughtFood;
+import it.savoreco.model.entity.Purchase;
+import it.savoreco.model.entity.UserAccount;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,46 +17,46 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(
-        name = "restaurantOrdersServlet",
-        displayName = "RestaurantOrders - Home",
-        description = "RestaurantOrders page",
-        value = "/seller/restaurantOrders"
+        name = "UserOrdersServlet",
+        displayName = "UserOrders - Home",
+        description = "UserOrders page",
+        value = "/user/userOrders"
 )
-public class RestaurantOrdersServlet extends HttpServlet {
-    private static final Logger logger = LoggerFactory.getLogger(RestaurantOrdersServlet.class);
+public class UserOrdersServlet extends HttpServlet {
+    private static final Logger logger = LoggerFactory.getLogger(UserOrdersServlet.class);
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/seller/restaurantOrders.jsp");
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/user/userOrders.jsp");
 
-        SellerAccount seller = (SellerAccount) request.getSession().getAttribute("seller");
+        UserAccount user = (UserAccount) request.getSession().getAttribute("user");
 
         try {
             SessionFactory sessionFactory = (SessionFactory) request.getServletContext().getAttribute("SessionFactory");
             Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
 
-            Restaurant restaurant = seller.getRestaurant();
-
             Query<BoughtFood> bFoodQuery = session.createQuery("FROM BoughtFood bf " +
-                    "WHERE bf.restaurant = :restaurant ORDER BY bf.purchase.time", BoughtFood.class);
-            bFoodQuery.setParameter("restaurant", restaurant);
+                    "WHERE bf.purchase.user = :user", BoughtFood.class);
+            bFoodQuery.setParameter("user", user);
             List<BoughtFood> orders = bFoodQuery.list();
 
             transaction.commit();
 
             request.setAttribute("orders", orders);
-            request.setAttribute("restaurant", restaurant);
+            request.setAttribute("user", user);
 
             requestDispatcher.forward(request, response);
         } catch (IOException | ServletException e) {
-            logger.warn("Cannot forward to restaurantOrders.jsp", e);
+            logger.warn("Cannot forward to userOrders.jsp", e);
         }
     }
 }
-
-

@@ -1,152 +1,179 @@
 @import "global.css";
 
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    line-height: 1.5;
 }
 
 .main-container {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-  gap: 2vw;
-  padding: 2vw;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 2vw;
+    padding: 2vw;
 }
 
 .main-box, .products-box {
-  background-color: var(--md-sys-color-surface);
-  border-radius: 1.1rem;
-  border: 0.1rem solid var(--md-sys-color-secondary);
-  padding: 2vw;
-  box-shadow: 0 0.2em 4em 0.4em rgba(0, 0, 0, 0.25);
-  margin-top: 2vh;
-  flex: 1 1 48%;
+    background-color: var(--md-sys-color-surface);
+    border-radius: 1.1rem;
+    border: 0.1rem solid var(--md-sys-color-secondary);
+    padding: 2vw;
+    box-shadow: 0 0.2em 4em 0.4em rgba(0, 0, 0, 0.25);
+    margin-top: 2vh;
+    flex: 1 1 48%;
 }
 
 .products-box {
-  min-width: 48%;
+    min-width: 48%;
 }
 
-@media screen and (max-width: 900px) {
-  .main-container {
-    flex-direction: column;
-  }
+input[type="file"]::file-selector-button {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border: none;
+    padding: 0.5em 2%;
+    border-radius: 0.4em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-  .main-box, products-box {
-    min-width: 90vw;
-    margin-left: auto;
-    margin-right: auto;
-  }
+input[type="file"]::file-selector-button:hover {
+    background-color: #004d00; /* Darker green background on hover */
+}
+
+
+
+@media screen and (max-width: 900px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .main-box, products-box {
+        min-width: 90vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 .attribute {
-  margin: 0.5em;
+    margin: 2%;
 }
 
 label {
-  display: block;
-  margin-bottom: 0.5em;
-  font-weight: bold;
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+search {
+    display: flex;
+}
+
+search input[type="text"] {
+    padding: .375rem .75rem .375rem 40px;
 }
 
 .center {
-  margin: auto;
-  margin-top: 1em;
-  text-align: center;
+    margin: 1em auto auto;
+    text-align: center;
 }
 
 input[type="text"],
 textarea {
-  width: 100%;
-  padding: 0.5em;
-  margin-bottom: 1em;
-  border: 1px solid var(--md-sys-color-primary);
-  border-radius: 0.4em;
-  background-color: var(--md-sys-color-on-primary);
-  color: var(--md-sys-color-on-background);
+    width: 100%;
+    padding: 1%;
+    margin-bottom: 1em;
+    border: 1px solid var(--md-sys-color-primary);
+    border-radius: 0.4em;
+    background-color: var(--md-sys-color-on-primary);
+    color: var(--md-sys-color-on-background);
 }
 
 input[type="text"]:focus,
 textarea:focus {
-  border-color: var(--md-sys-color-secondary-fixed-dim);
-  outline: none;
-  box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
+    border-color: var(--md-sys-color-secondary-fixed-dim);
+    outline: none;
+    box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
 }
 
 button {
-  display: block;
-  width: 100%;
-  padding: 0.5em 1em;
-  font-size: 1.1em;
-  color: var(--md-sys-color-on-primary);
-  background-color: var(--md-sys-color-primary);
-  border: none;
-  border-radius: 0.4em;
-  cursor: pointer;
-  text-align: center;
+    display: block;
+    min-width: 100%;
+    padding: 0.6em 4%;
+    font-size: 1.1em;
+    color: var(--md-sys-color-on-primary);
+    background-color: var(--md-sys-color-primary);
+    border: none;
+    border-radius: 0.4em;
+    cursor: pointer;
+    text-align: center;
 }
 
 button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .foodBox {
-  border-radius: 0.5rem;
-  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
-  padding: 1rem;
-  margin: 1rem 0 2rem;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  width: calc(100% - 2rem);
-  background-color: var(--md-sys-color-primary-container);
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    padding: 1rem;
+    margin: 1rem 0 2rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: calc(100% - 2rem);
+    background-color: var(--md-sys-color-primary-container);
 }
 
 .foodImage {
-  max-height: 100%;
-  object-fit: cover;
-  margin-right: 1em;
-  height: 10em;
-  width: 10em;
+    max-height: 100%;
+    object-fit: cover;
+    margin-right: 1em;
+    height: 10em;
+    width: 10em;
 }
 
 input.radar-autocomplete-input {
-  width: 100%;
-  margin: auto;
+    width: 100%;
+    margin: auto;
 }
 
 #autocomplete {
-  padding-bottom: 0;
+    padding-bottom: 0;
 }
 
 textarea {
-  padding: 2%;
-  line-height: 1.8em;
-  color: var(--md-sys-color-on-background);
-  vertical-align: middle;
-  background-color: var(--md-sys-color-on-primary);
-  background-repeat: no-repeat;
-  background-position: right 8px center;
-  border: 1% solid var(--md-sys-color-primary);
-  border-radius: 0.4em;
-  outline: none;
-  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 0 inset;
-  :focus{
-    border-color: var(--md-sys-color-secondary-fixed-dim);;
+    padding: 2%;
+    line-height: 1.8em;
+    color: var(--md-sys-color-on-background);
+    vertical-align: middle;
+    background-color: var(--md-sys-color-on-primary);
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    border: 1% solid var(--md-sys-color-primary);
+    border-radius: 0.4em;
     outline: none;
-    box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
-  }
-  width: 65%;
-  min-width: 65%;
-  max-width: 75%;
-  margin: auto auto 1em auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 0 inset;
+
+    :focus {
+        border-color: var(--md-sys-color-secondary-fixed-dim);;
+        outline: none;
+        box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
+    }
+
+    min-width: 100%;
+    margin: auto auto 1em auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

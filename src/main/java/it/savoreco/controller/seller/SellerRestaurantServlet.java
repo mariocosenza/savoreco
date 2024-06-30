@@ -1,4 +1,4 @@
-package it.savoreco.controller;
+package it.savoreco.controller.seller;
 
 import com.google.common.html.HtmlEscapers;
 import com.google.common.reflect.TypeToken;
@@ -18,7 +18,6 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
@@ -51,7 +50,7 @@ public class SellerRestaurantServlet extends HttpServlet {
         nameMatcher = Pattern.compile("^[a-zA-Z][a-zA-Z0-9-_\\s]{2,24}$");
         descriptionMatcher = Pattern.compile("^.{2,2000}$");
         categoryMatcher = Pattern.compile("^[a-zA-Z\\s]{2,25}$");
-        priceMatcher = Pattern.compile("^\\d+(\\.\\d{1,2})?$");
+        priceMatcher = Pattern.compile("^\\d+(\\.\\d{1,2})?$|^\\d+(,\\d{1,2})?$");
         allergensMatcher = Pattern.compile("^[A-Za-z]+(?:,\\s*[A-Za-z]+){0,49}$");
         greenPointsMatcher = Pattern.compile("^\\d{1,2}$");
         quantityMatcher = Pattern.compile("^\\d{1,5}$");
@@ -69,20 +68,17 @@ public class SellerRestaurantServlet extends HttpServlet {
             Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
 
-            Query<Restaurant> RestaurantQuery = session.createQuery("FROM Restaurant r " +
-                    "WHERE r.id = :id", Restaurant.class);
-            RestaurantQuery.setParameter("id", seller.getRestaurant().getId());
-            Restaurant restaurant = RestaurantQuery.getSingleResult();
+            Restaurant restaurant = session.get(Restaurant.class, seller.getRestaurant().getId());
 
-            Query<Food> FoodQuery = session.createQuery("FROM Food f " +
+            Query<Food> foodQuery = session.createQuery("FROM Food f " +
                     "WHERE f.restaurant = :restaurant", Food.class);
-            FoodQuery.setParameter("restaurant", restaurant);
-            List<Food> products = FoodQuery.list();
+            foodQuery.setParameter("restaurant", restaurant);
+            List<Food> products = foodQuery.list();
 
-            Query<BigDecimal> CostQuery = session.createQuery("SELECT SUM(bf.price * bf.quantity) FROM BoughtFood bf " +
+            Query<BigDecimal> costQuery = session.createQuery("SELECT SUM(bf.price * bf.quantity) FROM BoughtFood bf " +
                     "WHERE bf.restaurant = :restaurant", BigDecimal.class);
-            CostQuery.setParameter("restaurant", restaurant);
-            String totalCost = String.format("%.2f", CostQuery.getSingleResult().doubleValue());
+            costQuery.setParameter("restaurant", restaurant);
+            String totalCost = (costQuery.getSingleResult() == null) ? "0.00" : String.format("%.2f", costQuery.getSingleResult().doubleValue());
 
             transaction.commit();
 
@@ -118,14 +114,14 @@ public class SellerRestaurantServlet extends HttpServlet {
         try {
             Gson gson = new Gson();
             map = gson.fromJson(req.getReader(), mapType);
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("Error parsing JSON", e);
             return;
         }
 
         SellerAccount seller = (SellerAccount) req.getSession().getAttribute("seller");
 
-        if(map.get("mode").equals("saveFood")) {
+        if (map.get("mode").equals("saveFood")) {
             var name = map.get("fname").trim();
             var description = map.get("fdescription").trim();
             var category = map.get("fcategory").trim();
@@ -149,20 +145,17 @@ public class SellerRestaurantServlet extends HttpServlet {
                 Transaction transaction = session.beginTransaction();
 
                 try {
-                    Query<Restaurant> RestaurantQuery = session.createQuery("FROM Restaurant r " +
-                            "WHERE r.id = :id", Restaurant.class);
-                    RestaurantQuery.setParameter("id", seller.getRestaurant().getId());
-                    Restaurant restaurant = RestaurantQuery.getSingleResult();
+                    Restaurant restaurant = session.get(Restaurant.class, seller.getRestaurant().getId());
 
                     Food food = new Food();
                     food.setName(HtmlEscapers.htmlEscaper().escape(name));
                     food.setDescription(HtmlEscapers.htmlEscaper().escape(description));
                     food.setCategory(HtmlEscapers.htmlEscaper().escape(category));
-                    food.setPrice(Double.parseDouble(HtmlEscapers.htmlEscaper().escape(price)));
+                    food.setPrice(Double.parseDouble(price.replace(',','.')));
                     food.setAllergens(HtmlEscapers.htmlEscaper().escape(allergens));
-                    food.setGreenPoint(Integer.parseInt(HtmlEscapers.htmlEscaper().escape(greenPoints)));
+                    food.setGreenPoint(Integer.parseInt(greenPoints));
                     food.setImageObject(HtmlEscapers.htmlEscaper().escape(imageUrl));
-                    short quan = (short) Integer.parseInt(HtmlEscapers.htmlEscaper().escape(quantity));
+                    short quan = (short) Integer.parseInt(quantity);
                     food.setQuantity(quan);
                     food.setAvailable(quan > 0);
                     food.setRestaurant(restaurant);
@@ -170,9 +163,10 @@ public class SellerRestaurantServlet extends HttpServlet {
                     if (id.equals("null")) {
                         session.persist(food);
                     } else {
-                        food.setId(Integer.parseInt(HtmlEscapers.htmlEscaper().escape(id)));
+                        food.setId(Integer.parseInt(id));
                         session.merge(food);
                     }
+
                     transaction.commit();
                     resp.setStatus(HttpServletResponse.SC_ACCEPTED);
 
@@ -192,7 +186,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                     logger.warn("Error sending error", e);
                 }
             }
-        } else if(map.get("mode").equals("modifyRestaurant")) {
+        } else if (map.get("mode").equals("modifyRestaurant")) {
             var name = map.get("name").trim();
             var description = map.get("description").trim();
             var category = map.get("category").trim();
@@ -214,29 +208,24 @@ public class SellerRestaurantServlet extends HttpServlet {
                 Transaction transaction = session.beginTransaction();
 
                 try {
-                    Query<Restaurant> RestaurantQuery = session.createQuery("FROM Restaurant r " +
-                            "WHERE r.id = :id", Restaurant.class);
-                    RestaurantQuery.setParameter("id", seller.getRestaurant().getId());
-                    Restaurant restaurant = RestaurantQuery.getSingleResult();
+                    Restaurant restaurant = session.get(Restaurant.class, seller.getRestaurant().getId());
 
                     Address address;
 
-                    if(!street.isEmpty()){
+                    if (!street.isEmpty()) {
                         var addressId = new AddressId();
                         addressId.setStreet(HtmlEscapers.htmlEscaper().escape(street));
                         addressId.setZipcode(HtmlEscapers.htmlEscaper().escape(zipcode));
 
                         address = session.get(Address.class, addressId);
 
-                        if(address == null) {
+                        if (address == null) {
                             address = new Address();
                             address.setId(addressId);
                             address.setCity(HtmlEscapers.htmlEscaper().escape(city));
                             address.setCountryCode("IT");
                             address.setLat(Double.valueOf(lat));
                             address.setLon(Double.valueOf(lon));
-
-                            session.persist(addressId);
                             session.persist(address);
                         }
                     } else {
@@ -246,7 +235,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                     restaurant.setName(HtmlEscapers.htmlEscaper().escape(name));
                     restaurant.setAddress(address);
                     restaurant.setDescription(HtmlEscapers.htmlEscaper().escape(description));
-                    restaurant.setDeliveryCost(BigDecimal.valueOf(Double.parseDouble(deliveryCost)));
+                    restaurant.setDeliveryCost(BigDecimal.valueOf(Double.parseDouble(deliveryCost.replace(',','.'))));
                     restaurant.setCategory(HtmlEscapers.htmlEscaper().escape(category));
                     restaurant.setCreationTime(Instant.now());
                     restaurant.setImageObject(HtmlEscapers.htmlEscaper().escape(logoUrl));
@@ -272,8 +261,47 @@ public class SellerRestaurantServlet extends HttpServlet {
                     logger.warn("Error sending error", e);
                 }
             }
+        } else if (map.get("mode").equals("deleteFood")) {
+            var id = map.get("id").trim();
+
+            if (idMatcher.matcher(id).matches()) {
+                SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
+                Session session = sessionFactory.getCurrentSession();
+                Transaction transaction = session.beginTransaction();
+
+                try {
+                    Restaurant restaurant = session.get(Restaurant.class, seller.getRestaurant().getId());
+
+                    Query<Food> foodQuery = session.createQuery("FROM Food f " +
+                            "WHERE f.id = :id AND f.restaurant = :restaurant", Food.class);
+                    foodQuery.setParameter("id", id);
+                    foodQuery.setParameter("restaurant", restaurant);
+                    Food food = foodQuery.getSingleResult();
+
+                    if(food != null){
+                        session.remove(food);
+                    }
+
+                    transaction.commit();
+                    resp.setStatus(HttpServletResponse.SC_ACCEPTED);
+
+                } catch (Exception e) {
+                    transaction.rollback();
+                    logger.error("Error deleting food", e);
+                    try {
+                        resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    } catch (IOException ioException) {
+                        logger.warn("Error sending error", ioException);
+                    }
+                }
+            } else {
+                try {
+                    resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                } catch (IOException e) {
+                    logger.warn("Error sending error", e);
+                }
+            }
         } else {
-            //l'if per il delete
             try {
                 resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             } catch (IOException e) {

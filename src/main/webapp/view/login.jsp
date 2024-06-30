@@ -9,7 +9,8 @@
     <%@ include file="/components/header.jsp" %>
 </head>
 <body>
-<c:set var="serverPath" value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}"/>
+<c:set var="serverPath"
+       value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}"/>
 <a href="${serverPath}/home">
     <img src="../assets/images/savoreco-logo.svg" alt="page logo" class="accessLogo">
 </a>
@@ -40,12 +41,13 @@
             <c:otherwise>
             <form method="post" id="form" action="${serverPath}/login/moderator" onchange="validate()">
                 <h1>
-                    Accedi a Savoreco
+                    Accedi a Savoreco - Moderatore
                 </h1>
                 </c:otherwise>
                 </c:choose>
                 <label for="email">Email</label>
-                <input inputmode="email" type="email" id="email" name="email" placeholder="Inserisci la tua email" required maxlength="128">
+                <input inputmode="email" type="email" id="email" name="email" placeholder="Inserisci la tua email"
+                       required maxlength="128">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required>
 

@@ -1,4 +1,4 @@
-package it.savoreco.controller;
+package it.savoreco.controller.moderator;
 
 import it.savoreco.model.entity.ModeratorAccount;
 import it.savoreco.service.PasswordSHA512;
@@ -45,7 +45,7 @@ public class ModeratorLoginServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        if(req.getSession(false) == null ||req.getSession(false).getAttribute("logged") == null) {
+        if (req.getSession(false) == null || req.getSession(false).getAttribute("logged") == null) {
             var email = req.getParameter("email");
             var password = PasswordSHA512.SHA512Hash(req.getParameter("password"));
             try {
@@ -57,7 +57,7 @@ public class ModeratorLoginServlet extends HttpServlet {
                 query.setParameter("password", password);
                 var account = query.stream().findAny();
                 transaction.commit();
-                if(account.isPresent()) {
+                if (account.isPresent()) {
                     req.getSession().setAttribute("logged", "moderator");
                     req.getSession().setAttribute("moderator", account.get());
                     resp.sendRedirect("/home");
