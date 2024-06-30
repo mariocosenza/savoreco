@@ -3,6 +3,7 @@ package it.savoreco.controller.commons;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import it.savoreco.model.entity.Basket;
 import it.savoreco.model.entity.SellerAccount;
 import it.savoreco.model.entity.UserAccount;
 import it.savoreco.service.PasswordSHA512;
@@ -101,7 +102,12 @@ public class RegistrationServlet extends HttpServlet {
                     user.setPassword(PasswordSHA512.SHA512Hash(password));
                     user.setCountryCode("IT");
                     user.setEcoPoint(0);
+
+                    var basket = new Basket();
+                    basket.setUser(user);
+
                     session.persist(user);
+                    session.persist(basket);
                     transaction.commit();
                     resp.setStatus(HttpServletResponse.SC_ACCEPTED);
                 }
