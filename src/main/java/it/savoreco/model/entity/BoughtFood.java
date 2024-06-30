@@ -17,10 +17,10 @@ public class BoughtFood {
     private Long id;
 
     @MapsId
-    @OneToOne(fetch = FetchType.EAGER, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "purchase_id", nullable = false)
-    private Purchase purchase = new Purchase();
+    private Purchase purchase;
 
     @Size(max = 128)
     @NotNull
@@ -43,10 +43,10 @@ public class BoughtFood {
     private Short quantity;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @ColumnDefault("1")
     @JoinColumn(name = "restaurant_id", nullable = false)
-    private Restaurant restaurant = new Restaurant();
+    private Restaurant restaurant;
 
     public Long getId() {
         return id;
@@ -88,7 +88,6 @@ public class BoughtFood {
         this.price = price;
     }
 
-
     public Short getQuantity() {
         return quantity;
     }
@@ -104,7 +103,6 @@ public class BoughtFood {
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
     }
-
 
     @Override
     public String toString() {

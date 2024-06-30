@@ -88,6 +88,7 @@ public class PurchaseServlet extends HttpServlet {
                 logger.warn("Cannot forward to purchaseStatus.jsp", e);
             }
         } else {
+
             SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
             Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
@@ -97,23 +98,28 @@ public class PurchaseServlet extends HttpServlet {
             purchase.setIva(IVA);
             purchase.setUser(user);
             purchase.setTime(Instant.now());
+            purchase.setPickUp(true);
             purchase.setPickUp(Boolean.parseBoolean(req.getParameter("pick_up")));
             if (!Boolean.parseBoolean(req.getParameter("pick_up"))) {
                 purchase.setAddress(user.getAddress());
+                purchase.setPickUp(false);
             }
-            purchase.setStatus(Purchase.Statuses.pending);
+
             purchase.setPaymentMethod(Purchase.PaymentMethods.google);
             purchase.setTotalCost(BigDecimal.valueOf(((List<Food>) httpSession.getAttribute("readyBoughtFood")).stream().mapToDouble(Food::getPrice).sum()));
             purchase.setDeliveryCost(BigDecimal.valueOf((Double) httpSession.getAttribute("deliveryCost")));
+            purchase.setStatus(Purchase.Statuses.payed);
+            session.persist(purchase);
 
             List<BoughtFood> boughtFoodList = new ArrayList<>();
             for (var detachedFood : (List<Food>) httpSession.getAttribute("readyBoughtFood")) {
                 var soldFood = boughtFoodList.stream().filter(b -> b.getName().equals(detachedFood.getName())).findAny().orElse(null);
                 var food = session.get(Food.class, detachedFood.getId());
-                session.lock(food, LockMode.PESSIMISTIC_READ);
+            //    session.lock(food, LockMode.PESSIMISTIC_READ);
                 if (food.getAvailable()) {
                     var boughtFood = new BoughtFood();
                     if (soldFood == null) {
+                        boughtFood.setId(purchase.getId());
                         boughtFood.setPurchase(purchase);
                         boughtFood.setName(detachedFood.getName());
                         boughtFood.setGreenPoint(detachedFood.getGreenPoint());
@@ -130,7 +136,7 @@ public class PurchaseServlet extends HttpServlet {
                     if (food.getQuantity() == 0) {
                         food.setAvailable(true);
                     }
-                   session.refresh(food, LockMode.PESSIMISTIC_READ);
+               //    session.refresh(food, LockMode.PESSIMISTIC_READ);
                 } else {
                     resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
                     return;
@@ -138,16 +144,13 @@ public class PurchaseServlet extends HttpServlet {
                 user.setEcoPoint(user.getEcoPoint() + detachedFood.getGreenPoint());
             }
 
-            purchase.setStatus(Purchase.Statuses.payed);
+
             for (var sold : boughtFoodList) {
-                session.persist(sold);
+                    session.persist(sold);
             }
 
-            Query<BasketContain> query = session.createQuery("from BasketContain where basket.user.id = :user_id", BasketContain.class);
+            Query<BasketContain> query = session.createQuery("DELETE BasketContain where basket.user.id = :user_id", BasketContain.class);
             query.setParameter("user_id", ((UserAccount) req.getSession().getAttribute("user")).getId());
-            for (var basket : query.list()) {
-                session.remove(basket);
-            }
 
 
             transaction.commit();
