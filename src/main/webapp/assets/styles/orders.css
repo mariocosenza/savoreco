@@ -17,6 +17,7 @@
 
 main p {
     padding-right: 1em;
+    word-spacing: normal;
 }
 
 .foodImage {
@@ -59,6 +60,10 @@ main a {
 
 main a:hover {
     color: var(--md-sys-color-secondary-fixed-dim);
+}
+
+strong.status {
+    margin-right: 0.6em;
 }
 
 @media (max-width: 768px) {

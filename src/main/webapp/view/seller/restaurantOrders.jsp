@@ -65,7 +65,7 @@
                 <% } %>
             </div>
             <div id="<%= purchase.getId()%>" class="info">
-                <strong>Stato dell'ordine: </strong>
+                <strong class="status">Stato dell'ordine: </strong>
                 <p> <%= purchase.getStatus() %></p>
                 <select name="dropdown" onchange="updateStatus(this.value, '<%= purchase.getId()%>')">
                     <option value="change">Change</option>
