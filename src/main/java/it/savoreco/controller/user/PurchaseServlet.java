@@ -128,7 +128,7 @@ public class PurchaseServlet extends HttpServlet {
                         boughtFood.setQuantity((short) quantity);
                         boughtFood.setPrice(BigDecimal.valueOf(item.getFood().getPrice() * quantity));
                         boughtFood.setRestaurant(food.getRestaurant());
-                        System.out.println(boughtFood);
+                        session.persist(boughtFood);
                 } else {
                    // session.refresh(food, LockMode.PESSIMISTIC_READ);
                     resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
