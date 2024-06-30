@@ -38,7 +38,7 @@
             </div>
             <h2>Puoi modificare anche solo il tuo indirizzo</h2>
             <c:if test="${sessionScope.user.address.city != null}">
-                <label for="autocomplete">
+                <label for="autocomplete" id="labelAutocomplete">
                     <c:out value="Il tuo indirizzo ${sessionScope.user.address.id.street}, ${sessionScope.user.address.city}"/>
                 </label>
             </c:if>

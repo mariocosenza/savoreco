@@ -9,8 +9,8 @@ async function submitRegistration() {
         const address = searchResult()
         document.querySelector("#lat").value = address.latitude
         document.querySelector("#lon").value = address.longitude
-        document.querySelector("#postal").value = address.postalCode
-        document.querySelector("#address").value = address.street + ` ${address.number}`
+        document.querySelector("#postal").value = ` ${address.postalCode === undefined ? "" : address.postalCode}`
+        document.querySelector("#address").value = address.street + ` ${address.number === undefined? "" : address.number}`
         document.querySelector("#city").value = address.city
         const formData = new FormData(document.querySelector("#form"))
         try {
@@ -22,6 +22,7 @@ async function submitRegistration() {
             if (response.status === 201) {
                 window.location.href = "/home"
             } else if (response.ok) {
+                document.querySelector("#labelAutocomplete").innerHTML = `Il tuo indirizzo ${address.street}, ${address.number === undefined? "" : address.number}` + " " + address.city
                 formOk()
             } else {
                 formError()
