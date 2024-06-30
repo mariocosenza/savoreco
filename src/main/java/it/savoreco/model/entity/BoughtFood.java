@@ -21,7 +21,7 @@ public class BoughtFood {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "purchase_id", nullable = false)
-    private Purchase purchase;
+    private Purchase purchase = new Purchase();
 
     @Size(max = 128)
     @NotNull
@@ -43,10 +43,10 @@ public class BoughtFood {
     @Column(name = "quantity", nullable = false)
     private Short quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @ColumnDefault("1")
     @JoinColumn(name = "restaurant_id")
-    private Restaurant restaurant;
+    private Restaurant restaurant = new Restaurant();
 
     public Integer getId() {
         return id;
