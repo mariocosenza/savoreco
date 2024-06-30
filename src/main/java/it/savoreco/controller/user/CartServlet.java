@@ -47,9 +47,9 @@ public class CartServlet extends HttpServlet {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
-        Query<Basket> query = session.createQuery("from Basket where user = :user", Basket.class);
-        query.setParameter("user", req.getSession().getAttribute("user"));
-        var basket = query.getSingleResult();
+        Query<Basket> query = session.createQuery("from Basket where user.id = :user", Basket.class);
+        query.setParameter("user", ((UserAccount) req.getSession().getAttribute("user")).getId());
+        var basket = query.stream().toList().getFirst();
 
         Query<BasketContain> queryBasketContain = session.createQuery("from BasketContain c where c.basket = basket and food.id = :foodId", BasketContain.class);
         queryBasketContain.setParameter("foodId", foodId);
@@ -60,7 +60,7 @@ public class CartServlet extends HttpServlet {
             transaction.commit();
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);
         } else if (Objects.nonNull(req.getParameter("add"))) {
-            queryBasketContain.setParameter("foodId", foodId);
+
             var basketContain = queryBasketContain.list();
             var food = session.get(Food.class, foodId);
 
@@ -82,6 +82,7 @@ public class CartServlet extends HttpServlet {
                 session.merge(basketContain.getFirst());
             } else {
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                transaction.rollback();
                 return;
             }
 
