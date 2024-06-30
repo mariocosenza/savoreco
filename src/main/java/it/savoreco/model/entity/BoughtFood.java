@@ -13,11 +13,12 @@ import java.math.BigDecimal;
 @Table(name = "bought_food")
 public class BoughtFood {
     @Id
-    @Column(name = "purchase_id", nullable = false)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bought_food_id", nullable = false)
+    private Integer id;
 
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "purchase_id", nullable = false)
     private Purchase purchase;
@@ -42,17 +43,16 @@ public class BoughtFood {
     @Column(name = "quantity", nullable = false)
     private Short quantity;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @ColumnDefault("1")
-    @JoinColumn(name = "restaurant_id", nullable = false)
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
