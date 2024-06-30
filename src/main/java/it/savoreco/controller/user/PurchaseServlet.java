@@ -118,6 +118,7 @@ public class PurchaseServlet extends HttpServlet {
 
 
             var basketList = (List<BasketContain>) httpSession.getAttribute("basketList");
+            boolean mismatch = false;
             for (var item : basketList) {
                 var food = session.get(Food.class, item.getFood().getId());
                 int quantity = item.getQuantity();
@@ -130,6 +131,17 @@ public class PurchaseServlet extends HttpServlet {
                     boughtFood.setPrice(BigDecimal.valueOf(item.getFood().getPrice() * quantity));
                     boughtFood.setRestaurant(food.getRestaurant());
                     session.persist(boughtFood);
+
+                    food.setQuantity((short) (food.getQuantity() - (short) quantity));
+                    if(food.getQuantity() == 0) {
+                        food.setAvailable(false);
+                    } else if (food.getQuantity() < 0) {
+                        mismatch = true;
+                        transaction.rollback();
+                        resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                        break;
+                    }
+                    session.merge(food);
                 } else {
                     // session.refresh(food, LockMode.PESSIMISTIC_READ);
                     resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
@@ -138,6 +150,10 @@ public class PurchaseServlet extends HttpServlet {
                 user.setEcoPoint(user.getEcoPoint() + item.getFood().getGreenPoint() * quantity);
             }
 
+            if(mismatch) {
+                session = sessionFactory.getCurrentSession();
+                transaction = session.beginTransaction();
+            }
 
             Query<BasketContain> query = session.createQuery("from BasketContain where basket.user.id = :user_id", BasketContain.class);
             query.setParameter("user_id", ((UserAccount) req.getSession().getAttribute("user")).getId());
