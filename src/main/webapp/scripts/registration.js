@@ -108,7 +108,6 @@ function validateSeller() {
     let error = false
     for (const arg of document.querySelectorAll("label")) {
         const element = document.getElementById(arg.htmlFor)
-        console
         if (element.type !== "radio" && element.value !== "") {
             if (element.id === "name") {
                 if (regexUsername.test(element.value)) {
