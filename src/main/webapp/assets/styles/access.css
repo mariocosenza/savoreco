@@ -23,6 +23,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="dat
     min-width: 65%;
     max-width: 75%;
     margin-bottom: 1em;
+    cursor: pointer;
 }
 
 div.center, div.centerLogin {
@@ -153,6 +154,19 @@ a:hover {
 
 p.policy {
     font-size: 0.8em;
+}
+
+.privacy {
+    line-height: 1.5;
+    display: inline;
+}
+
+.privacyCheck {
+    all: revert;
+    display: inline;
+    cursor: pointer;
+    color: var(--md-sys-color-on-background);
+    accent-color: var(--md-sys-color-primary-container);
 }
 
 @media screen and (max-width: 600px) {

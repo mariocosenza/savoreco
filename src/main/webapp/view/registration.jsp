@@ -45,16 +45,18 @@
                    required>
             <label for="birthdate" id="age_label">Data nascita</label>
             <input type="date" id="birthdate" name="birthdate" min="1900-01-01">
+            <p class="policy">
+                <label class="privacy" for="privacyCheck">
+                    <input id="privacyCheck" type="checkbox" class="privacyCheck" value="false">
+                    Creando un account, accetti i nostri Termini di Servizio e confermi di aver letto la nostra Privacy Policy. <br>
+                    La tua privacy è garantita e i dati saranno trattati nel rispetto delle normative vigenti.
+                </label>
+            </p>
             <button disabled>
                 Crea account
             </button>
             <p>
                 Sei gia iscritto? <a href="login">Accedi</a>
-            </p>
-            <p class="policy">
-                Creando un account, accetti i nostri Termini di Servizio e confermi di aver letto la nostra Privacy
-                Policy.
-                La tua privacy è garantita e i dati saranno trattati nel rispetto delle normative vigenti.
             </p>
         </form>
     </div>
