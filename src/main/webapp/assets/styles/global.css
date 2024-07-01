@@ -248,20 +248,20 @@ button {
     color: var(--md-sys-color-on-primary-container);
     text-transform: uppercase;
     word-spacing: 0.2em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    border: 2px solid transparent;
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+    border: max(2px, 0.1vmin) solid transparent;
     transition: background-color 0.3s, transform 0.3s, border-color 0.3s;
 }
 
 button:hover, button:focus {
     background-color: var(--md-sys-color-secondary-container);
-    transform: translateY(-3px);
+    transform: translateY(-0.15em);
     border-color: var(--md-sys-color-primary);
 }
 
 button:active {
-    transform: translateY(-1px);
+    transform: translateY(-0.1em);
     background-color: var(--md-sys-color-tertiary-container);
 }
 
