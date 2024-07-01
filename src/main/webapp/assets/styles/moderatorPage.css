@@ -2,9 +2,8 @@
 
 table {
     width: 90%;
-    max-width: 80em;
     border-collapse: collapse;
-    margin: 2em auto;
+    margin: 3% auto;
     white-space: nowrap;
 }
 
@@ -48,9 +47,8 @@ button.deleted-users {
 }
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
     table {
-        margin: 1em auto;
         white-space: normal;
     }
 
@@ -61,7 +59,7 @@ button.deleted-users {
     tbody tr {
         display: block;
         width: 100%;
-        margin-bottom: 1em;
+        margin-bottom: 3vh;
         border: 1px solid;
     }
 

@@ -1,13 +1,10 @@
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
 <%@ page import="it.savoreco.model.entity.Restaurant" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="it.savoreco.model.entity.BoughtFood" %>
 <%@ page import="it.savoreco.model.entity.Purchase" %>
 <%@ page import="it.savoreco.model.entity.UserAccount" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.time.ZoneId" %>
+<%@ page import="java.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%
@@ -18,6 +15,7 @@
         response.sendRedirect("./home.jsp");
         return;
     }
+    orders.sort(Comparator.comparing(a -> a.getPurchase().getTime()));
 %>
 
 <!DOCTYPE html>
@@ -37,13 +35,15 @@
     <% if (orders.isEmpty()) { %>
     <h1 class="center">Il tuo Ristorante non ha ancora ricevuto nessun ordine</h1>
     <% }
-
-        Map<Purchase, List<BoughtFood>> categorizedBoughtFood = new HashMap<>();
+        Map<Purchase, List<BoughtFood>> foodMap = new HashMap<>();
         for (BoughtFood boughtFood : orders) {
-            categorizedBoughtFood.computeIfAbsent(boughtFood.getPurchase(), k -> new ArrayList<>()).add(boughtFood);
+            foodMap.computeIfAbsent(boughtFood.getPurchase(), k -> new ArrayList<>()).add(boughtFood);
         }
 
-        for (Map.Entry<Purchase, List<BoughtFood>> entry : categorizedBoughtFood.entrySet()) {
+        List<Map.Entry<Purchase, List<BoughtFood>>> entries = new ArrayList<>(foodMap.entrySet());
+        entries.sort(Comparator.comparing(entry -> entry.getKey().getTime()));
+
+        for (Map.Entry<Purchase, List<BoughtFood>> entry : entries) {
             Purchase purchase = entry.getKey();
             List<BoughtFood> boughtFoods = entry.getValue();
             UserAccount user = purchase.getUser();

@@ -1,5 +1,13 @@
 @import "access.css";
 
+search {
+    display: flex;
+}
+
+search input[type="text"] {
+    padding: .375rem .75rem .375rem 40px;
+}
+
 input.radar-autocomplete-input {
     width: 100%;
     margin: auto;
@@ -45,7 +53,7 @@ textarea {
     width: 65%;
     min-width: 65%;
     max-width: 75%;
-    margin: auto auto 1em auto;
+    margin: auto auto 2vh auto;
     display: flex;
     justify-content: center;
     align-items: center;

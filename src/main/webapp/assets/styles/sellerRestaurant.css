@@ -47,7 +47,6 @@ input[type="file"]::file-selector-button:hover {
     background-color: #004d00; /* Darker green background on hover */
 }
 
-
 @media screen and (max-width: 900px) {
     .main-container {
         flex-direction: column;
@@ -79,15 +78,14 @@ search input[type="text"] {
 }
 
 .center {
-    margin: 1em auto auto;
+    margin: 3vh auto auto;
     text-align: center;
 }
 
-input[type="text"],
-textarea {
+input[type="text"] {
     width: 100%;
-    padding: 1%;
-    margin-bottom: 1em;
+    padding: 2%;
+    margin-bottom: 10%;
     border: 1px solid var(--md-sys-color-primary);
     border-radius: 0.4em;
     background-color: var(--md-sys-color-on-primary);
@@ -104,12 +102,9 @@ textarea:focus {
 button {
     display: block;
     min-width: 100%;
-    padding: 0.6em 4%;
     font-size: 1.1em;
     color: var(--md-sys-color-on-primary);
     background-color: var(--md-sys-color-primary);
-    border: none;
-    border-radius: 0.4em;
     cursor: pointer;
     text-align: center;
 }
@@ -122,23 +117,20 @@ button:disabled {
 .foodBox {
     border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
-    padding: 1rem;
-    margin: 1rem 0 2rem;
+    padding: 2vw;
+    margin: 3vh 0 2vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    width: calc(100% - 2rem);
     background-color: var(--md-sys-color-primary-container);
 }
 
 .foodImage {
-    max-height: 100%;
     object-fit: cover;
-    margin-right: 1em;
-    height: 10em;
-    width: 10em;
+    height: 90%;
+    width: 90%;
 }
 
 input.radar-autocomplete-input {
@@ -170,7 +162,7 @@ textarea {
     }
 
     min-width: 100%;
-    margin: auto auto 1em auto;
+    margin: auto auto 2vh auto;
     display: flex;
     justify-content: center;
     align-items: center;

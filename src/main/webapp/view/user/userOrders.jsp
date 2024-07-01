@@ -1,10 +1,7 @@
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.time.ZoneId" %>
 <%@ page import="it.savoreco.model.entity.*" %>
+<%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
@@ -15,6 +12,7 @@
         response.sendRedirect("./home.jsp");
         return;
     }
+    orders.sort(Comparator.comparing(a -> a.getPurchase().getTime()));
 %>
 
 <!DOCTYPE html>
@@ -33,16 +31,19 @@
     <% if (orders.isEmpty()) { %>
     <h1>Non hai ancora effettuato nessun ordine</h1>
     <% }
-
-        Map<Purchase, List<BoughtFood>> categorizedBoughtFood = new HashMap<>();
+        Map<Purchase, List<BoughtFood>> foodMap = new HashMap<>();
         for (BoughtFood boughtFood : orders) {
-            categorizedBoughtFood.computeIfAbsent(boughtFood.getPurchase(), k -> new ArrayList<>()).add(boughtFood);
+            foodMap.computeIfAbsent(boughtFood.getPurchase(), k -> new ArrayList<>()).add(boughtFood);
         }
 
-        for (Map.Entry<Purchase, List<BoughtFood>> entry : categorizedBoughtFood.entrySet()) {
+        List<Map.Entry<Purchase, List<BoughtFood>>> entries = new ArrayList<>(foodMap.entrySet());
+        entries.sort(Comparator.comparing(entry -> entry.getKey().getTime()));
+
+        for (Map.Entry<Purchase, List<BoughtFood>> entry : entries) {
             Purchase purchase = entry.getKey();
             List<BoughtFood> boughtFoods = entry.getValue();
     %>
+
     <div class="purchaseBox">
         <h3>Acquisto del  <%= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
                 .format(purchase.getTime().atZone(ZoneId.systemDefault()))%>:</h3>
