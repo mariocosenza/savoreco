@@ -122,9 +122,7 @@ public class RegistrationServlet extends HttpServlet {
                     resp.setStatus(HttpServletResponse.SC_ACCEPTED);
                 }
 
-                default -> {
-                    resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                }
+                default -> resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }
         } else {
             try {
