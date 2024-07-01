@@ -11,12 +11,12 @@ input[type="text"], input[type="password"], input[type="email"], input[type="dat
     border: 1% solid var(--md-sys-color-primary);
     border-radius: 0.4em;
     outline: none;
-    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 0 inset;
+    box-shadow: rgba(225, 228, 232, 0.2) 0 0.1vmax 0 0 inset;
 
     :focus {
         border-color: var(--md-sys-color-secondary-fixed-dim);;
         outline: none;
-        box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
+        box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 0.2em;
     }
 
     width: 65%;
@@ -30,7 +30,7 @@ div.center, div.centerLogin {
     border-radius: 1.1rem;
     border: 0.1rem solid var(--md-sys-color-secondary);
     padding: 1vw;
-    box-shadow: 0 0.2em 4em 0.4em rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0.2vmin 2vmin 0.4em rgba(0, 0, 0, 0.25);
     margin-top: 5vh;
     width: 38vw;
     min-width: 38vw;
@@ -99,7 +99,7 @@ button:disabled {
 img.accessLogo {
     position: absolute;
     left: 2vw;
-    width: 10em;
+    width: min(10em, 5vw);
     height: auto;
     top: 2em;
 }
@@ -132,7 +132,7 @@ a:hover {
     min-width: 15vw;
     margin-top: 1vh;
     margin-right: 5vw;
-    padding: 20px;
+    padding: max(1vw, 2em);
     background-color: var(--md-sys-color-error-container);
     color: var(--md-sys-color-on-error-container);
 }
@@ -142,8 +142,8 @@ a:hover {
     color: white;
     font-weight: bold;
     float: right;
-    font-size: 22px;
-    line-height: 20px;
+    font-size: 2em;
+    line-height: 1.5em;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -157,8 +157,13 @@ p.policy {
 }
 
 .privacy {
+    margin-right: 5%;
+    flex-direction: row;
     line-height: 1.5;
-    display: inline;
+    gap: 2%;
+    display: flex;
+    word-wrap: break-word;
+    text-align: justify;
 }
 
 .privacyCheck {
@@ -186,6 +191,6 @@ p.policy {
     }
 
     img.accessLogo {
-        width: 2em;
+        width: min(2em, 10vw);
     }
 }
