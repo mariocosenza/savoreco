@@ -1,13 +1,12 @@
 @import "global.css";
 
-.purchaseBox, .foodBox {
+.purchaseBox {
     border-radius: 1.1rem;
     border: 0.1rem solid var(--md-sys-color-secondary);
     padding: 2vw;
     box-shadow: 0 0.2em 4em 0.4em rgba(0, 0, 0, 0.25);
     background-color: var(--md-sys-color-on-primary);
-    width: calc(100% - 4rem);
-    max-width: 100%;
+    width: calc(100% - 7vw);
     box-sizing: border-box;
 }
 
@@ -17,32 +16,21 @@
 
 main p {
     padding-right: 1em;
-    word-spacing: normal;
-}
-
-.foodImage {
-    max-height: 100%;
-    object-fit: cover;
-    margin-right: 1em;
-    height: 10em;
-    width: 10em;
 }
 
 .info {
     display: flex;
     align-items: center;
-    margin-bottom: 1em;
     flex-wrap: wrap;
 }
 
 .foodItem {
     border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
-    padding: 1rem;
-    margin: 1rem 0;
+    padding: 2vw;
+    margin: 3vh 0 2vh;
     display: flex;
     align-items: center;
-    width: calc(100% - 4rem);
     background-color: var(--md-sys-color-primary-container);
 }
 
@@ -69,7 +57,7 @@ strong.status {
 @media (max-width: 768px) {
 
 
-    .purchaseBox, .foodBox {
+    .purchaseBox {
         padding: 4vw;
         width: calc(100% - 4rem);
         min-width: 80%;
@@ -80,14 +68,8 @@ strong.status {
         margin-right: auto;
     }
 
-    .foodImage {
-        height: 8em;
-        width: 8em;
-    }
-
     .foodItem {
         flex-direction: column;
-        width: calc(100% - 4rem);
     }
 
     .info {
@@ -102,24 +84,15 @@ strong.status {
 
 @media (max-width: 480px) {
 
-    .purchaseBox, .foodBox {
+    .purchaseBox {
         text-align: center;
         justify-content: center;
         align-items: center;
         padding: 8vw;
-        width: calc(100% - 4rem);
         box-shadow: none;
     }
 
-    .foodImage {
-        height: 6em;
-        width: 6em;
-        margin-right: 0;
-        margin-bottom: 1em;
-    }
-
     .foodItem {
-        width: 100%;
         padding: 0.5rem;
     }
 
@@ -133,5 +106,9 @@ strong.status {
         padding-right: 0;
         width: 100%;
         text-align: center;
+    }
+
+    strong.status {
+        align-self: center;
     }
 }
