@@ -71,7 +71,7 @@ search input[type="text"] {
 }
 
 input[type="text"] {
-    width: 100%;
+    width: calc(98% - 2vw);
     padding: 2%;
     margin-bottom: 10%;
     border: min(1vw, 0.1em) solid var(--md-sys-color-primary);
@@ -168,11 +168,9 @@ textarea {
 
     button.modify {
         max-width: 80%;
-        margin-left: 10%;
     }
 
     .main-box, products-box {
-        min-width: 90vw;
         margin-left: auto;
         margin-right: auto;
     }

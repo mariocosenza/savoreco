@@ -111,4 +111,8 @@ strong.status {
     strong.status {
         align-self: center;
     }
+
+    select {
+        align-self: center;
+    }
 }
