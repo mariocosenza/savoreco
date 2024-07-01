@@ -27,7 +27,7 @@ label {
 }
 
 aside {
-    padding: 2em 1vw;
+    padding: 2em 2vw;
     margin-top: 15vh;
     display: flex;
     align-items: center;
@@ -43,7 +43,7 @@ aside {
     margin-left: 2vw;
     min-width: 14vw;
     max-width: 14vw;
-    box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 1vmax 2vmax, rgba(0, 0, 0, 0.22) 0 0.8vmax 0.8vmax;
 }
 
 img.svgLogo {
@@ -71,7 +71,7 @@ h2 {
     min-height: 20em;
     max-height: 20em;
     border-radius: 0.4em;
-    box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 1vmax 2vmax, rgba(0, 0, 0, 0.22) 0 0.8vmax 0.8vmax;
 }
 
 div.resultImageDiv {
@@ -120,10 +120,10 @@ img.resultImage {
     min-width: 95%;
     text-align: center;
     margin-top: 1em;
-    border-width: 0.1em;
+    border-width: 0.5vmax;
     border-style: solid;
     background-color: var(--md-sys-color-secondary-container);
-    box-shadow: rgba(0, 0, 0, 0.25) 0 7px 14px, rgba(0, 0, 0, 0.22) 0 5px 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 0.1vmin 0.5vmin, rgba(0, 0, 0, 0.22) 0 0.2vmin 0.2vmin;
     border-radius: 0.4em;
 }
 
@@ -192,7 +192,7 @@ button.searchLogo {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 3em;
+    min-width: 5%;
     height: 3em;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
@@ -264,6 +264,11 @@ h2.price {
 
 @media screen and (max-width: 600px) {
 
+    .result {
+        max-width: 80vw;
+        min-width: 80vw;
+    }
+
     button.showMoreButton {
         margin-left: 25vw;
         margin-right: 25vw;
@@ -294,15 +299,14 @@ h2.price {
 
     .mobileSelector select {
         all: revert;
-        /* styling */
         background-color: var(--md-sys-color-background);
         border: thin solid var(--md-sys-color-primary);
         color: var(--md-sys-color-on-background);
-        border-radius: 4px;
+        border-radius: 0.3em;
         display: inline-block;
         font: inherit;
         line-height: 1.5em;
-        padding: 0.5em 15vw 5vw 1em;
+        padding: 0.5em 15vw 1em 2vw;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
@@ -315,17 +319,14 @@ h2.price {
         font-size: 1rem;
     }
 
-    /* arrows */
+
     .mobileSelector select.classic {
         background-image: linear-gradient(45deg, transparent 50%, var(--md-sys-color-tertiary-fixed-dim) 50%),
         linear-gradient(135deg, var(--md-sys-color-tertiary-fixed-dim) 50%, transparent 50%),
         linear-gradient(to right, var(--md-sys-color-on-tertiary-fixed-variant), var(--md-sys-color-on-tertiary-fixed-variant));
-        background-position: calc(100% - 20px) calc(1em + 2px),
-        calc(100% - 15px) calc(1em + 2px),
-        100% 0;
-        background-size: 5px 5px,
-        5px 5px,
-        2.5em 2.5em;
+        background-position: calc(100% - 2vw) calc(1em + 0.2vw),
+        calc(100% - 1.5vw) calc(1em + 0.2vw), 100% 0;
+        background-size: 0.8vw 0.8vw, 0.8vw 0.8vw, 2.5em 2.5em;
         background-repeat: no-repeat;
     }
 
@@ -333,16 +334,14 @@ h2.price {
         background-image: linear-gradient(45deg, var(--md-sys-color-primary-container) 50%, transparent 50%),
         linear-gradient(135deg, transparent 50%, var(--md-sys-color-primary-container) 50%),
         linear-gradient(to right, var(--md-sys-color-on-primary-container), var(--md-sys-color-on-primary-container));
-        background-position: calc(100% - 15px) 1em,
-        calc(100% - 20px) 1em,
-        100% 0;
-        background-size: 5px 5px,
-        5px 5px,
-        2.5em 2.5em;
+        background-position: calc(100% - 1.5vw) 1em,
+        calc(100% - 2vw) 1em, 100% 0;
+        background-size: 0.8vw 0.8vw, 0.8vw 0.8vw, 2.5em 2.5em;
         background-repeat: no-repeat;
         border-color: grey;
         outline: 0;
     }
+
 
     search input[type="search"]::placeholder {
         font-size: 0.8em;
