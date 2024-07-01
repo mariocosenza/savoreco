@@ -9,6 +9,7 @@
 
 .restaurantImage {
     max-width: 35%;
+    max-height: 20em;
     margin-right: 2%;
     margin-left: 2%;
     object-fit: scale-down;
