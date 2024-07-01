@@ -1,7 +1,7 @@
 "use strict";
 
 
-function deleteProduct(obj, id, price, quantity) {
+function deleteProduct(obj, id, price) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/user/cart", true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
@@ -9,11 +9,13 @@ function deleteProduct(obj, id, price, quantity) {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
                 const sel = document.querySelector("#price");
-                const selPrice = parseFloat(sel.innerHTML);
-                if (selPrice - (price * quantity) <= 0) {
+                const floatPrice = parseFloat(price.replace(",", "."))
+                const selPrice = parseFloat(sel.innerHTML.replace(",", "."));
+                const quantity = parseInt(obj.parentNode.parentNode.parentNode.querySelector(".piece").innerHTML)
+                if (selPrice - (floatPrice * quantity) <= 0.009) {
                     location.reload();
                 } else {
-                    sel.innerHTML = `${selPrice - price * quantity}`;
+                    sel.innerHTML = `${selPrice - floatPrice * quantity}`;
                 }
                 obj.closest("li").remove();
             } else {
@@ -49,8 +51,8 @@ async function addProduct(obj, id, price) {
             num++
             obj.parentElement.children[0].innerHTML = `${num}`
             const sel = document.querySelector("#price")
-            const selPrice = parseFloat(sel.innerHTML)
-            sel.innerHTML = `${selPrice + parseFloat(price)}`
+            const selPrice = parseFloat(sel.innerHTML.replace(",", "."))
+            sel.innerHTML = `${selPrice + parseFloat(price.replace(",", "."))}`
         } else {
             location.reload();
         }

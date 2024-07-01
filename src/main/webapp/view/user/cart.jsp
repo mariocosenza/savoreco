@@ -38,7 +38,7 @@
                                     <svg class="delete" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                                          viewBox="0 0 27 26"
                                          fill="none" onclick="deleteProduct(this, '<c:out
-                                            value="${item.food.id}"/>', ${item.quantity}, ${item.food.price}); return false">
+                                            value="${item.food.id}"/>', '${item.food.price}'); return false">
                                         <path d="M8.01465 18.4197L13.2303 13.0506L18.446 7.68152" stroke="#2F6A43"
                                               stroke-width="1.67038" stroke-linecap="round"
                                               stroke-linejoin="round"></path>
