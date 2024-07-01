@@ -1,15 +1,16 @@
 @import "global.css";
 
 .foodImage {
-    height: 30%;
-    width: 30%;
-    margin-right: 2vw;
-    object-fit: cover;
+    max-height: 10em;
+    max-width: 30%;
+    margin-right: 2%;
+    object-fit: scale-down;
 }
 
 .restaurantImage {
     max-width: 35%;
     margin-right: 2%;
+    margin-left: 2%;
     object-fit: scale-down;
     mix-blend-mode: multiply;
     border-radius: 1em;
@@ -26,7 +27,7 @@ div#map {
     border-radius: 1.1rem;
     border: 0.1rem solid var(--md-sys-color-secondary);
     padding: 2vw;
-    box-shadow: 0 0.2em 4em 0.4em rgba(0, 0, 0, 0.25);
+    box-shadow: 0 min(0.2em, 1vw) min(4em, 4vw)  0.4em rgba(0, 0, 0, 0.25);
     margin-top: 5vh;
     width: 80vw;
     min-width: 38vw;
@@ -43,7 +44,7 @@ div#map {
 
 .foodBox {
     border-radius: 0.5rem;
-    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 min(3px, 2%) 0.5em;
     padding: 2%;
     margin: 2vh 0;
     display: flex;
@@ -113,16 +114,17 @@ button {
     }
 
     .foodImage {
-        width: 60%;
-        height: auto;
+        max-width: 60%;
+        max-height: 15em;
         margin-bottom: 1em;
     }
 }
 
 @media screen and (max-width: 650px) {
     .restaurantImage {
-        width: 100%;
-        height: auto;
+        max-width: 98.5%;
+        padding: 1.5%;
+        max-height: 15em;
     }
 
     .restaurantInfo {
@@ -135,8 +137,8 @@ button {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 15px;
-    height: 15px;
+    width: max(1vmin, 1em);
+    height: max(1vmin, 1em);;
     background-color: #FF0;
     border-radius: 50%;
     animation: effect-animation 1.5s ease-in-out forwards;

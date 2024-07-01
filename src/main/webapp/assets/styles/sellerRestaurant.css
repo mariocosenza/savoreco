@@ -1,9 +1,6 @@
 @import "global.css";
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
@@ -22,9 +19,9 @@ h1 {
 .main-box, .products-box {
     background-color: var(--md-sys-color-surface);
     border-radius: 1.1rem;
-    border: 0.1rem solid var(--md-sys-color-secondary);
+    border: max(0.1rem, 0.1vw) solid var(--md-sys-color-secondary);
     padding: 2vw;
-    box-shadow: 0 0.2em 4em 0.4em rgba(0, 0, 0, 0.25);
+    box-shadow: 0 calc(0.2em * 1vw) calc(4em * 1vw) calc(0.4em * 1vw) rgba(0, 0, 0, 0.25);
     margin-top: 2vh;
     flex: 1 1 48%;
 }
@@ -47,17 +44,7 @@ input[type="file"]::file-selector-button:hover {
     background-color: #004d00; /* Darker green background on hover */
 }
 
-@media screen and (max-width: 900px) {
-    .main-container {
-        flex-direction: column;
-    }
 
-    .main-box, products-box {
-        min-width: 90vw;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
 
 .attribute {
     margin: 2%;
@@ -74,7 +61,8 @@ search {
 }
 
 search input[type="text"] {
-    padding: .375rem .75rem .375rem 40px;
+    text-align: center;
+    padding: calc(.375rem * 0.5vw) calc(.75rem * 0.5vw) calc(.375rem * 0.5vw) calc(40px * 0.5vw);
 }
 
 .center {
@@ -96,7 +84,7 @@ input[type="text"]:focus,
 textarea:focus {
     border-color: var(--md-sys-color-secondary-fixed-dim);
     outline: none;
-    box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
+    box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 0.15em;
 }
 
 button {
@@ -116,7 +104,7 @@ button:disabled {
 
 .foodBox {
     border-radius: 0.5rem;
-    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 min(3px, 1vw) 8px;
     padding: 2vw;
     margin: 3vh 0 2vh;
     display: flex;
@@ -128,9 +116,9 @@ button:disabled {
 }
 
 .foodImage {
-    object-fit: cover;
-    height: 90%;
-    width: 90%;
+    object-fit: scale-down;
+    max-height: 20em;
+    max-width: 50%;
 }
 
 input.radar-autocomplete-input {
@@ -153,7 +141,7 @@ textarea {
     border: 1% solid var(--md-sys-color-primary);
     border-radius: 0.4em;
     outline: none;
-    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 0 inset;
+    box-shadow: rgba(225, 228, 232, 0.2) 0 min(2px, 1vw) 0 0 inset;
 
     :focus {
         border-color: var(--md-sys-color-secondary-fixed-dim);;
@@ -167,4 +155,25 @@ textarea {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+@media screen and (max-width: 900px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .foodImage {
+        margin-left: 25%;
+    }
+
+    button.modify {
+        max-width: 80%;
+        margin-left: 10%;
+    }
+
+    .main-box, products-box {
+        min-width: 90vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
