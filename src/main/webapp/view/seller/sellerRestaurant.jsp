@@ -64,7 +64,7 @@
                         <div class="attribute">
                             <label for="allergens" id="allergens_label">Allergeni</label>
                             <input type="text" id="allergens" name="allergens" placeholder="Inserisci gli Allergeni"
-                                   value="<%= food.getAllergens()%>" maxlength="50" required>
+                                   value="<%= food.getAllergens()%>" maxlength="50">
                         </div>
                         <div class="attribute">
                             <label for="greenPoints" id="greenPoints_label">Green Points</label>

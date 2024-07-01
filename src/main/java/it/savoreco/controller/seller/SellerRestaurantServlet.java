@@ -136,7 +136,7 @@ public class SellerRestaurantServlet extends HttpServlet {
                     && descriptionMatcher.matcher(description).matches()
                     && categoryMatcher.matcher(category).matches()
                     && priceMatcher.matcher(price).matches()
-                    && allergensMatcher.matcher(allergens).matches()
+                    && ((allergensMatcher.matcher(allergens).matches()) || allergens.isEmpty())
                     && greenPointsMatcher.matcher(greenPoints).matches()
                     && quantityMatcher.matcher(greenPoints).matches()) {
 

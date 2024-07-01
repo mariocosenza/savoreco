@@ -77,7 +77,7 @@ function validateFood(foodId) {
         } else if (element.id === "price") {
             isValid = regexCost.test(element.value);
         } else if (element.id === "allergens") {
-            isValid = regexAllergens.test(element.value);
+            isValid = (element.value === "") || (regexAllergens.test(element.value));
         } else if (element.id === "greenPoints") {
             isValid = regexGreenPoints.test(element.value);
         } else if (element.id === "quantity") {
