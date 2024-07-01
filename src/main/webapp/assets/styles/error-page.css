@@ -2,14 +2,14 @@
 
 main.center-page {
     position: relative;
-    margin: 1rem;
+    margin: max(1rem, 1vw);
 }
 
 div.center-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
+    padding: max(1vw, 1rem);
     text-align: center;
 }
 
