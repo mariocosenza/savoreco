@@ -74,7 +74,7 @@ input[type="text"] {
     width: 100%;
     padding: 2%;
     margin-bottom: 10%;
-    border: 1px solid var(--md-sys-color-primary);
+    border: min(1vw, 0.1em) solid var(--md-sys-color-primary);
     border-radius: 0.4em;
     background-color: var(--md-sys-color-on-primary);
     color: var(--md-sys-color-on-background);
@@ -137,7 +137,7 @@ textarea {
     vertical-align: middle;
     background-color: var(--md-sys-color-on-primary);
     background-repeat: no-repeat;
-    background-position: right 8px center;
+    background-position: right 0.5em center;
     border: 1% solid var(--md-sys-color-primary);
     border-radius: 0.4em;
     outline: none;
@@ -146,7 +146,7 @@ textarea {
     :focus {
         border-color: var(--md-sys-color-secondary-fixed-dim);;
         outline: none;
-        box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
+        box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 0.2em;
     }
 
     min-width: 100%;

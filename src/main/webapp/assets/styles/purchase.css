@@ -28,7 +28,7 @@ body.confirmed {
     width: 25%;
     height: 50%;
     border: solid var(--md-sys-color-on-background);
-    border-width: 0 8px 8px 0;
+    border-width: 0 max(0.5em, 1vw) max(0.5em, 1vw) 0;
     transform: rotate(45deg);
 }
 

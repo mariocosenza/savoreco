@@ -33,7 +33,7 @@ div.content {
 @media (prefers-color-scheme: light) {
     div.content {
         background-color: rgba(193, 201, 191, 0.88);
-        box-shadow: 0 4px 8px rgba(44, 62, 80, 0.2);
+        box-shadow: 0 min(4px, 1vw) 0.5em rgba(44, 62, 80, 0.2);
     }
 }
 
@@ -67,7 +67,7 @@ h2 {
 
 .paragrafo-stilizzato:hover {
     border-left-color: var(--md-sys-color-tertiary);
-    box-shadow: 0 6px 12px var(--md-sys-color-tertiary-container);
+    box-shadow: 0 max(0.4em, 1vw) 0.7em var(--md-sys-color-tertiary-container);
 }
 
 progress {
@@ -79,7 +79,7 @@ progress {
 
 progress::-webkit-progress-bar {
     background-color: var(--md-sys-color-on-background);
-    border-radius: 10px;
+    border-radius: 0.8em;
     overflow: hidden;
 }
 

@@ -9,7 +9,7 @@
     border-radius: 0.5em;
     margin: 5vh auto auto;
     background-color: var(--md-sys-color-background);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0.8em rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 

@@ -7,7 +7,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="dat
     vertical-align: middle;
     background-color: var(--md-sys-color-on-primary);
     background-repeat: no-repeat;
-    background-position: right 8px center;
+    background-position: right 0.5em center;
     border: 1% solid var(--md-sys-color-primary);
     border-radius: 0.4em;
     outline: none;

@@ -5,7 +5,8 @@ search {
 }
 
 search input[type="text"] {
-    padding: .375rem .75rem .375rem 40px;
+    text-align: center;
+    padding: calc(.375rem * 0.5vw) calc(.75rem * 0.5vw) calc(.375rem * 0.5vw) calc(40px * 0.5vw);
 }
 
 input.radar-autocomplete-input {
@@ -38,16 +39,16 @@ textarea {
     vertical-align: middle;
     background-color: var(--md-sys-color-on-primary);
     background-repeat: no-repeat;
-    background-position: right 8px center;
+    background-position: right 0.5em center;
     border: 1% solid var(--md-sys-color-primary);
     border-radius: 0.4em;
     outline: none;
-    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 0 inset;
+    box-shadow: rgba(225, 228, 232, 0.2) 0 min(0.1em, 1vw) 0 0 inset;
 
     :focus {
         border-color: var(--md-sys-color-secondary-fixed-dim);;
         outline: none;
-        box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
+        box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 min(0.3em, 5vw);
     }
 
     width: 65%;

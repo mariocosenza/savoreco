@@ -60,7 +60,7 @@ button.deleted-users {
         display: block;
         width: 100%;
         margin-bottom: 3vh;
-        border: 1px solid;
+        border: 1vmin solid;
     }
 
     td {
