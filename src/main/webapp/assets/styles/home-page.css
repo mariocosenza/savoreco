@@ -24,7 +24,6 @@ div.center {
 }
 
 
-
 h1.search {
     font-size: 1.5em;
 }
@@ -84,23 +83,22 @@ div.left, div.right {
     min-width: 25vw;
     width: 25vw;
     overflow: hidden;
-    box-shadow: 0 0.1em 2em 0.2em rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0.1vmin 2vmin 0.2em rgba(0, 0, 0, 0.25);
     transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
     will-change: box-shadow, transform, background-color;
 }
 
-div.left:hover  {
+div.left:hover {
     transform: translateY(-1rem) rotate(-3deg);
-    box-shadow: 0 0.5em 3em 0.3em rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0.5vmin 2vmin 0.3em rgba(0, 0, 0, 0.3);
     background: var(--md-sys-color-on-secondary, #DDDDDD); /* Colore di sfondo al passaggio del mouse */
 }
 
 div.right:hover {
     transform: translateY(-1rem) rotate(3deg);
-    box-shadow: 0 0.5em 3em 0.3em rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0.5vmin 2vmin 0.3em rgba(0, 0, 0, 0.3);
     background: var(--md-sys-color-on-secondary, #DDDDDD); /* Colore di sfondo al passaggio del mouse */
 }
-
 
 
 div.left {
@@ -132,6 +130,9 @@ div.left p, div.right p {
     margin-right: 5%;
 }
 
+.radar-autocomplete-input {
+    border-radius: 0.8rem;
+}
 
 @media screen and (max-width: 900px) {
     div.info {
@@ -141,6 +142,7 @@ div.left p, div.right p {
         display: block;
         margin: 15vh auto 5rem;
     }
+
     div.info img.center {
         vertical-align: top;
         max-height: 15em;
@@ -167,7 +169,7 @@ div.left p, div.right p {
         margin: 0;
     }
 
-    div.left, div.right{
+    div.left, div.right {
         padding-bottom: 1em;
         float: none;
         height: auto;

@@ -1,8 +1,9 @@
-package it.savoreco.controller;
+package it.savoreco.controller.commons;
 
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import it.savoreco.model.entity.Basket;
 import it.savoreco.model.entity.SellerAccount;
 import it.savoreco.model.entity.UserAccount;
 import it.savoreco.service.PasswordSHA512;
@@ -57,7 +58,7 @@ public class RegistrationServlet extends HttpServlet {
         try {
             Gson gson = new Gson();
             map = gson.fromJson(req.getReader(), mapType);
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("Error parsing JSON", e);
             return;
         }
@@ -101,7 +102,12 @@ public class RegistrationServlet extends HttpServlet {
                     user.setPassword(PasswordSHA512.SHA512Hash(password));
                     user.setCountryCode("IT");
                     user.setEcoPoint(0);
+
+                    var basket = new Basket();
+                    basket.setUser(user);
+
                     session.persist(user);
+                    session.persist(basket);
                     transaction.commit();
                     resp.setStatus(HttpServletResponse.SC_ACCEPTED);
                 }
@@ -114,6 +120,10 @@ public class RegistrationServlet extends HttpServlet {
                     session.persist(seller);
                     transaction.commit();
                     resp.setStatus(HttpServletResponse.SC_ACCEPTED);
+                }
+
+                default -> {
+                    resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 }
             }
         } else {
@@ -129,7 +139,7 @@ public class RegistrationServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
 
         try {
-            if(Objects.isNull(req.getSession(false)) || Objects.isNull(req.getSession(false).getAttribute("logged"))) {
+            if (Objects.isNull(req.getSession(false)) || Objects.isNull(req.getSession(false).getAttribute("logged"))) {
                 RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/registration.jsp");
                 requestDispatcher.forward(req, resp);
             } else {

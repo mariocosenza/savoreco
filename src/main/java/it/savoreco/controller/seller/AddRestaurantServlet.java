@@ -1,9 +1,12 @@
-package it.savoreco.controller;
+package it.savoreco.controller.seller;
 
 import com.google.common.html.HtmlEscapers;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import it.savoreco.model.entity.*;
+import it.savoreco.model.entity.Address;
+import it.savoreco.model.entity.AddressId;
+import it.savoreco.model.entity.Restaurant;
+import it.savoreco.model.entity.SellerAccount;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -42,7 +45,7 @@ public class AddRestaurantServlet extends HttpServlet {
         super.init(config);
         nameMatcher = Pattern.compile("^[a-zA-Z][a-zA-Z0-9-_\\s]{2,24}$");
         descriptionMatcher = Pattern.compile("^.{2,2000}$");
-        deliveryCostMatcher = Pattern.compile("^\\d+(\\.\\d{1,2})?$");
+        deliveryCostMatcher = Pattern.compile("^\\d+(\\.\\d{1,2})?$|^\\d+(,\\d{1,2})?$");
         categoryMatcher = Pattern.compile("^[a-zA-Z\\s]{2,25}$");
     }
 
@@ -55,7 +58,7 @@ public class AddRestaurantServlet extends HttpServlet {
         try {
             Gson gson = new Gson();
             map = gson.fromJson(req.getReader(), mapType);
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("Error parsing JSON", e);
             return;
         }
@@ -89,7 +92,7 @@ public class AddRestaurantServlet extends HttpServlet {
 
                 var address = session.get(Address.class, addressId);
 
-                if(address == null) {
+                if (address == null) {
                     address = new Address();
                     address.setId(addressId);
                     address.setCity(HtmlEscapers.htmlEscaper().escape(city));
@@ -103,7 +106,7 @@ public class AddRestaurantServlet extends HttpServlet {
                 restaurant.setName(HtmlEscapers.htmlEscaper().escape(name));
                 restaurant.setAddress(address);
                 restaurant.setDescription(HtmlEscapers.htmlEscaper().escape(description));
-                restaurant.setDeliveryCost(BigDecimal.valueOf(Double.parseDouble(deliveryCost.trim())));
+                restaurant.setDeliveryCost(BigDecimal.valueOf(Double.parseDouble(deliveryCost.replace(',', '.'))));
                 restaurant.setCategory(HtmlEscapers.htmlEscaper().escape(category.trim()));
                 restaurant.setCreationTime(Instant.now());
                 restaurant.setImageObject(HtmlEscapers.htmlEscaper().escape(imageUrl));

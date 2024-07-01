@@ -5,15 +5,16 @@ const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$
 const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
 async function submitRegistration() {
-    if (validate()) {
+    if (validate() && searchResult() !== undefined) {
         const address = searchResult()
         document.querySelector("#lat").value = address.latitude
         document.querySelector("#lon").value = address.longitude
-        document.querySelector("#postal").value = address.postalCode
-        document.querySelector("#address").value = address.street + ` ${address.number}`
+        document.querySelector("#postal").value = ` ${address.postalCode === undefined ? "" : address.postalCode}`
+        document.querySelector("#address").value = address.street + ` ${address.number === undefined ? "" : address.number}`
         document.querySelector("#city").value = address.city
         const formData = new FormData(document.querySelector("#form"))
-        try { const response = await fetch("/user/preference", {
+        try {
+            const response = await fetch("/user/preference", {
                 method: "POST",
                 body: JSON.stringify(Object.fromEntries(formData)),
                 contentType: "application/json"
@@ -21,6 +22,7 @@ async function submitRegistration() {
             if (response.status === 201) {
                 window.location.href = "/home"
             } else if (response.ok) {
+                document.querySelector("#labelAutocomplete").innerHTML = `Il tuo indirizzo ${address.street}, ${address.number === undefined ? "" : address.number}` + " " + address.city
                 formOk()
             } else {
                 formError()
@@ -38,7 +40,7 @@ function formError() {
     document.querySelector("label").style.color = "var(--md-sys-color-on-background)"
     const alert = document.querySelector(".alert")
     alert.style.backgroundColor = "var(--md-sys-color-error-container)"
-    alert.style.visibility ="visible"
+    alert.style.visibility = "visible"
     alert.style.color = "var(--md-sys-color-on-error-container)"
     document.querySelector("#textAlert").innerHTML = "Errore nell'aggiornamento"
 }
@@ -47,7 +49,7 @@ function formOk() {
     document.querySelector("button").disabled = true
     document.querySelector("label").style.color = "var(--md-sys-color-on-background)"
     const alert = document.querySelector(".alert")
-    alert.style.visibility ="visible"
+    alert.style.visibility = "visible"
     alert.style.backgroundColor = "var(--md-sys-color-primary)"
     alert.style.color = "var(--md-sys-color-on-background)"
     document.querySelector("#textAlert").innerHTML = "Aggiornato con successo"
@@ -60,7 +62,7 @@ function validate() {
     for (const arg of document.querySelectorAll("label")) {
         const element = document.getElementById(arg.htmlFor)
         if (element.id === "email") {
-            if(element.value === "") {
+            if (element.value === "") {
                 count++
             } else if (regexEmail.test(element.value)) {
                 arg.style.color = "var(--md-sys-color-primary)"
@@ -69,7 +71,7 @@ function validate() {
                 error = true
             }
         } else if (element.id === "password") {
-            if(element.value === "") {
+            if (element.value === "") {
                 count++
             } else if (regexPassword.test(element.value)) {
                 arg.style.color = "var(--md-sys-color-primary)"
@@ -77,13 +79,13 @@ function validate() {
                 arg.style.color = "var(--md-sys-color-error)"
                 error = true
             }
-            if(element.value === document.querySelector("#check_password").value) {
-                if(element.value === "") {
+            if (element.value === document.querySelector("#check_password").value) {
+                if (element.value === "") {
                     count++
                 } else {
                     document.querySelector("#check_label").style.color = "var(--md-sys-color-primary)"
                 }
-            } else if(document.querySelector("#check_password").value !== "") {
+            } else if (document.querySelector("#check_password").value !== "") {
                 arg.style.color = "var(--md-sys-color-error)"
                 document.querySelector("#check_label").style.color = "var(--md-sys-color-error)"
                 error = true
@@ -91,7 +93,7 @@ function validate() {
         }
     }
 
-    if(count === 3)
+    if (count === 3)
         error = false
 
     if (!error) {

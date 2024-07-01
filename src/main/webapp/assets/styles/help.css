@@ -5,31 +5,45 @@ main {
 }
 
 main header, article, main div {
-    border: 0.2em solid var(--md-sys-color-secondary, #B2F1C0);
+    border: calc(1.5vmin - .5vw) solid var(--md-sys-color-secondary, #B2F1C0);
 }
 
 main header, article {
-    box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 max(0.8em, 0.5vw) 2em, rgba(0, 0, 0, 0.22) 0 max(0.6em, 0.3vw) 0.6em;
 }
 
 header, article, main div {
-    margin-bottom: 20px;
+    margin-bottom: 2svh;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+    text-align: justify;
     padding: 5vw;
-    border: 1px solid var(--md-sys-color-on-background);
-    border-radius: 0.4em;
+    border: 0.1em solid var(--md-sys-color-on-background);
+    border-radius: calc(1.5vmax - .5vh);
     background-color: var(--md-sys-color-background);
 }
+
 header {
     background-color: var(--md-sys-color-primary-container);
     color: var(--md-sys-color-on-primary-container);
 }
+
 main h1, main h2, main h3 {
     color: var(--md-sys-color-on-background);
 }
+
 main a {
+    word-wrap: break-word;
     color: var(--md-sys-color-primary);
     text-decoration: none;
 }
+
+main p {
+    word-wrap: break-word;
+    min-width: 100%;
+}
+
 main a:hover {
     text-decoration: underline;
 }

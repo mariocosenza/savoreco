@@ -1,4 +1,4 @@
-package it.savoreco.controller;
+package it.savoreco.controller.user;
 
 import com.google.common.html.HtmlEscapers;
 import com.google.common.reflect.TypeToken;
@@ -62,7 +62,7 @@ public class UserPreferenceServlet extends HttpServlet {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
-        if(Objects.nonNull(req.getParameter("delete"))) {
+        if (Objects.nonNull(req.getParameter("delete"))) {
             var user = (UserAccount) req.getSession().getAttribute("user");
             user.setDeleted(true);
             user.setExpires(Instant.now().plus(7, ChronoUnit.DAYS));
@@ -85,7 +85,7 @@ public class UserPreferenceServlet extends HttpServlet {
         try {
             Gson gson = new Gson();
             map = gson.fromJson(req.getReader(), mapType);
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("Error parsing JSON", e);
             return;
         }
@@ -100,7 +100,7 @@ public class UserPreferenceServlet extends HttpServlet {
                 var oldPassword = PasswordSHA512.SHA512Hash(map.get("old_password"));
                 var newPassword = PasswordSHA512.SHA512Hash(map.get("password"));
                 var user = session.get(UserAccount.class, userAccount.getId());
-                if(user.getPassword().equals(oldPassword) && !newPassword.equals(oldPassword)) {
+                if (user.getPassword().equals(oldPassword) && !newPassword.equals(oldPassword)) {
                     userAccount.setEmail(map.get("email").trim());
                     userAccount.setPassword(newPassword);
                     check = true;
@@ -111,7 +111,7 @@ public class UserPreferenceServlet extends HttpServlet {
             }
 
 
-            if(Objects.nonNull(map.get("lat"))
+            if (Objects.nonNull(map.get("lat"))
                     && Objects.nonNull(map.get("lon"))
                     && Objects.nonNull(map.get("address"))
                     && Objects.nonNull(map.get("postal"))
@@ -130,20 +130,20 @@ public class UserPreferenceServlet extends HttpServlet {
                 id.setZipcode(zipcode);
                 address.setCity(city);
                 address.setId(id);
-                if(session.get(Address.class, id) == null) {
+                if (session.get(Address.class, id) == null) {
                     session.persist(address);
                 }
                 userAccount.setAddress(address);
             }
-                session.merge(userAccount);
-                transaction.commit();
+            session.merge(userAccount);
+            transaction.commit();
 
-                if(check) {
-                    req.getSession().invalidate();
-                    resp.setStatus(HttpServletResponse.SC_CREATED);
-                } else {
-                    resp.setStatus(HttpServletResponse.SC_OK);
-                }
+            if (check) {
+                req.getSession().invalidate();
+                resp.setStatus(HttpServletResponse.SC_CREATED);
+            } else {
+                resp.setStatus(HttpServletResponse.SC_OK);
+            }
         } catch (Exception e) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             transaction.rollback();

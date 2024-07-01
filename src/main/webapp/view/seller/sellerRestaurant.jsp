@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="../../assets/styles/sellerRestaurant.css">
     <script src="../../scripts/coordinate.js"></script>
     <script src="../../scripts/sellerRestaurant.js"></script>
+    <script src="../../scripts/image.js"></script>
 </head>
 <body>
 <%@ include file="../../components/navbar.jsp" %>
@@ -31,9 +32,11 @@
             <h3 class="center"><strong>GESTISCI I TUOI PRODOTTI</strong></h3>
             <div>
                 <%for (Food food : products) {%>
-                <form method="post" id="form<%=food.getId()%>" onsubmit="submitFoodUpdate(<%= food.getId() %>); return false" onchange="validateFood(<%= food.getId() %>)">
+                <form method="post" id="form<%=food.getId()%>"
+                      onsubmit="submitFoodUpdate(<%= food.getId() %>); return false"
+                      onchange="validateFood(<%= food.getId() %>)">
                     <div class="foodBox">
-                        <%if(food.getId() != null){%>
+                        <%if (food.getId() != null) {%>
                         <div class="attribute">
                             <img class="foodImage" src="<%= food.getImageObject() %>" alt="<%= food.getName() %>">
                         </div>
@@ -61,7 +64,7 @@
                         <div class="attribute">
                             <label for="allergens" id="allergens_label">Allergeni</label>
                             <input type="text" id="allergens" name="allergens" placeholder="Inserisci gli Allergeni"
-                                   value="<%= food.getAllergens()%>" maxlength="50" required>
+                                   value="<%= food.getAllergens()%>" maxlength="50">
                         </div>
                         <div class="attribute">
                             <label for="greenPoints" id="greenPoints_label">Green Points</label>
@@ -78,18 +81,20 @@
                         <div class="attribute">
                             <label for="image" id="image_label">Immagine</label>
                             <input accept=".png" type="file" id="image" name="image" placeholder="Inserisci la image">
-                            <input name="imageUrl" id="imageUrl" type="text" value="<%= food.getImageObject()%>" style="display: none" hidden="hidden">
+                            <input name="imageUrl" id="imageUrl" type="text" value="<%= food.getImageObject()%>"
+                                   style="display: none" hidden="hidden">
                         </div>
-                        <%if(food.getId() != null){%>
+                        <%if (food.getId() != null) {%>
                         <div class="attribute">
-                            <button class="save" disabled>Salva</button>
+                            <button type="submit" class="save" disabled>Salva</button>
                         </div>
                         <div class="attribute">
-                            <button class="delete">Rimuovi</button>
+                            <button type="button" class="delete" onclick="deleteFood(<%= food.getId() %>)">Rimuovi
+                            </button>
                         </div>
                         <% } else {%>
                         <div class="attribute">
-                            <button class="save" disabled>Aggiungi</button>
+                            <button type="submit" class="save" disabled>Aggiungi</button>
                         </div>
                         <% } %>
                     </div>
@@ -100,10 +105,12 @@
 
         <div class="main-box">
             <h3 class="center"><strong>GESTISCI LA TUA ATTIVITÀ</strong></h3>
-            <form method="post" id="formRest" onsubmit="submitRestaurantUpdate(); return false" onchange="validateRestaurant()">
+            <form method="post" id="formRest" onsubmit="submitRestaurantUpdate(); return false"
+                  onchange="validateRestaurant()">
                 <div>
                     <div class="attribute">
-                        <img class="foodImage" src="<%= restaurant.getImageObject() %>" alt="<%= restaurant.getName() %>">
+                        <img class="foodImage" src="<%= restaurant.getImageObject() %>"
+                             alt="<%= restaurant.getName() %>">
                     </div>
                     <div class="attribute">
                         <label for="name" id="name_label">Nome</label>
@@ -124,7 +131,7 @@
                         <label for="deliveryCost" id="deliveryCost_label">Costo di Consegna</label>
                         <input type="text" id="deliveryCost" name="deliveryCost"
                                placeholder="Inserisci il Costo di Consegna"
-                               value="<%=String.format("%.2f",restaurant.getDeliveryCost())%>" maxlength="5" required>
+                               value="<%=String.format("%,.2f",restaurant.getDeliveryCost())%>" maxlength="5" required>
                     </div>
                     <div class="attribute">
                         <label for="autocomplete">Indirizzo</label>
@@ -144,12 +151,14 @@
                     <div class="attribute">
                         <label for="logo" id="logo_label">Immagine</label>
                         <input accept=".png" type="file" id="logo" name="logo" placeholder="Inserisci la image">
-                        <input name="logoUrl" id="logoUrl" type="text" value="<%= restaurant.getImageObject()%>" style="display: none" hidden="hidden">
+                        <input name="logoUrl" id="logoUrl" type="text" value="<%= restaurant.getImageObject()%>"
+                               style="display: none" hidden="hidden">
                     </div>
                     <button class="modify" disabled>Salva le Modifiche</button>
                 </div>
             </form>
-            <p><strong>GUADAGNO TOTALE:</strong> <%=totalCost%></p>
+            <p><strong>GUADAGNO TOTALE:</strong> <%=totalCost%>
+            </p>
         </div>
     </div>
 </main>

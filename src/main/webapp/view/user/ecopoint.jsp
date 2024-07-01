@@ -16,7 +16,7 @@
             <h2>
                 <c:choose>
                     <c:when test="${(requestScope.maxEcoPoint - requestScope.ecoPoint) != 0}">
-                        Ti mancano <c:out value="${requestScope.maxEcoPoint - requestScope.ecoPoint + 1}"/>  punti
+                        Ti mancano <c:out value="${requestScope.maxEcoPoint - requestScope.ecoPoint + 1}"/> punti
                     </c:when>
                     <c:otherwise>
                         Ti manca <c:out value="${requestScope.maxEcoPoint - requestScope.ecoPoint + 1}"/> punto
@@ -29,10 +29,10 @@
     </div>
     <p class="paragrafo-stilizzato">
         La sostenibilità non è solo una scelta, è uno stile di vita. <br>
-        Con Savoreco, ogni pasto diventa un'opportunità per fare la differenza.  <br>
+        Con Savoreco, ogni pasto diventa un'opportunità per fare la differenza. <br>
         Unisciti a noi nell'adozione di abitudini alimentari che rispettano il nostro pianeta.
     </p>
 </main>
-<%@include file="../../components/footer.jsp"%>
+<%@include file="../../components/footer.jsp" %>
 </body>
 </html>

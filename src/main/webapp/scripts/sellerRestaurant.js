@@ -1,45 +1,30 @@
 "use strict";
 
+const regexId = /^\d+$/;
 const regexName = /^[a-zA-Z][a-zA-Z0-9-_\s]{2,24}$/;
 const regexDescription = /^.{2,2000}$/;
 const regexCategory = /^[a-zA-Z\s]{2,25}$/;
-const regexCost = /^\d+(\.\d{1,2})?$/;
+const regexCost = /^\d+(\.\d{1,2})?$|^\d+(,\d{1,2})?$/;
 const regexAllergens = /^[A-Za-z]+(?:,\s*[A-Za-z]+){0,49}$/;
 const regexGreenPoints = /^\d{1,2}$/;
 const regexQuantity = /^\d{1,5}$/;
 
 async function submitFoodUpdate(foodId) {
+    if (!(foodId == null || regexId.test(foodId))) {
+        console.error('Errore di ID:', foodId);
+        window.location.href = "/home";
+        return;
+    }
+
     const form = document.getElementById(`form${foodId}`);
     if (validateFood(foodId)) {
-        const imageFile = form.querySelector('input[type="file"]').files[0];
-        if (imageFile) {
-            const imageFormData = new FormData();
-            const maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
-
-            if (imageFile.type !== "image/png") {
-                alert("Please select a PNG image file.");
-                formError(form);
+        const imageUrl = (await saveImage(form.querySelector('input[type="file"]').files[0]));
+        if (imageUrl !== "") {
+            if (imageUrl === "error") {
+                formError();
                 return;
             }
-
-            if (imageFile.size > maxSizeInBytes) {
-                alert("The file size should not exceed 10 MB.");
-                formError(form);
-                return;
-            }
-
-            const mode = "restaurant";
-            imageFormData.append("mode", mode);
-            imageFormData.append("image", imageFile);
-            const imageResponse = await fetch("/fileUpload", {
-                method: "POST",
-                body: imageFormData
-            });
-
-            if (!imageResponse.ok) {
-                throw new Error("Failed to upload image");
-            }
-            form.querySelector("#imageUrl").value = await imageResponse.text();
+            form.querySelector("#imageUrl").value = imageUrl;
         }
 
         const formData = new FormData(form);
@@ -52,17 +37,17 @@ async function submitFoodUpdate(foodId) {
                 body: JSON.stringify(Object.fromEntries(formData)),
                 contentType: "application/json"
             });
-            if(response.ok) {
+            if (response.ok) {
                 location.reload();
             } else {
-                formError(form);
+                formError(foodId);
             }
         } catch (e) {
             console.error("Error submitting form", e);
-            formError(form);
+            formError(foodId);
         }
     } else {
-        formError(form);
+        formError(foodId);
     }
 }
 
@@ -71,7 +56,6 @@ function formError(foodId) {
     form.querySelector("button.save").disabled = true;
     form.querySelectorAll("label").forEach(label => label.style.color = "var(--md-sys-color-error)");
 }
-
 
 
 function validateFood(foodId) {
@@ -93,7 +77,7 @@ function validateFood(foodId) {
         } else if (element.id === "price") {
             isValid = regexCost.test(element.value);
         } else if (element.id === "allergens") {
-            isValid = regexAllergens.test(element.value);
+            isValid = (element.value === "") || (regexAllergens.test(element.value));
         } else if (element.id === "greenPoints") {
             isValid = regexGreenPoints.test(element.value);
         } else if (element.id === "quantity") {
@@ -114,56 +98,25 @@ function validateFood(foodId) {
 }
 
 
-
-
-
-
-
-
-
-
-
 async function submitRestaurantUpdate() {
     const form = document.querySelector(`#formRest`);
     if (validateRestaurant()) {
         const address = searchResult();
-        if(address !== undefined) {
+        if (address !== undefined) {
             form.querySelector("#lat").value = address.latitude
             form.querySelector("#lon").value = address.longitude
-            form.querySelector("#postal").value = address.postalCode + ` ${address.postalCode === undefined? "00042" : address.postalCode}`
-            form.querySelector("#address").value = address.street + ` ${address.number === undefined? "" : address.number}`
+            form.querySelector("#postal").value = ` ${address.postalCode === undefined ? "" : address.postalCode}`
+            form.querySelector("#address").value = address.street + ` ${address.number === undefined ? "" : address.number}`
             form.querySelector("#city").value = address.city
         }
-        const imageFile = form.querySelector('input[type="file"]').files[0];
-        if (imageFile) {
-            const imageFormData = new FormData();
-            const maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
 
-            if (imageFile.type !== "image/png") {
-                alert("Please select a PNG image file.");
-                formError('#formRest');
+        const imageUrl = (await saveImage(form.querySelector('input[type="file"]').files[0]));
+        if (imageUrl !== "") {
+            if (imageUrl === "error") {
+                formError();
                 return;
             }
-
-            if (imageFile.size > maxSizeInBytes) {
-                alert("The file size should not exceed 10 MB.");
-                formError('#formRest');
-                return;
-            }
-
-            const mode = "restaurant";
-            imageFormData.append("mode", mode);
-            imageFormData.append("image", imageFile);
-            const imageResponse = await fetch("/fileUpload", {
-                method: "POST",
-                body: imageFormData
-            });
-
-            if (!imageResponse.ok) {
-                throw new Error("Failed to upload image");
-            }
-
-            form.querySelector("#logoUrl").value = await imageResponse.text();
+            form.querySelector("#logoUrl").value = imageUrl;
         }
 
         const formData = new FormData(form);
@@ -176,7 +129,9 @@ async function submitRestaurantUpdate() {
                 contentType: "application/json"
             });
 
-            if (!response.ok) {
+            if (response.ok) {
+                location.reload()
+            } else {
                 formError('Rest');
             }
         } catch (e) {
@@ -224,7 +179,7 @@ function validateRestaurant() {
                 label.style.color = "var(--md-sys-color-error)";
                 error = true;
             }
-        } else  if (element.value === "" && element.id !== "logo") {
+        } else if (element.value === "" && element.id !== "logo") {
             error = true;
         }
     });
@@ -236,4 +191,27 @@ function validateRestaurant() {
     return !error;
 }
 
+async function deleteFood(foodId) {
+    if (!regexId.test(foodId)) {
+        console.error('Errore di ID:', foodId);
+        window.location.href = "/home";
+        return;
+    }
 
+    const formData = new FormData();
+    try {
+        formData.append("mode", "deleteFood");
+        formData.append("id", foodId);
+        const response = await fetch("/seller/sellerRestaurant", {
+            method: "POST",
+            body: JSON.stringify(Object.fromEntries(formData)),
+            contentType: "application/json"
+        });
+
+        if (response.ok) {
+            location.reload()
+        }
+    } catch (e) {
+        console.error("Error submitting form", e);
+    }
+}

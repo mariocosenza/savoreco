@@ -1,5 +1,6 @@
 function countdown() {
     let seconds = 10;
+
     function tick() {
         const counter = document.getElementById("counter");
         seconds--;
@@ -10,6 +11,7 @@ function countdown() {
             window.location.href = "/home";
         }
     }
+
     tick();
 }
 
@@ -46,6 +48,7 @@ const cardPaymentMethod = Object.assign(
 );
 
 let paymentsClient = null;
+
 function getGoogleIsReadyToPayRequest() {
     return Object.assign(
         {},
@@ -69,7 +72,7 @@ function getGooglePaymentDataRequest() {
 
 
 function getGooglePaymentsClient() {
-    if ( paymentsClient === null ) {
+    if (paymentsClient === null) {
         paymentsClient = new google.payments.api.PaymentsClient({environment: 'TEST'});
     }
     return paymentsClient;
@@ -79,12 +82,12 @@ function getGooglePaymentsClient() {
 function onGooglePayLoaded() {
     const paymentsClient = getGooglePaymentsClient();
     paymentsClient.isReadyToPay(getGoogleIsReadyToPayRequest())
-        .then(function(response) {
+        .then(function (response) {
             if (response.result) {
                 addGooglePayButton();
             }
         })
-        .catch(function(err) {
+        .catch(function (err) {
             // show error in developer console for debugging
             console.error(err);
         });
@@ -121,11 +124,11 @@ function onGooglePaymentButtonClicked() {
 
     const paymentsClient = getGooglePaymentsClient();
     paymentsClient.loadPaymentData(paymentDataRequest)
-        .then(function(paymentData) {
+        .then(function (paymentData) {
             // handle the response
             processPayment();
         })
-        .catch(function(err) {
+        .catch(function (err) {
             // show error in developer console for debugging
             console.error(err);
         });

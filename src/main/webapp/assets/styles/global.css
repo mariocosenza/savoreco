@@ -132,7 +132,7 @@ main {
 nav {
     width: 100vw;
     list-style-type: none;
-    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 0 0 0.1em rgba(0, 0, 0, 0.24);
     padding-top: 1rem;
     padding-bottom: 1rem;
     max-height: 5rem;
@@ -158,6 +158,7 @@ span.siteLinkRight {
     float: right;
     margin-right: 10vw;
 }
+
 span.siteLinkRight a {
     margin-left: 1vw;
     display: inline-block;
@@ -171,7 +172,7 @@ span.siteLinkRight a {
     color: var(--md-sys-color-on-background, black);
 }
 
-#ecoLogoText, #bigTextLogo{
+#ecoLogoText, #bigTextLogo {
     font-size: 2rem;
     font-style: normal;
     font-weight: 700;
@@ -198,7 +199,7 @@ img.logoImage {
     height: 100vh;
     width: 0;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 0;
     right: 0;
     background-color: var(--md-sys-color-surface);
@@ -208,7 +209,7 @@ img.logoImage {
 }
 
 .sidenav a {
-    padding: 0.5rem 0.5rem 0.5rem 2rem;
+    padding: 0.4rem 0.5svw 0.4rem 2svw;
     text-decoration: none;
     font-size: 1.4em;
     color: var(--md-sys-color-on-surface);
@@ -247,32 +248,32 @@ button {
     color: var(--md-sys-color-on-primary-container);
     text-transform: uppercase;
     word-spacing: 0.2em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    border: 2px solid transparent;
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+    border: max(2px, 0.1vmin) solid transparent;
     transition: background-color 0.3s, transform 0.3s, border-color 0.3s;
 }
 
 button:hover, button:focus {
     background-color: var(--md-sys-color-secondary-container);
-    transform: translateY(-3px);
+    transform: translateY(-0.15em);
     border-color: var(--md-sys-color-primary);
 }
 
 button:active {
-    transform: translateY(-1px);
+    transform: translateY(-0.1em);
     background-color: var(--md-sys-color-tertiary-container);
 }
 
 
 button.big {
     font-size: 1.2rem;
-    padding: clamp(0.2em, 0.5em, calc(20px + 1.5625vw));
+    padding: clamp(0.2em, 1vw, calc(20px + 1.5625vw));
 }
 
 div.cardCentral {
-    border-radius:  calc(100px + 1.5625vw);
-    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    border-radius: calc(100px + 1.5625vw);
+    box-shadow: rgba(0, 0, 0, 0.24) 0 0.1vmin 0.5rem;
     padding: 1rem 9vw;
     margin: 1rem 16vw;
     width: 50vw;
@@ -323,7 +324,7 @@ form {
 
 footer {
     all: revert;
-    background:  var(--md-sys-color-secondary-container);
+    background: var(--md-sys-color-secondary-container);
     display: flex;
     min-height: 50px;
     bottom: 0;
@@ -341,10 +342,10 @@ span.copyright {
 
 p.footer {
     all: revert;
-    background-color:  var(--md-sys-color-secondary-container);
-    min-width: 31.33vw;
-    margin-left: 1vw;
-    margin-right: 1vw;
+    background-color: var(--md-sys-color-secondary-container);
+    min-width: 29.33%;
+    margin-left: 2%;
+    margin-right: 2%;
     color: var(--md-sys-color-on-secondary-container, black);
     font-size: 1rem;
     line-height: 1.5;
@@ -388,8 +389,9 @@ button {
 
 @media screen and (max-height: 450px) {
     .sidenav {
-        padding-top: 15px;
+        padding-top: 1em;
     }
+
     .sidenav a {
         font-size: 1.2rem;
     }
@@ -410,8 +412,7 @@ button {
     }
 
     p.footer {
-        min-width: 95vw;
-        margin: 1em 0 0 5vw;
+        margin: 1em 5% 0 5%;
     }
 }
 

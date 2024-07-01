@@ -22,14 +22,18 @@ main div {
 .rightCost h1 {
     margin: auto auto 1.5em;
 }
+
 .rightCost h2 {
     font-size: 1.0em;
 }
 
 #container {
-    margin-left: 60%; !important;
-    max-width:  25%; !important;
-    max-height: 25%; !important;
+    margin-left: 60%;
+!important;
+    max-width: 25%;
+!important;
+    max-height: 25%;
+!important;
 }
 
 
@@ -69,11 +73,11 @@ form {
 button {
     background-color: var(--md-sys-color-primary-container);
     color: var(--md-sys-color-on-background);
-    padding: 0.8em;
     cursor: pointer;
     font-size: 1em;
     margin-top: 2em;
     margin-left: 50%;
+    padding: max(0.4em, 2%);
 }
 
 
@@ -87,7 +91,6 @@ h1.orderTitle {
 button:hover {
     background-color: var(--md-sys-color-tertiary);
 }
-
 
 
 li {
@@ -110,7 +113,7 @@ div.empty h1 {
 
 svg.addIcon {
     clear: both;
-    min-width: 1.4em;
+    min-width: max(1.4em, 1%);
     min-height: 2em;
     margin-left: 2%;
     transition: transform 0.3s ease-out;
@@ -123,7 +126,7 @@ svg.addIcon:hover {
 
 svg.delete {
     float: right;
-    width: 1.5em;
+    width: max(1.5em, 1.2%);
     height: 1.5em;
     transition: transform 0.7s ease-out;
     filter: brightness(0) saturate(100%) invert(13%) sepia(99%) saturate(7477%) hue-rotate(356deg) brightness(104%) contrast(101%);
@@ -152,7 +155,7 @@ ol {
     padding: 2em 0;
 }
 
-h2, h1  {
+h2, h1 {
     color: var(--md-sys-color-on-background);
 }
 
@@ -204,11 +207,7 @@ div.summaryPayment h2 {
 }
 
 
-
-
-
-
-@media  screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
     main img {
         max-width: 45vw;
     }
@@ -218,12 +217,13 @@ div.summaryPayment h2 {
         text-align: center;
         font-size: 0.7em;
     }
+
     #container {
         margin-left: 30%;
     }
 }
 
-@media  screen and (max-width: 400px) {
+@media screen and (max-width: 400px) {
 
     #container {
         margin-left: 20%;

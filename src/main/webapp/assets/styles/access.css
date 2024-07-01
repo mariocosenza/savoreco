@@ -7,27 +7,30 @@ input[type="text"], input[type="password"], input[type="email"], input[type="dat
     vertical-align: middle;
     background-color: var(--md-sys-color-on-primary);
     background-repeat: no-repeat;
-    background-position: right 8px center;
+    background-position: right 0.5em center;
     border: 1% solid var(--md-sys-color-primary);
     border-radius: 0.4em;
     outline: none;
-    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 0 inset;
-    :focus{
+    box-shadow: rgba(225, 228, 232, 0.2) 0 0.1vmax 0 0 inset;
+
+    :focus {
         border-color: var(--md-sys-color-secondary-fixed-dim);;
         outline: none;
-        box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
+        box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 0.2em;
     }
+
     width: 65%;
     min-width: 65%;
     max-width: 75%;
     margin-bottom: 1em;
+    cursor: pointer;
 }
 
 div.center, div.centerLogin {
     border-radius: 1.1rem;
     border: 0.1rem solid var(--md-sys-color-secondary);
     padding: 1vw;
-    box-shadow: 0 0.2em 4em 0.4em rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0.2vmin 2vmin 0.4em rgba(0, 0, 0, 0.25);
     margin-top: 5vh;
     width: 38vw;
     min-width: 38vw;
@@ -43,7 +46,7 @@ div.centerLogin {
     margin-top: 15vh;
 }
 
-label,input, span.form{
+label, input, span.form {
     color: var(--md-sys-color-on-background);
     display: flex;
     flex-direction: column;
@@ -55,8 +58,6 @@ label,input, span.form{
 label {
     font-size: 1.1em;
 }
-
-
 
 
 input {
@@ -76,7 +77,7 @@ form {
 }
 
 p {
-  text-align: center;
+    text-align: center;
 }
 
 button {
@@ -98,7 +99,7 @@ button:disabled {
 img.accessLogo {
     position: absolute;
     left: 2vw;
-    width: 10em;
+    width: min(10em, 5vw);
     height: auto;
     top: 2em;
 }
@@ -131,7 +132,7 @@ a:hover {
     min-width: 15vw;
     margin-top: 1vh;
     margin-right: 5vw;
-    padding: 20px;
+    padding: max(1vw, 2em);
     background-color: var(--md-sys-color-error-container);
     color: var(--md-sys-color-on-error-container);
 }
@@ -141,8 +142,8 @@ a:hover {
     color: white;
     font-weight: bold;
     float: right;
-    font-size: 22px;
-    line-height: 20px;
+    font-size: 2em;
+    line-height: 1.5em;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -155,7 +156,25 @@ p.policy {
     font-size: 0.8em;
 }
 
-@media screen and (max-width: 600px){
+.privacy {
+    margin-right: 5%;
+    flex-direction: row;
+    line-height: 1.5;
+    gap: 2%;
+    display: flex;
+    word-wrap: break-word;
+    text-align: justify;
+}
+
+.privacyCheck {
+    all: revert;
+    display: inline;
+    cursor: pointer;
+    color: var(--md-sys-color-on-background);
+    accent-color: var(--md-sys-color-primary-container);
+}
+
+@media screen and (max-width: 600px) {
 
     div.center, div.centerLogin {
         min-width: 74vw;
@@ -172,6 +191,6 @@ p.policy {
     }
 
     img.accessLogo {
-        width: 2em;
+        width: min(2em, 10vw);
     }
 }

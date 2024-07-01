@@ -29,7 +29,7 @@ async function submitRegistration() {
 function formError() {
     document.querySelector("button").disabled = true
     document.querySelector("label").style.color = "var(--md-sys-color-on-background)"
-    document.querySelector(".alert").style.visibility ="visible"
+    document.querySelector(".alert").style.visibility = "visible"
 }
 
 function validate() {
@@ -44,70 +44,6 @@ function validateUser() {
     document.querySelectorAll("label").forEach(e => e.style.color = "var(--md-sys-color-on-background)")
     let error = false
     if (document.querySelector("#user").checked) {
-        for (const arg of document.querySelectorAll("label")) {
-                const element = document.getElementById(arg.htmlFor)
-                if (element.type !== "radio" && element.value !== "") {
-                    if (element.id === "name") {
-                        if (regexUsername.test(element.value)) {
-                            arg.style.color = "var(--md-sys-color-primary)"
-                        } else {
-                            arg.style.color = "var(--md-sys-color-error)"
-                            error = true
-                        }
-                    } else if (element.id === "surname") {
-                        if (regexUsername.test(element.value)) {
-                            arg.style.color = "var(--md-sys-color-primary)"
-                        } else {
-                            arg.style.color = "var(--md-sys-color-error)"
-                            error = true
-                        }
-                    } else if (element.id === "email") {
-                        if (regexEmail.test(element.value)) {
-                            arg.style.color = "var(--md-sys-color-primary)"
-                        } else {
-                            arg.style.color = "var(--md-sys-color-error)"
-                            error = true
-                        }
-                    } else if (element.id === "password") {
-                        if (regexPassword.test(element.value)) {
-                            arg.style.color = "var(--md-sys-color-primary)"
-                        } else {
-                            arg.style.color = "var(--md-sys-color-error)"
-                            error = true
-                        }
-                        if(element.value === document.querySelector("#check_password").value) {
-                            document.querySelector("#check_label").style.color = "var(--md-sys-color-primary)"
-                        } else if(document.querySelector("#check_password").value !== "") {
-                            arg.style.color = "var(--md-sys-color-error)"
-                            document.querySelector("#check_label").style.color = "var(--md-sys-color-error)"
-                            error = true
-                        }
-                    } else if (element.id === "birthdate") {
-                        if(element.value !== "") {
-                            arg.style.color = "var(--md-sys-color-primary)"
-                        }
-                        else {
-                            arg.style.color = "var(--md-sys-color-error)"
-                            error = true
-                        }
-                    }
-                }
-                else if(element.value === "") {
-                    error = true
-                }
-            }
-        }
-
-    if (!error) {
-        document.querySelector("button").disabled = false
-    }
-
-    return !error
-}
-
-function validateSeller() {
-    document.querySelectorAll("label").forEach(e => e.style.color = "var(--md-sys-color-on-background)")
-    let error = false
         for (const arg of document.querySelectorAll("label")) {
             const element = document.getElementById(arg.htmlFor)
             if (element.type !== "radio" && element.value !== "") {
@@ -139,22 +75,82 @@ function validateSeller() {
                         arg.style.color = "var(--md-sys-color-error)"
                         error = true
                     }
-                    if(element.value === document.querySelector("#check_password").value) {
+                    if (element.value === document.querySelector("#check_password").value) {
                         document.querySelector("#check_label").style.color = "var(--md-sys-color-primary)"
-                    } else if(document.querySelector("#check_password").value !== "") {
+                    } else if (document.querySelector("#check_password").value !== "") {
                         arg.style.color = "var(--md-sys-color-error)"
                         document.querySelector("#check_label").style.color = "var(--md-sys-color-error)"
                         error = true
                     }
+                } else if (element.id === "birthdate") {
+                    if (element.value !== "") {
+                        arg.style.color = "var(--md-sys-color-primary)"
+                    } else {
+                        arg.style.color = "var(--md-sys-color-error)"
+                        error = true
+                    }
                 }
-            } else if(element.value === "" && element.id !== "birthdate") {
+            } else if (element.value === "") {
                 error = true
             }
         }
-
-    if (!error) {
-        document.querySelector("button").disabled = false
     }
+
+
+    document.querySelector("button").disabled = !(!error && document.querySelector("#privacyCheck").checked);
+
+
+    return !error
+}
+
+function validateSeller() {
+    document.querySelectorAll("label").forEach(e => e.style.color = "var(--md-sys-color-on-background)")
+    let error = false
+    for (const arg of document.querySelectorAll("label")) {
+        const element = document.getElementById(arg.htmlFor)
+        if (element.type !== "radio" && element.value !== "") {
+            if (element.id === "name") {
+                if (regexUsername.test(element.value)) {
+                    arg.style.color = "var(--md-sys-color-primary)"
+                } else {
+                    arg.style.color = "var(--md-sys-color-error)"
+                    error = true
+                }
+            } else if (element.id === "surname") {
+                if (regexUsername.test(element.value)) {
+                    arg.style.color = "var(--md-sys-color-primary)"
+                } else {
+                    arg.style.color = "var(--md-sys-color-error)"
+                    error = true
+                }
+            } else if (element.id === "email") {
+                if (regexEmail.test(element.value)) {
+                    arg.style.color = "var(--md-sys-color-primary)"
+                } else {
+                    arg.style.color = "var(--md-sys-color-error)"
+                    error = true
+                }
+            } else if (element.id === "password") {
+                if (regexPassword.test(element.value)) {
+                    arg.style.color = "var(--md-sys-color-primary)"
+                } else {
+                    arg.style.color = "var(--md-sys-color-error)"
+                    error = true
+                }
+                if (element.value === document.querySelector("#check_password").value) {
+                    document.querySelector("#check_label").style.color = "var(--md-sys-color-primary)"
+                } else if (document.querySelector("#check_password").value !== "") {
+                    arg.style.color = "var(--md-sys-color-error)"
+                    document.querySelector("#check_label").style.color = "var(--md-sys-color-error)"
+                    error = true
+                }
+            }
+        } else if (element.value === "" && element.id !== "birthdate") {
+            error = true
+        }
+    }
+
+    document.querySelector("button").disabled = !(!error && document.querySelector("#privacyCheck").checked);
 
     return !error
 }
@@ -174,6 +170,8 @@ function radioChange() {
     }
 }
 
-window.onload = function() {
-    document.querySelector("#birthdate").max = new Date().toLocaleDateString('it-IT')
+window.onload = function () {
+    const dataCorrente = new Date();
+    dataCorrente.setFullYear(dataCorrente.getFullYear() - 14);
+    document.querySelector("#birthdate").max = dataCorrente.toISOString().split('T')[0];
 }

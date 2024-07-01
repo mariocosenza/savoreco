@@ -1,16 +1,21 @@
+"use strict";
+
+
 function deleteProduct(obj, id, price) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/user/cart", true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
                 const sel = document.querySelector("#price");
-                const selPrice = parseFloat(sel.innerHTML);
-                if (selPrice - parseFloat(price) <= 0) {
+                const floatPrice = parseFloat(price.replace(",", "."))
+                const selPrice = parseFloat(sel.innerHTML.replace(",", "."));
+                const quantity = parseInt(obj.parentNode.parentNode.parentNode.querySelector(".piece").innerHTML)
+                if (selPrice - (floatPrice * quantity) <= 0.009) {
                     location.reload();
                 } else {
-                    sel.innerHTML = `${selPrice - parseFloat(price)}`;
+                    sel.innerHTML = `${selPrice - floatPrice * quantity}`;
                 }
                 obj.closest("li").remove();
             } else {
@@ -18,7 +23,7 @@ function deleteProduct(obj, id, price) {
             }
         }
     };
-    xhr.onerror = function() {
+    xhr.onerror = function () {
         window.location.href = "/home";
     };
     xhr.send(new URLSearchParams({
@@ -26,10 +31,10 @@ function deleteProduct(obj, id, price) {
         delete: "true"
     }).toString());
 
-    setTimeout(() => window.location.href = "/home" ,15000)
+    setTimeout(() => window.location.href = "/home", 15000)
 }
 
-async function addProduct (obj, id, price) {
+async function addProduct(obj, id, price) {
     try {
         const response = await fetch("/user/cart", {
             method: "POST",
@@ -45,14 +50,13 @@ async function addProduct (obj, id, price) {
             let num = parseInt(obj.parentElement.children[0].innerHTML)
             num++
             obj.parentElement.children[0].innerHTML = `${num}`
-            const sel =  document.querySelector("#price")
-            const selPrice = parseFloat(sel.innerHTML)
-            sel.innerHTML = `${selPrice + parseFloat(price)}`
+            const sel = document.querySelector("#price")
+            const selPrice = parseFloat(sel.innerHTML.replace(",", "."))
+            sel.innerHTML = `${selPrice + parseFloat(price.replace(",", "."))}`
         } else {
             location.reload();
         }
     } catch (e) {
-        console.log(e)
         window.location.href = "/home"
     }
 }

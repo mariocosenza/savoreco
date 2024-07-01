@@ -36,7 +36,7 @@ VALUES
     ('SaraBlui@gmail.com', 'Sara', 'Blui', encode(sha512('Sara123*'::bytea), 'hex'), '1990-04-23', false, null, 'Viale Guglielmo Marconi', '85100', 'IT', null),
     ('MarcoVerdi@gmail.com', 'Marco', 'Verdi', encode(sha512('Marco123*'::bytea), 'hex'), '1992-05-11', false, null, 'Viale Europa', '80053', 'IT', null),
     ('FrancescaNeri@gmail.com', 'Francesca', 'Neri', encode(sha512('Francesca123*'::bytea), 'hex'), '1987-09-29', true, '2024-07-24', 'Via Giuseppe Cosenza', '80053', 'IT', null),
-    ('RobertoVioli@gmail.com', 'Roberto', 'Violi', encode(sha512('Roberto123*'::bytea), 'hex'), '1990-09-11', false, null, null, null, 'IT', null);
+    ('RobertoVioli@gmail.com', 'Roberto', 'Violi', encode(sha512('Roberto123*'::bytea), 'hex'), '1990-09-11', false, null, null, null, 'IT', null),
     ('ElenaBianchi@gmail.com', 'Elena', 'Bianchi', encode(sha512('Elena123*'::bytea), 'hex'), '1995-07-21', false, null, 'Via Nazario Sauro', '85100', 'IT', null),
     ('MatteoVerdi@gmail.com', 'Matteo', 'Verdi', encode(sha512('Matteo123*'::bytea), 'hex'), '1993-03-15', false, null, 'Corso Umberto I', '85100', 'IT', null),
     ('AnnaRossi@gmail.com', 'Anna', 'Rossi', encode(sha512('Anna123*'::bytea), 'hex'), '1991-11-30', false, null, 'Via Vittorio Veneto', '80054', 'IT', null),
@@ -46,7 +46,7 @@ VALUES
     ('ValentinaRossi@gmail.com', 'Valentina', 'Rossi', encode(sha512('Valentina123*'::bytea), 'hex'), '1989-03-10', false, null, null, null, 'IT', null),
     ('DavideNeri@gmail.com', 'Davide', 'Neri', encode(sha512('Davide123*'::bytea), 'hex'), '1996-07-08', false, null, 'Via Roma', '80053', 'IT', null),
     ('AlessandraVerdi@gmail.com', 'Alessandra', 'Verdi', encode(sha512('Alessandra123*'::bytea), 'hex'), '1981-01-22', '2024-07-26', null, null, null, 'IT', null),
-    ('FabioRossi@gmail.com', 'Fabio', 'Rossi', encode(sha512('Fabio123*'::bytea), 'hex'), '1997-02-14', false, null, 'Via Nocera', '80053', 'IT', null),
+    ('FabioRossi@gmail.com', 'Fabio', 'Rossi', encode(sha512('Fabio123*'::bytea), 'hex'), '1997-02-14', false, null, 'Via Nocera', '80053', 'IT', null);
    
 
 
@@ -57,7 +57,7 @@ VALUES
     ('Il ritrovo dei golosi', 'Via Unità D''Italia', '85100', null, 4.00, 'Pasticceria', false, '2024-06-18 13:48:56.867141', 'Il Ritrovo dei Golosi è un paradiso per gli amanti dei dolci. Offriamo una varietà di pasticceria italiana classica, dalle sfogliatelle croccanti ai tiramisù vellutati. Ogni creazione è preparata con ingredienti di alta qualità e una passione per la tradizione che si riflette in ogni morso.'),
     ('Buon Boccone', 'Piazza Principe Umberto', '80053', null, 2.00, 'Rosticceria', false, '2024-06-22 17:44:16.785705',  'Buon Boccone è il tuo angolo di gusto dedicato alla cucina di rosticceria tradizionale. Con piatti preparati come una volta, da arancini dorati a frittatine cremose, il nostro menu è pensato per portare sulla tua tavola il sapore genuino dei piatti caserecci, perfetti per ogni occasione.'),
     ('Mare e sole', 'Via Nazario Sauro', '85100', null, 1.50, 'Pizzeria', false, '2024-06-23 05:06:21.693811', 'Mare e Sole ti invita a gustare l’autentica pizza napoletana, preparata con passione e ingredienti freschi. Il nostro menu varia dalle classiche Margherita e Diavola alle creazioni più innovative, tutte cotte nel nostro forno a legna per un’esperienza culinaria indimenticabile.'),
-    ('Sushi King', 'Via Luigi Denza', '80053', null, 5.00, 'Giapponese', false, '2024-06-24 11:38:51.867141', 'Sushi King è il ristorante giapponese che offre un’autentica esperienza di sushi e sashimi. Scopri la freschezza dei nostri nigiri, uramaki creativi e tempura leggera. Ogni piatto è preparato con maestria e attenzione ai dettagli per portare sulla tua tavola il meglio della cucina nipponica.');
+    ('Sushi King', 'Via Luigi Denza', '80053', null, 5.00, 'Giapponese', false, '2024-06-24 11:38:51.867141', 'Sushi King è il ristorante giapponese che offre un’autentica esperienza di sushi e sashimi. Scopri la freschezza dei nostri nigiri, uramaki creativi e tempura leggera. Ogni piatto è preparato con maestria e attenzione ai dettagli per portare sulla tua tavola il meglio della cucina nipponica.'),
     ('Marcos Pizza Imperiale', 'Via Ugo Foscolo', '80054', null, 3.00, 'Pizzeria', false, '2024-06-25 11:38:51.867141', 'Situata in Via Ugo Foscolo, Marcos Pizza Imperiale è una pizzeria rinomata nel cuore della città di Gragnano. Questo locale è noto per la sua autenticità. Specializzata in una vasta gamma di pizze tradizionali, offre un ambiente accogliente e informale dove poter gustare i sapori autentici della cucina italiana.');
 
 
@@ -69,7 +69,9 @@ VALUES
     ('VeraGialli@gmail.com', 'Vera', 'Gialli', encode(sha512('Vera123*'::bytea), 'hex'), 4),
     ('FrancoArancio@gmail.com', 'Franco', 'Arancio', encode(sha512('Franco123*'::bytea), 'hex'), 5),
     ('LucaBianchi@gmail.com', 'Luca', 'Bianchi', encode(sha512('Luca123*'::bytea), 'hex'), 6),
-    ('AnnaBlui@gmail.com', 'Anna', 'Blui', encode(sha512('Anna123*'::bytea), 'hex'), null);
+    ('AnnaBlui@gmail.com', 'Anna', 'Blui', encode(sha512('Anna123*'::bytea), 'hex'), null),
+    ('MarcoBordeaux@gmail.com', 'Marco', 'Bordeaux', encode(sha512('Marco123*'::bytea), 'hex'), 7);
+
 
 INSERT INTO moderator_account (email, name, surname, password)
 VALUES
@@ -103,11 +105,14 @@ VALUES
     (6, null, 'Nigiri di Tonno', true, 20, 'Nigiri', 'Pesce, Soia', 10.00, 60, 'Nigiri con riso e fettine di tonno fresco.'),
     (6, null, 'Ramen', true, 18, 'Zuppa', 'Glutine, Soia, Uova', 15.00, 70, 'Zuppa tradizionale giapponese con uova, alghe e carne.'),
     (6, null, 'Uramaki California Roll', false, 22, 'Uramaki', 'Glutine, Pesce, Soia', 14.00, 0, 'Uramaki con polpa di granchio, avocado e cetriolo.'),
-    (6, null, 'Zuppa di Miso', true, 12, 'Zuppa', 'Soia', 5.00, 90, 'Zuppa tradizionale giapponese con tofu, alga wakame e miso.');
-    
+    (6, null, 'Zuppa di Miso', true, 12, 'Zuppa', 'Soia', 5.00, 90, 'Zuppa tradizionale giapponese con tofu, alga wakame e miso.'),
+    (7, null, 'Pizza Margherita', true, 15, 'Pizza', 'Glutine, Latte', 4.50, 104, 'Classica pizza con pomodoro, mozzarella e basilico.'),
+    (7, null, 'Pizza Diavola', true, 18, 'Pizza', 'Glutine, Latte', 6.50, 80, 'Pizza piccante con salame piccante e mozzarella.'),
+    (7, null, 'Pizza Capricciosa', true, 20, 'Pizza', 'Glutine, Latte', 7.00, 26, 'Pizza con pomodoro, mozzarella, funghi, prosciutto, carciofi e olive.'),
+    (7, null, 'Pizza Napoletana', true, 22, 'Pizza', 'Glutine, Latte, Pesce', 7.50, 60, 'Pizza con pomodoro, mozzarella, acciughe e capperi.');
 
 INSERT INTO purchase (user_id, delivery_cost, time, iva, status, total_cost, payment_method, pick_up, street, zipcode)
-VALUES (
+VALUES
     (1, 2.50, '2024-06-18 13:48:58.062140', 10, 'payed', 25.50, 'paypal', true, null, null),
     (2, 5.50, '2024-06-18 13:48:58.062140', 10, 'payed', 41.00, 'visa', false, 'Via Nicola Vaccaro', '85100'),
     (1, 2.00, '2024-06-22 18:29:56.889459', 10, 'payed', 16.00, 'paypal', true, null, null),
@@ -116,7 +121,7 @@ VALUES (
     (5, 4.00, '2024-06-22 19:23:14.961214', 10, 'payed', 7.00, 'visa', false, 'Corso Umberto I', '85100'),
     (3, 7.00, '2024-06-23 16:37:56.829330', 10, 'payed', 10.00, 'google', true, null, null),
     (2, 2.00, '2024-06-23 17:09:57.037974', 10, 'payed', 14.00, 'google', true, null, null),
-    (1, 6.50, '2024-06-23 20:35:52.483929', 10, 'payed', 10.50, 'google', true, null, null));
+    (1, 6.50, '2024-06-23 20:35:52.483929', 10, 'payed', 10.50, 'google', true, null, null);
 
 
 
@@ -126,7 +131,17 @@ VALUES
     (2),
     (3),
     (4),
-    (5);
+    (5),
+    (6),
+    (7),
+    (8),
+    (9),
+    (10),
+    (11),
+    (12),
+    (13),
+    (14),
+    (15);
 
 INSERT INTO bought_food (purchase_id, name, green_point, price, quantity, restaurant_id)
 VALUES
