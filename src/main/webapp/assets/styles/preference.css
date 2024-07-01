@@ -43,10 +43,10 @@ form {
     border: 2px solid var(--md-sys-color-primary);
     border-radius: 0.5em;
     outline: none;
-    box-shadow: rgba(225, 228, 232, 0.3) 0 2px 4px 0 inset;
+    box-shadow: rgba(225, 228, 232, 0.3) 0 0.15vmax 0.2vmax 0 inset;
     transition: border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
     width: 75%;
-    padding: 0.5em;
+    padding: min(1em, 2vw);
     margin-bottom: 1em;
 }
 
@@ -69,7 +69,7 @@ button {
     min-width: 15vw;
     margin-top: 15vh;
     margin-right: 5vw;
-    padding: 20px;
+    padding: 2vw;
     background-color: var(--md-sys-color-error-container);
     color: var(--md-sys-color-on-error-container);
 }
@@ -79,8 +79,8 @@ button {
     color: white;
     font-weight: bold;
     float: right;
-    font-size: 22px;
-    line-height: 20px;
+    font-size: 2em;
+    line-height: 1.5em;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -98,7 +98,7 @@ button {
     min-width: 15vw;
     margin-right: 83vw;
     color: var(--md-sys-color-on-tertiary-container);
-    padding: 0.8em;
+    padding: 0.4vw;
 }
 
 .point h1 {
@@ -127,7 +127,7 @@ input {
     margin-top: 5em;
     display: inline-block;
     text-decoration: none;
-    padding: 15px;
+    padding: max(1em, 1vw);
     background-color: var(--md-sys-color-error-container);
     border-radius: calc(100px + 1.5625vw);
     text-transform: uppercase;
@@ -157,19 +157,19 @@ input {
 
 .modal__content {
     z-index: 2;
-    border-radius: 4px;
+    border-radius: 0.2em;
     position: relative;
     width: 45vw;
     max-width: 90%;
     background: var(--md-sys-color-surface);
-    padding: 1em 2em;
+    padding: 1em min(2em, 1vmax);
 }
 
 .modal__close {
     z-index: 2;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0.8em;
+    right: max(0.8em, 1vw);
     color: #585858;
     text-decoration: none;
 }
