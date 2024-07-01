@@ -120,7 +120,7 @@ img.resultImage {
     min-width: 95%;
     text-align: center;
     margin-top: 1em;
-    border-width: 0.5vmax;
+    border-width: max(0.2em, 0.5vmin);
     border-style: solid;
     background-color: var(--md-sys-color-secondary-container);
     box-shadow: rgba(0, 0, 0, 0.25) 0 0.1vmin 0.5vmin, rgba(0, 0, 0, 0.22) 0 0.2vmin 0.2vmin;
