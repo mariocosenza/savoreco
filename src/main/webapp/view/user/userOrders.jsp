@@ -37,7 +37,7 @@
         }
 
         List<Map.Entry<Purchase, List<BoughtFood>>> entries = new ArrayList<>(foodMap.entrySet());
-        entries.sort(Comparator.comparing(entry -> entry.getKey().getTime()));
+        entries.sort(Comparator.comparing((Map.Entry<Purchase, List<BoughtFood>> entry) -> entry.getKey().getTime()).reversed());
 
         for (Map.Entry<Purchase, List<BoughtFood>> entry : entries) {
             Purchase purchase = entry.getKey();
