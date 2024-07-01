@@ -132,7 +132,7 @@ main {
 nav {
     width: 100vw;
     list-style-type: none;
-    box-shadow: 0 0 0 -0.2em rgba(0, 0, 0, 0.24);
+    box-shadow: 0 0 0 0.1em rgba(0, 0, 0, 0.24);
     padding-top: 1rem;
     padding-bottom: 1rem;
     max-height: 5rem;
