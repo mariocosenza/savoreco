@@ -11,7 +11,7 @@ repositories {
 }
 
 ext {
-    junitVersion = '5.10.2'
+    junitVersion = '5.10.3'
 }
 
 java {
@@ -36,7 +36,7 @@ dependencies {
     implementation("javax.xml.bind:jaxb-api:2.3.1")
     implementation("org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1")
     implementation("org.apache.commons:commons-lang3:3.14.0")
-    implementation("org.apache.lucene:lucene-spatial-extras:9.11.0")
+    implementation("org.apache.lucene:lucene-spatial-extras:9.11.1")
     implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
     implementation("com.google.guava:guava:33.2.1-jre")
     implementation("com.google.code.gson:gson:2.11.0")
@@ -47,7 +47,7 @@ dependencies {
     implementation('org.hibernate:hibernate-core:6.5.2.Final')
     implementation("org.hibernate:hibernate-spatial:6.5.2.Final")
     implementation('org.glassfish.jaxb:jaxb-runtime:4.0.5')
-    implementation("com.amazonaws:aws-java-sdk-s3:1.12.748")
+    implementation("com.amazonaws:aws-java-sdk-s3:1.12.753")
     implementation("net.postgis:postgis-jdbc:2023.1.0")
     implementation("org.postgresql:postgresql:42.7.3")
     implementation('org.hibernate.validator:hibernate-validator:8.0.1.Final')
