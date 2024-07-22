@@ -40,7 +40,7 @@ dependencies {
     implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
     implementation("com.google.guava:guava:33.2.1-jre")
     implementation("com.google.code.gson:gson:2.11.0")
-    implementation("jakarta.el:jakarta.el-api:6.0.0")
+    implementation("jakarta.el:jakarta.el-api:6.0.1")
     compileOnly('jakarta.servlet:jakarta.servlet-api:6.1.0')
     implementation("org.slf4j:slf4j-simple:2.0.13")
     implementation("org.slf4j:slf4j-api:2.0.13")
