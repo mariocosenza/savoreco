@@ -43,7 +43,7 @@ dependencies {
     implementation("jakarta.el:jakarta.el-api:6.0.1")
     compileOnly('jakarta.servlet:jakarta.servlet-api:6.1.0')
     implementation("org.slf4j:slf4j-simple:2.0.16")
-    implementation("org.slf4j:slf4j-api:2.0.13")
+    implementation("org.slf4j:slf4j-api:2.0.16")
     implementation('org.hibernate:hibernate-core:6.6.0.Final')
     implementation("org.hibernate:hibernate-spatial:6.6.0.Final")
     implementation('org.glassfish.jaxb:jaxb-runtime:4.0.5')
