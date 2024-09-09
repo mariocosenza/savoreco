@@ -47,7 +47,7 @@ dependencies {
     implementation('org.hibernate:hibernate-core:6.6.0.Final')
     implementation("org.hibernate:hibernate-spatial:6.6.0.Final")
     implementation('org.glassfish.jaxb:jaxb-runtime:4.0.5')
-    implementation("com.amazonaws:aws-java-sdk-s3:1.12.770")
+    implementation("com.amazonaws:aws-java-sdk-s3:1.12.771")
     implementation("net.postgis:postgis-jdbc:2024.1.0")
     implementation("org.postgresql:postgresql:42.7.4")
     implementation('org.hibernate.validator:hibernate-validator:8.0.1.Final')
